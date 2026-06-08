@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Interactive trading strategy simulator — Dual MA Crossover with RSI filter, stop loss, and take profit. Built by Niyam Rathod." />
+  <title>Trading Strategy Simulator — Niyam Rathod</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .project-hero {
+      padding: calc(var(--sp-32) * 0.6) 0 var(--sp-16);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .project-hero__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8125rem;
+      font-family: var(--font-body);
+      color: var(--color-muted);
+      text-decoration: none;
+      margin-bottom: var(--sp-16);
+      transition: color var(--dur-fast);
+    }
+    .project-hero__back:hover { color: var(--color-text); }
+    .project-hero__back svg { transition: transform var(--dur-fast); }
+    .project-hero__back:hover svg { transform: translateX(-3px); }
+
+    .project-hero__label {
+      font-size: 0.75rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: var(--sp-8);
+    }
+    .project-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: var(--sp-12);
+    }
+    .project-hero__desc {
+      font-size: 1rem;
+      color: var(--color-muted);
+      max-width: 52ch;
+      line-height: 1.7;
+      margin-bottom: var(--sp-16);
+    }
+    .project-hero__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .simulator-section {
+      padding: var(--sp-24) 0 var(--sp-32);
+    }
+    .simulator-wrapper {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--color-surface);
+    }
+    .simulator-wrapper iframe {
+      width: 100%;
+      height: 900px;
+      border: none;
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      .simulator-wrapper iframe { height: 100vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" aria-hidden="true"><div class="cursor__dot"></div></div>
+
+  <!-- ── Nav ──────────────────────────────────────────────────── -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__brand">NR</a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html#work"    class="nav__link">Work</a></li>
+        <li><a href="index.html#about"   class="nav__link">About</a></li>
+        <li><a href="index.html#contact" class="nav__link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── Project header ────────────────────────────────────── -->
+    <section class="project-hero">
+      <div class="container">
+        <a href="index.html#work" class="project-hero__back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
+          </svg>
+          Back to work
+        </a>
+        <p class="project-hero__label">Project 02</p>
+        <h1 class="project-hero__title">Trading Strategy<br>Simulator</h1>
+        <p class="project-hero__desc">
+          An interactive backtesting tool built on real market data. Configure a dual
+          moving average crossover strategy with an RSI filter, stop loss, and take
+          profit — then run it across any ticker to see performance metrics, trade
+          signals, and a full trade log.
+        </p>
+        <ul class="project-hero__tags" role="list">
+          <li class="tag">Python</li>
+          <li class="tag">Gradio</li>
+          <li class="tag">yfinance</li>
+          <li class="tag">Plotly</li>
+          <li class="tag">Backtesting</li>
+          <li class="tag">Quantitative Finance</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── Simulator embed ────────────────────────────────────── -->
+    <section class="simulator-section">
+      <div class="container">
+        <div class="simulator-wrapper">
+          <iframe
+            src="https://niyamrathod-trading-strategy-simulator.hf.space"
+            title="Trading Strategy Simulator"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__links">
+          <a href="https://github.com/niyamrathod" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/niyam-rathod-153395285" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:niyamrathod@icloud.com">Email</a>
+        </div>
+        <span class="footer__copy">&copy; 2026 Niyam Rathod</span>
+      </div>
+      <div class="footer__wordmark" aria-hidden="true">NIYAM RATHOD</div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
