@@ -236,8 +236,7 @@ ul { list-style: none; }
   letter-spacing: -0.045em;
   color: var(--color-text);
   margin-bottom: var(--sp-8);
-  /* Hidden until JS runs; prevents flash */
-  opacity: 0;
+  /* JS sets opacity:0 on desktop only before animating in */
 }
 .hero__name-line {
   display: block;
@@ -251,8 +250,6 @@ ul { list-style: none; }
   color: var(--color-muted);
   max-width: 500px;
   line-height: 1.55;
-  /* Hidden until JS */
-  opacity: 0;
 }
 
 .hero__links {
@@ -260,7 +257,6 @@ ul { list-style: none; }
   flex-wrap: wrap;
   gap: var(--sp-3);
   margin-top: var(--sp-6);
-  opacity: 0; /* Hidden until JS */
 }
 .hero__social-link {
   display: inline-flex;
@@ -296,7 +292,6 @@ ul { list-style: none; }
   flex-direction: column;
   align-items: flex-start;
   gap: var(--sp-3);
-  opacity: 0; /* Hidden until JS */
 }
 .hero__scroll-hint span {
   font-size: var(--text-xs);
