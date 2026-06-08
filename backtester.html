@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="css/style.css" />
   <style>
     .project-hero {
-      padding: calc(var(--sp-32) * 0.6) 0 var(--sp-16);
+      padding: calc(var(--sp-32) * 0.35) 0 var(--sp-12);
       border-bottom: 1px solid var(--color-border);
     }
     .project-hero__back {
@@ -54,7 +54,7 @@
       color: var(--color-muted);
       max-width: 52ch;
       line-height: 1.7;
-      margin-bottom: var(--sp-16);
+      margin-bottom: var(--sp-12);
     }
     .project-hero__tags {
       display: flex;
@@ -66,7 +66,7 @@
     }
 
     .simulator-section {
-      padding: var(--sp-24) 0 var(--sp-32);
+      padding: var(--sp-16) 0 var(--sp-24);
     }
     .simulator-wrapper {
       border: 1px solid var(--color-border);
@@ -76,13 +76,17 @@
     }
     .simulator-wrapper iframe {
       width: 100%;
-      height: 900px;
+      height: calc(100vh - 120px);
+      min-height: 820px;
       border: none;
       display: block;
     }
 
     @media (max-width: 640px) {
-      .simulator-wrapper iframe { height: 100vh; }
+      .simulator-wrapper iframe {
+        height: 100vh;
+        min-height: unset;
+      }
     }
   </style>
 </head>
