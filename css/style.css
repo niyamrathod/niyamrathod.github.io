@@ -513,26 +513,23 @@ ul { list-style: none; }
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--color-text);
-  background: var(--color-accent);
+  background: #C2B5A3;   /* warm stone — muted, matches parchment vibe */
   padding: var(--sp-4) var(--sp-8);
-  border: 2px solid var(--color-accent);
+  border: 2px solid #C2B5A3;
   border-radius: 100px;
   will-change: transform;
-  /* Press effect */
-  box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+  box-shadow: 0 4px 0 rgba(0,0,0,0.1);
   transition:
-    transform  0.14s ease,
-    box-shadow 0.14s ease,
-    background var(--dur-fast),
-    color      var(--dur-fast),
+    transform    0.14s ease,
+    box-shadow   0.14s ease,
+    background   var(--dur-fast),
     border-color var(--dur-fast);
 }
 .contact__cta:hover {
   transform: translateY(3px);
   box-shadow: none;
-  background: var(--color-faint);
-  color: var(--color-text);
-  border-color: var(--color-border);
+  background: #B5A898;
+  border-color: #B5A898;
 }
 .contact__cta svg {
   flex-shrink: 0;
@@ -572,7 +569,7 @@ ul { list-style: none; }
 }
 .footer__wordmark {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 13vw, 13.5rem);
+  font-size: clamp(2.5rem, 7.8vw, 8rem);
   font-weight: 800;
   letter-spacing: -0.045em;
   line-height: 0.82;
