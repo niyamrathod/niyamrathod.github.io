@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Live crypto trading bot — regime-adaptive algorithmic trading on Binance Testnet. Built by Niyam Rathod." />
+  <title>Crypto Trading Bot — Niyam Rathod</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .project-hero {
+      padding: calc(var(--sp-32) * 0.35) 0 var(--sp-12);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .project-hero__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8125rem;
+      font-family: var(--font-body);
+      color: var(--color-muted);
+      text-decoration: none;
+      margin-bottom: var(--sp-16);
+      transition: color var(--dur-fast);
+    }
+    .project-hero__back:hover { color: var(--color-text); }
+    .project-hero__back svg { transition: transform var(--dur-fast); }
+    .project-hero__back:hover svg { transform: translateX(-3px); }
+    .project-hero__label {
+      font-size: 0.75rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: var(--sp-8);
+    }
+    .project-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: var(--sp-12);
+    }
+    .project-hero__desc {
+      font-size: 1rem;
+      color: var(--color-muted);
+      max-width: 52ch;
+      line-height: 1.7;
+      margin-bottom: var(--sp-12);
+    }
+    .project-hero__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .simulator-section {
+      padding: var(--sp-16) 0 var(--sp-24);
+    }
+    .simulator-wrapper {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--color-surface);
+    }
+    .simulator-wrapper iframe {
+      width: 100%;
+      height: calc(100vh - 120px);
+      min-height: 820px;
+      border: none;
+      display: block;
+    }
+    @media (max-width: 640px) {
+      .simulator-wrapper iframe { height: 100vh; min-height: unset; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" aria-hidden="true"><div class="cursor__dot"></div></div>
+
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__brand">NR</a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html#work"    class="nav__link">Work</a></li>
+        <li><a href="index.html#about"   class="nav__link">About</a></li>
+        <li><a href="index.html#contact" class="nav__link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="project-hero">
+      <div class="container">
+        <a href="index.html#work" class="project-hero__back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
+          </svg>
+          Back to work
+        </a>
+        <p class="project-hero__label">Project 04</p>
+        <h1 class="project-hero__title">Crypto<br>Trading Bot</h1>
+        <p class="project-hero__desc">
+          A regime-adaptive algorithmic bot running live on Binance Testnet, trading BTC and ETH
+          around the clock. It detects whether markets are trending, ranging, or neutral using ADX,
+          then switches automatically between a trend-following, mean reversion, or momentum
+          strategy — with stop loss, take profit, and a portfolio kill switch built in.
+        </p>
+        <ul class="project-hero__tags" role="list">
+          <li class="tag">Python</li>
+          <li class="tag">Binance API</li>
+          <li class="tag">Gradio</li>
+          <li class="tag">Algorithmic Trading</li>
+          <li class="tag">Regime Detection</li>
+          <li class="tag">Quantitative Finance</li>
+        </ul>
+        <p style="margin-top:14px;font-size:0.8125rem;color:var(--color-muted);display:flex;align-items:center;gap:6px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          Best experienced on desktop or laptop.
+        </p>
+      </div>
+    </section>
+
+    <section class="simulator-section">
+      <div class="container">
+        <div class="simulator-wrapper">
+          <!-- UPDATE src to new HF Space URL after upload -->
+          <iframe
+            src="https://niyamrathod-crypto-trading-bot.hf.space"
+            title="Crypto Trading Bot Dashboard"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__links">
+          <a href="https://github.com/niyamrathod" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/niyam-rathod-153395285" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:niyamrathod@icloud.com">Email</a>
+        </div>
+        <span class="footer__copy">&copy; 2026 Niyam Rathod</span>
+      </div>
+      <div class="footer__wordmark" aria-hidden="true">NIYAM RATHOD</div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
