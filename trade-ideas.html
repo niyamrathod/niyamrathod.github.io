@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Trade Ideas — structured research pitches across rates, FX, and volatility, drawn from my quantitative tools. Niyam Rathod." />
+  <title>Trade Ideas — Niyam Rathod</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+
+    /* ── Page hero (matches other project pages) ──────── */
+    .page-hero {
+      padding: calc(var(--sp-32) * 0.35) 0 var(--sp-12);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .page-hero__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8125rem;
+      font-family: var(--font-body);
+      color: var(--color-muted);
+      text-decoration: none;
+      margin-bottom: var(--sp-16);
+      transition: color var(--dur-fast);
+    }
+    .page-hero__back:hover { color: var(--color-text); }
+    .page-hero__back svg   { transition: transform var(--dur-fast); }
+    .page-hero__back:hover svg { transform: translateX(-3px); }
+    .page-hero__label {
+      font-size: 0.75rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: var(--sp-8);
+    }
+    .page-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: var(--sp-12);
+    }
+    .page-hero__desc {
+      font-size: 1rem;
+      color: var(--color-muted);
+      max-width: 56ch;
+      line-height: 1.7;
+    }
+
+    /* ── Track record table ───────────────────────────── */
+    .record-section {
+      padding: var(--sp-16) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .record-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .record-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+      min-width: 680px;
+    }
+    .record-table thead th {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      text-align: left;
+      padding: var(--sp-3) var(--sp-4);
+      border-bottom: 1px solid var(--color-border);
+      white-space: nowrap;
+    }
+    .record-table tbody td {
+      padding: var(--sp-4);
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text);
+      vertical-align: middle;
+    }
+    .record-table tbody tr:last-child td { border-bottom: none; }
+    .record-table tbody tr:hover td { background: var(--color-faint); }
+    .col-trade  { font-weight: 500; }
+    .col-muted  { color: var(--color-muted); }
+    .col-pos    { color: #16a34a; font-weight: 500; }
+    .col-neg    { color: #dc2626; font-weight: 500; }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .status-badge--open    { background: var(--color-faint); color: var(--color-muted); border: 1px solid var(--color-border); }
+    .status-badge--hit     { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+    .status-badge--stopped { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
+    .status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+    /* ── Pitch blocks ─────────────────────────────────── */
+    .pitches-section { padding: var(--sp-16) 0 var(--sp-24); }
+    .pitches-stack   { display: flex; flex-direction: column; gap: var(--sp-8); }
+
+    .pitch-block {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 3px 0 var(--color-border);
+    }
+    .pitch-block__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--sp-3);
+      padding: var(--sp-6) var(--sp-8);
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-faint);
+    }
+    .pitch-block__header-left  { display: flex; align-items: center; gap: var(--sp-4); }
+    .pitch-block__header-right { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; }
+    .pitch-block__num {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--color-muted);
+      flex-shrink: 0;
+    }
+    .pitch-block__title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+    }
+    .pitch-source {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--color-muted);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 3px 8px;
+      white-space: nowrap;
+    }
+    .pitch-block__body { padding: var(--sp-8); }
+
+    /* Fields: bordered grid */
+    .pitch-fields {
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: var(--sp-6);
+    }
+    .pitch-fields > *:not(:last-child) { border-bottom: 1px solid var(--color-border); }
+
+    .pitch-field { padding: var(--sp-6); }
+    .pitch-field--wide { /* spans both columns, no extra css needed — it's a direct child */ }
+
+    .pitch-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .pitch-row .pitch-field:first-child { border-right: 1px solid var(--color-border); }
+
+    .pitch-field__label {
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: var(--sp-2);
+    }
+    .pitch-field--kill .pitch-field__label { color: #b91c1c; }
+
+    .pitch-field__value {
+      font-size: 0.875rem;
+      color: var(--color-muted);
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    /* Chart slot */
+    .pitch-chart-slot {
+      border: 1px dashed var(--color-border);
+      border-radius: 8px;
+      padding: var(--sp-8);
+      background: var(--color-faint);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-3);
+      min-height: 160px;
+      text-align: center;
+    }
+    .pitch-chart-slot svg { width: 24px; height: 24px; color: var(--color-border); }
+    .pitch-chart-slot__label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+    .pitch-chart-slot__hint {
+      font-size: 0.8125rem;
+      color: var(--color-muted);
+      max-width: 44ch;
+      line-height: 1.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .pitch-row { grid-template-columns: 1fr; }
+      .pitch-row .pitch-field:first-child {
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+      }
+      .pitch-block__header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" aria-hidden="true"><div class="cursor__dot"></div></div>
+
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__brand">NR</a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html#work"    class="nav__link">Work</a></li>
+        <li><a href="index.html#about"   class="nav__link">About</a></li>
+        <li><a href="index.html#contact" class="nav__link">Contact</a></li>
+        <li><a href="trade-ideas.html"   class="nav__link" style="color:var(--color-text);">Ideas</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── Page hero ───────────────────────────────────── -->
+    <section class="page-hero">
+      <div class="container">
+        <a href="index.html#work" class="page-hero__back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
+          </svg>
+          Back to work
+        </a>
+        <p class="page-hero__label">Project 05</p>
+        <h1 class="page-hero__title">Trade<br>Ideas</h1>
+        <p class="page-hero__desc">
+          Structured pitches across rates, FX, and volatility — framed the way a trading desk
+          presents them internally: thesis, instrument, sizing, risk/reward, catalyst, and the
+          scenario that ends the trade. Signals and charts drawn directly from my quantitative tools.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Track record ────────────────────────────────── -->
+    <section class="record-section">
+      <div class="container">
+        <div class="section-header" style="margin-bottom:var(--sp-8);">
+          <span class="section-label">Performance</span>
+          <h2 class="section-heading">Track Record</h2>
+        </div>
+        <div class="record-wrap">
+          <table class="record-table" aria-label="Trade pitch track record">
+            <thead>
+              <tr>
+                <th>Trade</th>
+                <th>Date Pitched</th>
+                <th>Asset Class</th>
+                <th>Status</th>
+                <th>Entry</th>
+                <th>Current Mark</th>
+                <th>P&amp;L</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-trade">2s10s DV01-Neutral Steepener</td>
+                <td class="col-muted">[DD MMM YYYY]</td>
+                <td class="col-muted">Fixed Income</td>
+                <td><span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span></td>
+                <td class="col-muted">[X]bps</td>
+                <td class="col-muted">[X]bps</td>
+                <td class="col-pos">[+X]bps</td>
+              </tr>
+              <tr>
+                <td class="col-trade">Short [TICKER] Straddle</td>
+                <td class="col-muted">[DD MMM YYYY]</td>
+                <td class="col-muted">Options / Vol</td>
+                <td><span class="status-badge status-badge--hit"><span class="status-dot"></span>Target Hit</span></td>
+                <td class="col-muted">$[X] premium</td>
+                <td class="col-muted">—</td>
+                <td class="col-pos">+$[X]</td>
+              </tr>
+              <tr>
+                <td class="col-trade">G10 FX Carry Basket</td>
+                <td class="col-muted">[DD MMM YYYY]</td>
+                <td class="col-muted">FX</td>
+                <td><span class="status-badge status-badge--stopped"><span class="status-dot"></span>Stopped</span></td>
+                <td class="col-muted">[X] spot</td>
+                <td class="col-muted">—</td>
+                <td class="col-neg">−[X]%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Pitch blocks ─────────────────────────────────── -->
+    <section class="pitches-section">
+      <div class="container">
+        <div class="section-header" style="margin-bottom:var(--sp-8);">
+          <span class="section-label">Research</span>
+          <h2 class="section-heading">Current Pitches</h2>
+        </div>
+        <div class="pitches-stack">
+
+          <!-- Pitch 01 — Rates -->
+          <article class="pitch-block" aria-label="Pitch 01: 2s10s Steepener">
+            <header class="pitch-block__header">
+              <div class="pitch-block__header-left">
+                <span class="pitch-block__num">01</span>
+                <h3 class="pitch-block__title">2s10s DV01-Neutral Steepener</h3>
+              </div>
+              <div class="pitch-block__header-right">
+                <span class="pitch-source">Rates &amp; Yield Curve tool</span>
+                <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+              </div>
+            </header>
+            <div class="pitch-block__body">
+              <div class="pitch-fields">
+                <div class="pitch-field pitch-field--wide">
+                  <p class="pitch-field__label">View</p>
+                  <p class="pitch-field__value">[Paste your macro thesis here — e.g. the 2s10s spread is at historically extreme levels; describe why the curve steepens from here: rate cycle inflection, front-end anchored by Fed guidance, long-end repricing growth and inflation premia.]</p>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Instrument</p>
+                    <p class="pitch-field__value">DV01-neutral position: long [X]yr Treasuries / short [X]yr Treasuries, sized so a 1bp parallel shift is P&amp;L-neutral. Size ratio from the DV01 table in the Rates &amp; Yield Curve tool.</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Sizing &amp; Levels</p>
+                    <p class="pitch-field__value">Entry spread: [X]bps<br>Target: [X]bps wider<br>Stop: [X]bps tighter<br>DV01 per leg: $[X]/bp<br>Notional: $[X]</p>
+                  </div>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Risk / Reward &amp; Breakevens</p>
+                    <p class="pitch-field__value">Reward: +[X]bps × $[DV01] = +$[X]<br>Risk: −[X]bps × $[DV01] = −$[X]<br>R/R ratio: [X] : 1<br>Daily carry cost/benefit: [X]bps</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Catalyst</p>
+                    <p class="pitch-field__value">[The event that triggers the move — e.g. FOMC rate decision, CPI print, NFP, fiscal supply announcement, or a shift in Fed forward guidance.]</p>
+                  </div>
+                </div>
+                <div class="pitch-field pitch-field--wide pitch-field--kill">
+                  <p class="pitch-field__label">What Kills It</p>
+                  <p class="pitch-field__value">[The scenario that closes the trade — e.g. renewed inflation surprise anchors the front end and forces re-inversion; a growth scare triggers a bull-flattening safe-haven bid; foreign demand compresses the long end.]</p>
+                </div>
+              </div>
+              <div class="pitch-chart-slot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+                <p class="pitch-chart-slot__label">Chart Placeholder</p>
+                <p class="pitch-chart-slot__hint">Insert a Plotly export of the US Treasury yield curve from the Rates &amp; Yield Curve tool — annotate the current 2s10s spread, entry level, and target.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Pitch 02 — Vol -->
+          <article class="pitch-block" aria-label="Pitch 02: Short Straddle">
+            <header class="pitch-block__header">
+              <div class="pitch-block__header-left">
+                <span class="pitch-block__num">02</span>
+                <h3 class="pitch-block__title">Short [TICKER] [Expiry] Straddle</h3>
+              </div>
+              <div class="pitch-block__header-right">
+                <span class="pitch-source">Volatility &amp; Derivatives Toolkit</span>
+                <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+              </div>
+            </header>
+            <div class="pitch-block__body">
+              <div class="pitch-fields">
+                <div class="pitch-field pitch-field--wide">
+                  <p class="pitch-field__label">View</p>
+                  <p class="pitch-field__value">[State the vol view — e.g. implied vol on [TICKER] is elevated vs 30-day realised (IV: [X]% vs RV: [X]%); the IV surface shows near-term options are overpriced ahead of [event]; expect vol to mean-revert post-catalyst.]</p>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Instrument</p>
+                    <p class="pitch-field__value">Sell [TICKER] [Strike] [Expiry] call + put (ATM straddle).<br>Net premium received: $[X]<br>Initial delta: ~0<br>Vega: −$[X] per vol point</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Sizing &amp; Levels</p>
+                    <p class="pitch-field__value">Strike: $[X] (ATM)<br>Expiry: [DD MMM YYYY] ([X] DTE)<br>Contracts: [X]<br>Premium received: $[X] total<br>Position size: [X]% of book</p>
+                  </div>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Risk / Reward &amp; Breakevens</p>
+                    <p class="pitch-field__value">Upper breakeven: $[Strike + Premium]<br>Lower breakeven: $[Strike − Premium]<br>Max gain: $[X] if price = strike at expiry<br>Theta: +$[X]/day<br>IV crush required: [X]% → [X]%</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Catalyst</p>
+                    <p class="pitch-field__value">[The vol catalyst — e.g. post-earnings IV crush; end of a macro uncertainty window; IV mean-reverts toward 30-day realised from elevated levels.]</p>
+                  </div>
+                </div>
+                <div class="pitch-field pitch-field--wide pitch-field--kill">
+                  <p class="pitch-field__label">What Kills It</p>
+                  <p class="pitch-field__value">[The loss scenario — e.g. gap move beyond the breakevens on an unexpected result; macro shock keeps IV elevated; sustained directional move forces repeated delta hedging losses.]</p>
+                </div>
+              </div>
+              <div class="pitch-chart-slot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+                <p class="pitch-chart-slot__label">Chart Placeholder</p>
+                <p class="pitch-chart-slot__hint">Insert the 3D implied volatility surface from the Volatility &amp; Derivatives Toolkit — highlight the target strike and expiry; annotate IV vs realised vol.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Pitch 03 — FX -->
+          <article class="pitch-block" aria-label="Pitch 03: G10 FX Carry">
+            <header class="pitch-block__header">
+              <div class="pitch-block__header-left">
+                <span class="pitch-block__num">03</span>
+                <h3 class="pitch-block__title">G10 FX Carry Basket</h3>
+              </div>
+              <div class="pitch-block__header-right">
+                <span class="pitch-source">FX Carry &amp; CIP tool</span>
+                <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+              </div>
+            </header>
+            <div class="pitch-block__body">
+              <div class="pitch-fields">
+                <div class="pitch-field pitch-field--wide">
+                  <p class="pitch-field__label">View</p>
+                  <p class="pitch-field__value">[State the carry view — e.g. G10 rate differentials are wide and the risk environment is stable; the carry basket backtest shows [X]% annualised return at [X]% vol; CIP deviation on [PAIR] of [X]bps flags an additional funding edge.]</p>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Instrument</p>
+                    <p class="pitch-field__value">Long top-3 carry: [CCY1], [CCY2], [CCY3]<br>Short bottom-3 carry: [CCY4], [CCY5], [CCY6]<br>Equal-weighted per leg via spot FX or 1-month forwards to lock carry income.</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Sizing &amp; Levels</p>
+                    <p class="pitch-field__value">Entry spots: [CCY1/USD: X] · [CCY2/USD: X] · ...<br>Notional per leg: $[X]<br>Total gross exposure: $[X]<br>Stop: −[X]% on basket</p>
+                  </div>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Risk / Reward &amp; Breakevens</p>
+                    <p class="pitch-field__value">Carry income: [X]% p.a. ([X]bps/day)<br>Expected basket vol: [X]% p.a.<br>Carry-to-vol ratio: [X]×<br>Breakeven: carry absorbs [X]% adverse spot move</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Catalyst</p>
+                    <p class="pitch-field__value">[The supportive environment — e.g. stable growth, central banks on hold maintaining wide differentials, low equity vol suppressing FX vol, no EM contagion risk.]</p>
+                  </div>
+                </div>
+                <div class="pitch-field pitch-field--wide pitch-field--kill">
+                  <p class="pitch-field__label">What Kills It</p>
+                  <p class="pitch-field__value">[The unwind scenario — e.g. sharp risk-off forces JPY and CHF short squeezes; a global growth scare collapses commodity currencies; a carry unwind loop triggers stop-outs across the basket.]</p>
+                </div>
+              </div>
+              <div class="pitch-chart-slot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+                <p class="pitch-chart-slot__label">Chart Placeholder</p>
+                <p class="pitch-chart-slot__hint">Insert the carry basket backtest chart from the FX Carry &amp; CIP tool — cumulative P&amp;L vs benchmark for the selected period.</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__links">
+          <a href="https://github.com/niyamrathod" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/niyam-rathod-153395285" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:niyamrathod@icloud.com">Email</a>
+        </div>
+        <span class="footer__copy">&copy; 2026 Niyam Rathod</span>
+      </div>
+      <div class="footer__wordmark" aria-hidden="true">NIYAM RATHOD</div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
