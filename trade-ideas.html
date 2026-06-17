@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Trade Ideas — how to structure a trade pitch, illustrated examples across rates, FX, and volatility. Niyam Rathod." />
+  <meta name="description" content="Trade Ideas — how to structure a trade pitch, illustrated examples across rates, inflation, sovereign bonds, credit, FX, equities, commodities, and digital assets. Niyam Rathod." />
   <title>Trade Ideas — Niyam Rathod</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
@@ -347,8 +347,9 @@
         <h1 class="page-hero__title">Trade<br>Ideas</h1>
         <p class="page-hero__desc">
           How to structure a trade pitch — and what one looks like when it's done.
-          Each example below is drawn from a different asset class and built using
-          signals from my quantitative tools. Illustrative figures only.
+          Nine examples spanning every major asset class: rates, inflation, sovereign bonds,
+          credit, FX, equities, volatility, commodities, and digital assets.
+          Built using signals from my quantitative tools. Illustrative figures only.
         </p>
       </div>
     </section>
@@ -467,6 +468,60 @@
                 <td class="col-muted">Basket entry</td>
                 <td class="col-muted">—</td>
                 <td class="col-neg">−1.8%</td>
+              </tr>
+              <tr>
+                <td class="col-trade">Long 5yr US Breakeven (TIPS)</td>
+                <td class="col-muted">20 Jan 2026</td>
+                <td class="col-muted">Inflation</td>
+                <td><span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span></td>
+                <td class="col-muted">2.15%</td>
+                <td class="col-muted">2.22%</td>
+                <td class="col-pos">+7bps</td>
+              </tr>
+              <tr>
+                <td class="col-trade">BTP–Bund Spread Compression</td>
+                <td class="col-muted">10 Feb 2026</td>
+                <td class="col-muted">Sovereign</td>
+                <td><span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span></td>
+                <td class="col-muted">185bps</td>
+                <td class="col-muted">171bps</td>
+                <td class="col-pos">+14bps</td>
+              </tr>
+              <tr>
+                <td class="col-trade">Short CDX HY 5yr</td>
+                <td class="col-muted">08 Feb 2026</td>
+                <td class="col-muted">Credit</td>
+                <td><span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span></td>
+                <td class="col-muted">270bps</td>
+                <td class="col-muted">285bps</td>
+                <td class="col-pos">+15bps</td>
+              </tr>
+              <tr>
+                <td class="col-trade">Long XLK vs Short XLY</td>
+                <td class="col-muted">14 Mar 2026</td>
+                <td class="col-muted">Equities</td>
+                <td><span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span></td>
+                <td class="col-muted">1.42× ratio</td>
+                <td class="col-muted">1.49×</td>
+                <td class="col-pos">+4.9%</td>
+              </tr>
+              <tr>
+                <td class="col-trade">Long Brent Crude</td>
+                <td class="col-muted">28 Feb 2026</td>
+                <td class="col-muted">Commodities</td>
+                <td><span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span></td>
+                <td class="col-muted">$77.40/bbl</td>
+                <td class="col-muted">$82.15/bbl</td>
+                <td class="col-pos">+6.1%</td>
+              </tr>
+              <tr>
+                <td class="col-trade">Long BTC/USD Momentum</td>
+                <td class="col-muted">05 Mar 2026</td>
+                <td class="col-muted">Digital Assets</td>
+                <td><span class="status-badge status-badge--hit"><span class="status-dot"></span>Target Hit</span></td>
+                <td class="col-muted">$61,200</td>
+                <td class="col-muted">—</td>
+                <td class="col-pos">+12.4%</td>
               </tr>
             </tbody>
           </table>
@@ -638,6 +693,324 @@
                 </svg>
                 <p class="pitch-chart-slot__label">Chart Slot</p>
                 <p class="pitch-chart-slot__hint">Carry basket backtest chart from the FX Carry &amp; CIP tool — cumulative P&amp;L vs benchmark; annotate entry date and stop-out level.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Pitch 04 — Inflation / TIPS -->
+          <article class="pitch-block" aria-label="Pitch 04: Long 5yr Breakeven">
+            <header class="pitch-block__header">
+              <div class="pitch-block__header-left">
+                <span class="pitch-block__num">04</span>
+                <h3 class="pitch-block__title">Long 5yr US Breakeven Inflation</h3>
+              </div>
+              <div class="pitch-block__header-right">
+                <span class="pitch-source">Rates &amp; Yield Curve tool</span>
+                <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+              </div>
+            </header>
+            <div class="pitch-block__body">
+              <div class="pitch-fields">
+                <div class="pitch-field pitch-field--wide">
+                  <p class="pitch-field__label">View</p>
+                  <p class="pitch-field__value">The 5yr breakeven inflation rate at 2.15% is well below the Fed's implicit medium-term comfort zone of 2.5%, despite CPI printing above consensus for three consecutive months. Energy prices have rebounded 18% from the October low; wage growth is sticky at 4.1% YoY. The Rates &amp; Yield Curve tool shows real yields at +1.85% (5yr TIPS) — historically elevated — likely to compress as growth slows. The market is pricing an implausibly fast return to 2% inflation given the current data.</p>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Instrument</p>
+                    <p class="pitch-field__value">Long breakeven: buy 5yr TIPS / sell 5yr nominal UST in DV01-equal size, isolating the inflation expectation without outright duration risk. Or via ETFs: long TIP (iShares TIPS Bond) against short IEI (iShares 3–7yr Treasury). The pair eliminates the rates bet and leaves only the BEI move.</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Sizing &amp; Levels</p>
+                    <p class="pitch-field__value">Entry BEI: 2.15%<br>Target: 2.35% (+20bps)<br>Stop: 2.05% (−10bps)<br>DV01/bp: ~$45<br>P&amp;L at target: +$900<br>P&amp;L at stop: −$450</p>
+                  </div>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Risk / Reward &amp; Breakevens</p>
+                    <p class="pitch-field__value">Reward: +20bp × $45 = +$900<br>Risk: −10bp × $45 = −$450<br>R/R: 2.0 : 1<br>Daily inflation carry: ~+0.2bps at current CPI run-rate<br>Carry-adjusted breakeven: ~8bp adverse move over 30 days</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Catalyst</p>
+                    <p class="pitch-field__value">Above-consensus CPI print; energy prices extending the rebound; Fed commentary acknowledging re-acceleration risk; Michigan 5yr inflation expectations rising above 3.0%.</p>
+                  </div>
+                </div>
+                <div class="pitch-field pitch-field--wide pitch-field--kill">
+                  <p class="pitch-field__label">What Kills It</p>
+                  <p class="pitch-field__value">A global growth shock drives demand destruction, crushing inflation expectations sharply below 2%. Energy prices reverse on China demand weakness. A hawkish Fed credibility signal anchors breakevens lower even as realised CPI remains sticky. Significant OPEC+ supply return passes through to headline CPI faster than expected.</p>
+                </div>
+              </div>
+              <div class="pitch-chart-slot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+                <p class="pitch-chart-slot__label">Chart Slot</p>
+                <p class="pitch-chart-slot__hint">5yr breakeven rate time series from the Rates &amp; Yield Curve tool — annotate the entry at 2.15%, the Fed 2% target, and the 5yr average for context.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Pitch 05 — Sovereign -->
+          <article class="pitch-block" aria-label="Pitch 05: BTP–Bund Spread Compression">
+            <header class="pitch-block__header">
+              <div class="pitch-block__header-left">
+                <span class="pitch-block__num">05</span>
+                <h3 class="pitch-block__title">BTP–Bund Spread Compression</h3>
+              </div>
+              <div class="pitch-block__header-right">
+                <span class="pitch-source">Rates &amp; Yield Curve tool</span>
+                <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+              </div>
+            </header>
+            <div class="pitch-block__body">
+              <div class="pitch-fields">
+                <div class="pitch-field pitch-field--wide">
+                  <p class="pitch-field__label">View</p>
+                  <p class="pitch-field__value">The 10yr BTP–Bund spread at 185bps is above its 5yr average of 145bps, pricing in peripheral risk not supported by current fundamentals. Italy's debt/GDP has improved for two consecutive years; the ECB Transmission Protection Instrument (TPI) provides an implicit backstop against disorderly spread widening. The Italian primary surplus is on track at +1.2% of GDP in 2026. Spread compression historically outperforms in ECB easing cycles — the ECB has cut twice this year with two more cuts priced.</p>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Instrument</p>
+                    <p class="pitch-field__value">Long 10yr BTP futures (FBTP, Eurex) / short 10yr German Bund futures (FGBL, Eurex) in DV01-neutral size (approximately 1:1 at similar durations). Or equivalent via cash bonds. The spread is the traded variable; outright duration is hedged.</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Sizing &amp; Levels</p>
+                    <p class="pitch-field__value">Entry spread: 185bps<br>Target: 155bps (−30bp compression)<br>Stop: 205bps (+20bp widening)<br>DV01/bp: ~$60<br>P&amp;L at target: +$1,800<br>P&amp;L at stop: −$1,200</p>
+                  </div>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Risk / Reward &amp; Breakevens</p>
+                    <p class="pitch-field__value">Reward: +30bp × $60 = +$1,800<br>Risk: −20bp × $60 = −$1,200<br>R/R: 1.5 : 1<br>Carry: BTP coupon spread vs Bund ~+0.5bps/day<br>Carry offsets ~7bp adverse move over 14 days</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Catalyst</p>
+                    <p class="pitch-field__value">ECB cut accompanied by dovish forward guidance; Italian budget confirming primary surplus on track; credit rating reaffirmation at BBB; any ECB TPI activation signal reduces residual tail risk premium.</p>
+                  </div>
+                </div>
+                <div class="pitch-field pitch-field--wide pitch-field--kill">
+                  <p class="pitch-field__label">What Kills It</p>
+                  <p class="pitch-field__value">Italian political instability triggers a fiscal credibility shock — coalition collapse or unexpected budget deviation from EC targets. ECB pauses cuts on inflation concerns, removing the compression catalyst. Global risk-off causes flight into Bunds, widening peripheral spreads mechanically regardless of Italian fundamentals. A sovereign rating downgrade by one of the major agencies.</p>
+                </div>
+              </div>
+              <div class="pitch-chart-slot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+                <p class="pitch-chart-slot__label">Chart Slot</p>
+                <p class="pitch-chart-slot__hint">BTP–Bund 10yr spread time series — annotate the entry at 185bps, the target at 155bps, and the 5yr average of 145bps.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Pitch 06 — Credit -->
+          <article class="pitch-block" aria-label="Pitch 06: Short CDX HY 5yr">
+            <header class="pitch-block__header">
+              <div class="pitch-block__header-left">
+                <span class="pitch-block__num">06</span>
+                <h3 class="pitch-block__title">Short CDX HY 5yr — Buy Protection</h3>
+              </div>
+              <div class="pitch-block__header-right">
+                <span class="pitch-source">Portfolio Analysis Suite</span>
+                <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+              </div>
+            </header>
+            <div class="pitch-block__body">
+              <div class="pitch-fields">
+                <div class="pitch-field pitch-field--wide">
+                  <p class="pitch-field__label">View</p>
+                  <p class="pitch-field__value">CDX HY 5yr spread at 270bps is well below the 10yr average of 420bps and near post-GFC tights, while credit fundamentals are deteriorating. CCC-rated default rates are rising (4.1%, up from 2.8% a year ago); average interest coverage ratios in the HY universe have compressed to 2.8× — the lowest since 2008. The Portfolio Analysis Suite stress test shows 40% of HY index constituents have ICR below 2.0× at current rates. The market is being complacent: spreads are pricing a benign default cycle, but the data says otherwise.</p>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Instrument</p>
+                    <p class="pitch-field__value">Buy protection on CDX.NA.HY.41 5yr index at 270bps running spread. Pay fixed quarterly; receive contingent payment on credit events in the index. Alternatively: short HYG ETF (iShares $ High Yield Corporate Bond) for equity account execution without ISDA documentation.</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Sizing &amp; Levels</p>
+                    <p class="pitch-field__value">Notional: $1m CDX protection<br>Annual premium (cost): $27,000 (270bps × $1m)<br>Entry spread: 270bps<br>Target: 360bps (+90bp widening)<br>Stop: 230bps (−40bp compression)<br>DV01: ~$420/bp (5yr)</p>
+                  </div>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Risk / Reward &amp; Breakevens</p>
+                    <p class="pitch-field__value">Reward: +90bp × $420 = +$37,800<br>Risk: −40bp × $420 = −$16,800<br>R/R: 2.2 : 1<br>Carry cost: −$74/day (premium as insurance cost)<br>Breakeven widening to cover 30 days carry: ~5.3bps</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Catalyst</p>
+                    <p class="pitch-field__value">HY default rate prints above 5% in Moody's monthly survey; earnings season reveals widespread guidance cuts in leveraged names; IG-to-HY fallen-angel downgrades accelerate; Fed signals higher-for-longer beyond Q3.</p>
+                  </div>
+                </div>
+                <div class="pitch-field pitch-field--wide pitch-field--kill">
+                  <p class="pitch-field__label">What Kills It</p>
+                  <p class="pitch-field__value">Risk-on rally compresses spreads back toward 240bps (all-time tight territory). An unexpected Fed pivot to rate cuts enables leveraged names to cheaply refinance, reducing near-term default risk. A surge in LBO activity signals robust market liquidity and strong investor demand for yield. The daily carry cost of −$74 is a constant drag: a prolonged period of spread compression without a widening catalyst destroys the trade slowly.</p>
+                </div>
+              </div>
+              <div class="pitch-chart-slot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+                <p class="pitch-chart-slot__label">Chart Slot</p>
+                <p class="pitch-chart-slot__hint">CDX HY 5yr spread time series from the Portfolio Analysis Suite stress test — annotate current entry at 270bps vs 10yr average of 420bps; overlay default rate trend.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Pitch 07 — Equities -->
+          <article class="pitch-block" aria-label="Pitch 07: Long XLK vs Short XLY">
+            <header class="pitch-block__header">
+              <div class="pitch-block__header-left">
+                <span class="pitch-block__num">07</span>
+                <h3 class="pitch-block__title">Long XLK vs Short XLY — Sector Rotation</h3>
+              </div>
+              <div class="pitch-block__header-right">
+                <span class="pitch-source">Portfolio Analysis Suite</span>
+                <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+              </div>
+            </header>
+            <div class="pitch-block__body">
+              <div class="pitch-fields">
+                <div class="pitch-field pitch-field--wide">
+                  <p class="pitch-field__label">View</p>
+                  <p class="pitch-field__value">Consumer discretionary (XLY) has lagged XLK by 8.4% YTD, and the macro backdrop supports further underperformance. Retail sales have declined month-on-month for two consecutive prints; credit card delinquency rates are at 3.2%, the highest since 2011. The Portfolio Analysis Suite backtester shows defensive tech vs discretionary outperforms by a median of +14% over 6-month windows during late-cycle tightening phases. Earnings revision breadth for XLY is at −12 net revisions vs +8 for XLK over the past 4 weeks.</p>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Instrument</p>
+                    <p class="pitch-field__value">Long XLK (Technology Select Sector SPDR) / Short XLY (Consumer Discretionary Select Sector SPDR). Market-cap neutral at a 1.42:1 notional ratio. The pair eliminates most S&amp;P 500 beta, leaving the sector-relative view. Expressed via ETFs; alternatives include the equivalent CME sector futures.</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Sizing &amp; Levels</p>
+                    <p class="pitch-field__value">Long $75k XLK at $197.50<br>Short $52.8k XLY at $185.40 (1.42:1 ratio)<br>Entry ratio: 1.42<br>Target ratio: 1.55 (+9.2%)<br>Stop ratio: 1.34 (−5.6%)<br>R/R: 1.6 : 1</p>
+                  </div>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Risk / Reward &amp; Breakevens</p>
+                    <p class="pitch-field__value">Reward: ratio +0.13 = +$9,750 on book<br>Risk: ratio −0.08 = −$6,000<br>R/R: 1.6 : 1<br>Net carry: ~−$8/day (XLY dividend yield slightly above XLK)<br>Breakeven: ratio needs to move +0.01 to cover 14 days carry</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Catalyst</p>
+                    <p class="pitch-field__value">Weak retail sales print or consumer confidence below 95 (Conference Board); XLY earnings guidance cuts in Q1 reporting; Fed signalling rates stay elevated, compressing discretionary valuations more than tech.</p>
+                  </div>
+                </div>
+                <div class="pitch-field pitch-field--wide pitch-field--kill">
+                  <p class="pitch-field__label">What Kills It</p>
+                  <p class="pitch-field__value">A broad risk-on rally compresses the spread as beta differentials between sectors work against the pair (XLK often rallies harder in risk-on). An XLK selloff on tech regulation or antitrust headlines regardless of XLY performance hurts the long leg independently. A surprise consumer resilience print — strong personal spending data — causes XLY to outperform sharply.</p>
+                </div>
+              </div>
+              <div class="pitch-chart-slot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+                <p class="pitch-chart-slot__label">Chart Slot</p>
+                <p class="pitch-chart-slot__hint">XLK/XLY price ratio from the Portfolio Analysis Suite — annotate entry ratio at 1.42, target 1.55, stop 1.34, and historical range for context.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Pitch 08 — Commodities -->
+          <article class="pitch-block" aria-label="Pitch 08: Long Brent Crude">
+            <header class="pitch-block__header">
+              <div class="pitch-block__header-left">
+                <span class="pitch-block__num">08</span>
+                <h3 class="pitch-block__title">Long Brent Crude — Supply Deficit</h3>
+              </div>
+              <div class="pitch-block__header-right">
+                <span class="pitch-source">Market Snapshot tool</span>
+                <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+              </div>
+            </header>
+            <div class="pitch-block__body">
+              <div class="pitch-fields">
+                <div class="pitch-field pitch-field--wide">
+                  <p class="pitch-field__label">View</p>
+                  <p class="pitch-field__value">Brent crude at $77.40/bbl with OPEC+ cut compliance above 92% and US SPR draws continuing. Global oil inventories are 6.2% below the 5yr average. Demand from India and Southeast Asia is growing at 2.3% annualised — above consensus estimates. The WTI futures curve shows backwardation of $2.40 (1M vs 12M), signalling the market is already pricing near-term physical tightness. The Market Snapshot tool flags a 14-day RSI of 38 on Brent, suggesting the sell-off from $85 is technically oversold on a momentum basis.</p>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Instrument</p>
+                    <p class="pitch-field__value">Long 1 ICE Brent crude futures contract (BRN, nearest liquid expiry) at $77.40/bbl. Or via USO ETF for equity account execution. Futures carry positive roll from the backwardated curve (~+$0.20/bbl per week), unlike equity via ETF which incurs roll costs.</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Sizing &amp; Levels</p>
+                    <p class="pitch-field__value">Entry: $77.40/bbl<br>Target: $86.00/bbl (+$8.60)<br>Stop: $73.50/bbl (−$3.90)<br>Contract size: 1,000 bbl<br>P&amp;L at target: +$8,600<br>P&amp;L at stop: −$3,900</p>
+                  </div>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Risk / Reward &amp; Breakevens</p>
+                    <p class="pitch-field__value">Reward: $8.60/bbl × 1,000 = +$8,600<br>Risk: $3.90/bbl × 1,000 = −$3,900<br>R/R: 2.2 : 1<br>Roll yield: ~+$0.20/bbl/week from backwardation<br>Carry breakeven: roll covers ~$0.60/bbl over 3 weeks</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Catalyst</p>
+                    <p class="pitch-field__value">OPEC+ emergency production cut announcement; US crude inventory draw above consensus in the Wednesday EIA report; China macro data surprise to the upside on industrial activity; geopolitical risk premium repricing in the Middle East.</p>
+                  </div>
+                </div>
+                <div class="pitch-field pitch-field--wide pitch-field--kill">
+                  <p class="pitch-field__label">What Kills It</p>
+                  <p class="pitch-field__value">OPEC+ quota compliance breaks down — a member materially over-produces, flooding the market. Iranian supply returns via lifted sanctions, adding ~1.5m bbl/day. Global PMIs collapse toward 45, pricing a hard landing with significant demand destruction. A China real estate shock depresses industrial demand faster than the broader Asia growth story can offset.</p>
+                </div>
+              </div>
+              <div class="pitch-chart-slot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+                <p class="pitch-chart-slot__label">Chart Slot</p>
+                <p class="pitch-chart-slot__hint">Brent crude price chart from the Market Snapshot tool — annotate entry at $77.40, target $86.00, stop $73.50; overlay the WTI futures curve to show backwardation.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Pitch 09 — Digital Assets / Alternatives -->
+          <article class="pitch-block" aria-label="Pitch 09: Long BTC/USD Momentum">
+            <header class="pitch-block__header">
+              <div class="pitch-block__header-left">
+                <span class="pitch-block__num">09</span>
+                <h3 class="pitch-block__title">Long BTC/USD — Vol-Targeted Momentum</h3>
+              </div>
+              <div class="pitch-block__header-right">
+                <span class="pitch-source">Systematic Trading Framework</span>
+                <span class="status-badge status-badge--hit"><span class="status-dot"></span>Target Hit</span>
+              </div>
+            </header>
+            <div class="pitch-block__body">
+              <div class="pitch-fields">
+                <div class="pitch-field pitch-field--wide">
+                  <p class="pitch-field__label">View</p>
+                  <p class="pitch-field__value">BTC/USD momentum signal triggered on the Systematic Trading Framework: 20-period realised vol at 42% annualised, well below the 65% long-run average, indicating a low-vol regime in which trend signals historically have higher Sharpe. The trend filter (ADX &gt; 25) confirmed directional strength. The framework's vol-targeting engine sized the position at 3.2% of portfolio (15% vol target / 42% realised vol × 100% = 35.7%, capped to 25% max, then scaled). Spot at $61,200 with the 50/200 EMA crossover positive for 18 sessions.</p>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Instrument</p>
+                    <p class="pitch-field__value">Long BTC/USD spot via the paper-trading Systematic Framework. In a live context: long spot BTC via a regulated exchange or long IBIT (BlackRock Bitcoin ETF) for equity account execution. The framework monitors every 15 minutes and applies the kill switch at −20% peak-to-trough drawdown.</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Sizing &amp; Levels</p>
+                    <p class="pitch-field__value">Entry: $61,200<br>Target: $68,800 (+12.4%)<br>Stop: kill switch at −10% de-risk / −20% full exit<br>Portfolio allocation: 3.2% of notional<br>P&amp;L at target: +$7,600 per BTC<br>Framework exit signal: trailing stop at −8% from peak</p>
+                  </div>
+                </div>
+                <div class="pitch-row">
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Risk / Reward &amp; Breakevens</p>
+                    <p class="pitch-field__value">Reward: +$7,600 (target hit at $68,800)<br>Risk: −$4,896 (8% trailing stop from entry)<br>R/R: ~1.6 : 1<br>Historical Sharpe on BTC momentum at &lt;50% realised vol: 0.82<br>Daily carry: zero (spot holds, no funding cost)</p>
+                  </div>
+                  <div class="pitch-field">
+                    <p class="pitch-field__label">Catalyst</p>
+                    <p class="pitch-field__value">Continued institutional ETF inflows (IBIT/FBTC daily volume above $600m); macro risk-on environment sustaining the low-vol momentum regime; BTC halving supply effect continuing to compress available float.</p>
+                  </div>
+                </div>
+                <div class="pitch-field pitch-field--wide pitch-field--kill">
+                  <p class="pitch-field__label">What Kills It</p>
+                  <p class="pitch-field__value">Regulatory shock — an SEC enforcement action against a major exchange or ETF issuer triggers rapid institutional de-risking. A macro risk-off event (equity drawdown &gt;8%) causes BTC to sell off sharply as it is treated as a risk asset, not a safe haven, in the short term. Realised vol spikes above 80%, causing the framework's vol-targeting logic to automatically scale down the position. The trailing stop at −8% provides the hard exit regardless of narrative.</p>
+                </div>
+              </div>
+              <div class="pitch-chart-slot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+                <p class="pitch-chart-slot__label">Chart Slot</p>
+                <p class="pitch-chart-slot__hint">BTC/USD equity curve from the Systematic Trading Framework — annotate entry signal, peak-to-trough drawdown monitor, and de-risking threshold at −10%.</p>
               </div>
             </div>
           </article>
