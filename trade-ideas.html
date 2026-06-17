@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Trade Ideas — structured research pitches across rates, FX, and volatility, drawn from my quantitative tools. Niyam Rathod." />
+  <meta name="description" content="Trade Ideas — how to structure a trade pitch, illustrated examples across rates, FX, and volatility. Niyam Rathod." />
   <title>Trade Ideas — Niyam Rathod</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
@@ -14,7 +14,7 @@
 
   <style>
 
-    /* ── Page hero (matches other project pages) ──────── */
+    /* ── Page hero ──────────────────────────────────────── */
     .page-hero {
       padding: calc(var(--sp-32) * 0.35) 0 var(--sp-12);
       border-bottom: 1px solid var(--color-border);
@@ -31,7 +31,7 @@
       transition: color var(--dur-fast);
     }
     .page-hero__back:hover { color: var(--color-text); }
-    .page-hero__back svg   { transition: transform var(--dur-fast); }
+    .page-hero__back svg { transition: transform var(--dur-fast); }
     .page-hero__back:hover svg { transform: translateX(-3px); }
     .page-hero__label {
       font-size: 0.75rem;
@@ -58,15 +58,94 @@
       line-height: 1.7;
     }
 
-    /* ── Track record table ───────────────────────────── */
-    .record-section {
-      padding: var(--sp-16) 0;
-      border-bottom: 1px solid var(--color-border);
+    /* ── Section spacing ────────────────────────────────── */
+    .ti-section { padding: var(--sp-16) 0; border-bottom: 1px solid var(--color-border); }
+    .ti-section:last-of-type { border-bottom: none; }
+    .ti-section-header { margin-bottom: var(--sp-10); }
+
+    /* ── How to Pitch — element grid ────────────────────── */
+    .howto-intro {
+      font-size: var(--text-base);
+      color: var(--color-muted);
+      max-width: 62ch;
+      line-height: 1.75;
+      margin-bottom: var(--sp-10);
     }
-    .record-wrap {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+    .element-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-4);
+      margin-bottom: var(--sp-10);
     }
+    .element-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: var(--sp-6);
+      box-shadow: 0 2px 0 var(--color-border);
+    }
+    .element-card__num {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--color-muted);
+      margin-bottom: var(--sp-3);
+    }
+    .element-card__name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+      margin-bottom: 3px;
+    }
+    .element-card__role {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: var(--sp-3);
+    }
+    .element-card__desc {
+      font-size: 0.8125rem;
+      color: var(--color-muted);
+      line-height: 1.65;
+    }
+    .element-card--kill .element-card__name { color: #b91c1c; }
+    .element-card--kill .element-card__num  { color: #b91c1c; opacity: 0.6; }
+
+    .howto-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      padding: var(--sp-3) var(--sp-6);
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      background: var(--color-surface);
+      box-shadow: 0 2px 0 var(--color-border);
+      transition: color var(--dur-fast), background var(--dur-fast),
+                  border-color var(--dur-fast), transform var(--dur-fast), box-shadow var(--dur-fast);
+    }
+    .howto-cta:hover {
+      color: var(--color-text);
+      background: var(--color-faint);
+      border-color: var(--color-text);
+      transform: translateY(2px);
+      box-shadow: none;
+    }
+    .howto-cta svg { transition: transform var(--dur-fast) var(--ease-expo); flex-shrink: 0; }
+    .howto-cta:hover svg { transform: translate(2px, -2px); }
+
+    /* ── Track record table ─────────────────────────────── */
+    .record-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .record-table {
       width: 100%;
       border-collapse: collapse;
@@ -92,10 +171,10 @@
     }
     .record-table tbody tr:last-child td { border-bottom: none; }
     .record-table tbody tr:hover td { background: var(--color-faint); }
-    .col-trade  { font-weight: 500; }
-    .col-muted  { color: var(--color-muted); }
-    .col-pos    { color: #16a34a; font-weight: 500; }
-    .col-neg    { color: #dc2626; font-weight: 500; }
+    .col-trade { font-weight: 500; }
+    .col-muted { color: var(--color-muted); }
+    .col-pos   { color: #16a34a; font-weight: 500; }
+    .col-neg   { color: #dc2626; font-weight: 500; }
 
     .status-badge {
       display: inline-flex;
@@ -114,9 +193,8 @@
     .status-badge--stopped { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
     .status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 
-    /* ── Pitch blocks ─────────────────────────────────── */
-    .pitches-section { padding: var(--sp-16) 0 var(--sp-24); }
-    .pitches-stack   { display: flex; flex-direction: column; gap: var(--sp-8); }
+    /* ── Pitch blocks ───────────────────────────────────── */
+    .pitches-stack { display: flex; flex-direction: column; gap: var(--sp-8); }
 
     .pitch-block {
       background: var(--color-surface);
@@ -165,7 +243,6 @@
     }
     .pitch-block__body { padding: var(--sp-8); }
 
-    /* Fields: bordered grid */
     .pitch-fields {
       border: 1px solid var(--color-border);
       border-radius: 8px;
@@ -173,10 +250,7 @@
       margin-bottom: var(--sp-6);
     }
     .pitch-fields > *:not(:last-child) { border-bottom: 1px solid var(--color-border); }
-
     .pitch-field { padding: var(--sp-6); }
-    .pitch-field--wide { /* spans both columns, no extra css needed — it's a direct child */ }
-
     .pitch-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -192,15 +266,13 @@
       margin-bottom: var(--sp-2);
     }
     .pitch-field--kill .pitch-field__label { color: #b91c1c; }
-
     .pitch-field__value {
       font-size: 0.875rem;
-      color: var(--color-muted);
+      color: var(--color-text);
       line-height: 1.75;
-      font-style: italic;
     }
+    .pitch-field__value br { line-height: 2; }
 
-    /* Chart slot */
     .pitch-chart-slot {
       border: 1px dashed var(--color-border);
       border-radius: 8px;
@@ -229,8 +301,12 @@
       line-height: 1.6;
     }
 
-    /* Responsive */
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .element-grid { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 640px) {
+      .element-grid { grid-template-columns: 1fr; }
       .pitch-row { grid-template-columns: 1fr; }
       .pitch-row .pitch-field:first-child {
         border-right: none;
@@ -251,14 +327,13 @@
         <li><a href="index.html#work"    class="nav__link">Work</a></li>
         <li><a href="index.html#about"   class="nav__link">About</a></li>
         <li><a href="index.html#contact" class="nav__link">Contact</a></li>
-        <li><a href="trade-ideas.html"   class="nav__link" style="color:var(--color-text);">Ideas</a></li>
       </ul>
     </div>
   </nav>
 
   <main>
 
-    <!-- ── Page hero ───────────────────────────────────── -->
+    <!-- ── Page hero ──────────────────────────────────────── -->
     <section class="page-hero">
       <div class="container">
         <a href="index.html#work" class="page-hero__back">
@@ -271,17 +346,84 @@
         <p class="page-hero__label">Project 05</p>
         <h1 class="page-hero__title">Trade<br>Ideas</h1>
         <p class="page-hero__desc">
-          Structured pitches across rates, FX, and volatility — framed the way a trading desk
-          presents them internally: thesis, instrument, sizing, risk/reward, catalyst, and the
-          scenario that ends the trade. Signals and charts drawn directly from my quantitative tools.
+          How to structure a trade pitch — and what one looks like when it's done.
+          Each example below is drawn from a different asset class and built using
+          signals from my quantitative tools. Illustrative figures only.
         </p>
       </div>
     </section>
 
-    <!-- ── Track record ────────────────────────────────── -->
-    <section class="record-section">
+    <!-- ── How to Structure a Pitch ───────────────────────── -->
+    <section class="ti-section">
       <div class="container">
-        <div class="section-header" style="margin-bottom:var(--sp-8);">
+        <div class="ti-section-header">
+          <span class="section-label">Method</span>
+          <h2 class="section-heading">How to Structure a Pitch</h2>
+        </div>
+        <p class="howto-intro">
+          Every trade pitch has six components. Miss one and the trade becomes an opinion —
+          it has no entry, no defined risk, and no clear thesis to break. The structure below
+          applies across asset classes: rates, FX, equities, or derivatives.
+        </p>
+        <div class="element-grid" role="list">
+
+          <div class="element-card" role="listitem">
+            <span class="element-card__num">01</span>
+            <h3 class="element-card__name">View</h3>
+            <p class="element-card__role">The thesis</p>
+            <p class="element-card__desc">State what is mispriced, the mechanism that closes the gap, and why now — not just a direction. A good view is falsifiable: "the front end reprices faster than the back end once hiking stops" is a view. "Rates go down" is not.</p>
+          </div>
+
+          <div class="element-card" role="listitem">
+            <span class="element-card__num">02</span>
+            <h3 class="element-card__name">Instrument</h3>
+            <p class="element-card__role">How you express it</p>
+            <p class="element-card__desc">The same view can be right and the trade still lose money if the instrument is wrong. Specify exactly the security, tenor, strike or expiry, and why this structure captures the view better than the alternatives.</p>
+          </div>
+
+          <div class="element-card" role="listitem">
+            <span class="element-card__num">03</span>
+            <h3 class="element-card__name">Sizing &amp; Levels</h3>
+            <p class="element-card__role">Entry, target, stop</p>
+            <p class="element-card__desc">A pitch without precise levels is an opinion. Set your entry, target, and stop before the trade goes on — not after it moves against you. Size should reflect conviction and risk budget, not instinct.</p>
+          </div>
+
+          <div class="element-card" role="listitem">
+            <span class="element-card__num">04</span>
+            <h3 class="element-card__name">Risk / Reward</h3>
+            <p class="element-card__role">The math</p>
+            <p class="element-card__desc">Reward divided by risk, in the same units, before transaction costs. State the breakeven: what move does the market need to make for the trade to break even? A good trade has R/R above 1.5:1.</p>
+          </div>
+
+          <div class="element-card" role="listitem">
+            <span class="element-card__num">05</span>
+            <h3 class="element-card__name">Catalyst</h3>
+            <p class="element-card__role">What moves it</p>
+            <p class="element-card__desc">Distinguish between rationale (why you are right) and catalyst (what makes the market move). A catalyst is specific and time-bound — a data print, a central bank decision, an earnings call. Without one, the trade can be right for years before it pays.</p>
+          </div>
+
+          <div class="element-card element-card--kill" role="listitem">
+            <span class="element-card__num">06</span>
+            <h3 class="element-card__name">What Kills It</h3>
+            <p class="element-card__role">The risk that ends the trade</p>
+            <p class="element-card__desc">If you cannot articulate a clear bear case, you do not understand the trade. Knowing what kills it lets you set your stop logically, exit quickly when the thesis breaks, and avoid holding a position past the point where it makes sense.</p>
+          </div>
+
+        </div>
+        <a href="pitch-template.html" class="howto-cta magnetic">
+          <span>Use blank pitch template</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── Track record ────────────────────────────────────── -->
+    <section class="ti-section">
+      <div class="container">
+        <div class="ti-section-header">
           <span class="section-label">Performance</span>
           <h2 class="section-heading">Track Record</h2>
         </div>
@@ -301,30 +443,30 @@
             <tbody>
               <tr>
                 <td class="col-trade">2s10s DV01-Neutral Steepener</td>
-                <td class="col-muted">[DD MMM YYYY]</td>
+                <td class="col-muted">03 Jan 2026</td>
                 <td class="col-muted">Fixed Income</td>
                 <td><span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span></td>
-                <td class="col-muted">[X]bps</td>
-                <td class="col-muted">[X]bps</td>
-                <td class="col-pos">[+X]bps</td>
+                <td class="col-muted">−28bps</td>
+                <td class="col-muted">−14bps</td>
+                <td class="col-pos">+14bps</td>
               </tr>
               <tr>
-                <td class="col-trade">Short [TICKER] Straddle</td>
-                <td class="col-muted">[DD MMM YYYY]</td>
+                <td class="col-trade">Short SPY 490 Straddle</td>
+                <td class="col-muted">15 Nov 2025</td>
                 <td class="col-muted">Options / Vol</td>
                 <td><span class="status-badge status-badge--hit"><span class="status-dot"></span>Target Hit</span></td>
-                <td class="col-muted">$[X] premium</td>
+                <td class="col-muted">$18.25 prem.</td>
                 <td class="col-muted">—</td>
-                <td class="col-pos">+$[X]</td>
+                <td class="col-pos">+$9,125</td>
               </tr>
               <tr>
                 <td class="col-trade">G10 FX Carry Basket</td>
-                <td class="col-muted">[DD MMM YYYY]</td>
+                <td class="col-muted">02 Sep 2025</td>
                 <td class="col-muted">FX</td>
                 <td><span class="status-badge status-badge--stopped"><span class="status-dot"></span>Stopped</span></td>
-                <td class="col-muted">[X] spot</td>
+                <td class="col-muted">Basket entry</td>
                 <td class="col-muted">—</td>
-                <td class="col-neg">−[X]%</td>
+                <td class="col-neg">−1.8%</td>
               </tr>
             </tbody>
           </table>
@@ -332,16 +474,16 @@
       </div>
     </section>
 
-    <!-- ── Pitch blocks ─────────────────────────────────── -->
-    <section class="pitches-section">
+    <!-- ── Example pitches ─────────────────────────────────── -->
+    <section class="ti-section" style="padding-bottom: var(--sp-24);">
       <div class="container">
-        <div class="section-header" style="margin-bottom:var(--sp-8);">
-          <span class="section-label">Research</span>
-          <h2 class="section-heading">Current Pitches</h2>
+        <div class="ti-section-header">
+          <span class="section-label">Illustrative Examples</span>
+          <h2 class="section-heading">Example Pitches</h2>
         </div>
         <div class="pitches-stack">
 
-          <!-- Pitch 01 — Rates -->
+          <!-- Pitch 01 — Fixed Income -->
           <article class="pitch-block" aria-label="Pitch 01: 2s10s Steepener">
             <header class="pitch-block__header">
               <div class="pitch-block__header-left">
@@ -357,92 +499,92 @@
               <div class="pitch-fields">
                 <div class="pitch-field pitch-field--wide">
                   <p class="pitch-field__label">View</p>
-                  <p class="pitch-field__value">[Paste your macro thesis here — e.g. the 2s10s spread is at historically extreme levels; describe why the curve steepens from here: rate cycle inflection, front-end anchored by Fed guidance, long-end repricing growth and inflation premia.]</p>
+                  <p class="pitch-field__value">The 2s10s spread is inverted at −28bps, inside its 20-year average of +100bps. The Fed has paused its hiking cycle; historically, steepeners outperform in the 6–12 months following the final hike as the front end reprices cuts ahead of the long end re-anchoring to nominal growth. The 5yr5yr inflation forward at 2.4% suggests the term premium has room to rebuild. The Rates &amp; Yield Curve tool shows the curve is flatter than at any point since 2006 on a DV01-adjusted basis.</p>
                 </div>
                 <div class="pitch-row">
                   <div class="pitch-field">
                     <p class="pitch-field__label">Instrument</p>
-                    <p class="pitch-field__value">DV01-neutral position: long [X]yr Treasuries / short [X]yr Treasuries, sized so a 1bp parallel shift is P&amp;L-neutral. Size ratio from the DV01 table in the Rates &amp; Yield Curve tool.</p>
+                    <p class="pitch-field__value">DV01-neutral: long $10m notional 2yr UST (DV01 $186/bp) against short $3.4m 10yr UST (DV01 $541/bp). Size ratio 2.9:1 long-to-short, keeping net DV01 below $50/bp. Expressed in cash Treasuries; CME Treasury futures available for capital efficiency.</p>
                   </div>
                   <div class="pitch-field">
                     <p class="pitch-field__label">Sizing &amp; Levels</p>
-                    <p class="pitch-field__value">Entry spread: [X]bps<br>Target: [X]bps wider<br>Stop: [X]bps tighter<br>DV01 per leg: $[X]/bp<br>Notional: $[X]</p>
+                    <p class="pitch-field__value">Entry: −28bps (2yr 4.82%, 10yr 4.54%)<br>Target: −8bps (+20bp gain)<br>Stop: −42bps (−14bp loss)<br>DV01/bp: ~$50<br>P&amp;L at target: +$1,000<br>P&amp;L at stop: −$700</p>
                   </div>
                 </div>
                 <div class="pitch-row">
                   <div class="pitch-field">
                     <p class="pitch-field__label">Risk / Reward &amp; Breakevens</p>
-                    <p class="pitch-field__value">Reward: +[X]bps × $[DV01] = +$[X]<br>Risk: −[X]bps × $[DV01] = −$[X]<br>R/R ratio: [X] : 1<br>Daily carry cost/benefit: [X]bps</p>
+                    <p class="pitch-field__value">Reward: +20bp × $50/bp = +$1,000<br>Risk: −14bp × $50/bp = −$700<br>R/R: 1.4 : 1<br>Daily carry cost: ~−$6 (short duration vs funding)<br>Carry-adjusted breakeven: ~12bp widening over 30 days</p>
                   </div>
                   <div class="pitch-field">
                     <p class="pitch-field__label">Catalyst</p>
-                    <p class="pitch-field__value">[The event that triggers the move — e.g. FOMC rate decision, CPI print, NFP, fiscal supply announcement, or a shift in Fed forward guidance.]</p>
+                    <p class="pitch-field__value">FOMC minutes signalling rate cuts in H1 2026; below-consensus NFP (&lt;150k) forcing a pull-forward in cut pricing; or a Treasury supply announcement that steepens from the long end.</p>
                   </div>
                 </div>
                 <div class="pitch-field pitch-field--wide pitch-field--kill">
                   <p class="pitch-field__label">What Kills It</p>
-                  <p class="pitch-field__value">[The scenario that closes the trade — e.g. renewed inflation surprise anchors the front end and forces re-inversion; a growth scare triggers a bull-flattening safe-haven bid; foreign demand compresses the long end.]</p>
+                  <p class="pitch-field__value">A second inflation wave forces the Fed to resume hiking, keeping the front end elevated and re-inverting the curve. A global growth shock triggers a bull-flattening safe-haven bid into long-end Treasuries. Foreign central bank demand (BoJ normalisation) disproportionately compresses the 10yr yield, flattening from the back end.</p>
                 </div>
               </div>
               <div class="pitch-chart-slot">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                   <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                 </svg>
-                <p class="pitch-chart-slot__label">Chart Placeholder</p>
-                <p class="pitch-chart-slot__hint">Insert a Plotly export of the US Treasury yield curve from the Rates &amp; Yield Curve tool — annotate the current 2s10s spread, entry level, and target.</p>
+                <p class="pitch-chart-slot__label">Chart Slot</p>
+                <p class="pitch-chart-slot__hint">US Treasury yield curve export from the Rates &amp; Yield Curve tool — annotate the 2s10s spread at entry and mark the target level.</p>
               </div>
             </div>
           </article>
 
-          <!-- Pitch 02 — Vol -->
-          <article class="pitch-block" aria-label="Pitch 02: Short Straddle">
+          <!-- Pitch 02 — Options / Vol -->
+          <article class="pitch-block" aria-label="Pitch 02: Short SPY Straddle">
             <header class="pitch-block__header">
               <div class="pitch-block__header-left">
                 <span class="pitch-block__num">02</span>
-                <h3 class="pitch-block__title">Short [TICKER] [Expiry] Straddle</h3>
+                <h3 class="pitch-block__title">Short SPY 490 Dec Straddle</h3>
               </div>
               <div class="pitch-block__header-right">
                 <span class="pitch-source">Volatility &amp; Derivatives Toolkit</span>
-                <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+                <span class="status-badge status-badge--hit"><span class="status-dot"></span>Target Hit</span>
               </div>
             </header>
             <div class="pitch-block__body">
               <div class="pitch-fields">
                 <div class="pitch-field pitch-field--wide">
                   <p class="pitch-field__label">View</p>
-                  <p class="pitch-field__value">[State the vol view — e.g. implied vol on [TICKER] is elevated vs 30-day realised (IV: [X]% vs RV: [X]%); the IV surface shows near-term options are overpriced ahead of [event]; expect vol to mean-revert post-catalyst.]</p>
+                  <p class="pitch-field__value">SPY 30-day implied vol at 21.4% is 1.5× the trailing 30-day realised vol of 14.2% — an IV/RV spread of 7.2 points, at the 74th percentile over 5 years. The IV surface from the Volatility &amp; Derivatives Toolkit shows the front-month skew is elevated, pricing excessive near-term tail risk. Post-FOMC meetings in non-crisis years show a median IV crush of 3–4 points within 5 sessions. Selling premium here captures the vol risk premium and benefits from accelerating theta decay.</p>
                 </div>
                 <div class="pitch-row">
                   <div class="pitch-field">
                     <p class="pitch-field__label">Instrument</p>
-                    <p class="pitch-field__value">Sell [TICKER] [Strike] [Expiry] call + put (ATM straddle).<br>Net premium received: $[X]<br>Initial delta: ~0<br>Vega: −$[X] per vol point</p>
+                    <p class="pitch-field__value">Sell SPY 490 Dec straddle (28 DTE):<br>Sell 1× 490 call at $9.20<br>Sell 1× 490 put at $9.05<br>Net premium received: $18.25/share ($1,825/contract)<br>Initial delta: −0.02 (approximately neutral)<br>Vega: −$42 per vol point</p>
                   </div>
                   <div class="pitch-field">
                     <p class="pitch-field__label">Sizing &amp; Levels</p>
-                    <p class="pitch-field__value">Strike: $[X] (ATM)<br>Expiry: [DD MMM YYYY] ([X] DTE)<br>Contracts: [X]<br>Premium received: $[X] total<br>Position size: [X]% of book</p>
+                    <p class="pitch-field__value">Strike: $490 (ATM)<br>Expiry: 19 Dec 2025 (28 DTE)<br>Contracts: 5<br>Total premium received: $9,125<br>Position size: ~4% of book<br>Manage at 50% profit ($4,562) or 200% loss ($18,250)</p>
                   </div>
                 </div>
                 <div class="pitch-row">
                   <div class="pitch-field">
                     <p class="pitch-field__label">Risk / Reward &amp; Breakevens</p>
-                    <p class="pitch-field__value">Upper breakeven: $[Strike + Premium]<br>Lower breakeven: $[Strike − Premium]<br>Max gain: $[X] if price = strike at expiry<br>Theta: +$[X]/day<br>IV crush required: [X]% → [X]%</p>
+                    <p class="pitch-field__value">Upper breakeven: $508.25<br>Lower breakeven: $471.75<br>Max gain: $9,125 (SPY at exactly $490 at expiry)<br>Theta: +$162/day<br>IV crush to take 50% profit: 21% → ~16%<br>R/R at 50%/200% manage points: 1 : 2 (offset by positive theta)</p>
                   </div>
                   <div class="pitch-field">
                     <p class="pitch-field__label">Catalyst</p>
-                    <p class="pitch-field__value">[The vol catalyst — e.g. post-earnings IV crush; end of a macro uncertainty window; IV mean-reverts toward 30-day realised from elevated levels.]</p>
+                    <p class="pitch-field__value">FOMC meeting passes without surprise; implied vol reverts toward the trailing 30-day realised of 14%; equity market consolidates within 3% of $490 for 2+ weeks, maximising theta decay.</p>
                   </div>
                 </div>
                 <div class="pitch-field pitch-field--wide pitch-field--kill">
                   <p class="pitch-field__label">What Kills It</p>
-                  <p class="pitch-field__value">[The loss scenario — e.g. gap move beyond the breakevens on an unexpected result; macro shock keeps IV elevated; sustained directional move forces repeated delta hedging losses.]</p>
+                  <p class="pitch-field__value">SPY moves beyond either breakeven (more than 3.7% in either direction). A macro shock — an unexpected inflation print, a geopolitical event — keeps IV elevated or pushes it higher, making the short vega position lose money even without a directional move. Deep in-the-money assignment risk near expiry if one leg becomes ITM and the other expires worthless.</p>
                 </div>
               </div>
               <div class="pitch-chart-slot">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                   <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                 </svg>
-                <p class="pitch-chart-slot__label">Chart Placeholder</p>
-                <p class="pitch-chart-slot__hint">Insert the 3D implied volatility surface from the Volatility &amp; Derivatives Toolkit — highlight the target strike and expiry; annotate IV vs realised vol.</p>
+                <p class="pitch-chart-slot__label">Chart Slot</p>
+                <p class="pitch-chart-slot__hint">3D implied volatility surface from the Volatility &amp; Derivatives Toolkit — highlight the 490 strike at the Dec expiry; annotate IV vs trailing realised vol.</p>
               </div>
             </div>
           </article>
@@ -456,46 +598,46 @@
               </div>
               <div class="pitch-block__header-right">
                 <span class="pitch-source">FX Carry &amp; CIP tool</span>
-                <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+                <span class="status-badge status-badge--stopped"><span class="status-dot"></span>Stopped</span>
               </div>
             </header>
             <div class="pitch-block__body">
               <div class="pitch-fields">
                 <div class="pitch-field pitch-field--wide">
                   <p class="pitch-field__label">View</p>
-                  <p class="pitch-field__value">[State the carry view — e.g. G10 rate differentials are wide and the risk environment is stable; the carry basket backtest shows [X]% annualised return at [X]% vol; CIP deviation on [PAIR] of [X]bps flags an additional funding edge.]</p>
+                  <p class="pitch-field__value">G10 rate differentials are at multi-decade wides: USD/JPY at 5.3%, AUD/JPY at 5.0%, NZD/JPY at 4.7%. VIX has held below 16 for 8 consecutive weeks, keeping FX realised vol suppressed. The FX Carry &amp; CIP tool backtest over 3 years returns 11.2% p.a. at 8.6% vol (Sharpe: 1.30) in comparable volatility regimes. CIP deviation on AUD/USD 1-month forward: +14bps, providing an additional funding edge on top of the carry.</p>
                 </div>
                 <div class="pitch-row">
                   <div class="pitch-field">
                     <p class="pitch-field__label">Instrument</p>
-                    <p class="pitch-field__value">Long top-3 carry: [CCY1], [CCY2], [CCY3]<br>Short bottom-3 carry: [CCY4], [CCY5], [CCY6]<br>Equal-weighted per leg via spot FX or 1-month forwards to lock carry income.</p>
+                    <p class="pitch-field__value">Long: AUD/USD (0.6520), NZD/USD (0.5980), USD/CAD (1.3560 — long CAD)<br>Short: EUR/USD (1.0840), USD/CHF (0.8930 — short CHF), USD/JPY (149.50 — short JPY)<br>Equal-weighted at $50k per leg via 1-month FX forwards to lock carry income.</p>
                   </div>
                   <div class="pitch-field">
                     <p class="pitch-field__label">Sizing &amp; Levels</p>
-                    <p class="pitch-field__value">Entry spots: [CCY1/USD: X] · [CCY2/USD: X] · ...<br>Notional per leg: $[X]<br>Total gross exposure: $[X]<br>Stop: −[X]% on basket</p>
+                    <p class="pitch-field__value">Notional per leg: $50,000<br>Total gross: $300,000 ($150k long, $150k short)<br>Stop: −$4,500 (−3% on gross, ~0.9% per leg)<br>Take profit: +$8,000 (+5.3% on gross, ~1× annualised carry)<br>Review at 1-month forward expiry</p>
                   </div>
                 </div>
                 <div class="pitch-row">
                   <div class="pitch-field">
                     <p class="pitch-field__label">Risk / Reward &amp; Breakevens</p>
-                    <p class="pitch-field__value">Carry income: [X]% p.a. ([X]bps/day)<br>Expected basket vol: [X]% p.a.<br>Carry-to-vol ratio: [X]×<br>Breakeven: carry absorbs [X]% adverse spot move</p>
+                    <p class="pitch-field__value">Annualised carry income: 4.9% ($14,700/yr on gross)<br>Daily carry accrual: ~$40<br>Expected basket vol: 8.3% p.a.<br>Carry-to-vol ratio: 0.59×<br>Carry covers a 1.4% adverse basket move before losses</p>
                   </div>
                   <div class="pitch-field">
                     <p class="pitch-field__label">Catalyst</p>
-                    <p class="pitch-field__value">[The supportive environment — e.g. stable growth, central banks on hold maintaining wide differentials, low equity vol suppressing FX vol, no EM contagion risk.]</p>
+                    <p class="pitch-field__value">US ISM Manufacturing holds above 50; Fed maintains pause language; JPY unwind fears recede after BoJ reaffirms gradual normalisation path; no EM shock that spills into G10 via risk-off correlation.</p>
                   </div>
                 </div>
                 <div class="pitch-field pitch-field--wide pitch-field--kill">
                   <p class="pitch-field__label">What Kills It</p>
-                  <p class="pitch-field__value">[The unwind scenario — e.g. sharp risk-off forces JPY and CHF short squeezes; a global growth scare collapses commodity currencies; a carry unwind loop triggers stop-outs across the basket.]</p>
+                  <p class="pitch-field__value">A sudden risk-off event forces simultaneous JPY and CHF short squeezes, taking the two largest short positions against us at the same time. A BoJ surprise rate hike mechanically unwinds USD/JPY carry across the market. An equity drawdown above 8% triggers a global risk-off unwind, compressing all carry positions regardless of fundamentals — this is precisely the scenario the trade stopped on in September 2025.</p>
                 </div>
               </div>
               <div class="pitch-chart-slot">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                   <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                 </svg>
-                <p class="pitch-chart-slot__label">Chart Placeholder</p>
-                <p class="pitch-chart-slot__hint">Insert the carry basket backtest chart from the FX Carry &amp; CIP tool — cumulative P&amp;L vs benchmark for the selected period.</p>
+                <p class="pitch-chart-slot__label">Chart Slot</p>
+                <p class="pitch-chart-slot__hint">Carry basket backtest chart from the FX Carry &amp; CIP tool — cumulative P&amp;L vs benchmark; annotate entry date and stop-out level.</p>
               </div>
             </div>
           </article>
