@@ -301,12 +301,46 @@
       line-height: 1.6;
     }
 
+    /* ── Pitch snapshot bar ─────────────────────────────── */
+    .pitch-snapshot {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: var(--sp-6);
+      background: var(--color-faint);
+    }
+    .pitch-snapshot__cell {
+      padding: var(--sp-4) var(--sp-5);
+      border-right: 1px solid var(--color-border);
+    }
+    .pitch-snapshot__cell:last-child { border-right: none; }
+    .pitch-snapshot__key {
+      font-size: 0.5625rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 4px;
+    }
+    .pitch-snapshot__val {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+    }
+    .pitch-snapshot__val--long  { color: #16a34a; }
+    .pitch-snapshot__val--short { color: #dc2626; }
+
     /* ── Responsive ─────────────────────────────────────── */
     @media (max-width: 768px) {
       .element-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 640px) {
       .element-grid { grid-template-columns: 1fr; }
+      .pitch-snapshot { grid-template-columns: repeat(3, 1fr); }
       .pitch-row { grid-template-columns: 1fr; }
       .pitch-row .pitch-field:first-child {
         border-right: none;
@@ -551,6 +585,28 @@
               </div>
             </header>
             <div class="pitch-block__body">
+              <div class="pitch-snapshot">
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Direction</p>
+                  <p class="pitch-snapshot__val pitch-snapshot__val--long">Long Steepener</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Entry</p>
+                  <p class="pitch-snapshot__val">−28bps</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Target</p>
+                  <p class="pitch-snapshot__val">−8bps</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Stop</p>
+                  <p class="pitch-snapshot__val">−42bps</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">R/R</p>
+                  <p class="pitch-snapshot__val">1.4 : 1</p>
+                </div>
+              </div>
               <div class="pitch-fields">
                 <div class="pitch-field pitch-field--wide">
                   <p class="pitch-field__label">View</p>
@@ -604,6 +660,28 @@
               </div>
             </header>
             <div class="pitch-block__body">
+              <div class="pitch-snapshot">
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Direction</p>
+                  <p class="pitch-snapshot__val pitch-snapshot__val--short">Short Vol</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Entry</p>
+                  <p class="pitch-snapshot__val">$18.25 prem.</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Manage At</p>
+                  <p class="pitch-snapshot__val">50% profit</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Stop</p>
+                  <p class="pitch-snapshot__val">200% loss</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Theta</p>
+                  <p class="pitch-snapshot__val pitch-snapshot__val--long">+$162/day</p>
+                </div>
+              </div>
               <div class="pitch-fields">
                 <div class="pitch-field pitch-field--wide">
                   <p class="pitch-field__label">View</p>
@@ -657,6 +735,28 @@
               </div>
             </header>
             <div class="pitch-block__body">
+              <div class="pitch-snapshot">
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Direction</p>
+                  <p class="pitch-snapshot__val pitch-snapshot__val--long">Long Carry</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Carry p.a.</p>
+                  <p class="pitch-snapshot__val">4.9%</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Target</p>
+                  <p class="pitch-snapshot__val">+5.3%</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Stop</p>
+                  <p class="pitch-snapshot__val">−3.0%</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Carry / Vol</p>
+                  <p class="pitch-snapshot__val">0.59×</p>
+                </div>
+              </div>
               <div class="pitch-fields">
                 <div class="pitch-field pitch-field--wide">
                   <p class="pitch-field__label">View</p>
@@ -710,6 +810,28 @@
               </div>
             </header>
             <div class="pitch-block__body">
+              <div class="pitch-snapshot">
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Direction</p>
+                  <p class="pitch-snapshot__val pitch-snapshot__val--long">Long BEI</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Entry</p>
+                  <p class="pitch-snapshot__val">2.15%</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Target</p>
+                  <p class="pitch-snapshot__val">2.35%</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Stop</p>
+                  <p class="pitch-snapshot__val">2.05%</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">R/R</p>
+                  <p class="pitch-snapshot__val">2.0 : 1</p>
+                </div>
+              </div>
               <div class="pitch-fields">
                 <div class="pitch-field pitch-field--wide">
                   <p class="pitch-field__label">View</p>
@@ -763,6 +885,28 @@
               </div>
             </header>
             <div class="pitch-block__body">
+              <div class="pitch-snapshot">
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Direction</p>
+                  <p class="pitch-snapshot__val pitch-snapshot__val--long">Spread Compression</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Entry</p>
+                  <p class="pitch-snapshot__val">185bps</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Target</p>
+                  <p class="pitch-snapshot__val">155bps</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Stop</p>
+                  <p class="pitch-snapshot__val">205bps</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">R/R</p>
+                  <p class="pitch-snapshot__val">1.5 : 1</p>
+                </div>
+              </div>
               <div class="pitch-fields">
                 <div class="pitch-field pitch-field--wide">
                   <p class="pitch-field__label">View</p>
@@ -816,6 +960,28 @@
               </div>
             </header>
             <div class="pitch-block__body">
+              <div class="pitch-snapshot">
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Direction</p>
+                  <p class="pitch-snapshot__val pitch-snapshot__val--short">Buy Protection</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Entry Spread</p>
+                  <p class="pitch-snapshot__val">270bps</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Target</p>
+                  <p class="pitch-snapshot__val">360bps</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Stop</p>
+                  <p class="pitch-snapshot__val">230bps</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">R/R</p>
+                  <p class="pitch-snapshot__val">2.2 : 1</p>
+                </div>
+              </div>
               <div class="pitch-fields">
                 <div class="pitch-field pitch-field--wide">
                   <p class="pitch-field__label">View</p>
@@ -869,6 +1035,28 @@
               </div>
             </header>
             <div class="pitch-block__body">
+              <div class="pitch-snapshot">
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Direction</p>
+                  <p class="pitch-snapshot__val pitch-snapshot__val--long">Long XLK</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Entry Ratio</p>
+                  <p class="pitch-snapshot__val">1.42×</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Target</p>
+                  <p class="pitch-snapshot__val">1.55×</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Stop</p>
+                  <p class="pitch-snapshot__val">1.34×</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">R/R</p>
+                  <p class="pitch-snapshot__val">1.6 : 1</p>
+                </div>
+              </div>
               <div class="pitch-fields">
                 <div class="pitch-field pitch-field--wide">
                   <p class="pitch-field__label">View</p>
@@ -922,6 +1110,28 @@
               </div>
             </header>
             <div class="pitch-block__body">
+              <div class="pitch-snapshot">
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Direction</p>
+                  <p class="pitch-snapshot__val pitch-snapshot__val--long">Long</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Entry</p>
+                  <p class="pitch-snapshot__val">$77.40/bbl</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Target</p>
+                  <p class="pitch-snapshot__val">$86.00/bbl</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Stop</p>
+                  <p class="pitch-snapshot__val">$73.50/bbl</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">R/R</p>
+                  <p class="pitch-snapshot__val">2.2 : 1</p>
+                </div>
+              </div>
               <div class="pitch-fields">
                 <div class="pitch-field pitch-field--wide">
                   <p class="pitch-field__label">View</p>
@@ -975,6 +1185,28 @@
               </div>
             </header>
             <div class="pitch-block__body">
+              <div class="pitch-snapshot">
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Direction</p>
+                  <p class="pitch-snapshot__val pitch-snapshot__val--long">Long</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Entry</p>
+                  <p class="pitch-snapshot__val">$61,200</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Target</p>
+                  <p class="pitch-snapshot__val">$68,800</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">Stop</p>
+                  <p class="pitch-snapshot__val">−8% trail</p>
+                </div>
+                <div class="pitch-snapshot__cell">
+                  <p class="pitch-snapshot__key">R/R</p>
+                  <p class="pitch-snapshot__val">1.6 : 1</p>
+                </div>
+              </div>
               <div class="pitch-fields">
                 <div class="pitch-field pitch-field--wide">
                   <p class="pitch-field__label">View</p>
