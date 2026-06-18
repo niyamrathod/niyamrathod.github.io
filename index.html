@@ -273,6 +273,39 @@
       text-underline-offset: 2px;
     }
 
+    /* ── Markets-fluency chip strip (About section) ─────────── */
+    .skills-strip {
+      margin-top: var(--sp-10);
+      padding-top: var(--sp-8);
+      border-top: 1px solid var(--color-border);
+    }
+    .skills-strip__row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--sp-2);
+      margin-bottom: var(--sp-4);
+    }
+    .skills-strip__row:last-child { margin-bottom: 0; }
+    .skills-strip__label {
+      font-size: 0.5625rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      flex-shrink: 0;
+      width: 88px;
+    }
+    .skills-chip {
+      font-size: 0.6875rem;
+      padding: 3px 10px;
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      color: var(--color-text);
+      background: var(--color-faint);
+      white-space: nowrap;
+    }
+
     /* ── Card thesis clamp (keeps 9-card grid uniform) ──────── */
     .view-card__thesis {
       display: -webkit-box;
@@ -892,23 +925,58 @@
             <div class="skills-group">
               <h3 class="skills-group__label">Programming</h3>
               <ul class="skills-list" role="list">
-                <li>Python (learning)</li><li>VS Code</li>
+                <li>Python</li><li>VS Code</li><li>Gradio</li><li>Plotly</li>
               </ul>
             </div>
             <div class="skills-group">
-              <h3 class="skills-group__label">Data &amp; Analytics</h3>
+              <h3 class="skills-group__label">Data &amp; Tools</h3>
               <ul class="skills-list" role="list">
-                <li>Bloomberg</li><li>Haver Analytics</li><li>Statistical Modelling</li><li>Regression &amp; ARDL</li>
+                <li>Bloomberg Terminal</li><li>Haver Analytics</li><li>Statistical Modelling</li><li>Regression &amp; ARDL</li>
               </ul>
             </div>
             <div class="skills-group">
-              <h3 class="skills-group__label">Finance</h3>
+              <h3 class="skills-group__label">Markets</h3>
               <ul class="skills-list" role="list">
-                <li>Macro Research</li><li>Backtesting</li><li>Risk Frameworks</li><li>VaR &amp; Stress Testing</li>
+                <li>Trade Structuring</li><li>Risk Management</li><li>VaR &amp; Stress Testing</li><li>Systematic Strategies</li>
               </ul>
             </div>
           </div>
         </div>
+
+        <!-- ── Markets fluency strip ── -->
+        <div class="skills-strip">
+          <div class="skills-strip__row">
+            <span class="skills-strip__label">Asset Classes</span>
+            <span class="skills-chip">Rates / Fixed Income</span>
+            <span class="skills-chip">FX</span>
+            <span class="skills-chip">Credit</span>
+            <span class="skills-chip">Equities</span>
+            <span class="skills-chip">Volatility</span>
+            <span class="skills-chip">Commodities</span>
+            <span class="skills-chip">Inflation / TIPS</span>
+            <span class="skills-chip">Sovereign Bonds</span>
+            <span class="skills-chip">Digital Assets</span>
+          </div>
+          <div class="skills-strip__row">
+            <span class="skills-strip__label">Analytics</span>
+            <span class="skills-chip">Yield Curve &amp; DV01</span>
+            <span class="skills-chip">Options Pricing &amp; Greeks</span>
+            <span class="skills-chip">Carry / CIP</span>
+            <span class="skills-chip">Volatility Surface</span>
+            <span class="skills-chip">VaR &amp; Stress Testing</span>
+            <span class="skills-chip">Risk / Reward Framing</span>
+            <span class="skills-chip">Systematic Backtesting</span>
+            <span class="skills-chip">Macro Research</span>
+          </div>
+          <div class="skills-strip__row">
+            <span class="skills-strip__label">Tools</span>
+            <span class="skills-chip">Bloomberg Terminal</span>
+            <span class="skills-chip">Python</span>
+            <span class="skills-chip">Haver Analytics</span>
+            <span class="skills-chip">Plotly / Gradio</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
