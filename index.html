@@ -205,11 +205,125 @@
     .status-badge--watch   { background: #fef9c3; color: #a16207; border: 1px solid #fde68a; }
     .status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 
+    /* ── News ticker ────────────────────────────────────────── */
+    .views__ticker-wrap {
+      margin: var(--sp-8) 0 var(--sp-2);
+    }
+    .views__ticker-label {
+      font-size: 0.5625rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: var(--sp-3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .views__ticker {
+      display: none; /* shown by JS when headlines load */
+      gap: var(--sp-3);
+      overflow-x: auto;
+      padding-bottom: var(--sp-2);
+      scrollbar-width: none;
+    }
+    .views__ticker::-webkit-scrollbar { display: none; }
+    .headline-pill {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: var(--sp-3) var(--sp-4);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      text-decoration: none;
+      width: 220px;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .headline-pill:hover { border-color: var(--color-text); transform: translateY(-1px); }
+    .headline-pill__source {
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+    .headline-pill__title {
+      font-size: 0.75rem;
+      color: var(--color-text);
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .headline-pill__time {
+      font-size: 0.5rem;
+      color: var(--color-muted);
+      margin-top: 2px;
+    }
+    .views__ticker-fallback {
+      font-size: 0.75rem;
+      color: var(--color-muted);
+    }
+    .views__ticker-fallback a {
+      color: var(--color-text);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* ── Card thesis clamp (keeps 9-card grid uniform) ──────── */
+    .view-card__thesis {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ── Source links ───────────────────────────────────────── */
+    .view-card__sources {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      padding: var(--sp-3) var(--sp-6);
+      border-top: 1px solid var(--color-border);
+      background: var(--color-faint);
+      flex-wrap: wrap;
+    }
+    .view-card__sources-label {
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-right: 2px;
+    }
+    .view-card__source-link {
+      font-size: 0.5625rem;
+      font-weight: 500;
+      color: var(--color-muted);
+      text-decoration: none;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 2px 7px;
+      background: var(--color-surface);
+      transition: color 0.15s, border-color 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .view-card__source-link:hover { color: var(--color-text); border-color: var(--color-text); }
+    .view-card__source-link svg { opacity: 0.5; }
+
     /* ── Responsive ─────────────────────────────────────────── */
-    @media (max-width: 900px) {
+    @media (max-width: 1100px) {
+      .views-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 840px) {
       .views-grid { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 600px) {
+    @media (max-width: 520px) {
       .views-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -469,6 +583,27 @@
           </span>
           <h2 class="section-heading" id="views-heading">Current Views</h2>
           <p class="views__subtitle">
+            Nine live ideas — one per asset class — structured using the pitch builder.
+            Updated monthly as market conditions change.
+            <span class="views__disclaimer">Illustrative only. Not investment advice.</span>
+          </p>
+
+          <!-- Live news headlines (populated by JS) -->
+          <div class="views__ticker-wrap">
+            <p class="views__ticker-label">
+              <span class="views__live-dot" style="width:5px;height:5px;" aria-hidden="true"></span>
+              Latest market headlines
+            </p>
+            <div class="views__ticker" id="views-ticker" role="list" aria-label="Market headlines"></div>
+            <p class="views__ticker-fallback" id="views-ticker-fallback" style="display:none;">
+              Live headlines unavailable &mdash; read directly:
+              <a href="https://www.reuters.com/markets/" target="_blank" rel="noopener">Reuters Markets</a> &nbsp;&middot;&nbsp;
+              <a href="https://www.ft.com/markets" target="_blank" rel="noopener">FT Markets</a> &nbsp;&middot;&nbsp;
+              <a href="https://www.bloomberg.com/markets" target="_blank" rel="noopener">Bloomberg</a>
+            </p>
+          </div>
+        </div><!-- end .section-header -->
+          <p class="views__subtitle">
             Three live ideas structured using the pitch builder — one per major asset class.
             Updated as market conditions change.
             <br><span class="views__disclaimer">Illustrative only. Not investment advice.</span>
@@ -477,118 +612,211 @@
 
         <div class="views-grid">
 
-          <!-- View 01 — Rates -->
+          <!-- ── 01 Rates / Fixed Income ── -->
           <article class="view-card">
             <div class="view-card__top">
               <span class="view-card__asset">Rates / Fixed Income</span>
-              <span class="status-badge status-badge--open">
-                <span class="status-dot"></span>Open
-              </span>
+              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">2s10s DV01-Neutral Steepener</h3>
-            <p class="view-card__thesis">
-              Fed pause is in — the front end reprices cuts before the long end re-anchors to
-              nominal growth. 2s10s at −28bps vs a 20-year average of +100bps. The inversion
-              has overshot relative to where the curve has historically settled post-final hike.
-            </p>
+            <p class="view-card__thesis">Fed pause is in — the front end reprices cuts before the long end re-anchors to nominal growth. 2s10s at −28bps vs a 20-year average of +100bps; the inversion has overshot relative to where the curve historically settles post-final hike.</p>
             <div class="view-card__snap">
-              <div class="view-card__snap-item">
-                <span class="view-card__snap-key">Direction</span>
-                <span class="view-card__snap-val view-card__snap-val--long">Long</span>
-              </div>
-              <div class="view-card__snap-item">
-                <span class="view-card__snap-key">Entry</span>
-                <span class="view-card__snap-val">−28bps</span>
-              </div>
-              <div class="view-card__snap-item">
-                <span class="view-card__snap-key">Target</span>
-                <span class="view-card__snap-val">−8bps</span>
-              </div>
-              <div class="view-card__snap-item">
-                <span class="view-card__snap-key">R/R</span>
-                <span class="view-card__snap-val">3.3:1</span>
-              </div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">−28bps</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">−8bps</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">3.3:1</span></div>
             </div>
-            <div class="view-card__footer">
-              <span class="view-card__date">Updated Jun 2026</span>
-              <a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a>
+            <div class="view-card__sources">
+              <span class="view-card__sources-label">Read</span>
+              <a href="https://www.ft.com/bond-markets" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.reuters.com/markets/rates-bonds/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.bloomberg.com/markets/rates-bonds" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
             </div>
+            <div class="view-card__footer"><span class="view-card__date">Updated Jun 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
           </article>
 
-          <!-- View 02 — Credit -->
+          <!-- ── 02 Inflation / TIPS ── -->
+          <article class="view-card">
+            <div class="view-card__top">
+              <span class="view-card__asset">Inflation / TIPS</span>
+              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+            </div>
+            <h3 class="view-card__title">Long 5yr Breakeven Inflation</h3>
+            <p class="view-card__thesis">5yr breakeven at 2.15% underprices three consecutive above-consensus CPI prints. Energy prices up 18% from October lows and wage growth sticky at 4.1% YoY — neither is reflected in the current breakeven level.</p>
+            <div class="view-card__snap">
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long BEI</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">2.15%</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">2.35%</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">2.0:1</span></div>
+            </div>
+            <div class="view-card__sources">
+              <span class="view-card__sources-label">Read</span>
+              <a href="https://www.ft.com/economics" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.reuters.com/markets/rates-bonds/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.bloomberg.com/economics" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+            </div>
+            <div class="view-card__footer"><span class="view-card__date">Updated Jun 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+          </article>
+
+          <!-- ── 03 Sovereign Bonds ── -->
+          <article class="view-card">
+            <div class="view-card__top">
+              <span class="view-card__asset">Sovereign Bonds</span>
+              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+            </div>
+            <h3 class="view-card__title">BTP&ndash;Bund Spread Compression</h3>
+            <p class="view-card__thesis">10yr BTP–Bund at 185bps above fundamentals — Italian primary surplus on track, ECB TPI backstop intact, two more cuts priced for 2026. The risk premium is not supported by current fiscal data.</p>
+            <div class="view-card__snap">
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Tight</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">185bps</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">155bps</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">1.5:1</span></div>
+            </div>
+            <div class="view-card__sources">
+              <span class="view-card__sources-label">Read</span>
+              <a href="https://www.ft.com/european-economy" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.reuters.com/markets/europe/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.bloomberg.com/markets/rates-bonds" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+            </div>
+            <div class="view-card__footer"><span class="view-card__date">Updated Jun 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+          </article>
+
+          <!-- ── 04 Credit ── -->
           <article class="view-card">
             <div class="view-card__top">
               <span class="view-card__asset">Credit</span>
-              <span class="status-badge status-badge--open">
-                <span class="status-dot"></span>Open
-              </span>
+              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">Short CDX HY 5yr — Buy Protection</h3>
-            <p class="view-card__thesis">
-              CDX HY at 270bps — near post-GFC tights — while CCC default rates are rising
-              to 4.1% and average interest coverage sits at 2.8&times;, the lowest since 2008.
-              The market is pricing a benign default cycle that the data does not support.
-            </p>
+            <p class="view-card__thesis">CDX HY at 270bps near post-GFC tights while CCC default rates rise to 4.1% and average interest coverage hits 2.8&times; — the lowest since 2008. The market is pricing a benign default cycle the data does not support.</p>
             <div class="view-card__snap">
-              <div class="view-card__snap-item">
-                <span class="view-card__snap-key">Direction</span>
-                <span class="view-card__snap-val view-card__snap-val--short">Short</span>
-              </div>
-              <div class="view-card__snap-item">
-                <span class="view-card__snap-key">Entry</span>
-                <span class="view-card__snap-val">270bps</span>
-              </div>
-              <div class="view-card__snap-item">
-                <span class="view-card__snap-key">Target</span>
-                <span class="view-card__snap-val">360bps</span>
-              </div>
-              <div class="view-card__snap-item">
-                <span class="view-card__snap-key">R/R</span>
-                <span class="view-card__snap-val">2.3:1</span>
-              </div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--short">Short</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">270bps</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">360bps</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">2.3:1</span></div>
             </div>
-            <div class="view-card__footer">
-              <span class="view-card__date">Updated Jun 2026</span>
-              <a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a>
+            <div class="view-card__sources">
+              <span class="view-card__sources-label">Read</span>
+              <a href="https://www.ft.com/capital-markets" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.reuters.com/markets/deals/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.bloomberg.com/markets/credit" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
             </div>
+            <div class="view-card__footer"><span class="view-card__date">Updated Jun 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
           </article>
 
-          <!-- View 03 — Volatility -->
+          <!-- ── 05 FX ── -->
+          <article class="view-card">
+            <div class="view-card__top">
+              <span class="view-card__asset">FX</span>
+              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+            </div>
+            <h3 class="view-card__title">G10 Carry Basket — Long AUD/JPY</h3>
+            <p class="view-card__thesis">G10 rate differentials at decade highs; VIX below 16 for eight consecutive weeks. AUD/JPY carry at 5.0% p.a. Carry/vol ratio above 1.3 — a regime where the strategy has historically returned 11% p.a. at 8.6% vol.</p>
+            <div class="view-card__snap">
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">basket</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">+5.3%</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Carry</span><span class="view-card__snap-val view-card__snap-val--long">+$140/d</span></div>
+            </div>
+            <div class="view-card__sources">
+              <span class="view-card__sources-label">Read</span>
+              <a href="https://www.ft.com/currencies" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.reuters.com/markets/currencies/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.bloomberg.com/markets/currencies" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+            </div>
+            <div class="view-card__footer"><span class="view-card__date">Updated Jun 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+          </article>
+
+          <!-- ── 06 Equities ── -->
+          <article class="view-card">
+            <div class="view-card__top">
+              <span class="view-card__asset">Equities</span>
+              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+            </div>
+            <h3 class="view-card__title">Long XLK / Short XLY — Sector Pair</h3>
+            <p class="view-card__thesis">Consumer delinquencies at 3.2%; earnings revisions XLY −12 vs XLK +8 net upgrades. XLK/XLY ratio at 1.42 — below the 1.55 level consistent with late-cycle tightening where tech consistently outperforms discretionary.</p>
+            <div class="view-card__snap">
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">L/S</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">1.42</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">1.55</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">1.7:1</span></div>
+            </div>
+            <div class="view-card__sources">
+              <span class="view-card__sources-label">Read</span>
+              <a href="https://www.ft.com/equities" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.reuters.com/markets/stocks/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.bloomberg.com/markets/stocks" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+            </div>
+            <div class="view-card__footer"><span class="view-card__date">Updated Jun 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+          </article>
+
+          <!-- ── 07 Volatility / Options ── -->
           <article class="view-card">
             <div class="view-card__top">
               <span class="view-card__asset">Volatility / Options</span>
-              <span class="status-badge status-badge--watch">
-                <span class="status-dot"></span>Watching
-              </span>
+              <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
             </div>
             <h3 class="view-card__title">Short SPY Straddle — Sell IV</h3>
-            <p class="view-card__thesis">
-              SPY 30-day IV at 21.4% is 1.5&times; trailing realised vol of 14.2% — an
-              IV/RV spread at the 74th percentile over five years. Post-FOMC calm historically
-              compresses IV by 3–4 points in five sessions, monetising the premium gap.
-            </p>
+            <p class="view-card__thesis">SPY 30-day IV at 21.4% is 1.5&times; trailing realised vol of 14.2% — IV/RV spread at the 74th percentile. Post-FOMC calm historically compresses IV by 3–4 points in five sessions. Waiting for a cleaner risk setup before entry.</p>
             <div class="view-card__snap">
-              <div class="view-card__snap-item">
-                <span class="view-card__snap-key">Direction</span>
-                <span class="view-card__snap-val view-card__snap-val--short">Short&nbsp;Vol</span>
-              </div>
-              <div class="view-card__snap-item">
-                <span class="view-card__snap-key">Entry</span>
-                <span class="view-card__snap-val">$18.25</span>
-              </div>
-              <div class="view-card__snap-item">
-                <span class="view-card__snap-key">TP at</span>
-                <span class="view-card__snap-val">50%</span>
-              </div>
-              <div class="view-card__snap-item">
-                <span class="view-card__snap-key">Theta</span>
-                <span class="view-card__snap-val view-card__snap-val--long">+$32/d</span>
-              </div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--short">Short&nbsp;Vol</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">$18.25</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">TP&nbsp;at</span><span class="view-card__snap-val">50%</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Theta</span><span class="view-card__snap-val view-card__snap-val--long">+$32/d</span></div>
             </div>
-            <div class="view-card__footer">
-              <span class="view-card__date">Updated Jun 2026</span>
-              <a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a>
+            <div class="view-card__sources">
+              <span class="view-card__sources-label">Read</span>
+              <a href="https://www.ft.com/markets" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.cboe.com/us/options/market_statistics/" target="_blank" rel="noopener" class="view-card__source-link">CBOE&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.bloomberg.com/markets/stocks" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
             </div>
+            <div class="view-card__footer"><span class="view-card__date">Updated Jun 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+          </article>
+
+          <!-- ── 08 Commodities ── -->
+          <article class="view-card">
+            <div class="view-card__top">
+              <span class="view-card__asset">Commodities</span>
+              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+            </div>
+            <h3 class="view-card__title">Long Brent Crude</h3>
+            <p class="view-card__thesis">OPEC+ compliance at 92%, US SPR draws continuing, global inventories 6.2% below the 5yr average. India/SEA demand at 2.3% annualised. Curve in backwardation adds positive roll yield of ~$0.20/bbl/week to the long position.</p>
+            <div class="view-card__snap">
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">$77.40</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">$86.00</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">2.2:1</span></div>
+            </div>
+            <div class="view-card__sources">
+              <span class="view-card__sources-label">Read</span>
+              <a href="https://www.ft.com/commodities" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.reuters.com/markets/commodities/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.bloomberg.com/markets/commodities" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+            </div>
+            <div class="view-card__footer"><span class="view-card__date">Updated Jun 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+          </article>
+
+          <!-- ── 09 Digital Assets ── -->
+          <article class="view-card">
+            <div class="view-card__top">
+              <span class="view-card__asset">Digital Assets</span>
+              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+            </div>
+            <h3 class="view-card__title">Long BTC/USD — Momentum Signal</h3>
+            <p class="view-card__thesis">Realised vol at 42% vs 65% long-run average — a low-vol regime where the systematic framework sizes at 3.2% of portfolio. ADX above 25 confirms trend; 50/200 EMA crossover positive. IBIT/FBTC inflows above $600m/day.</p>
+            <div class="view-card__snap">
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">$61,200</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">$68,800</span></div>
+              <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">2.1:1</span></div>
+            </div>
+            <div class="view-card__sources">
+              <span class="view-card__sources-label">Read</span>
+              <a href="https://www.ft.com/cryptofinance" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.reuters.com/technology/future-of-money/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              <a href="https://www.bloomberg.com/crypto" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+            </div>
+            <div class="view-card__footer"><span class="view-card__date">Updated Jun 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
           </article>
 
         </div>
@@ -688,5 +916,51 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script src="js/main.js"></script>
+
+  <!-- Live market headlines via RSS2JSON (Yahoo Finance markets RSS) -->
+  <script>
+    (async function () {
+      const feeds = [
+        { url: 'https://feeds.content.dowjones.io/public/rss/mw_topstories', source: 'MarketWatch' },
+        { url: 'https://finance.yahoo.com/news/rssindex', source: 'Yahoo Finance' },
+      ];
+      const proxy = 'https://api.rss2json.com/v1/api.json?count=8&rss_url=';
+      const ticker   = document.getElementById('views-ticker');
+      const fallback = document.getElementById('views-ticker-fallback');
+      if (!ticker) return;
+
+      function timeAgo(dateStr) {
+        const mins = Math.round((Date.now() - new Date(dateStr)) / 60000);
+        if (mins < 60)   return mins + 'm ago';
+        if (mins < 1440) return Math.floor(mins / 60) + 'h ago';
+        return Math.floor(mins / 1440) + 'd ago';
+      }
+      function esc(s) {
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+
+      for (const feed of feeds) {
+        try {
+          const res  = await fetch(proxy + encodeURIComponent(feed.url), { signal: AbortSignal.timeout(5000) });
+          const data = await res.json();
+          if (data.status !== 'ok' || !data.items?.length) continue;
+
+          const html = data.items.slice(0, 6).map(item => `
+            <a href="${esc(item.link)}" target="_blank" rel="noopener" class="headline-pill" role="listitem">
+              <span class="headline-pill__source">${esc(feed.source)}</span>
+              <span class="headline-pill__title">${esc(item.title)}</span>
+              <span class="headline-pill__time">${timeAgo(item.pubDate)}</span>
+            </a>`).join('');
+
+          ticker.innerHTML = html;
+          ticker.style.display = 'flex';
+          return; // stop after first successful feed
+        } catch (_) {}
+      }
+
+      // Both feeds failed — show fallback links
+      if (fallback) fallback.style.display = 'block';
+    })();
+  </script>
 </body>
 </html>
