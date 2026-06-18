@@ -281,6 +281,38 @@
       overflow: hidden;
     }
 
+    /* ── Per-card live news headline ────────────────────────── */
+    .view-card__news {
+      display: none; /* shown by JS */
+      align-items: flex-start;
+      gap: 5px;
+      margin: var(--sp-2) var(--sp-6) 0;
+      padding: var(--sp-2) var(--sp-3);
+      background: var(--color-faint);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+    }
+    .view-card__news-label {
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #16a34a;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+    .view-card__news-link {
+      font-size: 0.6875rem;
+      color: var(--color-text);
+      text-decoration: none;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .view-card__news-link:hover { text-decoration: underline; text-underline-offset: 2px; }
+
     /* ── Source links ───────────────────────────────────────── */
     .view-card__sources {
       display: flex;
@@ -613,13 +645,14 @@
         <div class="views-grid">
 
           <!-- ── 01 Rates / Fixed Income ── -->
-          <article class="view-card">
+          <article class="view-card" data-card-keywords="bond,rate,yield,fed,treasury,curve,interest rate">
             <div class="view-card__top">
               <span class="view-card__asset">Rates / Fixed Income</span>
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">2s10s DV01-Neutral Steepener</h3>
-            <p class="view-card__thesis">Fed pause is in — the front end reprices cuts before the long end re-anchors to nominal growth. 2s10s at −28bps vs a 20-year average of +100bps; the inversion has overshot relative to where the curve historically settles post-final hike.</p>
+            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
+            <p class="view-card__thesis">Short-term US interest rates are higher than long-term rates — the opposite of normal. As the Fed stops raising rates, history shows this gap closes fast, with short-term rates falling first. I'm betting on that normalisation.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">−28bps</span></div>
@@ -636,13 +669,14 @@
           </article>
 
           <!-- ── 02 Inflation / TIPS ── -->
-          <article class="view-card">
+          <article class="view-card" data-card-keywords="inflation,cpi,pce,price,breakeven,tips">
             <div class="view-card__top">
               <span class="view-card__asset">Inflation / TIPS</span>
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">Long 5yr Breakeven Inflation</h3>
-            <p class="view-card__thesis">5yr breakeven at 2.15% underprices three consecutive above-consensus CPI prints. Energy prices up 18% from October lows and wage growth sticky at 4.1% YoY — neither is reflected in the current breakeven level.</p>
+            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
+            <p class="view-card__thesis">The bond market is pricing in falling inflation, but actual data keeps coming in higher than expected. Energy prices are rebounding and wages are still growing fast — I'm buying inflation protection while it's still cheap.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long BEI</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">2.15%</span></div>
@@ -659,13 +693,14 @@
           </article>
 
           <!-- ── 03 Sovereign Bonds ── -->
-          <article class="view-card">
+          <article class="view-card" data-card-keywords="sovereign,ecb,bund,gilt,european,italy,german">
             <div class="view-card__top">
               <span class="view-card__asset">Sovereign Bonds</span>
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">BTP&ndash;Bund Spread Compression</h3>
-            <p class="view-card__thesis">10yr BTP–Bund at 185bps above fundamentals — Italian primary surplus on track, ECB TPI backstop intact, two more cuts priced for 2026. The risk premium is not supported by current fiscal data.</p>
+            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
+            <p class="view-card__thesis">Italian government bonds pay nearly 2% more than German bonds. Italy's finances have improved and the ECB has committed to preventing a crisis — that gap looks too wide, and I'm betting it closes.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Tight</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">185bps</span></div>
@@ -682,13 +717,14 @@
           </article>
 
           <!-- ── 04 Credit ── -->
-          <article class="view-card">
+          <article class="view-card" data-card-keywords="credit,default,corporate bond,high yield,spread,debt">
             <div class="view-card__top">
               <span class="view-card__asset">Credit</span>
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">Short CDX HY 5yr — Buy Protection</h3>
-            <p class="view-card__thesis">CDX HY at 270bps near post-GFC tights while CCC default rates rise to 4.1% and average interest coverage hits 2.8&times; — the lowest since 2008. The market is pricing a benign default cycle the data does not support.</p>
+            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
+            <p class="view-card__thesis">Junk bonds are priced as if defaults won't happen, but companies are struggling more than markets realise — debt costs are up and earnings are down. I'm buying insurance against a wave of defaults before the market wakes up.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--short">Short</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">270bps</span></div>
@@ -705,13 +741,14 @@
           </article>
 
           <!-- ── 05 FX ── -->
-          <article class="view-card">
+          <article class="view-card" data-card-keywords="dollar,euro,yen,currency,forex,fx,aud,jpy">
             <div class="view-card__top">
               <span class="view-card__asset">FX</span>
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">G10 Carry Basket — Long AUD/JPY</h3>
-            <p class="view-card__thesis">G10 rate differentials at decade highs; VIX below 16 for eight consecutive weeks. AUD/JPY carry at 5.0% p.a. Carry/vol ratio above 1.3 — a regime where the strategy has historically returned 11% p.a. at 8.6% vol.</p>
+            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
+            <p class="view-card__thesis">Some currencies pay 5% more interest per year than others. In calm markets, you earn that difference just by holding the position. Volatility is low and conditions favour this trade historically.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">basket</span></div>
@@ -728,13 +765,14 @@
           </article>
 
           <!-- ── 06 Equities ── -->
-          <article class="view-card">
+          <article class="view-card" data-card-keywords="stock,equity,s&p,nasdaq,earnings,sector,tech">
             <div class="view-card__top">
               <span class="view-card__asset">Equities</span>
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">Long XLK / Short XLY — Sector Pair</h3>
-            <p class="view-card__thesis">Consumer delinquencies at 3.2%; earnings revisions XLY −12 vs XLK +8 net upgrades. XLK/XLY ratio at 1.42 — below the 1.55 level consistent with late-cycle tightening where tech consistently outperforms discretionary.</p>
+            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
+            <p class="view-card__thesis">Consumers are stretching financially — delinquencies are rising and retailers are cutting earnings forecasts. Tech companies are doing the opposite. I'm long tech, short consumer, betting the gap widens from here.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">L/S</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">1.42</span></div>
@@ -751,13 +789,14 @@
           </article>
 
           <!-- ── 07 Volatility / Options ── -->
-          <article class="view-card">
+          <article class="view-card" data-card-keywords="volatility,vix,options,implied,straddle,fomc">
             <div class="view-card__top">
               <span class="view-card__asset">Volatility / Options</span>
               <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
             </div>
             <h3 class="view-card__title">Short SPY Straddle — Sell IV</h3>
-            <p class="view-card__thesis">SPY 30-day IV at 21.4% is 1.5&times; trailing realised vol of 14.2% — IV/RV spread at the 74th percentile. Post-FOMC calm historically compresses IV by 3–4 points in five sessions. Waiting for a cleaner risk setup before entry.</p>
+            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
+            <p class="view-card__thesis">Markets are paying a large premium for crash protection, yet the S&amp;P is barely moving day-to-day. I'm looking to sell that overpriced insurance and pocket the difference — waiting for the clearest moment to enter.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--short">Short&nbsp;Vol</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">$18.25</span></div>
@@ -774,13 +813,14 @@
           </article>
 
           <!-- ── 08 Commodities ── -->
-          <article class="view-card">
+          <article class="view-card" data-card-keywords="oil,gold,commodity,crude,copper,opec,brent">
             <div class="view-card__top">
               <span class="view-card__asset">Commodities</span>
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">Long Brent Crude</h3>
-            <p class="view-card__thesis">OPEC+ compliance at 92%, US SPR draws continuing, global inventories 6.2% below the 5yr average. India/SEA demand at 2.3% annualised. Curve in backwardation adds positive roll yield of ~$0.20/bbl/week to the long position.</p>
+            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
+            <p class="view-card__thesis">Oil supply is tight: OPEC is sticking to cuts, stockpiles are well below normal, and demand from Asia keeps growing. Not only do I expect prices to rise — the way the futures market is structured means I get paid extra just to hold the trade.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">$77.40</span></div>
@@ -797,13 +837,14 @@
           </article>
 
           <!-- ── 09 Digital Assets ── -->
-          <article class="view-card">
+          <article class="view-card" data-card-keywords="bitcoin,crypto,btc,ethereum,digital asset,cryptocurrency">
             <div class="view-card__top">
               <span class="view-card__asset">Digital Assets</span>
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">Long BTC/USD — Momentum Signal</h3>
-            <p class="view-card__thesis">Realised vol at 42% vs 65% long-run average — a low-vol regime where the systematic framework sizes at 3.2% of portfolio. ADX above 25 confirms trend; 50/200 EMA crossover positive. IBIT/FBTC inflows above $600m/day.</p>
+            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
+            <p class="view-card__thesis">Bitcoin is trending higher with below-average volatility — the conditions my systematic strategy is built for. Institutional ETF inflows are strong, trend indicators are positive, and the model sizes the position automatically based on current volatility.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">$61,200</span></div>
@@ -917,17 +958,16 @@
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script src="js/main.js"></script>
 
-  <!-- Live market headlines via RSS2JSON (Yahoo Finance markets RSS) -->
+  <!-- Live market headlines via RSS2JSON -->
   <script>
     (async function () {
       const feeds = [
         { url: 'https://feeds.content.dowjones.io/public/rss/mw_topstories', source: 'MarketWatch' },
         { url: 'https://finance.yahoo.com/news/rssindex', source: 'Yahoo Finance' },
       ];
-      const proxy = 'https://api.rss2json.com/v1/api.json?count=8&rss_url=';
+      const proxy = 'https://api.rss2json.com/v1/api.json?count=30&rss_url=';
       const ticker   = document.getElementById('views-ticker');
       const fallback = document.getElementById('views-ticker-fallback');
-      if (!ticker) return;
 
       function timeAgo(dateStr) {
         const mins = Math.round((Date.now() - new Date(dateStr)) / 60000);
@@ -939,27 +979,49 @@
         return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
       }
 
+      let allItems = [];
+
       for (const feed of feeds) {
         try {
           const res  = await fetch(proxy + encodeURIComponent(feed.url), { signal: AbortSignal.timeout(5000) });
           const data = await res.json();
           if (data.status !== 'ok' || !data.items?.length) continue;
+          allItems = data.items;
 
-          const html = data.items.slice(0, 6).map(item => `
-            <a href="${esc(item.link)}" target="_blank" rel="noopener" class="headline-pill" role="listitem">
-              <span class="headline-pill__source">${esc(feed.source)}</span>
-              <span class="headline-pill__title">${esc(item.title)}</span>
-              <span class="headline-pill__time">${timeAgo(item.pubDate)}</span>
-            </a>`).join('');
-
-          ticker.innerHTML = html;
-          ticker.style.display = 'flex';
-          return; // stop after first successful feed
+          if (ticker) {
+            const html = data.items.slice(0, 6).map(item => `
+              <a href="${esc(item.link)}" target="_blank" rel="noopener" class="headline-pill" role="listitem">
+                <span class="headline-pill__source">${esc(feed.source)}</span>
+                <span class="headline-pill__title">${esc(item.title)}</span>
+                <span class="headline-pill__time">${timeAgo(item.pubDate)}</span>
+              </a>`).join('');
+            ticker.innerHTML = html;
+            ticker.style.display = 'flex';
+          }
+          break; // stop after first successful feed
         } catch (_) {}
       }
 
-      // Both feeds failed — show fallback links
-      if (fallback) fallback.style.display = 'block';
+      if (!allItems.length) {
+        if (fallback) fallback.style.display = 'block';
+        return;
+      }
+
+      // Populate per-card headlines by matching keywords
+      document.querySelectorAll('.view-card[data-card-keywords]').forEach(card => {
+        const keywords = card.dataset.cardKeywords.toLowerCase().split(',').map(k => k.trim());
+        const match = allItems.find(item => {
+          const text = (item.title + ' ' + (item.description || '')).toLowerCase();
+          return keywords.some(kw => text.includes(kw));
+        });
+        if (!match) return;
+        const wrapper = card.querySelector('.view-card__news');
+        const link    = card.querySelector('.view-card__news-link');
+        if (!wrapper || !link) return;
+        link.href        = match.link;
+        link.textContent = match.title;
+        wrapper.style.display = 'flex';
+      });
     })();
   </script>
 </body>
