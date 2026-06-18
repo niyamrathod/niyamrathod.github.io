@@ -579,6 +579,30 @@ ul { list-style: none; }
   margin-left: 0;
 }
 
+/* ── Project market-insight callout ─────────────────────────── */
+.project-insight {
+  margin-top: 20px;
+  padding: 11px 16px;
+  border-left: 2px solid var(--color-accent);
+  background: var(--color-faint);
+  border-radius: 0 6px 6px 0;
+}
+.project-insight__label {
+  display: block;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 4px;
+}
+.project-insight__text {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
 /* ============================================================
    RESPONSIVE
    ============================================================ */
