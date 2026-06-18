@@ -13,6 +13,206 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ── Current Views section ──────────────────────────────── */
+    .views {
+      padding: var(--sp-24) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .views__meta {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-6);
+      margin-top: var(--sp-4);
+      flex-wrap: wrap;
+    }
+    .views__subtitle {
+      font-size: 0.9375rem;
+      color: var(--color-muted);
+      line-height: 1.7;
+      max-width: 58ch;
+      margin-top: var(--sp-4);
+    }
+    .views__disclaimer {
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      opacity: 0.7;
+    }
+    .views__updated {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-top: var(--sp-6);
+    }
+    .views__live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #16a34a;
+      display: inline-block;
+      position: relative;
+    }
+    .views__live-dot::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 1.5px solid #16a34a;
+      opacity: 0.5;
+      animation: pulse-ring 2s ease-out infinite;
+    }
+    @keyframes pulse-ring {
+      0%   { transform: scale(0.8); opacity: 0.6; }
+      100% { transform: scale(1.6); opacity: 0;   }
+    }
+
+    /* ── Views grid ─────────────────────────────────────────── */
+    .views-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-5);
+      margin-top: var(--sp-10);
+    }
+
+    /* ── View card ──────────────────────────────────────────── */
+    .view-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 3px 0 var(--color-border);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .view-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 var(--color-border);
+    }
+    .view-card__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-3);
+      padding: var(--sp-5) var(--sp-6) 0;
+    }
+    .view-card__asset {
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      background: var(--color-faint);
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      padding: 3px 9px;
+    }
+    .view-card__title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+      padding: var(--sp-4) var(--sp-6) 0;
+      line-height: 1.2;
+    }
+    .view-card__thesis {
+      font-size: 0.8125rem;
+      color: var(--color-muted);
+      line-height: 1.7;
+      padding: var(--sp-3) var(--sp-6) 0;
+      flex: 1;
+    }
+
+    /* ── Mini snapshot ──────────────────────────────────────── */
+    .view-card__snap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--color-border);
+      margin-top: var(--sp-5);
+      background: var(--color-faint);
+    }
+    .view-card__snap-item {
+      padding: var(--sp-3) var(--sp-4);
+      border-right: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .view-card__snap-item:last-child { border-right: none; }
+    .view-card__snap-key {
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+    .view-card__snap-val {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-text);
+      letter-spacing: -0.01em;
+    }
+    .view-card__snap-val--long  { color: #16a34a; }
+    .view-card__snap-val--short { color: #dc2626; }
+
+    /* ── Card footer ────────────────────────────────────────── */
+    .view-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--sp-4) var(--sp-6);
+      border-top: 1px solid var(--color-border);
+    }
+    .view-card__date {
+      font-size: 0.6875rem;
+      color: var(--color-muted);
+    }
+    .view-card__link {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      color: var(--color-text);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: opacity 0.15s;
+    }
+    .view-card__link:hover { opacity: 0.6; }
+
+    /* ── Status badge (shared) ──────────────────────────────── */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 100px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .status-badge--open    { background: var(--color-faint); color: var(--color-muted); border: 1px solid var(--color-border); }
+    .status-badge--hit     { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+    .status-badge--watch   { background: #fef9c3; color: #a16207; border: 1px solid #fde68a; }
+    .status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .views-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .views-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
@@ -25,6 +225,7 @@
       <a href="#hero" class="nav__brand">NR</a> <!-- TODO: change initials if needed -->
       <ul class="nav__links" role="list">
         <li><a href="#work"    class="nav__link">Work</a></li>
+        <li><a href="#views"   class="nav__link">Views</a></li>
         <li><a href="#about"   class="nav__link">About</a></li>
         <li><a href="#contact" class="nav__link">Contact</a></li>
       </ul>
@@ -252,6 +453,141 @@
                 <li class="tag">Gradio</li>
                 <li class="tag">Trade Structuring</li>
               </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Current Views ────────────────────────────────────── -->
+    <section class="views" id="views" aria-labelledby="views-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">
+            <span class="views__live-dot" aria-hidden="true"></span>&nbsp; Live
+          </span>
+          <h2 class="section-heading" id="views-heading">Current Views</h2>
+          <p class="views__subtitle">
+            Three live ideas structured using the pitch builder — one per major asset class.
+            Updated as market conditions change.
+            <br><span class="views__disclaimer">Illustrative only. Not investment advice.</span>
+          </p>
+        </div>
+
+        <div class="views-grid">
+
+          <!-- View 01 — Rates -->
+          <article class="view-card">
+            <div class="view-card__top">
+              <span class="view-card__asset">Rates / Fixed Income</span>
+              <span class="status-badge status-badge--open">
+                <span class="status-dot"></span>Open
+              </span>
+            </div>
+            <h3 class="view-card__title">2s10s DV01-Neutral Steepener</h3>
+            <p class="view-card__thesis">
+              Fed pause is in — the front end reprices cuts before the long end re-anchors to
+              nominal growth. 2s10s at −28bps vs a 20-year average of +100bps. The inversion
+              has overshot relative to where the curve has historically settled post-final hike.
+            </p>
+            <div class="view-card__snap">
+              <div class="view-card__snap-item">
+                <span class="view-card__snap-key">Direction</span>
+                <span class="view-card__snap-val view-card__snap-val--long">Long</span>
+              </div>
+              <div class="view-card__snap-item">
+                <span class="view-card__snap-key">Entry</span>
+                <span class="view-card__snap-val">−28bps</span>
+              </div>
+              <div class="view-card__snap-item">
+                <span class="view-card__snap-key">Target</span>
+                <span class="view-card__snap-val">−8bps</span>
+              </div>
+              <div class="view-card__snap-item">
+                <span class="view-card__snap-key">R/R</span>
+                <span class="view-card__snap-val">3.3:1</span>
+              </div>
+            </div>
+            <div class="view-card__footer">
+              <span class="view-card__date">Updated Jun 2026</span>
+              <a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a>
+            </div>
+          </article>
+
+          <!-- View 02 — Credit -->
+          <article class="view-card">
+            <div class="view-card__top">
+              <span class="view-card__asset">Credit</span>
+              <span class="status-badge status-badge--open">
+                <span class="status-dot"></span>Open
+              </span>
+            </div>
+            <h3 class="view-card__title">Short CDX HY 5yr — Buy Protection</h3>
+            <p class="view-card__thesis">
+              CDX HY at 270bps — near post-GFC tights — while CCC default rates are rising
+              to 4.1% and average interest coverage sits at 2.8&times;, the lowest since 2008.
+              The market is pricing a benign default cycle that the data does not support.
+            </p>
+            <div class="view-card__snap">
+              <div class="view-card__snap-item">
+                <span class="view-card__snap-key">Direction</span>
+                <span class="view-card__snap-val view-card__snap-val--short">Short</span>
+              </div>
+              <div class="view-card__snap-item">
+                <span class="view-card__snap-key">Entry</span>
+                <span class="view-card__snap-val">270bps</span>
+              </div>
+              <div class="view-card__snap-item">
+                <span class="view-card__snap-key">Target</span>
+                <span class="view-card__snap-val">360bps</span>
+              </div>
+              <div class="view-card__snap-item">
+                <span class="view-card__snap-key">R/R</span>
+                <span class="view-card__snap-val">2.3:1</span>
+              </div>
+            </div>
+            <div class="view-card__footer">
+              <span class="view-card__date">Updated Jun 2026</span>
+              <a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a>
+            </div>
+          </article>
+
+          <!-- View 03 — Volatility -->
+          <article class="view-card">
+            <div class="view-card__top">
+              <span class="view-card__asset">Volatility / Options</span>
+              <span class="status-badge status-badge--watch">
+                <span class="status-dot"></span>Watching
+              </span>
+            </div>
+            <h3 class="view-card__title">Short SPY Straddle — Sell IV</h3>
+            <p class="view-card__thesis">
+              SPY 30-day IV at 21.4% is 1.5&times; trailing realised vol of 14.2% — an
+              IV/RV spread at the 74th percentile over five years. Post-FOMC calm historically
+              compresses IV by 3–4 points in five sessions, monetising the premium gap.
+            </p>
+            <div class="view-card__snap">
+              <div class="view-card__snap-item">
+                <span class="view-card__snap-key">Direction</span>
+                <span class="view-card__snap-val view-card__snap-val--short">Short&nbsp;Vol</span>
+              </div>
+              <div class="view-card__snap-item">
+                <span class="view-card__snap-key">Entry</span>
+                <span class="view-card__snap-val">$18.25</span>
+              </div>
+              <div class="view-card__snap-item">
+                <span class="view-card__snap-key">TP at</span>
+                <span class="view-card__snap-val">50%</span>
+              </div>
+              <div class="view-card__snap-item">
+                <span class="view-card__snap-key">Theta</span>
+                <span class="view-card__snap-val view-card__snap-val--long">+$32/d</span>
+              </div>
+            </div>
+            <div class="view-card__footer">
+              <span class="view-card__date">Updated Jun 2026</span>
+              <a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a>
             </div>
           </article>
 
