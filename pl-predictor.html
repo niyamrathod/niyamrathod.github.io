@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Premier League 2026/27 Predictor & Transfer Machine — Monte Carlo season simulation and player transfer impact tool. Built by Niyam Rathod." />
+  <title>PL 2026/27 Predictor — Niyam Rathod</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .project-hero {
+      padding: calc(var(--sp-32) * 0.35) 0 var(--sp-12);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .project-hero__back {
+      display: inline-flex; align-items: center; gap: var(--sp-2);
+      font-size: 0.8125rem; color: var(--color-muted); text-decoration: none;
+      margin-bottom: var(--sp-8);
+      transition: color var(--dur-fast);
+    }
+    .project-hero__back:hover { color: var(--color-text); }
+    .project-hero__label {
+      font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--color-muted); margin-bottom: var(--sp-3);
+    }
+    .project-hero__title {
+      font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1; margin-bottom: var(--sp-6);
+    }
+    .project-hero__desc {
+      max-width: 600px; font-size: 1rem; line-height: 1.7;
+      color: var(--color-muted); margin-bottom: var(--sp-6);
+    }
+    .project-hero__tags {
+      display: flex; flex-wrap: wrap; gap: var(--sp-2); list-style: none;
+      padding: 0; margin: 0 0 var(--sp-6);
+    }
+    .simulator-section { padding: var(--sp-16) 0 var(--sp-24); }
+    .simulator-wrapper {
+      width: 100%; border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--color-border);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+    .simulator-wrapper iframe {
+      width: 100%; height: 900px; border: none; display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__logo">NR</a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html#work"    class="nav__link">Work</a></li>
+        <li><a href="index.html#views"   class="nav__link">Views</a></li>
+        <li><a href="index.html#about"   class="nav__link">About</a></li>
+        <li><a href="index.html#contact" class="nav__link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── Page hero ──────────────────────────────────────── -->
+    <section class="project-hero">
+      <div class="container">
+        <a href="index.html#work" class="project-hero__back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
+          </svg>
+          Back to work
+        </a>
+        <p class="project-hero__label">Project 06</p>
+        <h1 class="project-hero__title">PL 2026/27<br>Predictor</h1>
+        <p class="project-hero__desc">
+          Monte Carlo season simulation for the full 2026/27 Premier League — all 380 games,
+          10 000 runs — built on a Dixon-Coles goals model fitted to three seasons of
+          historical results. The Transfer Machine lets you move any player between clubs
+          and see the formation change, stat impact, and updated win odds for both sides.
+        </p>
+        <ul class="project-hero__tags" role="list">
+          <li class="tag">Monte Carlo</li>
+          <li class="tag">Dixon-Coles</li>
+          <li class="tag">Transfer Machine</li>
+          <li class="tag">Cross-Asset</li>
+          <li class="tag">Python</li>
+        </ul>
+        <div class="project-insight" style="max-width:640px;">
+          <span class="project-insight__label">What this taught me about markets</span>
+          <p class="project-insight__text">Building the transfer machine showed me how marginal contribution analysis works in practice — the value of moving a player depends not just on their stats but on the positional gap they fill, the cover available to the selling club, and the constraints on the buyer. The same logic underpins how a trading desk prices the marginal risk contribution of adding a position to a portfolio.</p>
+        </div>
+        <p style="margin-top:14px;font-size:0.8125rem;color:var(--color-muted);display:flex;align-items:center;gap:6px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          Best experienced on desktop or laptop.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Gradio embed ───────────────────────────────────── -->
+    <section class="simulator-section">
+      <div class="container">
+        <div class="simulator-wrapper">
+          <iframe
+            src="https://niyamrathod-pl-predictor.hf.space"
+            title="PL 2026/27 Predictor & Transfer Machine"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <span class="footer__logo">NR</span>
+        <nav aria-label="Footer navigation">
+          <ul class="footer__links" role="list">
+            <li><a href="index.html#work">Work</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="footer__copy">&copy; 2026 Niyam Rathod</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
