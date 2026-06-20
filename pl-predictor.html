@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Premier League 2026/27 Predictor & Transfer Machine — Monte Carlo season simulation and player transfer impact tool. Built by Niyam Rathod." />
+  <meta name="description" content="Premier League 2026/27 Predictor — Monte Carlo simulation, Transfer Machine, Smart Signing optimiser, Model vs Market edge board, and walk-forward calibration. Built by Niyam Rathod." />
   <title>PL 2026/27 Predictor — Niyam Rathod</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
@@ -80,21 +80,28 @@
         <p class="project-hero__label">Project 06</p>
         <h1 class="project-hero__title">PL 2026/27<br>Predictor</h1>
         <p class="project-hero__desc">
-          Monte Carlo season simulation for the full 2026/27 Premier League — all 380 games,
-          10 000 runs — built on a Dixon-Coles goals model fitted to three seasons of
-          historical results. The Transfer Machine lets you move any player between clubs
-          and see the formation change, stat impact, and updated win odds for both sides.
+          A full quantitative football analytics suite built in Python. The core is a
+          Dixon-Coles goals model fitted to four seasons of Premier League results,
+          driving a 10&thinsp;000-run Monte Carlo season simulation. Five tools sit on top:
+          a <strong>Transfer Machine</strong> that models the marginal rating impact of any signing;
+          a <strong>Smart Signing optimiser</strong> that searches the whole player pool for the
+          best affordable signing for a chosen club; a <strong>Model vs Market</strong> edge board
+          comparing model probabilities to de-vigged bookmaker odds; a <strong>Track Record</strong>
+          calibration tab with out-of-sample RPS / Brier / log-loss scoring; and live
+          <strong>2026/27 season tracking</strong> that will score predictions as results come in
+          from August.
         </p>
         <ul class="project-hero__tags" role="list">
           <li class="tag">Monte Carlo</li>
           <li class="tag">Dixon-Coles</li>
           <li class="tag">Transfer Machine</li>
-          <li class="tag">Cross-Asset</li>
+          <li class="tag">Smart Signing</li>
+          <li class="tag">Model vs Market</li>
           <li class="tag">Python</li>
         </ul>
         <div class="project-insight" style="max-width:640px;">
           <span class="project-insight__label">What this taught me about markets</span>
-          <p class="project-insight__text">Building the transfer machine showed me how marginal contribution analysis works in practice — the value of moving a player depends not just on their stats but on the positional gap they fill, the cover available to the selling club, and the constraints on the buyer. The same logic underpins how a trading desk prices the marginal risk contribution of adding a position to a portfolio.</p>
+          <p class="project-insight__text">Every tool here maps directly onto S&amp;T skills. The Smart Signing optimiser is a constrained search problem — maximise alpha per unit of budget, the same framing a PM uses for position sizing. The Model vs Market tab is pure relative-value analysis: where does the model disagree with the crowd, and who has been right historically? The Track Record scoreboard applies the same out-of-sample integrity standard that a quant fund would demand — no look-ahead, walk-forward refits only. Building all three showed me that the gap between sport and markets is thinner than most people think.</p>
         </div>
         <p style="margin-top:14px;font-size:0.8125rem;color:var(--color-muted);display:flex;align-items:center;gap:6px;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
