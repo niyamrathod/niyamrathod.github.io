@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Systematic trading framework — volatility-targeted sizing, historical VaR, drawdown kill switch, and regime-adaptive execution across crypto, FX, and equity indices. Built by Niyam Rathod." />
+  <meta name="description" content="Systematic trading framework — 5-month live trade history, five VaR methods with interactive controls, strategy comparison simulator, regime-adaptive execution, and volatility-targeted sizing. Built by Niyam Rathod." />
   <title>Systematic Trading Framework — Niyam Rathod</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
@@ -115,23 +115,28 @@
         <h1 class="project-hero__title">Systematic<br>Trading Framework</h1>
         <p class="project-hero__desc">
           A production-style systematic trading framework paper-trading BTC, ETH, BNB, LTC, and XRP
-          24/7 on live Yahoo Finance data. Sizes every position using volatility targeting (not fixed
-          %), monitors peak-to-trough drawdown with a de-risking mode and kill switch, computes
-          historical simulation VaR on the open book each cycle, and reports a correctly annualised
-          Sharpe ratio. The same engine generalises to FX and equity index universes by changing one
-          config line.
+          24/7 on live Yahoo Finance data. The dashboard loads with a full five-month trade history
+          (130 completed trades, Jan&ndash;Jun 2026) so performance metrics are meaningful from the first visit.
+          Five tabs cover the core system: an <strong>interactive Risk Dashboard</strong> with five VaR
+          methods (Historical Simulation, Parametric, Monte Carlo, Cornish-Fisher, EWMA) and live
+          sliders for confidence level, lookback, and kill-switch thresholds; a <strong>Strategy
+          Comparison</strong> tab showing actual vs hypothetical returns for each of the five
+          regime-matched strategies; a filterable <strong>Trade History</strong> (by symbol, strategy,
+          and regime); a <strong>P&amp;L Analytics</strong> tab with period and cumulative breakdowns;
+          and a <strong>Live Trading</strong> tab to run the engine on demand.
         </p>
         <ul class="project-hero__tags" role="list">
           <li class="tag">Python</li>
           <li class="tag">Algorithmic Trading</li>
           <li class="tag">Risk Management</li>
           <li class="tag">Volatility Targeting</li>
-          <li class="tag">Gradio</li>
+          <li class="tag">VaR</li>
+          <li class="tag">Strategy Comparison</li>
           <li class="tag">Quantitative Finance</li>
         </ul>
         <div class="project-insight">
           <span class="project-insight__label">What this taught me about markets</span>
-          <p class="project-insight__text">Running a live framework taught me that position sizing matters more than the signal — a strategy with a positive Sharpe can still blow up if it sizes too large during a drawdown. Volatility targeting is how systematic desks keep risk constant as markets move.</p>
+          <p class="project-insight__text">Building five VaR implementations side-by-side made the differences concrete: Cornish-Fisher corrects for the fat tails and negative skew that make Gaussian VaR dangerously optimistic on crypto. The Strategy Comparison tab showed that regime-matched execution outperforms any single strategy held rigidly — the same lesson a macro desk applies when rotating between trend and mean-reversion books as the market cycle shifts.</p>
         </div>
         <p style="margin-top:14px;font-size:0.8125rem;color:var(--color-muted);display:flex;align-items:center;gap:6px;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
