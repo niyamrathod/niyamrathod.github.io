@@ -40,39 +40,6 @@
       color: var(--color-muted);
       opacity: 0.7;
     }
-    .views__updated {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--color-muted);
-      margin-top: var(--sp-6);
-    }
-    .views__live-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #16a34a;
-      display: inline-block;
-      position: relative;
-    }
-    .views__live-dot::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      border: 1.5px solid #16a34a;
-      opacity: 0.5;
-      animation: pulse-ring 2s ease-out infinite;
-    }
-    @keyframes pulse-ring {
-      0%   { transform: scale(0.8); opacity: 0.6; }
-      100% { transform: scale(1.6); opacity: 0;   }
-    }
-
     /* ── Views grid ─────────────────────────────────────────── */
     .views-grid {
       display: grid;
@@ -205,64 +172,6 @@
     .status-badge--watch   { background: #fef9c3; color: #a16207; border: 1px solid #fde68a; }
     .status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 
-    /* ── News ticker ────────────────────────────────────────── */
-    .views__ticker-wrap {
-      margin: var(--sp-8) 0 var(--sp-2);
-    }
-    .views__ticker-label {
-      font-size: 0.5625rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--color-muted);
-      margin-bottom: var(--sp-3);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .views__ticker {
-      display: none; /* shown by JS when headlines load */
-      gap: var(--sp-3);
-      overflow-x: auto;
-      padding-bottom: var(--sp-2);
-      scrollbar-width: none;
-    }
-    .views__ticker::-webkit-scrollbar { display: none; }
-    .headline-pill {
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      padding: var(--sp-3) var(--sp-4);
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: 8px;
-      text-decoration: none;
-      width: 220px;
-      transition: border-color 0.15s, transform 0.15s;
-    }
-    .headline-pill:hover { border-color: var(--color-text); transform: translateY(-1px); }
-    .headline-pill__source {
-      font-size: 0.5rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--color-muted);
-    }
-    .headline-pill__title {
-      font-size: 0.75rem;
-      color: var(--color-text);
-      line-height: 1.45;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .headline-pill__time {
-      font-size: 0.5rem;
-      color: var(--color-muted);
-      margin-top: 2px;
-    }
     .views__ticker-fallback {
       font-size: 0.75rem;
       color: var(--color-muted);
@@ -280,38 +189,6 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-
-    /* ── Per-card live news headline ────────────────────────── */
-    .view-card__news {
-      display: none; /* shown by JS */
-      align-items: flex-start;
-      gap: 5px;
-      margin: var(--sp-2) var(--sp-6) 0;
-      padding: var(--sp-2) var(--sp-3);
-      background: var(--color-faint);
-      border: 1px solid var(--color-border);
-      border-radius: 6px;
-    }
-    .view-card__news-label {
-      font-size: 0.5rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #16a34a;
-      margin-top: 1px;
-      flex-shrink: 0;
-    }
-    .view-card__news-link {
-      font-size: 0.6875rem;
-      color: var(--color-text);
-      text-decoration: none;
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .view-card__news-link:hover { text-decoration: underline; text-underline-offset: 2px; }
 
     /* ── Source links ───────────────────────────────────────── */
     .view-card__sources {
@@ -687,9 +564,7 @@
     <section class="views" id="views" aria-labelledby="views-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label">
-            <span class="views__live-dot" aria-hidden="true"></span>&nbsp; Live
-          </span>
+          <span class="section-label">Views</span>
           <h2 class="section-heading" id="views-heading">Current Views</h2>
           <p class="views__subtitle">
             Nine live ideas — one per asset class — structured using the pitch builder.
@@ -697,20 +572,12 @@
             <span class="views__disclaimer">Illustrative only. Not investment advice.</span>
           </p>
 
-          <!-- Live news headlines (populated by JS) -->
-          <div class="views__ticker-wrap">
-            <p class="views__ticker-label">
-              <span class="views__live-dot" style="width:5px;height:5px;" aria-hidden="true"></span>
-              Latest market headlines
-            </p>
-            <div class="views__ticker" id="views-ticker" role="list" aria-label="Market headlines"></div>
-            <p class="views__ticker-fallback" id="views-ticker-fallback" style="display:none;">
-              Live headlines unavailable &mdash; read directly:
-              <a href="https://www.reuters.com/markets/" target="_blank" rel="noopener">Reuters Markets</a> &nbsp;&middot;&nbsp;
-              <a href="https://www.ft.com/markets" target="_blank" rel="noopener">FT Markets</a> &nbsp;&middot;&nbsp;
-              <a href="https://www.bloomberg.com/markets" target="_blank" rel="noopener">Bloomberg</a>
-            </p>
-          </div>
+          <p class="views__ticker-fallback">
+            Market coverage:
+            <a href="https://www.reuters.com/markets/" target="_blank" rel="noopener">Reuters Markets</a> &nbsp;&middot;&nbsp;
+            <a href="https://www.ft.com/markets" target="_blank" rel="noopener">FT Markets</a> &nbsp;&middot;&nbsp;
+            <a href="https://www.bloomberg.com/markets" target="_blank" rel="noopener">Bloomberg</a>
+          </p>
         </div><!-- end .section-header -->
           <p class="views__subtitle">
             Three live ideas structured using the pitch builder — one per major asset class.
@@ -728,8 +595,7 @@
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">2s10s DV01-Neutral Steepener</h3>
-            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
-            <p class="view-card__thesis">Short-term US interest rates are higher than long-term rates — the opposite of normal. As the Fed stops raising rates, history shows this gap closes fast, with short-term rates falling first. I'm betting on that normalisation.</p>
+<p class="view-card__thesis">Short-term US interest rates are higher than long-term rates — the opposite of normal. As the Fed stops raising rates, history shows this gap closes fast, with short-term rates falling first. I'm betting on that normalisation.</p>
             <p class="view-card__mkt">The steepener is a broadly held macro fund position — crowding is real and the trade has been slow to play out as cut timing stays uncertain. Futures price modest easing but the front end only reprices when cuts actually arrive.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long</span></div>
@@ -744,7 +610,7 @@
               <a href="https://www.reuters.com/markets/rates-bonds/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
               <a href="https://www.bloomberg.com/markets/rates-bonds" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
             </div>
-            <div class="view-card__footer"><span class="view-card__date">Updated Jun 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+            <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
           </article>
 
           <!-- ── 02 Inflation / TIPS ── -->
@@ -754,8 +620,7 @@
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">Long 5yr Breakeven Inflation</h3>
-            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
-            <p class="view-card__thesis">The bond market is pricing in falling inflation, but actual data keeps coming in higher than expected. Energy prices are rebounding and wages are still growing fast — I'm buying inflation protection while it's still cheap.</p>
+<p class="view-card__thesis">The bond market is pricing in falling inflation, but actual data keeps coming in higher than expected. Energy prices are rebounding and wages are still growing fast — I'm buying inflation protection while it's still cheap.</p>
             <p class="view-card__mkt">The market is pricing near-full disinflation at current breakeven levels — consensus is that the Fed has won. TIPS are broadly under-owned by real-money funds relative to 2021–22 peak allocations, making entry less crowded than the headline thesis implies.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long BEI</span></div>
@@ -770,7 +635,7 @@
               <a href="https://www.reuters.com/markets/rates-bonds/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
               <a href="https://www.bloomberg.com/economics" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
             </div>
-            <div class="view-card__footer"><span class="view-card__date">Updated Jun 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+            <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
           </article>
 
           <!-- ── 03 Sovereign Bonds ── -->
@@ -780,8 +645,7 @@
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">Short OATs / Long Bunds — French Fiscal</h3>
-            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
-            <p class="view-card__thesis">France's coalition government has failed to pass a credible budget, and the OAT–Bund spread at 85bps is too tight given the fiscal trajectory. Germany's position is structurally stronger. The driver is French politics specifically — not broad European risk sentiment — which means it behaves differently to other spread trades.</p>
+<p class="view-card__thesis">France's coalition government has failed to pass a credible budget, and the OAT–Bund spread at 85bps is too tight given the fiscal trajectory. Germany's position is structurally stronger. The driver is French politics specifically — not broad European risk sentiment — which means it behaves differently to other spread trades.</p>
             <p class="view-card__mkt">The trade carries some legacy positioning from France's June 2024 snap election — not a virgin idea, and the spread has partially retraced since. Market is pricing moderate French fiscal risk, not a full credibility event.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--short">Short OATs</span></div>
@@ -806,8 +670,7 @@
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">Short CDX HY 5yr — Buy Protection</h3>
-            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
-            <p class="view-card__thesis">Junk bonds are priced as if defaults won't happen, but companies are struggling more than markets realise — debt costs are up and earnings are down. I'm buying insurance against a wave of defaults before the market wakes up.</p>
+<p class="view-card__thesis">Junk bonds are priced as if defaults won't happen, but companies are struggling more than markets realise — debt costs are up and earnings are down. I'm buying insurance against a wave of defaults before the market wakes up.</p>
             <p class="view-card__mkt">HY at 270bps implies annualised default rates below 3% — priced for a soft landing with little margin. Hedge fund positioning is net long credit in the search for carry, making protection relatively cheap and under-owned.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--short">Short</span></div>
@@ -822,7 +685,7 @@
               <a href="https://www.reuters.com/markets/deals/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
               <a href="https://www.bloomberg.com/markets/credit" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
             </div>
-            <div class="view-card__footer"><span class="view-card__date">Updated Jun 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+            <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
           </article>
 
           <!-- ── 05 FX ── -->
@@ -832,8 +695,7 @@
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">Short USD/JPY — Long JPY</h3>
-            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
-            <p class="view-card__thesis">The Bank of Japan is raising interest rates on its own domestic clock — Japanese wage growth and core inflation finally justify normalisation after decades of ultra-loose policy. As the BoJ hikes while the Fed cuts, the rate differential that has kept USD/JPY elevated begins to reverse. The catalyst is BoJ meetings and Japan CPI, not global risk sentiment.</p>
+<p class="view-card__thesis">The Bank of Japan is raising interest rates on its own domestic clock — Japanese wage growth and core inflation finally justify normalisation after decades of ultra-loose policy. As the BoJ hikes while the Fed cuts, the rate differential that has kept USD/JPY elevated begins to reverse. The catalyst is BoJ meetings and Japan CPI, not global risk sentiment.</p>
             <p class="view-card__mkt">Speculative accounts remain net long USD/JPY despite significant unwind after the August 2024 carry crash — positioning is less extreme but still skewed. Market has priced BoJ normalisation slowly and incrementally, not in a single reprice.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--short">Short</span></div>
@@ -858,8 +720,7 @@
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">Long XLP / Short XLY — Consumer Stress</h3>
-            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
-            <p class="view-card__thesis">US credit card and auto loan delinquencies are running above pre-COVID levels. Consumers are stretching further on less — savings are depleted and real wage growth has stalled. Staples spending is inelastic; discretionary is the first casualty. The driver is household balance sheet deterioration, not broad sector rotation.</p>
+<p class="view-card__thesis">US credit card and auto loan delinquencies are running above pre-COVID levels. Consumers are stretching further on less — savings are depleted and real wage growth has stalled. Staples spending is inelastic; discretionary is the first casualty. The driver is household balance sheet deterioration, not broad sector rotation.</p>
             <p class="view-card__mkt">Consumer discretionary is consensus overweight in US equity allocations — the soft-landing trade is still broadly held. Staples are under-owned as a defensive, so the long leg of this pair is not crowded.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">L/S</span></div>
@@ -884,8 +745,7 @@
               <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
             </div>
             <h3 class="view-card__title">Short SPY Straddle — Sell IV</h3>
-            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
-            <p class="view-card__thesis">Markets are paying a large premium for crash protection, yet the S&amp;P is barely moving day-to-day. I'm looking to sell that overpriced insurance and pocket the difference — waiting for the clearest moment to enter.</p>
+<p class="view-card__thesis">Markets are paying a large premium for crash protection, yet the S&amp;P is barely moving day-to-day. I'm looking to sell that overpriced insurance and pocket the difference — waiting for the clearest moment to enter.</p>
             <p class="view-card__mkt">Short volatility is structurally crowded — systematic vol-selling strategies and retail options income funds create persistent premium supply. Watching for IV to compress toward a compelling entry rather than selling into elevated vol.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--short">Short&nbsp;Vol</span></div>
@@ -900,7 +760,7 @@
               <a href="https://www.cboe.com/us/options/market_statistics/" target="_blank" rel="noopener" class="view-card__source-link">CBOE&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
               <a href="https://www.bloomberg.com/markets/stocks" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
             </div>
-            <div class="view-card__footer"><span class="view-card__date">Updated Jun 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+            <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
           </article>
 
           <!-- ── 08 Commodities ── -->
@@ -910,8 +770,7 @@
               <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
             </div>
             <h3 class="view-card__title">Long Brent Crude</h3>
-            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
-            <p class="view-card__thesis">Oil supply is tight: OPEC is sticking to cuts, stockpiles are well below normal, and demand from Asia keeps growing. Not only do I expect prices to rise — the way the futures market is structured means I get paid extra just to hold the trade.</p>
+<p class="view-card__thesis">Oil supply is tight: OPEC is sticking to cuts, stockpiles are well below normal, and demand from Asia keeps growing. Not only do I expect prices to rise — the way the futures market is structured means I get paid extra just to hold the trade.</p>
             <p class="view-card__mkt">CFTC managed money net longs in crude are moderately elevated — broadly owned but not at historical extremes. Backwardation in the forward curve means carry is positive; the full supply-discipline scenario is not yet priced in.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long</span></div>
@@ -926,7 +785,7 @@
               <a href="https://www.reuters.com/markets/commodities/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
               <a href="https://www.bloomberg.com/markets/commodities" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
             </div>
-            <div class="view-card__footer"><span class="view-card__date">Updated Jun 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+            <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
           </article>
 
           <!-- ── 09 Digital Assets ── -->
@@ -936,8 +795,7 @@
               <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
             </div>
             <h3 class="view-card__title">Long BTC/USD — Halving Thesis</h3>
-            <div class="view-card__news"><span class="view-card__news-label">Latest</span><a href="#" class="view-card__news-link" target="_blank" rel="noopener"></a></div>
-            <p class="view-card__thesis">Bitcoin's April 2024 halving cut new daily supply from 900 to 450 BTC — a programmed supply shock with no equivalent on the demand side. Spot ETF approval added a structural new buyer. The thesis is supply-side, not momentum chasing. BTC's short-term correlation to risk appetite makes entry timing critical — watching for a volatility-driven pullback.</p>
+<p class="view-card__thesis">Bitcoin's April 2024 halving cut new daily supply from 900 to 450 BTC — a programmed supply shock with no equivalent on the demand side. Spot ETF approval added a structural new buyer. The thesis is supply-side, not momentum chasing. BTC's short-term correlation to risk appetite makes entry timing critical — watching for a volatility-driven pullback.</p>
             <p class="view-card__mkt">Spot ETF inflows remain net positive but have decelerated from launch-quarter highs — institutional ownership is growing while retail sentiment oscillates. The halving supply thesis is well understood within crypto markets but largely absent from traditional macro allocator frameworks.</p>
             <div class="view-card__snap">
               <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long</span></div>
@@ -1067,71 +925,5 @@
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script src="js/main.js"></script>
 
-  <!-- Live market headlines via RSS2JSON -->
-  <script>
-    (async function () {
-      const feeds = [
-        { url: 'https://feeds.content.dowjones.io/public/rss/mw_topstories', source: 'MarketWatch' },
-        { url: 'https://finance.yahoo.com/news/rssindex', source: 'Yahoo Finance' },
-      ];
-      const proxy = 'https://api.rss2json.com/v1/api.json?count=30&rss_url=';
-      const ticker   = document.getElementById('views-ticker');
-      const fallback = document.getElementById('views-ticker-fallback');
-
-      function timeAgo(dateStr) {
-        const mins = Math.round((Date.now() - new Date(dateStr)) / 60000);
-        if (mins < 60)   return mins + 'm ago';
-        if (mins < 1440) return Math.floor(mins / 60) + 'h ago';
-        return Math.floor(mins / 1440) + 'd ago';
-      }
-      function esc(s) {
-        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-      }
-
-      let allItems = [];
-
-      for (const feed of feeds) {
-        try {
-          const res  = await fetch(proxy + encodeURIComponent(feed.url), { signal: AbortSignal.timeout(5000) });
-          const data = await res.json();
-          if (data.status !== 'ok' || !data.items?.length) continue;
-          allItems = data.items;
-
-          if (ticker) {
-            const html = data.items.slice(0, 6).map(item => `
-              <a href="${esc(item.link)}" target="_blank" rel="noopener" class="headline-pill" role="listitem">
-                <span class="headline-pill__source">${esc(feed.source)}</span>
-                <span class="headline-pill__title">${esc(item.title)}</span>
-                <span class="headline-pill__time">${timeAgo(item.pubDate)}</span>
-              </a>`).join('');
-            ticker.innerHTML = html;
-            ticker.style.display = 'flex';
-          }
-          break; // stop after first successful feed
-        } catch (_) {}
-      }
-
-      if (!allItems.length) {
-        if (fallback) fallback.style.display = 'block';
-        return;
-      }
-
-      // Populate per-card headlines by matching keywords
-      document.querySelectorAll('.view-card[data-card-keywords]').forEach(card => {
-        const keywords = card.dataset.cardKeywords.toLowerCase().split(',').map(k => k.trim());
-        const match = allItems.find(item => {
-          const text = (item.title + ' ' + (item.description || '')).toLowerCase();
-          return keywords.some(kw => text.includes(kw));
-        });
-        if (!match) return;
-        const wrapper = card.querySelector('.view-card__news');
-        const link    = card.querySelector('.view-card__news-link');
-        if (!wrapper || !link) return;
-        link.href        = match.link;
-        link.textContent = match.title;
-        wrapper.style.display = 'flex';
-      });
-    })();
-  </script>
 </body>
 </html>
