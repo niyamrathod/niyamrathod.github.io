@@ -348,6 +348,29 @@
     .view-card__source-link:hover { color: var(--color-text); border-color: var(--color-text); }
     .view-card__source-link svg { opacity: 0.5; }
 
+    /* ── Per-card size / risk strip ─────────────────────────── */
+    .view-card__size {
+      display: flex;
+      align-items: baseline;
+      gap: var(--sp-3);
+      padding: var(--sp-2) var(--sp-6);
+      border-top: 1px solid var(--color-border);
+    }
+    .view-card__size-key {
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      flex-shrink: 0;
+    }
+    .view-card__size-val {
+      font-size: 0.6875rem;
+      color: var(--color-text);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
     /* ── Responsive ─────────────────────────────────────────── */
     @media (max-width: 1100px) {
       .views-grid { grid-template-columns: repeat(3, 1fr); }
@@ -695,6 +718,7 @@
               <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">−8bps</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">3.3:1</span></div>
             </div>
+            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">DV01 $250/bp · 1R = $3,000</span></div>
             <div class="view-card__sources">
               <span class="view-card__sources-label">Read</span>
               <a href="https://www.ft.com/bond-markets" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
@@ -719,6 +743,7 @@
               <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">2.35%</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">2.0:1</span></div>
             </div>
+            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">DV01 $200/bp · 1R = $2,000</span></div>
             <div class="view-card__sources">
               <span class="view-card__sources-label">Read</span>
               <a href="https://www.ft.com/economics" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
@@ -743,6 +768,7 @@
               <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">115bps</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">2.0:1</span></div>
             </div>
+            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">DV01 $250/bp · 1R = $3,750</span></div>
             <div class="view-card__sources">
               <span class="view-card__sources-label">Read</span>
               <a href="https://www.ft.com/european-economy" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
@@ -767,6 +793,7 @@
               <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">360bps</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">2.3:1</span></div>
             </div>
+            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">CS01 $150/bp · 1R = $3,750</span></div>
             <div class="view-card__sources">
               <span class="view-card__sources-label">Read</span>
               <a href="https://www.ft.com/capital-markets" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
@@ -791,6 +818,7 @@
               <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">143.0</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">2.4:1</span></div>
             </div>
+            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">3% of book · 1R = $3,000</span></div>
             <div class="view-card__sources">
               <span class="view-card__sources-label">Read</span>
               <a href="https://www.ft.com/currencies" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
@@ -815,6 +843,7 @@
               <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">0.44&times;</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">1.8:1</span></div>
             </div>
+            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">4% each leg · 1R = $2,800</span></div>
             <div class="view-card__sources">
               <span class="view-card__sources-label">Read</span>
               <a href="https://www.ft.com/equities" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
@@ -839,6 +868,7 @@
               <div class="view-card__snap-item"><span class="view-card__snap-key">TP&nbsp;at</span><span class="view-card__snap-val">50%</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">Theta</span><span class="view-card__snap-val view-card__snap-val--long">+$32/d</span></div>
             </div>
+            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">$1,825 per 1R (prem. rec.)</span></div>
             <div class="view-card__sources">
               <span class="view-card__sources-label">Read</span>
               <a href="https://www.ft.com/markets" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
@@ -863,6 +893,7 @@
               <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">$86.00</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">2.2:1</span></div>
             </div>
+            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">2% of book · 1R = $3,200</span></div>
             <div class="view-card__sources">
               <span class="view-card__sources-label">Read</span>
               <a href="https://www.ft.com/commodities" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
@@ -887,6 +918,7 @@
               <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">$78k</span></div>
               <div class="view-card__snap-item"><span class="view-card__snap-key">Driver</span><span class="view-card__snap-val">Halving</span></div>
             </div>
+            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">1.5% of book on entry</span></div>
             <div class="view-card__sources">
               <span class="view-card__sources-label">Read</span>
               <a href="https://www.ft.com/cryptofinance" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
