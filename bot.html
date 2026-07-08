@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Systematic trading framework — 5-month live trade history, five VaR methods with interactive controls, strategy comparison simulator, regime-adaptive execution, and volatility-targeted sizing. Built by Niyam Rathod." />
+  <meta name="description" content="Systematic trading framework — built to understand what happens when you actually run a strategy for months rather than just backtesting it. By Niyam Rathod." />
   <title>Systematic Trading Framework — Niyam Rathod</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
@@ -114,16 +114,13 @@
         <p class="project-hero__label">Project 04</p>
         <h1 class="project-hero__title">Systematic<br>Trading Framework</h1>
         <p class="project-hero__desc">
-          A production-style systematic trading framework paper-trading BTC, ETH, BNB, LTC, and XRP
-          24/7 on live Yahoo Finance data. The dashboard loads with a full five-month trade history
-          (130 completed trades, Jan&ndash;Jun 2026) so performance metrics are meaningful from the first visit.
-          Five tabs cover the core system: an <strong>interactive Risk Dashboard</strong> with five VaR
-          methods (Historical Simulation, Parametric, Monte Carlo, Cornish-Fisher, EWMA) and live
-          sliders for confidence level, lookback, and kill-switch thresholds; a <strong>Strategy
-          Comparison</strong> tab showing actual vs hypothetical returns for each of the five
-          regime-matched strategies; a filterable <strong>Trade History</strong> (by symbol, strategy,
-          and regime); a <strong>P&amp;L Analytics</strong> tab with period and cumulative breakdowns;
-          and a <strong>Live Trading</strong> tab to run the engine on demand.
+          A strategy I built to see what systematic trading actually looks like when you run it for
+          months rather than just backtesting a few weeks. The dashboard loads with five months of
+          paper-trading history (130 completed trades, Jan&ndash;Jun 2026) across five crypto instruments.
+          Five tabs let you explore the results: an <strong>interactive Risk Dashboard</strong> comparing
+          five different ways of estimating risk; a <strong>Strategy Comparison</strong> tab showing how
+          each approach performed; a filterable <strong>Trade History</strong>; a
+          <strong>P&amp;L Analytics</strong> tab; and a <strong>Live Trading</strong> tab to re-run the engine.
         </p>
         <ul class="project-hero__tags" role="list">
           <li class="tag">Python</li>
@@ -136,7 +133,15 @@
         </ul>
         <div class="project-insight">
           <span class="project-insight__label">What this taught me about markets</span>
-          <p class="project-insight__text">Building five VaR implementations side-by-side made the differences concrete: Cornish-Fisher corrects for the fat tails and negative skew that make Gaussian VaR dangerously optimistic on crypto. The Strategy Comparison tab showed that regime-matched execution outperforms any single strategy held rigidly. Adapting the approach to market conditions consistently beat holding any single strategy through the five-month test period.</p>
+          <p class="project-insight__text">The thing that surprised me most was building five different ways to estimate the same risk number and getting five different answers. I knew the methods existed but I didn't expect the outputs to diverge as much as they did. The strategy comparison also showed results I wasn't expecting — switching approach by market conditions wasn't always the winner month to month, even if it came out ahead over the full period.</p>
+        </div>
+        <div class="project-insight" style="margin-top:var(--sp-8);">
+          <span class="project-insight__label">Why I built this</span>
+          <p class="project-insight__text">I wanted to know what actually happens when you commit to a strategy and run it for months rather than tweaking it in hindsight. The risk controls were the part I was most curious about — whether a kill-switch and position sizing based on recent volatility actually change what the strategy does, or just look good in theory.</p>
+        </div>
+        <div class="project-insight" style="margin-top:var(--sp-6);">
+          <span class="project-insight__label">What I'd still improve</span>
+          <p class="project-insight__text">Five months on five instruments isn't enough to say anything conclusive — I'm aware the sample is small. The way I detect market regimes is also pretty simple, and I suspect a more careful approach would change the results meaningfully. I'd treat the performance numbers as interesting rather than reliable.</p>
         </div>
         <p style="margin-top:14px;font-size:0.8125rem;color:var(--color-muted);display:flex;align-items:center;gap:6px;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>

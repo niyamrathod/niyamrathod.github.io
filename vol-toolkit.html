@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Volatility and derivatives pricing toolkit — Black-Scholes, Greeks, IV surface, and structured trade analysis. Built by Niyam Rathod." />
+  <meta name="description" content="Options pricing and vol surface explorer — built to understand how implied vol is backed out from market prices and how the surface forms across strikes and expiries. By Niyam Rathod." />
   <title>Volatility &amp; Derivatives Toolkit — Niyam Rathod</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
@@ -114,11 +114,10 @@
         <p class="project-hero__label">Project 01</p>
         <h1 class="project-hero__title">Volatility &amp;<br>Derivatives Toolkit</h1>
         <p class="project-hero__desc">
-          A full derivatives pricing suite: Black-Scholes with continuous dividend yield,
-          all five analytical Greeks with unit documentation, implied-vol inversion via
-          Brent's method, a live 3D IV surface from real option chains, rolling realised
-          volatility, and a delta-hedged short straddle scenario analyser, all on live
-          market data.
+          I built this to understand how options are actually priced and where implied vol
+          comes from. Pick a stock below and you can see how the surface forms across strikes
+          and expiries, back out the IV from any price, and run a rough straddle scenario.
+          Still learning the finer details of how the skew behaves around events.
         </p>
         <ul class="project-hero__tags" role="list">
           <li class="tag">Python</li>
@@ -130,7 +129,15 @@
         </ul>
         <div class="project-insight">
           <span class="project-insight__label">What this taught me about markets</span>
-          <p class="project-insight__text">Implied volatility is the market's consensus forecast of future moves, but the surface shows where that consensus breaks down. The skew reveals where dealers are hedging tail risk, and reprices sharply around macro events like FOMC or CPI prints.</p>
+          <p class="project-insight__text">Implied volatility is the market's consensus forecast of future moves, but building the surface showed me where that consensus breaks down. The skew shifts a lot more around macro events than I expected — I didn't fully appreciate how much IV reprices around FOMC or CPI before I could see it moving in the data.</p>
+        </div>
+        <div class="project-insight" style="margin-top:var(--sp-8);">
+          <span class="project-insight__label">Why I built this</span>
+          <p class="project-insight__text">I kept reading about implied vol without really understanding how a single number gets extracted from a market price. Building the Brent's method inversion made it concrete — you're just solving Black-Scholes backwards. The 3D surface came later, once I wanted to see how IV varies across strikes and tenors rather than just at one point.</p>
+        </div>
+        <div class="project-insight" style="margin-top:var(--sp-6);">
+          <span class="project-insight__label">What I'd still improve</span>
+          <p class="project-insight__text">The model assumes constant vol (Black-Scholes), so the surface is really just plotting market-implied deviations from that assumption rather than a true stochastic vol model. I'd want to understand SABR or Heston before treating any of these numbers as production-grade.</p>
         </div>
         <p style="margin-top:14px;font-size:0.8125rem;color:var(--color-muted);display:flex;align-items:center;gap:6px;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Premier League 2026/27 Predictor — Monte Carlo simulation, Transfer Machine, Smart Signing optimiser, Model vs Market edge board, and walk-forward calibration. Built by Niyam Rathod." />
+  <meta name="description" content="Premier League 2026/27 Predictor — a Dixon-Coles model fitted to four seasons of data, driving a Monte Carlo season simulation and edge-finding tools. Built by Niyam Rathod." />
   <title>PL 2026/27 Predictor — Niyam Rathod</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
@@ -58,7 +58,7 @@
       <a href="index.html" class="nav__logo">NR</a>
       <ul class="nav__links" role="list">
         <li><a href="index.html#work"    class="nav__link">Work</a></li>
-        <li><a href="index.html#views"   class="nav__link">Views</a></li>
+        <li><a href="index.html#markets" class="nav__link">Markets</a></li>
         <li><a href="index.html#about"   class="nav__link">About</a></li>
         <li><a href="index.html#contact" class="nav__link">Contact</a></li>
       </ul>
@@ -80,16 +80,13 @@
         <p class="project-hero__label">Project 06</p>
         <h1 class="project-hero__title">PL 2026/27<br>Predictor</h1>
         <p class="project-hero__desc">
-          A full quantitative football analytics suite built in Python. The core is a
-          Dixon-Coles goals model fitted to four seasons of Premier League results,
-          driving a 10&thinsp;000-run Monte Carlo season simulation. Five tools sit on top:
-          a <strong>Transfer Machine</strong> that models the marginal rating impact of any signing;
-          a <strong>Smart Signing optimiser</strong> that searches the whole player pool for the
-          best affordable signing for a chosen club; a <strong>Model vs Market</strong> edge board
-          comparing model probabilities to de-vigged bookmaker odds; a <strong>Track Record</strong>
-          calibration tab with out-of-sample RPS / Brier / log-loss scoring; and live
-          <strong>2026/27 season tracking</strong> that will score predictions as results come in
-          from August.
+          A Dixon-Coles model I fitted to four seasons of Premier League results to predict match
+          outcomes. I built it partly because football data is clean and easy to work with, and
+          partly because it forced me to actually implement a probability model from scratch. Five
+          tools sit on top: a <strong>Transfer Machine</strong>, a <strong>Smart Signing</strong>
+          optimiser, a <strong>Model vs Market</strong> edge board comparing my probabilities to
+          bookmaker odds, a <strong>Track Record</strong> scoring tab, and
+          <strong>2026/27 season tracking</strong> that scores predictions as results come in.
         </p>
         <ul class="project-hero__tags" role="list">
           <li class="tag">Monte Carlo</li>
@@ -101,7 +98,15 @@
         </ul>
         <div class="project-insight" style="max-width:640px;">
           <span class="project-insight__label">What this taught me about markets</span>
-          <p class="project-insight__text">Every tool here maps directly onto S&amp;T skills. The Smart Signing optimiser is a constrained search problem — maximise alpha per unit of budget, the same framing a PM uses for position sizing. The Model vs Market tab is pure relative-value analysis: where does the model disagree with the crowd, and who has been right historically? The Track Record scoreboard applies the same out-of-sample integrity standard that a quant fund would demand — no look-ahead, walk-forward refits only. Building all three showed me that the gap between sport and markets is thinner than most people think.</p>
+          <p class="project-insight__text">The Model vs Market tab was the most interesting part — comparing my model probabilities to bookmaker odds made me realise how much information is already priced in. The model disagrees with the market sometimes, but not consistently enough to feel like a real edge. I think that's actually a useful thing to learn about what it takes to beat a well-functioning market.</p>
+        </div>
+        <div class="project-insight" style="max-width:640px;margin-top:var(--sp-8);">
+          <span class="project-insight__label">Why I built this</span>
+          <p class="project-insight__text">I wanted to build something that involved real probability and statistics rather than just reading about it. Football felt like a good test case — the outcomes are messy and hard to predict, there's four seasons of data to fit on, and I could actually check whether the model worked after the fact. It also just seemed like a more interesting project than a standard stock-price predictor.</p>
+        </div>
+        <div class="project-insight" style="max-width:640px;margin-top:var(--sp-6);">
+          <span class="project-insight__label">What I'd still improve</span>
+          <p class="project-insight__text">The model doesn't account for injuries, new signings, or form streaks — it treats each team's attack and defence as fixed for the season, which I know isn't right. The ratings also get stale as the season progresses and I update them manually. I'd want a longer out-of-sample period before reading too much into the Track Record numbers.</p>
         </div>
         <p style="margin-top:14px;font-size:0.8125rem;color:var(--color-muted);display:flex;align-items:center;gap:6px;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Market Analysis Tools — Morning Briefing, Market Snapshot, Earnings Analyser, Portfolio Risk, Rates &amp; Yield Curve, FX Carry &amp; CIP. Built by Niyam Rathod." />
+  <meta name="description" content="Market Analysis Tools — six tools built to try to understand how different parts of the market connect day to day. By Niyam Rathod." />
   <title>Market Analysis Tools — Niyam Rathod</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
@@ -141,9 +141,9 @@
         <p class="project-hero__label">Project 03</p>
         <h1 class="project-hero__title">Market Analysis<br>Tools</h1>
         <p class="project-hero__desc">
-          A six-tool suite for interrogating market data and drawing conclusions fast.
-          Auto-loads a morning briefing when you open it, then switch tabs for deeper
-          rates, FX, or equity analysis.
+          Six tools I built to try to understand how different parts of the market connect.
+          Starts with a morning briefing, then goes into rates, FX, and earnings — areas
+          I'm still getting my head around properly.
         </p>
 
         <div class="tools-grid" style="grid-template-columns: repeat(3, 1fr);">
@@ -155,7 +155,7 @@
           <div class="tool-pill">
             <div class="tool-pill__icon">📊</div>
             <div class="tool-pill__name">Market Snapshot</div>
-            <div class="tool-pill__desc">Compare up to 6 assets: performance, volatility, returns</div>
+            <div class="tool-pill__desc">Compare up to 6 assets across performance, volatility, and returns</div>
           </div>
           <div class="tool-pill">
             <div class="tool-pill__icon">📈</div>
@@ -189,7 +189,15 @@
         </ul>
         <div class="project-insight">
           <span class="project-insight__label">What this taught me about markets</span>
-          <p class="project-insight__text">Building the yield curve tool showed me that the shape of the curve is the market's best guess at the Fed's next move, and the DV01-neutral steepener showed how rates traders isolate curve views without taking on directional duration risk.</p>
+          <p class="project-insight__text">Building the yield curve tab made me realise how much is packed into the shape of the curve — I knew rates mattered but hadn't really thought about what the 2s10s spread is actually telling you about where the market thinks the Fed goes next. The FX carry tab was similar: the concept made sense on paper but seeing the numbers move made it a lot more real.</p>
+        </div>
+        <div class="project-insight" style="margin-top:var(--sp-8);">
+          <span class="project-insight__label">Why I built this</span>
+          <p class="project-insight__text">I wanted somewhere to look at market data each morning without opening five different tabs. The rates and FX tools came from wanting to understand topics I kept reading about but hadn't really seen working in practice — carry trades, yield curve shape, how earnings move stocks.</p>
+        </div>
+        <div class="project-insight" style="margin-top:var(--sp-6);">
+          <span class="project-insight__label">What I'd still improve</span>
+          <p class="project-insight__text">A lot of the outputs are simplified and I'm not fully confident in how to interpret all of them yet. The FX carry numbers don't account for transaction costs or the fact that carry unwinds tend to be fast and correlated — so the backtest is more illustrative than something I'd trade off.</p>
         </div>
         <p style="font-size:0.8125rem;color:var(--color-muted);display:flex;align-items:center;gap:6px;margin:14px 0 0;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>

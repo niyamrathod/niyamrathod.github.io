@@ -391,7 +391,7 @@
               </div>
               <h3 class="project-card__title">Volatility &amp; Derivatives Toolkit</h3>
               <p class="project-card__insight">
-                Prices options live, extracts implied vol from real option chains, renders the full volatility surface across strikes and expiries, and models delta-hedged P&amp;L scenarios. Includes an IV/RV spread tool showing the gap between implied and realised volatility.
+                Built to understand how implied vol gets backed out from option prices and what the surface actually looks like across strikes and expiries. The IV/RV spread tab was the part that surprised me — realised vol trades below implied more often than I expected.
               </p>
               <ul class="project-card__tags" role="list">
                 <li class="tag">Derivatives</li>
@@ -428,7 +428,7 @@
               </div>
               <h3 class="project-card__title">Portfolio Analysis Suite</h3>
               <p class="project-card__insight">
-                Stress-tests multi-asset portfolios against 10 historical crises (GFC, dot-com, COVID, and more) to show exactly where risk concentrates. Also covers portfolio construction, strategy backtesting, seasonality patterns, and equity deep dives, all on live data.
+                Built to see how a simple portfolio holds up when correlations break down in a crisis. Running it against historical stress periods showed me that "well diversified" can look very different in a calm market versus a genuine risk-off move. All on Yahoo Finance data.
               </p>
               <ul class="project-card__tags" role="list">
                 <li class="tag">Cross-Asset</li>
@@ -457,7 +457,7 @@
               </div>
               <h3 class="project-card__title">Market Analysis Tools</h3>
               <p class="project-card__insight">
-                Six tools covering live market data: cross-asset morning briefing, US yield curve with DV01 steepener/flattener scenarios, G10 FX carry with covered interest parity analysis, earnings, and portfolio risk monitoring.
+                Six tools I built to understand how rates, FX, and equities connect in practice. The yield curve tab is where I worked out what DV01-neutral actually means — the sizing math for a steepener wasn't obvious until I coded it up.
               </p>
               <ul class="project-card__tags" role="list">
                 <li class="tag">Rates</li>
@@ -475,18 +475,18 @@
                 <span class="project-card__number">04</span>
                 <div class="project-card__links">
                   <a href="bot.html" class="project-card__link"
-                     aria-label="Systematic Trading Framework — live dashboard">
+                     aria-label="Systematic Trading Framework — dashboard">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" aria-hidden="true">
                       <path d="M7 17L17 7M17 7H7M17 7v10"/>
                     </svg>
-                    <span>Live</span>
+                    <span>Dashboard</span>
                   </a>
                 </div>
               </div>
               <h3 class="project-card__title">Systematic Trading Framework</h3>
               <p class="project-card__insight">
-                A systematic trading framework running live 24/7 across five instruments. Sizes every position via volatility targeting, monitors drawdown with a kill switch, computes intraday VaR, and reports annualised Sharpe.
+                A regime-switching strategy I built to understand how systematic risk management works in practice. Ran the engine on five crypto instruments over five months of paper trading to see how VaR, kill-switches, and volatility-targeted sizing actually behave together.
               </p>
               <ul class="project-card__tags" role="list">
                 <li class="tag">Risk Management</li>
@@ -515,7 +515,7 @@
               </div>
               <h3 class="project-card__title">Trade Pitch Builder</h3>
               <p class="project-card__insight">
-                Structures trade pitches across nine asset classes, with six fields per pitch: thesis, direction, entry, target, stop, and R/R. Nine worked examples included.
+                I built this to force myself to fill in all six fields before treating an opinion as a trade. Writing the "what kills it" section is usually harder than the thesis — and it's often what makes me reconsider the idea entirely.
               </p>
               <ul class="project-card__tags" role="list">
                 <li class="tag">Sales &amp; Trading</li>
@@ -544,7 +544,7 @@
               </div>
               <h3 class="project-card__title">PL 2026/27 Predictor &amp; Analytics Suite</h3>
               <p class="project-card__insight">
-                Dixon-Coles goals model + 10 000-run Monte Carlo season simulation. Five tools: Transfer Machine, Smart Signing optimiser (two-stage constrained search), Model vs Market edge board (de-vigged odds vs model), walk-forward calibration scoreboard, and live 2026/27 season tracking.
+                A Dixon-Coles model fitted to four seasons of Premier League data, running 10,000-simulation Monte Carlo. The Model vs Market tab is essentially relative-value analysis: where does the model disagree with the bookmaker, and has it been right out of sample?
               </p>
               <ul class="project-card__tags" role="list">
                 <li class="tag">Monte Carlo</li>
@@ -564,11 +564,11 @@
     <section class="views" id="views" aria-labelledby="views-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label">Views</span>
-          <h2 class="section-heading" id="views-heading">Current Views</h2>
+          <span class="section-label">Markets</span>
+          <h2 class="section-heading" id="views-heading">What I'm Watching</h2>
           <p class="views__subtitle">
-            Nine live ideas, one per asset class, structured using the pitch builder.
-            Updated monthly as market conditions change.
+            A few markets I've been following and trying to form a view on.
+            Not formal trade calls — just things I'm thinking about.
             <span class="views__disclaimer">Illustrative only. Not investment advice.</span>
           </p>
 
@@ -579,31 +579,17 @@
             <a href="https://www.bloomberg.com/markets" target="_blank" rel="noopener">Bloomberg</a>
           </p>
         </div><!-- end .section-header -->
-          <p class="views__subtitle">
-            Three live ideas structured using the pitch builder, one per major asset class.
-            Updated as market conditions change.
-            <br><span class="views__disclaimer">Illustrative only. Not investment advice.</span>
-          </p>
-        </div>
 
         <div class="views-grid">
 
-          <!-- ── 01 Rates / Fixed Income ── -->
+          <!-- ── 01 Rates ── -->
           <article class="view-card" data-card-keywords="bond,rate,yield,fed,treasury,curve,interest rate">
             <div class="view-card__top">
-              <span class="view-card__asset">Rates / Fixed Income</span>
-              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+              <span class="view-card__asset">Rates</span>
+              <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
             </div>
-            <h3 class="view-card__title">2s10s DV01-Neutral Steepener</h3>
-<p class="view-card__thesis">Short-term US interest rates are higher than long-term rates, which is the opposite of normal. As the Fed stops raising rates, history shows this gap closes fast, with short-term rates falling first. I'm betting on that normalisation.</p>
-            <p class="view-card__mkt">The steepener is a broadly held macro fund position; crowding is real and the trade has been slow to play out as cut timing stays uncertain. Futures price modest easing but the front end only reprices when cuts actually arrive.</p>
-            <div class="view-card__snap">
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">−28bps</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">−8bps</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">3.3:1</span></div>
-            </div>
-            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">DV01 $250/bp · 1R = $3,000</span></div>
+            <h3 class="view-card__title">US Rates</h3>
+            <p class="view-card__thesis">I've been thinking about how unusual it is that short-term US interest rates are currently higher than long-term ones — that usually flips back once the Fed starts cutting, with the short end falling faster. I think that normalisation is still coming, though the timing has been slower than a lot of people expected and I'm still watching how the data evolves.</p>
             <div class="view-card__sources">
               <span class="view-card__sources-label">Read</span>
               <a href="https://www.ft.com/bond-markets" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
@@ -613,97 +599,14 @@
             <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
           </article>
 
-          <!-- ── 02 Inflation / TIPS ── -->
-          <article class="view-card" data-card-keywords="inflation,cpi,pce,price,breakeven,tips">
-            <div class="view-card__top">
-              <span class="view-card__asset">Inflation / TIPS</span>
-              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
-            </div>
-            <h3 class="view-card__title">Long 5yr Breakeven Inflation</h3>
-<p class="view-card__thesis">The bond market is pricing in falling inflation, but actual data keeps coming in higher than expected. Energy prices are rebounding and wages are still growing fast, so I'm buying inflation protection while it's still cheap.</p>
-            <p class="view-card__mkt">The market is pricing near-full disinflation at current breakeven levels, and consensus is that the Fed has won. TIPS are broadly under-owned by real-money funds relative to 2021–22 peak allocations, making entry less crowded than the headline thesis implies.</p>
-            <div class="view-card__snap">
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long BEI</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">2.15%</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">2.35%</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">2.0:1</span></div>
-            </div>
-            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">DV01 $200/bp · 1R = $2,000</span></div>
-            <div class="view-card__sources">
-              <span class="view-card__sources-label">Read</span>
-              <a href="https://www.ft.com/economics" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.reuters.com/markets/rates-bonds/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.bloomberg.com/economics" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-            </div>
-            <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
-          </article>
-
-          <!-- ── 03 Sovereign Bonds ── -->
-          <article class="view-card" data-card-keywords="sovereign,oat,bund,france,french,germany,german,fiscal,budget">
-            <div class="view-card__top">
-              <span class="view-card__asset">Sovereign Bonds</span>
-              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
-            </div>
-            <h3 class="view-card__title">Short OATs / Long Bunds — French Fiscal</h3>
-<p class="view-card__thesis">France's coalition government has failed to pass a credible budget, and the OAT–Bund spread at 85bps is too tight given the fiscal trajectory. Germany's position is structurally stronger. The driver is French politics specifically, not broad European risk sentiment, which means it behaves differently to other spread trades.</p>
-            <p class="view-card__mkt">The trade carries some legacy positioning from France's June 2024 snap election, not a fresh idea, and the spread has partially retraced since. Market is pricing moderate French fiscal risk, not a full credibility event.</p>
-            <div class="view-card__snap">
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--short">Short OATs</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">85bps</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">115bps</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">2.0:1</span></div>
-            </div>
-            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">DV01 $250/bp · 1R = $3,750</span></div>
-            <div class="view-card__sources">
-              <span class="view-card__sources-label">Read</span>
-              <a href="https://www.ft.com/european-economy" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.reuters.com/markets/europe/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.bloomberg.com/markets/rates-bonds" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-            </div>
-            <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
-          </article>
-
-          <!-- ── 04 Credit ── -->
-          <article class="view-card" data-card-keywords="credit,default,corporate bond,high yield,spread,debt">
-            <div class="view-card__top">
-              <span class="view-card__asset">Credit</span>
-              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
-            </div>
-            <h3 class="view-card__title">Short CDX HY 5yr — Buy Protection</h3>
-<p class="view-card__thesis">Junk bonds are priced as if defaults won't happen, but companies are struggling more than markets realise; debt costs are up and earnings are down. I'm buying insurance against a wave of defaults before the market wakes up.</p>
-            <p class="view-card__mkt">HY at 270bps implies annualised default rates below 3%, priced for a soft landing with little margin. Hedge fund positioning is net long credit in the search for carry, making protection relatively cheap and under-owned.</p>
-            <div class="view-card__snap">
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--short">Short</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">270bps</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">360bps</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">2.3:1</span></div>
-            </div>
-            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">CS01 $150/bp · 1R = $3,750</span></div>
-            <div class="view-card__sources">
-              <span class="view-card__sources-label">Read</span>
-              <a href="https://www.ft.com/capital-markets" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.reuters.com/markets/deals/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.bloomberg.com/markets/credit" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-            </div>
-            <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
-          </article>
-
-          <!-- ── 05 FX ── -->
+          <!-- ── 02 FX ── -->
           <article class="view-card" data-card-keywords="dollar,yen,japan,boj,currency,forex,fx,jpy,usd,bank of japan">
             <div class="view-card__top">
               <span class="view-card__asset">FX</span>
-              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+              <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
             </div>
-            <h3 class="view-card__title">Short USD/JPY — Long JPY</h3>
-<p class="view-card__thesis">The Bank of Japan is raising interest rates driven by its own domestic conditions. Japanese wage growth and core inflation finally justify normalisation after decades of ultra-loose policy. As the BoJ hikes while the Fed cuts, the rate differential that has kept USD/JPY elevated begins to reverse. The catalyst is BoJ meetings and Japan CPI, not global risk sentiment.</p>
-            <p class="view-card__mkt">Speculative accounts remain net long USD/JPY despite significant unwind after the August 2024 carry crash, positioning is less extreme but still skewed. Market has priced BoJ normalisation slowly and incrementally, not in a single reprice.</p>
-            <div class="view-card__snap">
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--short">Short</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">155.0</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">143.0</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">2.4:1</span></div>
-            </div>
-            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">3% of book · 1R = $3,000</span></div>
+            <h3 class="view-card__title">USD/JPY</h3>
+            <p class="view-card__thesis">Japan's central bank has been raising rates for the first time in decades while the Fed is moving the other way — I think that shift in the rate gap between the two countries should bring the yen back up over time. The yen has been weak for years partly because Japanese rates were near zero, so this feels like a real structural change, though I'd want to see the BoJ actually follow through consistently before being too confident.</p>
             <div class="view-card__sources">
               <span class="view-card__sources-label">Read</span>
               <a href="https://www.ft.com/currencies" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
@@ -713,22 +616,14 @@
             <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
           </article>
 
-          <!-- ── 06 Equities ── -->
+          <!-- ── 03 Equities ── -->
           <article class="view-card" data-card-keywords="stock,equity,consumer,staples,discretionary,xlp,xly,spending,retail,delinquency">
             <div class="view-card__top">
               <span class="view-card__asset">Equities</span>
-              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+              <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
             </div>
-            <h3 class="view-card__title">Long XLP / Short XLY — Consumer Stress</h3>
-<p class="view-card__thesis">US credit card and auto loan delinquencies are running above pre-COVID levels. Consumers are stretching further on less; savings are depleted and real wage growth has stalled. Staples spending is inelastic; discretionary is the first casualty. The driver is household balance sheet deterioration, not broad sector rotation.</p>
-            <p class="view-card__mkt">Consumer discretionary is consensus overweight in US equity allocations, the soft-landing trade is still broadly held. Staples are under-owned as a defensive, so the long leg of this pair is not crowded.</p>
-            <div class="view-card__snap">
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">L/S</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">0.39&times;</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">0.44&times;</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">1.8:1</span></div>
-            </div>
-            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">4% each leg · 1R = $2,800</span></div>
+            <h3 class="view-card__title">US Consumer</h3>
+            <p class="view-card__thesis">US credit card and auto loan delinquencies have been creeping up, and I think consumer spending is more stretched than markets are pricing in — savings built up during COVID are mostly gone and real wage growth has slowed. I'd expect discretionary spending to be the first thing people cut back on, though I'm still figuring out how quickly this actually shows up in the numbers.</p>
             <div class="view-card__sources">
               <span class="view-card__sources-label">Read</span>
               <a href="https://www.ft.com/equities" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
@@ -738,47 +633,14 @@
             <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
           </article>
 
-          <!-- ── 07 Volatility / Options ── -->
-          <article class="view-card" data-card-keywords="volatility,vix,options,implied,straddle,fomc">
-            <div class="view-card__top">
-              <span class="view-card__asset">Volatility / Options</span>
-              <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
-            </div>
-            <h3 class="view-card__title">Short SPY Straddle — Sell IV</h3>
-<p class="view-card__thesis">Markets are paying a large premium for crash protection, yet the S&amp;P is barely moving day-to-day. I'm looking to sell that overpriced insurance and pocket the difference, waiting for the clearest moment to enter.</p>
-            <p class="view-card__mkt">Short volatility is structurally crowded, with systematic vol-selling strategies and retail options income funds creating persistent premium supply. Watching for IV to compress toward a compelling entry rather than selling into elevated vol.</p>
-            <div class="view-card__snap">
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--short">Short&nbsp;Vol</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">$18.25</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">TP&nbsp;at</span><span class="view-card__snap-val">50%</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Theta</span><span class="view-card__snap-val view-card__snap-val--long">+$32/d</span></div>
-            </div>
-            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">$1,825 per 1R (prem. rec.)</span></div>
-            <div class="view-card__sources">
-              <span class="view-card__sources-label">Read</span>
-              <a href="https://www.ft.com/markets" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.cboe.com/us/options/market_statistics/" target="_blank" rel="noopener" class="view-card__source-link">CBOE&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.bloomberg.com/markets/stocks" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-            </div>
-            <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
-          </article>
-
-          <!-- ── 08 Commodities ── -->
+          <!-- ── 04 Commodities ── -->
           <article class="view-card" data-card-keywords="oil,gold,commodity,crude,copper,opec,brent">
             <div class="view-card__top">
               <span class="view-card__asset">Commodities</span>
-              <span class="status-badge status-badge--open"><span class="status-dot"></span>Open</span>
+              <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
             </div>
-            <h3 class="view-card__title">Long Brent Crude</h3>
-<p class="view-card__thesis">Oil supply is tight: OPEC is sticking to cuts, stockpiles are well below normal, and demand from Asia keeps growing. Not only do I expect prices to rise, the way the futures market is structured means I get paid extra just to hold the trade.</p>
-            <p class="view-card__mkt">CFTC managed money net longs in crude are moderately elevated, broadly owned but not at historical extremes. Backwardation in the forward curve means carry is positive; the full supply-discipline scenario is not yet priced in.</p>
-            <div class="view-card__snap">
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Entry</span><span class="view-card__snap-val">$77.40</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">$86.00</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">R/R</span><span class="view-card__snap-val">2.2:1</span></div>
-            </div>
-            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">2% of book · 1R = $3,200</span></div>
+            <h3 class="view-card__title">Oil</h3>
+            <p class="view-card__thesis">I've been watching oil grind higher — OPEC is still holding back supply and demand from Asia keeps coming in stronger than expected, so I think there's more room to run. Though I'd want to see how long OPEC actually holds discipline before being too convicted, and a sharper slowdown in China would probably change the picture quickly.</p>
             <div class="view-card__sources">
               <span class="view-card__sources-label">Read</span>
               <a href="https://www.ft.com/commodities" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
@@ -788,22 +650,14 @@
             <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
           </article>
 
-          <!-- ── 09 Digital Assets ── -->
+          <!-- ── 05 Digital Assets ── -->
           <article class="view-card" data-card-keywords="bitcoin,crypto,btc,halving,digital asset,cryptocurrency,etf">
             <div class="view-card__top">
               <span class="view-card__asset">Digital Assets</span>
               <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
             </div>
-            <h3 class="view-card__title">Long BTC/USD — Halving Thesis</h3>
-<p class="view-card__thesis">Bitcoin's April 2024 halving cut new daily supply from 900 to 450 BTC, a programmed supply shock with no equivalent on the demand side. Spot ETF approval added a structural new buyer. The thesis is supply-side, not momentum chasing. BTC's short-term correlation to risk appetite makes entry timing critical, watching for a volatility-driven pullback.</p>
-            <p class="view-card__mkt">Spot ETF inflows remain net positive but have decelerated from launch-quarter highs, with institutional ownership growing while retail sentiment oscillates. The halving supply thesis is well understood within crypto markets but largely absent from traditional macro allocator frameworks.</p>
-            <div class="view-card__snap">
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Direction</span><span class="view-card__snap-val view-card__snap-val--long">Long</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Watching</span><span class="view-card__snap-val">~$62k</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Target</span><span class="view-card__snap-val">$78k</span></div>
-              <div class="view-card__snap-item"><span class="view-card__snap-key">Driver</span><span class="view-card__snap-val">Halving</span></div>
-            </div>
-            <div class="view-card__size"><span class="view-card__size-key">Risk</span><span class="view-card__size-val">1.5% of book on entry</span></div>
+            <h3 class="view-card__title">Bitcoin</h3>
+            <p class="view-card__thesis">Bitcoin's supply got cut in half last year — every four years or so the amount of new coins minted drops automatically, and historically that has been a meaningful driver of the price in the months after. The new US spot ETFs have also opened it up to a much bigger pool of buyers. I'm aware it tends to sell off with equities when markets get nervous, so timing feels important.</p>
             <div class="view-card__sources">
               <span class="view-card__sources-label">Read</span>
               <a href="https://www.ft.com/cryptofinance" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
