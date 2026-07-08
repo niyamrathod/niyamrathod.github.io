@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A paper-trading simulation I built to understand how systematic risk management works in practice — five months of crypto trades, five risk methods, one strategy. By Niyam Rathod." />
+  <meta name="description" content="A paper-trading simulation built to understand systematic risk management — position sizing, VaR, and kill-switches — in practice. By Niyam Rathod." />
   <title>Systematic Trading Framework — Niyam Rathod</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
@@ -114,15 +114,16 @@
         <p class="project-hero__label">Project 04</p>
         <h1 class="project-hero__title">Systematic<br>Trading Framework</h1>
         <p class="project-hero__desc">
-          A paper-trading simulation I built to understand what systematic risk management actually
-          looks like when you run a strategy for months rather than just backtesting a few weeks.
-          The dashboard loads with five months of simulated trades (around 130 paper trades,
-          Jan&ndash;Jun 2026) across five crypto instruments — no real capital, just a way of seeing how
-          the strategy and risk controls behave over time. Five tabs let you explore the results:
-          an <strong>interactive Risk Dashboard</strong> comparing five different ways of estimating
-          risk; a <strong>Strategy Comparison</strong> tab; a filterable <strong>Trade History</strong>;
-          a <strong>P&amp;L Analytics</strong> tab; and a <strong>Simulation</strong> tab to re-run the
-          strategy from scratch on paper.
+          A paper-trading simulation I built to understand how systematic risk management actually
+          works — position sizing, kill-switches, and VaR — rather than just reading about them.
+          It runs on BTC, ETH, BNB, LTC, and XRP using Yahoo Finance data, with no real money
+          involved. The dashboard loads five months of simulated history (around 130 paper trades,
+          Jan&ndash;Jun 2026). Five tabs let you explore: a <strong>Risk Dashboard</strong>
+          comparing five VaR methods (Historical Simulation, Parametric, Monte Carlo,
+          Cornish-Fisher, EWMA) with adjustable confidence level and lookback window; a
+          <strong>Strategy Comparison</strong> showing how each approach performed; a
+          <strong>Trade History</strong> you can filter; a <strong>P&amp;L Analytics</strong> tab;
+          and a <strong>Live Trading</strong> tab to re-run the paper simulation from scratch.
         </p>
         <ul class="project-hero__tags" role="list">
           <li class="tag">Python</li>
