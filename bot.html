@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A paper-trading simulation built to understand systematic risk management — position sizing, VaR, and kill-switches — in practice. By Niyam Rathod." />
+  <meta name="description" content="A paper-trading simulation built to understand systematic risk management (position sizing, VaR, and kill-switches) in practice. By Niyam Rathod." />
   <title>Systematic Trading Framework — Niyam Rathod</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
@@ -115,7 +115,7 @@
         <h1 class="project-hero__title">Systematic<br>Trading Framework</h1>
         <p class="project-hero__desc">
           A paper-trading simulation I built to understand how systematic risk management actually
-          works — position sizing, kill-switches, and VaR — rather than just reading about them.
+          works (position sizing, kill-switches, and VaR) rather than just reading about them.
           It runs on BTC, ETH, BNB, LTC, and XRP using Yahoo Finance data, with no real money
           involved. The dashboard loads five months of simulated history (around 130 paper trades,
           Jan&ndash;Jun 2026). Five tabs let you explore: a <strong>Risk Dashboard</strong>
@@ -136,15 +136,15 @@
         </ul>
         <div class="project-insight">
           <span class="project-insight__label">What this taught me about markets</span>
-          <p class="project-insight__text">The thing that surprised me most was building five different ways to estimate the same risk number and getting five different answers. I knew the methods existed but I didn't expect the outputs to diverge as much as they did. The strategy comparison also showed results I wasn't expecting — switching approach by market conditions wasn't always the winner month to month, even if it came out ahead over the full period.</p>
+          <p class="project-insight__text">The thing that surprised me most was building five different ways to estimate the same risk number and getting five different answers. I knew the methods existed but I didn't expect the outputs to diverge as much as they did. The strategy comparison also showed results I wasn't expecting: switching approach by market conditions wasn't always the winner month to month, even if it came out ahead over the full period.</p>
         </div>
         <div class="project-insight" style="margin-top:var(--sp-8);">
           <span class="project-insight__label">Why I built this</span>
-          <p class="project-insight__text">I wanted to know what actually happens when you commit to a strategy and run it for months rather than tweaking it in hindsight. The risk controls were the part I was most curious about — whether a kill-switch and position sizing based on recent volatility actually change what the strategy does, or just look good in theory.</p>
+          <p class="project-insight__text">I wanted to know what actually happens when you commit to a strategy and run it for months rather than tweaking it in hindsight. The risk controls were the part I was most curious about: whether a kill-switch and position sizing based on recent volatility actually change what the strategy does, or just look good in theory.</p>
         </div>
         <div class="project-insight" style="margin-top:var(--sp-6);">
           <span class="project-insight__label">What I'd still improve</span>
-          <p class="project-insight__text">Paper trading doesn't capture slippage or execution risk, so the P&amp;L numbers are cleaner than they'd be with real orders. The five VaR methods also disagree with each other more than I expected, and I'm not confident which is most reliable for crypto specifically — the return distributions are fat-tailed in ways that make standard assumptions questionable. Five months on five instruments is also a very short sample to draw any firm conclusions from, and I'd treat the strategy comparison results as illustrative rather than evidence that one approach is actually better.</p>
+          <p class="project-insight__text">Paper trading doesn't capture slippage or execution risk, so the P&amp;L numbers are cleaner than they'd be with real orders. The five VaR methods also disagree with each other more than I expected, and I'm not confident which is most reliable for crypto specifically, since the return distributions are fat-tailed in ways that make standard assumptions questionable. Five months on five instruments is also a very short sample to draw any firm conclusions from, and I'd treat the strategy comparison results as illustrative rather than evidence that one approach is actually better.</p>
         </div>
         <p style="margin-top:14px;font-size:0.8125rem;color:var(--color-muted);display:flex;align-items:center;gap:6px;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
