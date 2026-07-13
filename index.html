@@ -99,6 +99,9 @@
     }
 
     /* ── View bullet blocks ────────────────────────────────────── */
+    .view-notes {
+      padding: var(--sp-4) var(--sp-2) 0;
+    }
     .view-sub {
       font-size: 0.625rem;
       font-weight: 700;
@@ -106,15 +109,15 @@
       text-transform: uppercase;
       color: var(--color-muted);
       opacity: 0.65;
-      padding: var(--sp-3) var(--sp-6) 0;
-      margin: 0;
+      margin: var(--sp-3) 0 0;
     }
+    .view-sub:first-child { margin-top: 0; }
     .view-points {
       font-size: 0.8rem;
       color: var(--color-muted);
       line-height: 1.55;
-      padding: var(--sp-1) var(--sp-6) 0 calc(var(--sp-6) + 1.1em);
-      margin: 0;
+      padding-left: 1.1em;
+      margin: var(--sp-2) 0 0;
       list-style: disc;
     }
     .view-points li + li { margin-top: 2px; }
@@ -604,139 +607,159 @@
         <div class="views-grid">
 
           <!-- ── 01 Rates ── -->
-          <article class="view-card" data-card-keywords="bond,rate,yield,fed,treasury,curve,interest rate">
-            <div class="view-card__top">
-              <span class="view-card__asset">Rates</span>
-              <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
+          <div>
+            <article class="view-card" data-card-keywords="bond,rate,yield,fed,treasury,curve,interest rate">
+              <div class="view-card__top">
+                <span class="view-card__asset">Rates</span>
+                <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
+              </div>
+              <h3 class="view-card__title">US Rates</h3>
+              <p class="view-card__thesis">For most of the time I've followed this, short-term US rates were above long-term ones — an inverted curve. That finally flipped back in late 2025 when the Fed cut three times and the short end fell faster, which is roughly the mechanism I expected. Now I'm trying to work out what happens next.</p>
+              <div class="view-card__sources">
+                <span class="view-card__sources-label">Read</span>
+                <a href="https://www.ft.com/bond-markets" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+                <a href="https://www.reuters.com/markets/rates-bonds/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+                <a href="https://www.bloomberg.com/markets/rates-bonds" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              </div>
+              <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+            </article>
+            <div class="view-notes">
+              <p class="view-sub">What's happening</p>
+              <ul class="view-points">
+                <li>The curve un-inverted in late 2025 after the Fed cut three times</li>
+                <li>Fed funds now sitting at 3.50–3.75%, holding</li>
+              </ul>
+              <p class="view-sub">What I think</p>
+              <ul class="view-points">
+                <li>The steepening move might not be finished — long-end yields could still drift up if the market prices in fewer future cuts</li>
+                <li>Main risk is the Fed re-starting hikes, which would flatten the curve again</li>
+              </ul>
             </div>
-            <h3 class="view-card__title">US Rates</h3>
-            <p class="view-card__thesis">For most of the time I've followed this, short-term US rates were above long-term ones — an inverted curve. That finally flipped back in late 2025 when the Fed cut three times and the short end fell faster, which is roughly the mechanism I expected. Now I'm trying to work out what happens next.</p>
-            <p class="view-sub">What's happening</p>
-            <ul class="view-points">
-              <li>The curve un-inverted in late 2025 after the Fed cut three times</li>
-              <li>Fed funds now sitting at 3.50–3.75%, holding</li>
-            </ul>
-            <p class="view-sub">What I think</p>
-            <ul class="view-points">
-              <li>The steepening move might not be finished — long-end yields could still drift up if the market prices in fewer future cuts</li>
-              <li>Main risk is the Fed re-starting hikes, which would flatten the curve again</li>
-            </ul>
-            <div class="view-card__sources">
-              <span class="view-card__sources-label">Read</span>
-              <a href="https://www.ft.com/bond-markets" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.reuters.com/markets/rates-bonds/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.bloomberg.com/markets/rates-bonds" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-            </div>
-            <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
-          </article>
+          </div>
 
           <!-- ── 02 FX ── -->
-          <article class="view-card" data-card-keywords="dollar,yen,japan,boj,currency,forex,fx,jpy,usd,bank of japan">
-            <div class="view-card__top">
-              <span class="view-card__asset">FX</span>
-              <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
+          <div>
+            <article class="view-card" data-card-keywords="dollar,yen,japan,boj,currency,forex,fx,jpy,usd,bank of japan">
+              <div class="view-card__top">
+                <span class="view-card__asset">FX</span>
+                <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
+              </div>
+              <h3 class="view-card__title">USD/JPY</h3>
+              <p class="view-card__thesis">Japan's central bank has been raising rates for the first time in decades while the Fed is moving the other way, and I think that shift in the rate gap between the two countries should bring the yen back up over time. The yen has been weak for years partly because Japanese rates were near zero, so this feels like a real structural change, though I'd want to see the BoJ actually follow through consistently before being too confident.</p>
+              <div class="view-card__sources">
+                <span class="view-card__sources-label">Read</span>
+                <a href="https://www.ft.com/currencies" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+                <a href="https://www.reuters.com/markets/currencies/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+                <a href="https://www.bloomberg.com/markets/currencies" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              </div>
+              <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+            </article>
+            <div class="view-notes">
+              <p class="view-sub">What's happening</p>
+              <ul class="view-points">
+                <li>BoJ raised to 1% and is pausing</li>
+                <li>USD/JPY still trading around 160–162, well off the highs but not the yen recovery I expected</li>
+              </ul>
+              <p class="view-sub">What I think</p>
+              <ul class="view-points">
+                <li>I've been humbled by this one — the timing has been much harder than the direction</li>
+                <li>Still think the long-term direction makes sense, but I understand less about the carry dynamics than I did when I first looked at it</li>
+              </ul>
             </div>
-            <h3 class="view-card__title">USD/JPY</h3>
-            <p class="view-card__thesis">Japan's central bank has been raising rates for the first time in decades while the Fed is moving the other way, and I think that shift in the rate gap between the two countries should bring the yen back up over time. The yen has been weak for years partly because Japanese rates were near zero, so this feels like a real structural change, though I'd want to see the BoJ actually follow through consistently before being too confident.</p>
-            <p class="view-sub">What's happening</p>
-            <ul class="view-points">
-              <li>BoJ raised to 1% and is pausing</li>
-              <li>USD/JPY still trading around 160–162, well off the highs but not the yen recovery I expected</li>
-            </ul>
-            <p class="view-sub">What I think</p>
-            <ul class="view-points">
-              <li>I've been humbled by this one — the timing has been much harder than the direction</li>
-              <li>Still think the long-term direction makes sense, but I understand less about the carry dynamics than I did when I first looked at it</li>
-            </ul>
-            <div class="view-card__sources">
-              <span class="view-card__sources-label">Read</span>
-              <a href="https://www.ft.com/currencies" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.reuters.com/markets/currencies/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.bloomberg.com/markets/currencies" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-            </div>
-            <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
-          </article>
+          </div>
 
           <!-- ── 03 Equities ── -->
-          <article class="view-card" data-card-keywords="stock,equity,consumer,staples,discretionary,xlp,xly,spending,retail,delinquency">
-            <div class="view-card__top">
-              <span class="view-card__asset">Equities</span>
-              <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
+          <div>
+            <article class="view-card" data-card-keywords="stock,equity,consumer,staples,discretionary,xlp,xly,spending,retail,delinquency">
+              <div class="view-card__top">
+                <span class="view-card__asset">Equities</span>
+                <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
+              </div>
+              <h3 class="view-card__title">US Consumer</h3>
+              <p class="view-card__thesis">US credit card and auto loan delinquencies have been creeping up, and I think consumer spending is more stretched than markets are pricing in. Savings built up during COVID are mostly gone and real wage growth has slowed. I'd expect discretionary spending to be the first thing people cut back on, though I'm still figuring out how quickly this actually shows up in the numbers.</p>
+              <div class="view-card__sources">
+                <span class="view-card__sources-label">Read</span>
+                <a href="https://www.ft.com/equities" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+                <a href="https://www.reuters.com/markets/stocks/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+                <a href="https://www.bloomberg.com/markets/stocks" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              </div>
+              <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+            </article>
+            <div class="view-notes">
+              <p class="view-sub">What's happening</p>
+              <ul class="view-points">
+                <li>Delinquencies flattened in headline terms but the 90+ day bucket jumped</li>
+                <li>Balance growth has slowed</li>
+              </ul>
+              <p class="view-sub">What I think</p>
+              <ul class="view-points">
+                <li>It's playing out in a K-shaped way — high-income spending holding up, lower-income under real stress</li>
+                <li>My original framing was too uniform: not "the consumer" but which consumer</li>
+              </ul>
             </div>
-            <h3 class="view-card__title">US Consumer</h3>
-            <p class="view-card__thesis">US credit card and auto loan delinquencies have been creeping up, and I think consumer spending is more stretched than markets are pricing in. Savings built up during COVID are mostly gone and real wage growth has slowed. I'd expect discretionary spending to be the first thing people cut back on, though I'm still figuring out how quickly this actually shows up in the numbers.</p>
-            <p class="view-sub">What's happening</p>
-            <ul class="view-points">
-              <li>Delinquencies flattened in headline terms but the 90+ day bucket jumped</li>
-              <li>Balance growth has slowed</li>
-            </ul>
-            <p class="view-sub">What I think</p>
-            <ul class="view-points">
-              <li>It's playing out in a K-shaped way — high-income spending holding up, lower-income under real stress</li>
-              <li>My original framing was too uniform: not "the consumer" but which consumer</li>
-            </ul>
-            <div class="view-card__sources">
-              <span class="view-card__sources-label">Read</span>
-              <a href="https://www.ft.com/equities" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.reuters.com/markets/stocks/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.bloomberg.com/markets/stocks" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-            </div>
-            <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
-          </article>
+          </div>
 
           <!-- ── 04 Commodities ── -->
-          <article class="view-card" data-card-keywords="oil,gold,commodity,crude,copper,opec,brent">
-            <div class="view-card__top">
-              <span class="view-card__asset">Commodities</span>
-              <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
+          <div>
+            <article class="view-card" data-card-keywords="oil,gold,commodity,crude,copper,opec,brent">
+              <div class="view-card__top">
+                <span class="view-card__asset">Commodities</span>
+                <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
+              </div>
+              <h3 class="view-card__title">Oil</h3>
+              <p class="view-card__thesis">I've been watching oil grind higher. OPEC is still holding back supply and demand from Asia keeps coming in stronger than expected, so I think there's more room to run. Though I'd want to see how long OPEC actually holds discipline before being too convicted, and a sharper slowdown in China would probably change the picture quickly.</p>
+              <div class="view-card__sources">
+                <span class="view-card__sources-label">Read</span>
+                <a href="https://www.ft.com/commodities" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+                <a href="https://www.reuters.com/markets/commodities/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+                <a href="https://www.bloomberg.com/markets/commodities" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              </div>
+              <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+            </article>
+            <div class="view-notes">
+              <p class="view-sub">What's happening</p>
+              <ul class="view-points">
+                <li>OPEC+ has been raising quotas — +188k b/d since April</li>
+                <li>Brent sitting in the low-to-mid $70s</li>
+              </ul>
+              <p class="view-sub">What I think</p>
+              <ul class="view-points">
+                <li>The kill condition I wrote down ("OPEC discipline breaks") has basically triggered</li>
+                <li>Useful lesson: having a clear exit condition beforehand meant I wasn't scrambling to justify holding</li>
+              </ul>
             </div>
-            <h3 class="view-card__title">Oil</h3>
-            <p class="view-card__thesis">I've been watching oil grind higher. OPEC is still holding back supply and demand from Asia keeps coming in stronger than expected, so I think there's more room to run. Though I'd want to see how long OPEC actually holds discipline before being too convicted, and a sharper slowdown in China would probably change the picture quickly.</p>
-            <p class="view-sub">What's happening</p>
-            <ul class="view-points">
-              <li>OPEC+ has been raising quotas — +188k b/d since April</li>
-              <li>Brent sitting in the low-to-mid $70s</li>
-            </ul>
-            <p class="view-sub">What I think</p>
-            <ul class="view-points">
-              <li>The kill condition I wrote down ("OPEC discipline breaks") has basically triggered</li>
-              <li>Useful lesson: having a clear exit condition beforehand meant I wasn't scrambling to justify holding</li>
-            </ul>
-            <div class="view-card__sources">
-              <span class="view-card__sources-label">Read</span>
-              <a href="https://www.ft.com/commodities" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.reuters.com/markets/commodities/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.bloomberg.com/markets/commodities" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-            </div>
-            <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
-          </article>
+          </div>
 
           <!-- ── 05 Digital Assets ── -->
-          <article class="view-card" data-card-keywords="bitcoin,crypto,btc,halving,digital asset,cryptocurrency,etf">
-            <div class="view-card__top">
-              <span class="view-card__asset">Digital Assets</span>
-              <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
+          <div>
+            <article class="view-card" data-card-keywords="bitcoin,crypto,btc,halving,digital asset,cryptocurrency,etf">
+              <div class="view-card__top">
+                <span class="view-card__asset">Digital Assets</span>
+                <span class="status-badge status-badge--watch"><span class="status-dot"></span>Watching</span>
+              </div>
+              <h3 class="view-card__title">Bitcoin</h3>
+              <p class="view-card__thesis">Bitcoin's supply got cut in half back in 2024. Every four years or so the amount of new coins minted drops automatically, and historically that has been a meaningful driver of the price in the months after. The new US spot ETFs have also opened it up to a much bigger pool of buyers. I'm aware it tends to sell off with equities when markets get nervous, so timing feels important.</p>
+              <div class="view-card__sources">
+                <span class="view-card__sources-label">Read</span>
+                <a href="https://www.ft.com/cryptofinance" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+                <a href="https://www.reuters.com/technology/future-of-money/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+                <a href="https://www.bloomberg.com/crypto" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+              </div>
+              <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
+            </article>
+            <div class="view-notes">
+              <p class="view-sub">What's happening</p>
+              <ul class="view-points">
+                <li>Price in the mid-$60ks</li>
+                <li>ETF inflows turned to outflows — roughly $4bn out in June</li>
+              </ul>
+              <p class="view-sub">What I think</p>
+              <ul class="view-points">
+                <li>Flows are driving price more than the halving narrative now</li>
+                <li>The same pipe that brought in new buyers is now letting them leave quickly</li>
+              </ul>
             </div>
-            <h3 class="view-card__title">Bitcoin</h3>
-            <p class="view-card__thesis">Bitcoin's supply got cut in half back in 2024. Every four years or so the amount of new coins minted drops automatically, and historically that has been a meaningful driver of the price in the months after. The new US spot ETFs have also opened it up to a much bigger pool of buyers. I'm aware it tends to sell off with equities when markets get nervous, so timing feels important.</p>
-            <p class="view-sub">What's happening</p>
-            <ul class="view-points">
-              <li>Price in the mid-$60ks</li>
-              <li>ETF inflows turned to outflows — roughly $4bn out in June</li>
-            </ul>
-            <p class="view-sub">What I think</p>
-            <ul class="view-points">
-              <li>Flows are driving price more than the halving narrative now</li>
-              <li>The same pipe that brought in new buyers is now letting them leave quickly</li>
-            </ul>
-            <div class="view-card__sources">
-              <span class="view-card__sources-label">Read</span>
-              <a href="https://www.ft.com/cryptofinance" target="_blank" rel="noopener" class="view-card__source-link">FT&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.reuters.com/technology/future-of-money/" target="_blank" rel="noopener" class="view-card__source-link">Reuters&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-              <a href="https://www.bloomberg.com/crypto" target="_blank" rel="noopener" class="view-card__source-link">Bloomberg&nbsp;<svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
-            </div>
-            <div class="view-card__footer"><span class="view-card__date">Updated Jul 2026</span><a href="trade-ideas.html" class="view-card__link">Full pitch &rarr;</a></div>
-          </article>
+          </div>
 
         </div>
       </div>
