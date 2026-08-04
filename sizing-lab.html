@@ -150,7 +150,7 @@
         <p class="project-hero__label">Project 04</p>
         <h1 class="project-hero__title">Position Sizing<br>&amp; Risk Lab</h1>
         <p class="project-hero__desc">
-          Every game here has a guaranteed edge — the only variable is how much you stake.
+          Every game here has a guaranteed edge. The only variable is how much you stake.
           Change any input and every chart updates. Built to learn sizing, drawdown and ruin
           by watching them move.
         </p>
@@ -167,11 +167,11 @@
         </div>
         <div class="project-insight" style="margin-top:var(--sp-8);">
           <span class="project-insight__label">What this taught me about markets</span>
-          <p class="project-insight__text">The mean is a liar: a few lucky paths drag the average up while the typical outcome is far worse, so positive expected value alone tells you almost nothing about what happens to you. Over-betting turns a winning game into a losing one — same edge, same coin, and past a certain stake the median lifetime ends in ruin. And the punishment for sitting above the Kelly stake is far worse than the cost of sitting below it, which is why desks risk around 1% per trade when the maths might "allow" ten times that.</p>
+          <p class="project-insight__text">The mean is a liar: a few lucky paths drag the average up while the typical outcome is far worse, so positive expected value alone tells you almost nothing about what happens to you. Over-betting turns a winning game into a losing one. Same edge, same coin. Past a certain stake the median lifetime ends in ruin. And the punishment for sitting above the Kelly stake is far worse than the cost of sitting below it, which is why desks risk around 1% per trade when the maths might "allow" ten times that.</p>
         </div>
         <div class="project-insight" style="margin-top:var(--sp-6);">
           <span class="project-insight__label">What I'd still improve</span>
-          <p class="project-insight__text">Real returns aren't independent coin flips: fat tails and clustered losing streaks make real over-betting more dangerous than this shows. Kelly also assumes you know your edge, which in markets you never do — modelling that estimation error is the part I'd want to add next. It's a teaching simulator, not a backtest, and shouldn't be read as one.</p>
+          <p class="project-insight__text">Real returns aren't independent coin flips: fat tails and clustered losing streaks make real over-betting more dangerous than this shows. Kelly also assumes you know your edge, which in markets you never do. Modelling that estimation error is what I'd want to add next. It's a teaching simulator, not a backtest, and shouldn't be read as one.</p>
         </div>
       </div>
     </section>
@@ -214,7 +214,7 @@
           <div class="stats" id="stats"></div>
           <div id="verdict" class="verdict"></div>
           <canvas id="fan" width="860" height="280"></canvas>
-          <div class="cap">Percentile fan: the shaded bands show where the middle 50% and middle 90% of lifetimes sit at each point in time. The dark line is the median path — the typical experience, not the average.</div>
+          <div class="cap">Percentile fan: the shaded bands show where the middle 50% and middle 90% of lifetimes sit at each point in time. The dark line is the median path, which is the typical experience, not the average.</div>
           <canvas id="hist" width="860" height="215"></canvas>
           <div class="cap">Where every lifetime ended. Red = ruined, pink = lost money, blue = profit.</div>
         </div>
@@ -223,7 +223,7 @@
           <canvas id="kelly" width="860" height="340"></canvas>
           <div class="cap">Blue = long-run growth rate per bet at each stake size. Green line = Kelly (max growth). Red shading = the cliff, where a <em>winning</em> game starts losing money. Dotted red = simulated risk of ruin. Black dashed = your current stake. Move the stake slider above and watch yourself move along the curve.</div>
           <canvas id="kellyBar" width="860" height="230"></canvas>
-          <div class="cap">Median vs mean ending capital across stakes. Watch them diverge: past Kelly the mean keeps climbing on a few lucky paths while the median — what actually happens to you — collapses.</div>
+          <div class="cap">Median vs mean ending capital across stakes. Watch them diverge: past Kelly the mean keeps climbing on a few lucky paths while the median (what actually happens to you) collapses.</div>
         </div>
 
         <div id="t2" class="pane" style="display:none">
@@ -235,14 +235,14 @@
             <div class="cap">Loss tail of ending capital, with VaR and Expected Shortfall marked.</div></div>
           </div>
           <table id="varTable"></table>
-          <div class="cap">VaR answers "how bad is a bad case?" — the 95% VaR is the loss you only exceed 5% of the time. Expected Shortfall (CVaR) answers the better question: "when it IS that bad, how bad on average?" Desks use both because VaR says nothing about what lives beyond it.</div>
+          <div class="cap">VaR answers a simple question: how bad is a bad case? The 95% VaR is the loss you only exceed 5% of the time. Expected Shortfall (CVaR) asks the better one: when it IS that bad, how bad on average? Desks use both because VaR says nothing about what lives beyond it.</div>
         </div>
 
         <div id="t3" class="pane" style="display:none">
-          <div class="cap" style="margin-top:0">Every rule below trades the <b>identical</b> sequence of coin flips — only the sizing differs. That is the whole experiment: same edge, same luck, different survival.</div>
+          <div class="cap" style="margin-top:0">Every rule below trades the <b>identical</b> sequence of coin flips. Only the sizing differs. That is the whole experiment: same edge, same luck, different survival.</div>
           <canvas id="rules" width="860" height="300"></canvas>
           <table id="rulesTable"></table>
-          <div class="cap">Fixed fraction = same % of current bankroll (shrinks after losses — this is why it survives). Fixed stake = same £ amount every bet. Kelly / half-Kelly = growth-optimal and the practitioner's discount. Vol-target = smaller stake when recent results are choppy.</div>
+          <div class="cap">Fixed fraction = same % of current bankroll (shrinks after losses, which is why it survives). Fixed stake = same £ amount every bet. Kelly / half-Kelly = growth-optimal and the practitioner's discount. Vol-target = smaller stake when recent results are choppy.</div>
         </div>
 
         <div id="t4" class="pane" style="display:none">
@@ -464,7 +464,7 @@ series.forEach(function(s){g.strokeStyle=s.c;g.lineWidth=2;g.beginPath();
 s.path.forEach(function(v,i3){var x=X(i3),y=Y(v);if(i3===0)g.moveTo(x,y);else g.lineTo(x,y)});g.stroke()});
 series.forEach(function(s,i4){g.fillStyle=s.c;g.fillRect(L+i4*130,8,9,9);g.fillStyle='#444441';g.fillText(s.name,L+12+i4*130,16)});
 var rows='<tr><th>Sizing rule</th><th>Ending capital</th><th>Max drawdown</th><th>What it does</th></tr>';
-var expl={'Fixed 2%':'risk a constant small % — the desk default','Half Kelly':'the practitioner discount for uncertain edge','Kelly':'growth-optimal if your edge is exactly right','2× Kelly':'over-betting: same edge, ruinous variance','Fixed £ stake':'stake never shrinks after losses','Vol-targeted':'cut size when recent results turn choppy'};
+var expl={'Fixed 2%':'risk a constant small % (the desk default)','Half Kelly':'the practitioner discount for uncertain edge','Kelly':'growth-optimal if your edge is exactly right','2× Kelly':'over-betting: same edge, ruinous variance','Fixed £ stake':'stake never shrinks after losses','Vol-targeted':'cut size when recent results turn choppy'};
 series.forEach(function(s){rows+='<tr><td style="color:'+s.c+';font-weight:600">'+s.name+'</td><td>'+fmt(s.end)+'</td><td>'+pct(s.dd)+'</td><td style="text-align:right;color:#6B6A64">'+expl[s.name]+'</td></tr>'});
 el('rulesTable').innerHTML=rows}
 function maxDD(path){var peak=path[0],m=0;path.forEach(function(v){if(v>peak)peak=v;var d=(peak-v)/peak;if(d>m)m=d});return m}
@@ -503,7 +503,7 @@ el('vPay').textContent=(+el('pay').value/10).toFixed(1)+' : 1';
 el('vStake').textContent=el('stake').value+'%';
 el('vBets').textContent=el('bets').value;
 var k=kellyOf(),e=edgeOf();
-el('edgeTxt').textContent=(e>0?'+':'')+(e*100).toFixed(1)+'% per bet'+(e<=0?' (no edge — sizing cannot save you)':'');
+el('edgeTxt').textContent=(e>0?'+':'')+(e*100).toFixed(1)+'% per bet'+(e<=0?' (no edge; sizing cannot save you)':'');
 el('kellyTxt').textContent=(k*100).toFixed(1)+'%';
 if(pending)clearTimeout(pending);
 pending=setTimeout(render,90)}
@@ -513,11 +513,11 @@ if(curTab===0){
 var r=sim(g0.f,{bands:true});
 el('stats').innerHTML=st(fmt(r.med),'median ending')+st(fmt(r.mean),'mean ending')+st(fmt(r.p5),'worst 5%')+st(pct(r.ruin),'ruined')+st(pct(r.below),'lost money')+st(pct(r.medDD),'median max drawdown');
 var v=el('verdict');
-if(edgeOf()<=0){v.style.background='var(--bad-soft)';v.style.color='var(--bad)';v.innerHTML='<b>No edge.</b> With a negative expected value no sizing rule wins — smaller stakes only slow the bleed. Sizing manages risk; it cannot manufacture edge.'}
+if(edgeOf()<=0){v.style.background='var(--bad-soft)';v.style.color='var(--bad)';v.innerHTML='<b>No edge.</b> With a negative expected value no sizing rule wins. Smaller stakes only slow the bleed. Sizing manages risk; it cannot manufacture edge.'}
 else if(r.ruin>0.4){v.style.background='var(--bad-soft)';v.style.color='var(--bad)';v.innerHTML='<b>Ruin is now the likely outcome</b> of a game you are mathematically favoured to win. Only the stake changed.'}
-else if(g0.f>k*1.6){v.style.background='var(--warn-soft)';v.style.color='var(--warn)';v.innerHTML='<b>Over-bet: above the '+(k*100).toFixed(1)+'% Kelly stake.</b> Compare median and mean — the typical player and the average player are living different lives.'}
-else if(g0.f<k*0.35){v.style.background='var(--accent-soft)';v.style.color='var(--accent)';v.innerHTML='<b>Conservative: well below Kelly.</b> Ruin risk near zero, growth left on the table — deliberately where most professionals sit, because real edges are uncertain.'}
-else{v.style.background='var(--good-soft)';v.style.color='var(--good)';v.innerHTML='<b>In the Kelly zone</b> — near maximum long-run growth. Push the stake higher and watch the median fall while the mean rises.'}
+else if(g0.f>k*1.6){v.style.background='var(--warn-soft)';v.style.color='var(--warn)';v.innerHTML='<b>Over-bet: above the '+(k*100).toFixed(1)+'% Kelly stake.</b> Compare median and mean. The typical player and the average player are living different lives.'}
+else if(g0.f<k*0.35){v.style.background='var(--accent-soft)';v.style.color='var(--accent)';v.innerHTML='<b>Conservative: well below Kelly.</b> Ruin risk near zero, growth left on the table. Deliberately where most professionals sit, because real edges are uncertain.'}
+else{v.style.background='var(--good-soft)';v.style.color='var(--good)';v.innerHTML='<b>In the Kelly zone</b>, near maximum long-run growth. Push the stake higher and watch the median fall while the mean rises.'}
 drawFan(r);drawHist(r.finals)}
 else if(curTab===1){drawKelly();drawKellyBar()}
 else if(curTab===2){drawRisk(sim(g0.f,{}))}
