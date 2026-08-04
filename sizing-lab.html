@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Position Sizing &amp; Risk Lab — a Monte Carlo tool for learning position sizing, Kelly, drawdown, VaR and risk of ruin. By Niyam Rathod." />
+  <title>Position Sizing &amp; Risk Lab — Niyam Rathod</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ── Project-hero shell (matches other project pages) ─── */
+    .project-hero {
+      padding: calc(var(--sp-32) * 0.35) 0 var(--sp-12);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .project-hero__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8125rem;
+      font-family: var(--font-body);
+      color: var(--color-muted);
+      text-decoration: none;
+      margin-bottom: var(--sp-16);
+      transition: color var(--dur-fast);
+    }
+    .project-hero__back:hover { color: var(--color-text); }
+    .project-hero__back svg { transition: transform var(--dur-fast); }
+    .project-hero__back:hover svg { transform: translateX(-3px); }
+    .project-hero__label {
+      font-size: 0.75rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: var(--sp-8);
+    }
+    .project-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: var(--sp-12);
+    }
+    .project-hero__desc {
+      font-size: 1rem;
+      color: var(--color-muted);
+      max-width: 52ch;
+      line-height: 1.7;
+      margin-bottom: var(--sp-12);
+    }
+    .project-hero__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    /* ── Lab tool section ───────────────────────────────── */
+    .lab-section {
+      padding: var(--sp-16) 0 var(--sp-24);
+    }
+
+    /* ── Sizing-lab CSS variables (palette-mapped) ──────── */
+    :root {
+      --bg:          #F4F1EB;
+      --card:        #FFFFFF;
+      --text:        #111111;
+      --muted:       #7C7669;
+      --faint:       #98968E;
+      --border:      #E0DCD2;
+      --accent:      #1F4E79;
+      --accent-soft: #E8F0F7;
+      --good:        #1E7145;
+      --good-soft:   #E7F3EC;
+      --bad:         #A03123;
+      --bad-soft:    #F9ECEA;
+      --warn:        #9C6500;
+      --warn-soft:   #FAF1DE;
+    }
+
+    /* ── Sizing-lab component CSS (unchanged) ───────────── */
+    *{box-sizing:border-box}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+    .wrap{max-width:900px;margin:0 auto;padding:24px 16px 60px}
+    .panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px}
+    .inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px}
+    .ip{font-size:11.5px;color:var(--muted);display:flex;flex-direction:column;gap:3px}
+    .ip .val{font-size:14px;font-weight:700;color:var(--text)}
+    input[type=range]{width:100%;margin:0}
+    select,input[type=number]{border:1px solid var(--border);border-radius:7px;padding:6px 8px;font-size:13px;font-family:inherit;background:var(--card);color:var(--text);width:100%}
+    .tabs{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+    .tab{border:1px solid var(--border);background:var(--card);color:var(--muted);border-radius:9px;padding:8px 13px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit}
+    .tab.on{background:var(--accent);border-color:var(--accent);color:#fff}
+    .pane{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-top:10px}
+    canvas{width:100%;height:auto;border:1px solid var(--border);border-radius:9px;background:#fff;margin-top:10px}
+    .cap{font-size:11.5px;color:var(--muted);margin-top:7px}
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:8px;margin-top:4px}
+    .stat{border:1px solid var(--border);border-radius:9px;padding:8px 9px}
+    .stat .v{font-size:16px;font-weight:700;line-height:1.2}
+    .stat .l{font-size:10.5px;color:var(--muted)}
+    table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12.5px}
+    th,td{text-align:right;padding:6px 8px;border-bottom:1px solid var(--border)}
+    th:first-child,td:first-child{text-align:left}
+    th{font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--faint)}
+    .kelly-row{background:var(--good-soft);font-weight:600}
+    .verdict{margin-top:10px;border-radius:9px;padding:9px 11px;font-size:12.5px}
+    .btn{border:none;border-radius:9px;padding:9px 15px;font-size:12.5px;font-weight:600;font-family:inherit;cursor:pointer;background:var(--accent);color:#fff}
+    .btn2{border:1px solid var(--border);border-radius:9px;padding:8px 13px;font-size:12.5px;font-family:inherit;cursor:pointer;background:var(--card);color:var(--text)}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:620px){.split{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+  <div class="cursor" aria-hidden="true"><div class="cursor__dot"></div></div>
+
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__brand">NR</a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html#work"    class="nav__link">Work</a></li>
+        <li><a href="index.html#about"   class="nav__link">About</a></li>
+        <li><a href="index.html#contact" class="nav__link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="project-hero">
+      <div class="container">
+        <a href="index.html#work" class="project-hero__back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
+          </svg>
+          Back to work
+        </a>
+        <p class="project-hero__label">Project 04</p>
+        <h1 class="project-hero__title">Position Sizing<br>&amp; Risk Lab</h1>
+        <p class="project-hero__desc">
+          Every game here has a guaranteed edge — the only variable is how much you stake.
+          Change any input and every chart updates. Built to learn sizing, drawdown and ruin
+          by watching them move.
+        </p>
+        <ul class="project-hero__tags" role="list">
+          <li class="tag">Risk Management</li>
+          <li class="tag">Position Sizing</li>
+          <li class="tag">Kelly Criterion</li>
+          <li class="tag">Monte Carlo</li>
+          <li class="tag">VaR</li>
+        </ul>
+        <div class="project-insight">
+          <span class="project-insight__label">Why I built this</span>
+          <p class="project-insight__text">At Deutsche Bank I saw VaR and stress testing used in practice without really understanding what was inside the numbers. What stuck with me afterwards was reading that traders fail more often from sizing badly than from being wrong about direction, which I didn't really believe. This was the simplest experiment I could design to test it: hold the edge constant, change only the stake, and watch what happens across thousands of simulated lifetimes. It runs entirely in the browser because the idea doesn't need any data.</p>
+        </div>
+        <div class="project-insight" style="margin-top:var(--sp-8);">
+          <span class="project-insight__label">What this taught me about markets</span>
+          <p class="project-insight__text">The mean is a liar: a few lucky paths drag the average up while the typical outcome is far worse, so positive expected value alone tells you almost nothing about what happens to you. Over-betting turns a winning game into a losing one — same edge, same coin, and past a certain stake the median lifetime ends in ruin. And the punishment for sitting above the Kelly stake is far worse than the cost of sitting below it, which is why desks risk around 1% per trade when the maths might "allow" ten times that.</p>
+        </div>
+        <div class="project-insight" style="margin-top:var(--sp-6);">
+          <span class="project-insight__label">What I'd still improve</span>
+          <p class="project-insight__text">Real returns aren't independent coin flips: fat tails and clustered losing streaks make real over-betting more dangerous than this shows. Kelly also assumes you know your edge, which in markets you never do — modelling that estimation error is the part I'd want to add next. It's a teaching simulator, not a backtest, and shouldn't be read as one.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-section">
+      <div class="wrap">
+
+        <div class="panel">
+          <div class="inputs">
+            <label class="ip">Win probability <span class="val" id="vWin">55%</span>
+            <input type="range" id="win" min="35" max="75" step="1" value="55" oninput="upd()"></label>
+            <label class="ip">Payout on a win <span class="val" id="vPay">1.0 : 1</span>
+            <input type="range" id="pay" min="5" max="50" step="1" value="10" oninput="upd()"></label>
+            <label class="ip">Stake per bet <span class="val" id="vStake">10%</span>
+            <input type="range" id="stake" min="1" max="100" step="1" value="10" oninput="upd()"></label>
+            <label class="ip">Bets per lifetime <span class="val" id="vBets">100</span>
+            <input type="range" id="bets" min="20" max="300" step="10" value="100" oninput="upd()"></label>
+            <label class="ip">Starting capital
+            <input type="number" id="cap" value="100" min="10" step="10" oninput="upd()"></label>
+            <label class="ip">Lifetimes simulated
+            <select id="sims" onchange="upd()"><option>1000</option><option selected>3000</option><option>8000</option></select></label>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px">
+            <div style="font-size:12.5px;color:var(--muted)">Edge per bet: <b id="edgeTxt" style="color:var(--text)">—</b> · Kelly stake: <b id="kellyTxt" style="color:var(--good)">—</b></div>
+            <button class="btn2" onclick="setKelly()">Set stake to Kelly</button>
+            <button class="btn2" onclick="setHalf()">Half Kelly</button>
+            <button class="btn2" onclick="reseed()">New random seed</button>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <button class="tab on" onclick="tab(0)">Equity &amp; Outcomes</button>
+          <button class="tab" onclick="tab(1)">Kelly Curve</button>
+          <button class="tab" onclick="tab(2)">Drawdown &amp; VaR</button>
+          <button class="tab" onclick="tab(3)">Rules Head-to-Head</button>
+          <button class="tab" onclick="tab(4)">Streaks</button>
+        </div>
+
+        <div id="t0" class="pane">
+          <div class="stats" id="stats"></div>
+          <div id="verdict" class="verdict"></div>
+          <canvas id="fan" width="860" height="280"></canvas>
+          <div class="cap">Percentile fan: the shaded bands show where the middle 50% and middle 90% of lifetimes sit at each point in time. The dark line is the median path — the typical experience, not the average.</div>
+          <canvas id="hist" width="860" height="215"></canvas>
+          <div class="cap">Where every lifetime ended. Red = ruined, pink = lost money, blue = profit.</div>
+        </div>
+
+        <div id="t1" class="pane" style="display:none">
+          <canvas id="kelly" width="860" height="340"></canvas>
+          <div class="cap">Blue = long-run growth rate per bet at each stake size. Green line = Kelly (max growth). Red shading = the cliff, where a <em>winning</em> game starts losing money. Dotted red = simulated risk of ruin. Black dashed = your current stake. Move the stake slider above and watch yourself move along the curve.</div>
+          <canvas id="kellyBar" width="860" height="230"></canvas>
+          <div class="cap">Median vs mean ending capital across stakes. Watch them diverge: past Kelly the mean keeps climbing on a few lucky paths while the median — what actually happens to you — collapses.</div>
+        </div>
+
+        <div id="t2" class="pane" style="display:none">
+          <div class="stats" id="riskStats"></div>
+          <div class="split">
+            <div><canvas id="ddHist" width="420" height="240"></canvas>
+            <div class="cap">Distribution of maximum drawdown (worst peak-to-trough fall) per lifetime.</div></div>
+            <div><canvas id="tail" width="420" height="240"></canvas>
+            <div class="cap">Loss tail of ending capital, with VaR and Expected Shortfall marked.</div></div>
+          </div>
+          <table id="varTable"></table>
+          <div class="cap">VaR answers "how bad is a bad case?" — the 95% VaR is the loss you only exceed 5% of the time. Expected Shortfall (CVaR) answers the better question: "when it IS that bad, how bad on average?" Desks use both because VaR says nothing about what lives beyond it.</div>
+        </div>
+
+        <div id="t3" class="pane" style="display:none">
+          <div class="cap" style="margin-top:0">Every rule below trades the <b>identical</b> sequence of coin flips — only the sizing differs. That is the whole experiment: same edge, same luck, different survival.</div>
+          <canvas id="rules" width="860" height="300"></canvas>
+          <table id="rulesTable"></table>
+          <div class="cap">Fixed fraction = same % of current bankroll (shrinks after losses — this is why it survives). Fixed stake = same £ amount every bet. Kelly / half-Kelly = growth-optimal and the practitioner's discount. Vol-target = smaller stake when recent results are choppy.</div>
+        </div>
+
+        <div id="t4" class="pane" style="display:none">
+          <div class="stats" id="streakStats"></div>
+          <canvas id="streakChart" width="860" height="250"></canvas>
+          <table id="streakTable"></table>
+          <div class="cap">Losing streaks are a mathematical certainty, not bad luck. Sizing decides whether the inevitable streak is a bruise or a funeral.</div>
+        </div>
+
+      </div><!-- /.wrap -->
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__links">
+          <a href="https://github.com/niyamrathod" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/niyam-rathod-153395285" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:niyamrathod@icloud.com">Email</a>
+        </div>
+        <span class="footer__copy">&copy; 2026 Niyam Rathod</span>
+      </div>
+      <div class="footer__wordmark" aria-hidden="true">NIYAM RATHOD</div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+
+<script>
+var seed=12345;
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function el(i){return document.getElementById(i)}
+function P(){return{p:+el('win').value/100,b:+el('pay').value/10,f:+el('stake').value/100,n:+el('bets').value,cap:Math.max(10,+el('cap').value||100),sims:+el('sims').value}}
+function kellyOf(){var g=P();var k=(g.b*g.p-(1-g.p))/g.b;return Math.max(0,Math.min(k,1))}
+function edgeOf(){var g=P();return g.p*g.b-(1-g.p)}
+function fmt(x){if(!isFinite(x))return"—";if(x>=1e9)return "£"+(x/1e9).toFixed(1)+"bn";if(x>=1e6)return "£"+(x/1e6).toFixed(1)+"m";if(x>=1e4)return "£"+Math.round(x/1000)+"k";if(x>=100)return "£"+Math.round(x);return "£"+x.toFixed(2)}
+function pct(x){return (x*100).toFixed(1)+"%"}
+function reseed(){seed=Math.floor(Math.random()*1e6);upd()}
+function setKelly(){el('stake').value=Math.round(kellyOf()*100);upd()}
+function setHalf(){el('stake').value=Math.max(1,Math.round(kellyOf()*50));upd()}
+
+function sim(f,opt){
+opt=opt||{};var g=P(),n=g.n,sims=opt.sims||g.sims,rnd=mulberry(opt.seed||seed);
+var finals=[],dds=[],ruin=0,below=0,band=null,keep=opt.bands?[]:null;
+if(opt.bands){band=[];for(var i=0;i<=n;i++)band.push([])}
+for(var s=0;s<sims;s++){
+var bk=g.cap,peak=bk,mdd=0;
+if(opt.bands)band[0].push(bk);
+for(var i2=1;i2<=n;i2++){
+if(bk>=g.cap*0.005){var st=bk*f;if(rnd()<g.p)bk+=st*g.b;else bk-=st}
+if(bk>peak)peak=bk;var dd=(peak-bk)/peak;if(dd>mdd)mdd=dd;
+if(opt.bands)band[i2].push(bk)}
+finals.push(bk);dds.push(mdd);
+if(bk<g.cap*0.01)ruin++;if(bk<g.cap)below++}
+finals.sort(function(a,c){return a-c});dds.sort(function(a,c){return a-c});
+function q(arr,x){return arr[Math.min(arr.length-1,Math.floor(arr.length*x))]}
+var bands=null;
+if(opt.bands){bands=band.map(function(col){col.sort(function(a,c){return a-c});return[q(col,0.05),q(col,0.25),q(col,0.5),q(col,0.75),q(col,0.95)]})}
+return{med:q(finals,0.5),mean:finals.reduce(function(a,c){return a+c},0)/finals.length,
+p5:q(finals,0.05),p1:q(finals,0.01),p95:q(finals,0.95),
+es5:finals.slice(0,Math.max(1,Math.floor(finals.length*0.05))).reduce(function(a,c){return a+c},0)/Math.max(1,Math.floor(finals.length*0.05)),
+es1:finals.slice(0,Math.max(1,Math.floor(finals.length*0.01))).reduce(function(a,c){return a+c},0)/Math.max(1,Math.floor(finals.length*0.01)),
+ruin:ruin/sims,below:below/sims,finals:finals,dds:dds,medDD:q(dds,0.5),p95DD:q(dds,0.95),bands:bands}}
+
+function axes(c,g,L,R,T,B){g.strokeStyle='#E5E3DA';g.lineWidth=1;g.beginPath();g.moveTo(L,c.height-B);g.lineTo(c.width-R,c.height-B);g.stroke()}
+
+function drawFan(r){
+var c=el('fan'),g=c.getContext('2d'),cap=P().cap,n=P().n;g.clearRect(0,0,c.width,c.height);
+var L=54,R=18,T=18,B=30,mx=cap;
+r.bands.forEach(function(b){if(b[4]>mx)mx=b[4]});
+var lo=Math.log10(Math.max(cap*0.01,0.5)),hi=Math.log10(mx*1.15);
+function Y(v){return T+(hi-Math.log10(Math.max(v,Math.pow(10,lo))))/(hi-lo)*(c.height-T-B)}
+function X(i){return L+i/n*(c.width-L-R)}
+g.font='10px sans-serif';g.fillStyle='#98968E';
+[0.01,0.1,1,10,100].forEach(function(m){var v=cap*m;if(Math.log10(v)>lo&&Math.log10(v)<hi){g.strokeStyle='#EFEDE5';g.beginPath();g.moveTo(L,Y(v));g.lineTo(c.width-R,Y(v));g.stroke();g.fillStyle='#98968E';g.fillText(fmt(v),6,Y(v)+3)}});
+function bandPath(a,b2){g.beginPath();for(var i=0;i<=n;i++){var x=X(i),y=Y(r.bands[i][a]);if(i===0)g.moveTo(x,y);else g.lineTo(x,y)}
+for(var j=n;j>=0;j--)g.lineTo(X(j),Y(r.bands[j][b2]));g.closePath();g.fill()}
+g.fillStyle='rgba(31,78,121,0.10)';bandPath(0,4);
+g.fillStyle='rgba(31,78,121,0.22)';bandPath(1,3);
+g.strokeStyle='#1E7145';g.lineWidth=1.2;g.setLineDash([4,3]);g.beginPath();g.moveTo(L,Y(cap));g.lineTo(c.width-R,Y(cap));g.stroke();g.setLineDash([]);
+g.strokeStyle='#1F4E79';g.lineWidth=2.4;g.beginPath();
+for(var i3=0;i3<=n;i3++){var x=X(i3),y=Y(r.bands[i3][2]);if(i3===0)g.moveTo(x,y);else g.lineTo(x,y)}g.stroke();
+g.fillStyle='#6B6A64';g.fillText('median path',c.width-R-160,T+12);
+g.fillStyle='rgba(31,78,121,0.5)';g.fillRect(c.width-R-250,T+4,10,9);g.fillStyle='#6B6A64';g.fillText('middle 50%',c.width-R-236,T+12);
+g.fillText('bets →',c.width/2-16,c.height-8)}
+
+function drawHist(finals){
+var c=el('hist'),g=c.getContext('2d'),cap=P().cap;g.clearRect(0,0,c.width,c.height);
+var mults=[0.01,0.1,0.5,1,2,5,20,100,1000],labels=['ruin','<10%','10-50%','50-100%','1-2×','2-5×','5-20×','20-100×','100-1000×','>1000×'];
+var buckets=new Array(10).fill(0);
+finals.forEach(function(v){var m=v/cap,i=0;while(i<mults.length&&m>=mults[i])i++;buckets[i]++});
+var mB=Math.max.apply(null,buckets),bw=(c.width-46)/10;
+buckets.forEach(function(b,i){var h=b/mB*(c.height-62);
+g.fillStyle=i===0?'#A03123':(i<4?'#D8A69E':'#1F4E79');
+g.fillRect(34+i*bw+5,c.height-34-h,bw-10,h);
+g.fillStyle='#6B6A64';g.font='9.5px sans-serif';g.save();g.translate(34+i*bw+bw/2,c.height-22);g.rotate(-0.32);g.textAlign='center';g.fillText(labels[i],0,8);g.restore();
+if(b/finals.length>0.005){g.fillStyle='#22221F';g.textAlign='center';g.fillText(Math.round(b/finals.length*100)+'%',34+i*bw+bw/2,c.height-40-h);g.textAlign='left'}})}
+
+function growth(f){var g=P();if(f>=1)return -5;return g.p*Math.log(1+g.b*f)+(1-g.p)*Math.log(1-f)}
+
+function drawKelly(){
+var c=el('kelly'),g=c.getContext('2d');g.clearRect(0,0,c.width,c.height);
+var k=kellyOf(),fmax=Math.min(0.95,Math.max(0.4,k*2.8)),L=56,R=24,T=22,B=42;
+var pts=[],gmax=0,gmin=0;
+for(var f=0.005;f<=fmax;f+=0.005){var v=growth(f)*100;pts.push([f,v]);if(v>gmax)gmax=v;if(v<gmin)gmin=v}
+gmin=Math.max(gmin,-Math.abs(gmax)*2.5-0.5);
+function X(f){return L+f/fmax*(c.width-L-R)}
+function Y(v){return T+(gmax-v)/(gmax-gmin)*(c.height-T-B)}
+var cliff=null;for(var i=1;i<pts.length;i++){if(pts[i-1][1]>0&&pts[i][1]<=0){cliff=pts[i][0];break}}
+if(cliff){g.fillStyle='rgba(160,49,35,0.07)';g.fillRect(X(cliff),T,c.width-R-X(cliff),c.height-T-B)}
+g.strokeStyle='#E5E3DA';g.beginPath();g.moveTo(L,Y(0));g.lineTo(c.width-R,Y(0));g.stroke();
+g.font='10px sans-serif';g.fillStyle='#98968E';g.fillText('0%',L-26,Y(0)+3);
+g.fillText('growth/bet',4,T+8);
+for(var t=0;t<=fmax;t+=0.1)g.fillText(Math.round(t*100)+'%',X(t)-8,c.height-26);
+g.fillText('stake per bet →',c.width/2-32,c.height-8);
+g.strokeStyle='#1F4E79';g.lineWidth=2.6;g.beginPath();
+pts.forEach(function(pt,i2){var x=X(pt[0]),y=Y(Math.max(pt[1],gmin));if(i2===0)g.moveTo(x,y);else g.lineTo(x,y)});g.stroke();
+var rp=[];for(var rf=0.04;rf<=fmax;rf+=0.04)rp.push([rf,sim(rf,{sims:220}).ruin]);
+g.strokeStyle='#A03123';g.lineWidth=1.4;g.setLineDash([5,4]);g.beginPath();
+rp.forEach(function(pt,i3){var x=X(pt[0]),y=T+(1-pt[1])*(c.height-T-B);if(i3===0)g.moveTo(x,y);else g.lineTo(x,y)});g.stroke();g.setLineDash([]);
+g.fillStyle='#A03123';g.fillText('risk of ruin (dotted)',c.width-R-135,T+12);
+if(k>0.004){g.strokeStyle='#1E7145';g.lineWidth=2;g.beginPath();g.moveTo(X(k),T);g.lineTo(X(k),c.height-B);g.stroke();
+g.fillStyle='#1E7145';g.font='bold 10.5px sans-serif';g.fillText('Kelly '+(k*100).toFixed(0)+'%',X(k)-22,T-4)}
+if(cliff){g.strokeStyle='#A03123';g.lineWidth=1.4;g.beginPath();g.moveTo(X(cliff),T);g.lineTo(X(cliff),c.height-B);g.stroke();
+g.fillStyle='#A03123';g.fillText('cliff '+(cliff*100).toFixed(0)+'%',X(cliff)+3,T+26)}
+var f0=Math.min(P().f,fmax);
+g.strokeStyle='#22221F';g.lineWidth=1.5;g.setLineDash([2,3]);g.beginPath();g.moveTo(X(f0),T);g.lineTo(X(f0),c.height-B);g.stroke();g.setLineDash([]);
+g.fillStyle='#22221F';g.fillText('you',X(f0)-8,c.height-B+13)}
+
+function drawKellyBar(){
+var c=el('kellyBar'),g=c.getContext('2d'),cap=P().cap;g.clearRect(0,0,c.width,c.height);
+var k=kellyOf(),stakes=[0.02,0.05,k/2,k,k*1.5,k*2,0.5].filter(function(v,i,a){return v>0.001&&v<=1&&a.indexOf(v)===i}).sort(function(a,b){return a-b});
+var res=stakes.map(function(f){var r=sim(f,{sims:900});return{f:f,med:r.med,mean:r.mean}});
+var mx=Math.max.apply(null,res.map(function(r){return Math.max(r.med,r.mean)}));
+var lo=Math.log10(Math.max(cap*0.02,0.5)),hi=Math.log10(mx*1.2),L=50,B=42,T=26,H=c.height-T-B,bw=(c.width-L-20)/res.length;
+function Y(v){return T+(hi-Math.log10(Math.max(v,Math.pow(10,lo))))/(hi-lo)*H}
+g.font='10px sans-serif';
+res.forEach(function(r,i){
+var x=L+i*bw,isK=Math.abs(r.f-k)<0.002;
+g.fillStyle=isK?'#1E7145':'#1F4E79';g.fillRect(x+8,Y(r.med),bw/2-10,c.height-B-Y(r.med));
+g.fillStyle='#C9C6BC';g.fillRect(x+bw/2+2,Y(r.mean),bw/2-10,c.height-B-Y(r.mean));
+g.fillStyle='#6B6A64';g.textAlign='center';g.fillText((r.f*100).toFixed(0)+'%'+(isK?' (K)':''),x+bw/2,c.height-24);g.textAlign='left'});
+g.fillStyle='#1F4E79';g.fillRect(L,8,10,9);g.fillStyle='#6B6A64';g.fillText('median ending',L+14,16);
+g.fillStyle='#C9C6BC';g.fillRect(L+120,8,10,9);g.fillStyle='#6B6A64';g.fillText('mean ending (log scale)',L+134,16);
+g.fillText('stake per bet →',c.width/2-34,c.height-8)}
+
+function drawRisk(r){
+var cap=P().cap;
+el('riskStats').innerHTML=
+st(pct(r.medDD),'median max drawdown')+
+st(pct(r.p95DD),'95th percentile drawdown')+
+st(fmt(r.p5),'95% VaR level (5th pct)')+
+st(fmt(r.es5),'expected shortfall (worst 5%)')+
+st(pct(r.ruin),'risk of ruin');
+var c=el('ddHist'),g=c.getContext('2d');g.clearRect(0,0,c.width,c.height);
+var bk=[0,0,0,0,0,0,0],lab=['<10%','10-25','25-50','50-75','75-90','90-99','~100%'],ed=[0.1,0.25,0.5,0.75,0.9,0.99];
+r.dds.forEach(function(d){var i=0;while(i<ed.length&&d>=ed[i])i++;bk[i]++});
+var mB=Math.max.apply(null,bk),bw=(c.width-40)/7;
+g.font='9.5px sans-serif';
+bk.forEach(function(b,i){var h=b/mB*(c.height-58);
+g.fillStyle=i<2?'#1E7145':(i<4?'#9C6500':'#A03123');
+g.fillRect(28+i*bw+4,c.height-32-h,bw-8,h);
+g.fillStyle='#6B6A64';g.textAlign='center';g.fillText(lab[i],28+i*bw+bw/2,c.height-18);
+if(b/r.dds.length>0.01){g.fillStyle='#22221F';g.fillText(Math.round(b/r.dds.length*100)+'%',28+i*bw+bw/2,c.height-38-h)}g.textAlign='left'});
+g.fillStyle='#6B6A64';g.fillText('max drawdown per lifetime',28,14);
+var c2=el('tail'),g2=c2.getContext('2d');g2.clearRect(0,0,c2.width,c2.height);
+var tailN=Math.max(20,Math.floor(r.finals.length*0.25)),tail=r.finals.slice(0,tailN),mxv=tail[tail.length-1]||cap;
+var L=34,B=34,T=26,H=c2.height-T-B,W=c2.width-L-16;
+g2.strokeStyle='#E5E3DA';g2.beginPath();g2.moveTo(L,c2.height-B);g2.lineTo(c2.width-16,c2.height-B);g2.stroke();
+g2.strokeStyle='#1F4E79';g2.lineWidth=2;g2.beginPath();
+tail.forEach(function(v,i){var x=L+i/tailN*W,y=T+H-(v/mxv)*H;if(i===0)g2.moveTo(x,y);else g2.lineTo(x,y)});g2.stroke();
+var xv=L+0.2*W;
+g2.strokeStyle='#A03123';g2.setLineDash([4,3]);g2.beginPath();g2.moveTo(xv,T);g2.lineTo(xv,c2.height-B);g2.stroke();g2.setLineDash([]);
+g2.font='9.5px sans-serif';g2.fillStyle='#A03123';g2.fillText('95% VaR '+fmt(r.p5),xv+4,T+12);
+g2.fillStyle='#6B6A64';g2.fillText('worst 25% of lifetimes, sorted →',L,14);g2.fillText('ES '+fmt(r.es5),L+4,T+26);
+el('varTable').innerHTML='<tr><th>Measure</th><th>Level</th><th>Loss vs start</th><th>Plain English</th></tr>'+
+row('95% VaR',fmt(r.p5),pct((r.p5-cap)/cap),'1 lifetime in 20 ends at or below this')+
+row('99% VaR',fmt(r.p1),pct((r.p1-cap)/cap),'1 in 100 ends at or below this')+
+row('ES 95%',fmt(r.es5),pct((r.es5-cap)/cap),'average outcome WHEN in the worst 5%')+
+row('ES 99%',fmt(r.es1),pct((r.es1-cap)/cap),'average outcome when in the worst 1%')}
+function row(a,b,c,d){return '<tr><td>'+a+'</td><td>'+b+'</td><td>'+c+'</td><td style="text-align:right;color:#6B6A64">'+d+'</td></tr>'}
+function st(v,l){return '<div class="stat"><div class="v">'+v+'</div><div class="l">'+l+'</div></div>'}
+
+function drawRules(){
+var g0=P(),k=kellyOf(),n=g0.n,rnd=mulberry(seed),flips=[];
+for(var i=0;i<n;i++)flips.push(rnd()<g0.p);
+var rules=[
+{n:'Fixed 2%',c:'#1E7145',f:function(){return 0.02}},
+{n:'Half Kelly',c:'#1F4E79',f:function(){return k/2}},
+{n:'Kelly',c:'#9C6500',f:function(){return k}},
+{n:'2× Kelly',c:'#A03123',f:function(){return Math.min(k*2,0.99)}},
+{n:'Fixed £ stake',c:'#7A6FB0',fixed:true},
+{n:'Vol-targeted',c:'#4A9BB5',vol:true}];
+var series=rules.map(function(r){
+var bk=g0.cap,path=[bk],recent=[];
+for(var i2=0;i2<n;i2++){
+var f;
+if(r.fixed){f=Math.min(0.02*g0.cap/Math.max(bk,0.01),0.99)}
+else if(r.vol){var losses=recent.filter(function(x){return !x}).length;var vol=recent.length?losses/recent.length:1-g0.p;f=Math.min(k*0.5*((1-g0.p)/Math.max(vol,0.15)),0.99)}
+else f=r.f();
+if(bk>=g0.cap*0.005){var stk=bk*f;if(flips[i2])bk+=stk*g0.b;else bk-=stk}
+recent.push(flips[i2]);if(recent.length>10)recent.shift();
+path.push(bk)}
+return{name:r.n,c:r.c,path:path,end:bk,dd:maxDD(path)}});
+var c=el('rules'),g=c.getContext('2d');g.clearRect(0,0,c.width,c.height);
+var mx=g0.cap;series.forEach(function(s){s.path.forEach(function(v){if(v>mx)mx=v})});
+var L=56,R=16,T=26,B=30,lo=Math.log10(Math.max(g0.cap*0.01,0.5)),hi=Math.log10(mx*1.15);
+function Y(v){return T+(hi-Math.log10(Math.max(v,Math.pow(10,lo))))/(hi-lo)*(c.height-T-B)}
+function X(i){return L+i/n*(c.width-L-R)}
+g.font='10px sans-serif';
+[0.01,0.1,1,10,100,1000].forEach(function(m){var v=g0.cap*m;if(Math.log10(v)>lo&&Math.log10(v)<hi){g.strokeStyle='#EFEDE5';g.beginPath();g.moveTo(L,Y(v));g.lineTo(c.width-R,Y(v));g.stroke();g.fillStyle='#98968E';g.fillText(fmt(v),4,Y(v)+3)}});
+g.strokeStyle='#C9C6BC';g.setLineDash([4,3]);g.beginPath();g.moveTo(L,Y(g0.cap));g.lineTo(c.width-R,Y(g0.cap));g.stroke();g.setLineDash([]);
+series.forEach(function(s){g.strokeStyle=s.c;g.lineWidth=2;g.beginPath();
+s.path.forEach(function(v,i3){var x=X(i3),y=Y(v);if(i3===0)g.moveTo(x,y);else g.lineTo(x,y)});g.stroke()});
+series.forEach(function(s,i4){g.fillStyle=s.c;g.fillRect(L+i4*130,8,9,9);g.fillStyle='#444441';g.fillText(s.name,L+12+i4*130,16)});
+var rows='<tr><th>Sizing rule</th><th>Ending capital</th><th>Max drawdown</th><th>What it does</th></tr>';
+var expl={'Fixed 2%':'risk a constant small % — the desk default','Half Kelly':'the practitioner discount for uncertain edge','Kelly':'growth-optimal if your edge is exactly right','2× Kelly':'over-betting: same edge, ruinous variance','Fixed £ stake':'stake never shrinks after losses','Vol-targeted':'cut size when recent results turn choppy'};
+series.forEach(function(s){rows+='<tr><td style="color:'+s.c+';font-weight:600">'+s.name+'</td><td>'+fmt(s.end)+'</td><td>'+pct(s.dd)+'</td><td style="text-align:right;color:#6B6A64">'+expl[s.name]+'</td></tr>'});
+el('rulesTable').innerHTML=rows}
+function maxDD(path){var peak=path[0],m=0;path.forEach(function(v){if(v>peak)peak=v;var d=(peak-v)/peak;if(d>m)m=d});return m}
+
+function streaks(){
+var g0=P(),q=1-g0.p,N=g0.n,f=g0.f;
+var exp=Math.max(1,Math.round(Math.log(N)/Math.log(1/q)));
+el('streakStats').innerHTML=
+st(exp+' in a row','longest losing streak to expect')+
+st(Math.round(Math.pow(1-f,exp)*100)+'%','capital surviving it at your stake')+
+st(((1-Math.pow(0.75,1/exp))*100).toFixed(1)+'%','stake where that streak costs <25%')+
+st(pct(Math.pow(q,exp)),'chance of that streak on any given bet');
+var rows='<tr><th>Streak</th><th>Chance somewhere in '+N+' bets</th><th>Capital left at your '+Math.round(f*100)+'%</th><th>At 5%</th><th>At 25%</th></tr>';
+for(var k2=3;k2<=10;k2++){
+var pr=1-Math.pow(1-Math.pow(q,k2),Math.max(N-k2+1,1));
+rows+='<tr><td>'+k2+' losses in a row</td><td>'+(pr*100).toFixed(pr>0.1?0:1)+'%</td><td>'+Math.round(Math.pow(1-f,k2)*100)+'%</td><td>'+Math.round(Math.pow(0.95,k2)*100)+'%</td><td>'+Math.round(Math.pow(0.75,k2)*100)+'%</td></tr>'}
+el('streakTable').innerHTML=rows;
+var c=el('streakChart'),ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);
+var k3=kellyOf(),stakes=[0.05,Math.max(k3,0.01),Math.min(Math.max(k3*2,0.02),0.9),f],cols=['#1E7145','#1F4E79','#A03123','#22221F'],
+names=['5%','Kelly '+(k3*100).toFixed(0)+'%','2× Kelly','you '+Math.round(f*100)+'%'];
+var L=44,B=42,T=24,H=c.height-T-B,W=c.width-L-16,gw=W/8;
+ctx.font='9.5px sans-serif';
+for(var s2=3;s2<=10;s2++){var gx=L+(s2-3)*gw;
+stakes.forEach(function(stk,si){var left=Math.pow(1-stk,s2),h=left*H;
+ctx.fillStyle=cols[si];ctx.fillRect(gx+4+si*(gw-10)/4,T+H-h,(gw-10)/4-2,h)});
+ctx.fillStyle='#6B6A64';ctx.textAlign='center';ctx.fillText(s2,gx+gw/2,c.height-26);ctx.textAlign='left'}
+ctx.fillStyle='#98968E';ctx.fillText('capital surviving a losing streak of N →',L,T-8);
+names.forEach(function(nm,si){ctx.fillStyle=cols[si];ctx.fillRect(L+si*115,c.height-14,9,9);ctx.fillStyle='#444441';ctx.fillText(nm,L+12+si*115,c.height-6)})}
+
+var curTab=0;
+function tab(n){var ts=document.querySelectorAll('.tab');for(var i=0;i<5;i++){ts[i].className='tab'+(i===n?' on':'');el('t'+i).style.display=i===n?'block':'none'}curTab=n;upd()}
+var pending=null;
+function upd(){
+el('vWin').textContent=el('win').value+'%';
+el('vPay').textContent=(+el('pay').value/10).toFixed(1)+' : 1';
+el('vStake').textContent=el('stake').value+'%';
+el('vBets').textContent=el('bets').value;
+var k=kellyOf(),e=edgeOf();
+el('edgeTxt').textContent=(e>0?'+':'')+(e*100).toFixed(1)+'% per bet'+(e<=0?' (no edge — sizing cannot save you)':'');
+el('kellyTxt').textContent=(k*100).toFixed(1)+'%';
+if(pending)clearTimeout(pending);
+pending=setTimeout(render,90)}
+function render(){
+var g0=P(),k=kellyOf();
+if(curTab===0){
+var r=sim(g0.f,{bands:true});
+el('stats').innerHTML=st(fmt(r.med),'median ending')+st(fmt(r.mean),'mean ending')+st(fmt(r.p5),'worst 5%')+st(pct(r.ruin),'ruined')+st(pct(r.below),'lost money')+st(pct(r.medDD),'median max drawdown');
+var v=el('verdict');
+if(edgeOf()<=0){v.style.background='var(--bad-soft)';v.style.color='var(--bad)';v.innerHTML='<b>No edge.</b> With a negative expected value no sizing rule wins — smaller stakes only slow the bleed. Sizing manages risk; it cannot manufacture edge.'}
+else if(r.ruin>0.4){v.style.background='var(--bad-soft)';v.style.color='var(--bad)';v.innerHTML='<b>Ruin is now the likely outcome</b> of a game you are mathematically favoured to win. Only the stake changed.'}
+else if(g0.f>k*1.6){v.style.background='var(--warn-soft)';v.style.color='var(--warn)';v.innerHTML='<b>Over-bet: above the '+(k*100).toFixed(1)+'% Kelly stake.</b> Compare median and mean — the typical player and the average player are living different lives.'}
+else if(g0.f<k*0.35){v.style.background='var(--accent-soft)';v.style.color='var(--accent)';v.innerHTML='<b>Conservative: well below Kelly.</b> Ruin risk near zero, growth left on the table — deliberately where most professionals sit, because real edges are uncertain.'}
+else{v.style.background='var(--good-soft)';v.style.color='var(--good)';v.innerHTML='<b>In the Kelly zone</b> — near maximum long-run growth. Push the stake higher and watch the median fall while the mean rises.'}
+drawFan(r);drawHist(r.finals)}
+else if(curTab===1){drawKelly();drawKellyBar()}
+else if(curTab===2){drawRisk(sim(g0.f,{}))}
+else if(curTab===3){drawRules()}
+else if(curTab===4){streaks()}}
+upd();
+</script>
+</body>
+</html>
