@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Volatility, Sizing &amp; Risk Trainer — a decision trainer that reads an asset's volatility, asks you to size and position a trade, stress-tests it through real crises, and grades your risk process. By Niyam Rathod." />
+  <title>Volatility, Sizing &amp; Risk Trainer — Niyam Rathod</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ── Project-hero shell ──────────────────────────────── */
+    .project-hero {
+      padding: calc(var(--sp-32) * 0.35) 0 var(--sp-12);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .project-hero__back {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.8125rem; font-family: var(--font-body);
+      color: var(--color-muted); text-decoration: none;
+      margin-bottom: var(--sp-16); transition: color var(--dur-fast);
+    }
+    .project-hero__back:hover { color: var(--color-text); }
+    .project-hero__back svg { transition: transform var(--dur-fast); }
+    .project-hero__back:hover svg { transform: translateX(-3px); }
+    .project-hero__label {
+      font-size: 0.75rem; font-family: var(--font-body); font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--color-muted); margin-bottom: var(--sp-8);
+    }
+    .project-hero__title {
+      font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800; line-height: 1.05; letter-spacing: -0.02em;
+      color: var(--color-text); margin-bottom: var(--sp-12);
+    }
+    .project-hero__desc {
+      font-size: 1rem; color: var(--color-muted); max-width: 52ch;
+      line-height: 1.7; margin-bottom: var(--sp-12);
+    }
+    .project-hero__tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      list-style: none; padding: 0; margin: 0;
+    }
+
+    /* ── Lab section ─────────────────────────────────────── */
+    .lab-section { padding: var(--sp-16) 0 var(--sp-24); }
+
+    /* ── Tool CSS variables (palette-mapped) ─────────────── */
+    :root {
+      --bg:         #F4F1EB;
+      --card:       #FFFFFF;
+      --text:       #111111;
+      --muted:      #7C7669;
+      --faint:      #98968E;
+      --border:     #E0DCD2;
+      --accent:     #1F4E79;
+      --accent-soft:#E8F0F7;
+      --good:       #1E7145;
+      --good-soft:  #E7F3EC;
+      --bad:        #A03123;
+      --bad-soft:   #F9ECEA;
+      --warn:       #9C6500;
+      --warn-soft:  #FAF1DE;
+    }
+
+    /* ── Tool component CSS ──────────────────────────────── */
+    *{box-sizing:border-box}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+    .wrap{max-width:900px;margin:0 auto;padding:24px 16px 60px}
+    a{color:var(--accent)}
+    .panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-top:12px}
+    .panel h3{margin:0 0 4px;font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--accent)}
+    .step{font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+    .inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+    .ip{font-size:11.5px;color:var(--muted);display:flex;flex-direction:column;gap:3px}
+    .ip .val{font-size:14px;font-weight:700;color:var(--text)}
+    input[type=range]{width:100%;margin:0;accent-color:var(--accent)}
+    select,input[type=number]{border:1px solid var(--border);border-radius:7px;padding:6px 8px;font-size:13px;font-family:inherit;background:var(--card);color:var(--text);width:100%}
+    .seg{display:flex;gap:6px;flex-wrap:wrap}
+    .seg button{border:1px solid var(--border);background:var(--card);color:var(--muted);border-radius:9px;padding:7px 14px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit}
+    .seg button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:6px}
+    .stat{border:1px solid var(--border);border-radius:9px;padding:8px 9px}
+    .stat .v{font-size:16px;font-weight:700;line-height:1.2}
+    .stat .l{font-size:10.5px;color:var(--muted);margin-top:1px}
+    .stat.hl{background:var(--accent-soft);border-color:#bcd4ea}
+    canvas{width:100%;height:auto;border:1px solid var(--border);border-radius:9px;background:#fff;margin-top:10px}
+    .cap{font-size:11.5px;color:var(--muted);margin-top:7px}
+    .btn{border:none;border-radius:9px;padding:11px 18px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;background:var(--accent);color:#fff}
+    .btn:disabled{opacity:.5;cursor:not-allowed}
+    .btn2{border:1px solid var(--border);border-radius:9px;padding:9px 14px;font-size:12.5px;font-family:inherit;cursor:pointer;background:var(--card);color:var(--text)}
+    .live{font-size:12.5px;color:var(--muted);margin-top:12px}
+    .live b{color:var(--text)}
+    .warnpill{color:var(--warn)} .badpill{color:var(--bad)} .goodpill{color:var(--good)}
+    .scorecard{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+    .score{display:grid;grid-template-columns:70px 1fr;gap:10px;align-items:start;border:1px solid var(--border);border-radius:9px;padding:9px 11px}
+    .score .badge{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 0;border-radius:6px;text-align:center}
+    .b-pass{background:var(--good-soft);color:var(--good)} .b-warn{background:var(--warn-soft);color:var(--warn)} .b-fail{background:var(--bad-soft);color:var(--bad)} .b-na{background:#F0EFEA;color:var(--faint)}
+    .score .txt{font-size:12.5px}
+    .score .txt b{display:block;margin-bottom:1px}
+    .verdict{margin-top:12px;border-radius:9px;padding:11px 13px;font-size:13px}
+    .explain{background:#FBFAF6;border:1px dashed var(--border);border-radius:9px;padding:10px 12px;font-size:12.5px;color:var(--muted);margin-top:10px;display:none}
+    .explain.show{display:block}
+    .explain b{color:var(--text)}
+    .reveal{display:none}
+    .reveal.show{display:block}
+    .toprow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+    .levels .seg button{padding:6px 12px;font-size:12px}
+  </style>
+</head>
+<body>
+
+  <div class="cursor" aria-hidden="true"><div class="cursor__dot"></div></div>
+
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__brand">NR</a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html#work"    class="nav__link">Work</a></li>
+        <li><a href="index.html#about"   class="nav__link">About</a></li>
+        <li><a href="index.html#contact" class="nav__link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="project-hero">
+      <div class="container">
+        <a href="index.html#work" class="project-hero__back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
+          </svg>
+          Back to work
+        </a>
+        <p class="project-hero__label">Project 01</p>
+        <h1 class="project-hero__title">Volatility, Sizing<br>&amp; Risk Trainer</h1>
+        <p class="project-hero__desc">
+          Reads an asset's volatility, asks you to size and position a trade, then stress-tests it
+          through a real crisis and grades your risk process, not whether you called the market.
+          Runs entirely in the browser.
+        </p>
+        <ul class="project-hero__tags" role="list">
+          <li class="tag">Volatility</li>
+          <li class="tag">Position Sizing</li>
+          <li class="tag">VaR</li>
+          <li class="tag">Risk Management</li>
+          <li class="tag">Stress Testing</li>
+          <li class="tag">Options</li>
+          <li class="tag">Decision Training</li>
+        </ul>
+        <div class="project-insight">
+          <span class="project-insight__label">What this taught me about markets</span>
+          <p class="project-insight__text">The biggest thing was realising that risk is something you can actually control, but direction isn't. I can size a trade to a set amount of risk and check whether it survives a crash, but I can't know which way the market will go. Giving marks for a lucky call would just be hindsight. It also made the link between volatility and sizing concrete: how much a thing moves is what should decide how big you trade it, not a number you pick yourself.</p>
+        </div>
+        <div class="project-insight" style="margin-top:var(--sp-8);">
+          <span class="project-insight__label">Why I built this</span>
+          <p class="project-insight__text">I had two separate tools. An options and volatility one, and a position-sizing one that ran on coin flips. Neither felt like how a real decision actually gets made. So I merged them into one loop: you read an asset's volatility, decide how big to go and which way, then a real crisis hits and it tells you what you did well and what you got wrong.</p>
+        </div>
+        <div class="project-insight" style="margin-top:var(--sp-6);">
+          <span class="project-insight__label">What I'd still improve</span>
+          <p class="project-insight__text">Right now it only handles one asset at a time. I'd add a second next: in a calm market holding two things looks like it spreads your risk, but in a crisis they tend to fall together, so the real risk is bigger than it looks. The crises here are also based on rough historical moves rather than live data.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-section">
+      <div class="wrap">
+
+        <!-- LEVELS -->
+        <div class="panel levels">
+          <div class="toprow">
+            <div>
+              <div class="step">Choose a level</div>
+              <div class="seg" id="levelSeg">
+                <button data-lvl="1" class="on">1 · Size it</button>
+                <button data-lvl="2">2 · Stops &amp; gaps</button>
+                <button data-lvl="3">3 · Direction &amp; crises</button>
+                <button data-lvl="4">4 · Hedge the tail</button>
+              </div>
+            </div>
+            <label class="ip" style="flex-direction:row;align-items:center;gap:8px;font-size:12.5px">
+              <input type="checkbox" id="teachToggle" checked style="width:auto"> Show teaching notes
+            </label>
+          </div>
+          <div class="cap" id="levelDesc"></div>
+        </div>
+
+        <!-- STEP 1: VOLATILITY -->
+        <div class="panel">
+          <div class="step">Step 1: Volatility</div>
+          <div class="inputs">
+            <label class="ip">Asset
+              <select id="asset"></select>
+            </label>
+            <label class="ip">Market regime
+              <select id="scen"></select>
+            </label>
+          </div>
+          <div class="stats" id="volStats" style="margin-top:12px"></div>
+          <div class="explain" id="exVol"><b>Realized vs implied vol.</b> Realized (RV) is how much the asset has actually been moving; implied (IV) is what the options market is pricing for the future. When IV sits well above RV, the market is paying up for protection. Treat that as a signal to size down. The 1-day 95% VaR shown is per unit of position: roughly daily-vol &times; 1.645, the loss you'd exceed only 1 day in 20.</div>
+        </div>
+
+        <!-- STEP 2: DECISION -->
+        <div class="panel">
+          <div class="step">Step 2: Your decision</div>
+
+          <div id="dirRow" style="margin-bottom:14px">
+            <div class="ip" style="margin-bottom:5px">Positioning</div>
+            <div class="seg" id="dirSeg">
+              <button data-dir="1" class="on">Long</button>
+              <button data-dir="-1">Short</button>
+              <button data-dir="0">Flat (sit out)</button>
+            </div>
+          </div>
+
+          <div class="inputs">
+            <label class="ip">Risk budget (max you'll risk) <span class="val" id="vRisk">1.0%</span>
+              <input type="range" id="risk" min="0.25" max="5" step="0.25" value="1">
+            </label>
+            <label class="ip">Position size (notional % of capital) <span class="val" id="vNot">100%</span>
+              <input type="range" id="not" min="0" max="500" step="10" value="100">
+            </label>
+            <label class="ip" id="stopWrap">Stop-loss (adverse move) <span class="val" id="vStop">none</span>
+              <input type="range" id="stop" min="0" max="25" step="1" value="0">
+            </label>
+            <label class="ip" id="hedgeWrap" style="flex-direction:row;align-items:flex-end;gap:8px">
+              <input type="checkbox" id="hedge" style="width:auto;margin-bottom:4px"> <span>Buy a protective put (caps downside, costs premium)</span>
+            </label>
+          </div>
+
+          <div class="live" id="liveRead"></div>
+          <div class="explain" id="exSize"><b>Sizing off volatility, not gut.</b> Your position's 1-day 95% VaR is notional &times; daily-vol &times; 1.645. The disciplined size is the one that makes that VaR equal to your risk budget. Bigger vol means a smaller position for the same risk. That is the whole idea the coin-flip version missed: the stake isn't a free dial, it's set by how much the thing moves.</div>
+
+          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn" id="submit">Submit decision &amp; run the crisis &rarr;</button>
+            <button class="btn2" id="reset" style="display:none">New round</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: RESULT -->
+        <div class="panel reveal" id="resultPanel">
+          <div class="step">Step 3: Stress test &amp; correction</div>
+          <div class="stats" id="outStats"></div>
+          <canvas id="fan" width="860" height="300"></canvas>
+          <div class="cap">Simulated P&amp;L paths for your position over the ~30-day event at this regime's volatility. Shaded = middle 50% / 90% of outcomes; dark line = median; red dashed = your stop; the dot marks what this specific historical crisis actually did to your position.</div>
+
+          <div class="step" style="margin-top:18px">Reference answer</div>
+          <div class="live" id="refRead"></div>
+
+          <div class="step" style="margin-top:18px">Scorecard: risk process</div>
+          <div class="scorecard" id="scorecard"></div>
+          <div class="verdict" id="verdict"></div>
+          <div class="explain" id="exScore"><b>Why process, not P&amp;L.</b> In a scripted crisis the outcome is known, so it would be easy to reward "you should have been short." That just trains hindsight. What actually repeats is discipline: sizing to a budget, cutting into rising vol, keeping a single loss survivable, and knowing a stop can gap. Those are the things scored above.</div>
+        </div>
+
+        <div class="cap" style="margin-top:24px;border-top:1px solid var(--border);padding-top:12px">Best experienced on desktop or laptop.</div>
+
+      </div><!-- /.wrap -->
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__links">
+          <a href="https://github.com/niyamrathod" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/niyam-rathod-153395285" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:niyamrathod@icloud.com">Email</a>
+        </div>
+        <span class="footer__copy">&copy; 2026 Niyam Rathod</span>
+      </div>
+      <div class="footer__wordmark" aria-hidden="true">NIYAM RATHOD</div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+
+<script>
+"use strict";
+/* ---------- reproducible RNG ---------- */
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function randn(rng){var u=1-rng(),v=1-rng();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+function el(i){return document.getElementById(i)}
+
+/* ---------- data ---------- */
+var CAPITAL=100000;                 // £100k account
+var Z95=1.645, Z99=2.326, DPY=252, HORIZON=30;
+
+var ASSETS={
+ SPX:{name:"S&P 500 (equity index)",cls:"equity",spot:5200,rv:0.14,iv:0.16},
+ TECH:{name:"Mega-cap tech stock",cls:"equity",spot:200,rv:0.28,iv:0.31},
+ BRENT:{name:"Brent crude oil",cls:"oil",spot:81,rv:0.35,iv:0.33},
+ NATGAS:{name:"Natural gas",cls:"gas",spot:3.0,rv:0.60,iv:0.66},
+ GOLD:{name:"Gold",cls:"gold",spot:2400,rv:0.15,iv:0.14},
+ USDJPY:{name:"USD/JPY (FX)",cls:"fx",spot:157,rv:0.10,iv:0.11},
+ GILT:{name:"10Y Gilt future (rates)",cls:"rates",spot:95,rv:0.08,iv:0.09},
+ BTC:{name:"Bitcoin",cls:"crypto",spot:64000,rv:0.55,iv:0.70}
+};
+
+/* market move (signed return over the event) by asset class */
+var SCEN={
+ calm  :{name:"Calm (normal market)",volMult:1.0,gap:false,cut:1.0,shock:{}},
+ gfc   :{name:"2008 Global Financial Crisis",volMult:3.0,gap:true,cut:0.5,
+         shock:{equity:-0.45,oil:-0.55,gas:-0.40,gold:0.06,fx:-0.12,rates:0.05,crypto:-0.50}},
+ covid :{name:"COVID crash (Mar 2020)",volMult:4.0,gap:true,cut:0.5,
+         shock:{equity:-0.34,oil:-0.65,gas:-0.25,gold:0.02,fx:-0.03,rates:0.03,crypto:-0.40}},
+ snb   :{name:"SNB franc un-peg (2015)",volMult:2.5,gap:true,cut:0.6,
+         shock:{fx:-0.13,equity:-0.02,gold:0.01,oil:0,gas:0,rates:0.01,crypto:0}},
+ gilt  :{name:"2022 gilt / rates crisis",volMult:2.5,gap:true,cut:0.55,
+         shock:{rates:-0.15,equity:-0.08,gold:-0.06,fx:0.06,oil:-0.03,gas:0.05,crypto:-0.15}}
+};
+function shockOf(aKey,sKey){var a=ASSETS[aKey],s=SCEN[sKey];return (s.shock[a.cls]||0)}
+
+/* ---------- state ---------- */
+var S={level:1,asset:"SPX",scen:"calm",dir:1,riskPct:1,notPct:100,stopPct:0,hedge:false,submitted:false};
+
+/* ---------- level config ---------- */
+var LEVELS={
+ 1:{desc:"One asset, calm market, long only. Just size the position so its risk matches your budget. This is the core skill everything else builds on.",
+    scens:["calm"],dir:false,stop:false,hedge:false},
+ 2:{desc:"Now set a stop-loss, then watch a crisis gap straight through it. The lesson: a stop caps your loss in an orderly market, but in a gap it doesn't. Size is the protection stops can't give.",
+    scens:["calm","covid"],dir:false,stop:true,hedge:false},
+ 3:{desc:"Pick your direction and face any crisis. You're graded on risk control: sizing to budget, cutting into rising vol, surviving the drawdown. Not on whether you called the move.",
+    scens:["calm","gfc","covid","snb","gilt"],dir:true,stop:true,hedge:false},
+ 4:{desc:"Everything unlocked, plus a protective put. See how paying a premium to cap the tail changes your worst case: the options side reshaping the risk side.",
+    scens:["calm","gfc","covid","snb","gilt"],dir:true,stop:true,hedge:true}
+};
+
+/* ---------- helpers ---------- */
+function fmt(x){var s=x<0?"-":"";x=Math.abs(x);
+ if(x>=1e6)return s+"£"+(x/1e6).toFixed(2)+"m";
+ if(x>=1e3)return s+"£"+(x/1e3).toFixed(1)+"k";
+ return s+"£"+Math.round(x)}
+function pct(x,d){return (x*100).toFixed(d==null?1:d)+"%"}
+function dailyVol(aKey,mult){return ASSETS[aKey].rv/Math.sqrt(DPY)*(mult||1)}
+function notional(){return S.notPct/100*CAPITAL}
+function riskBudget(){return S.riskPct/100*CAPITAL}
+function userVaR(){return S.dir===0?0:notional()*dailyVol(S.asset,1)*Z95}
+function refNotional(){return riskBudget()/(dailyVol(S.asset,1)*Z95)}
+function statHTML(v,l,hl){return '<div class="stat'+(hl?' hl':'')+'"><div class="v">'+v+'</div><div class="l">'+l+'</div></div>'}
+
+/* ---------- populate selects / segments ---------- */
+function buildAssetSelect(){var s=el('asset');s.innerHTML='';for(var k in ASSETS)s.innerHTML+='<option value="'+k+'"'+(k===S.asset?' selected':'')+'>'+ASSETS[k].name+'</option>'}
+function buildScenSelect(){var cfg=LEVELS[S.level],s=el('scen');s.innerHTML='';
+ if(cfg.scens.indexOf(S.scen)<0)S.scen=cfg.scens[0];
+ cfg.scens.forEach(function(k){s.innerHTML+='<option value="'+k+'"'+(k===S.scen?' selected':'')+'>'+SCEN[k].name+'</option>'})}
+
+function applyLevel(){var cfg=LEVELS[S.level];
+ el('levelDesc').textContent=cfg.desc;
+ el('dirRow').style.display=cfg.dir?'block':'none';
+ if(!cfg.dir){S.dir=1;syncDir()}
+ el('stopWrap').style.display=cfg.stop?'flex':'none';
+ if(!cfg.stop){S.stopPct=0;el('stop').value=0;el('vStop').textContent='none'}
+ el('hedgeWrap').style.display=cfg.hedge?'flex':'none';
+ if(!cfg.hedge){S.hedge=false;el('hedge').checked=false}
+ buildScenSelect();
+}
+
+/* ---------- Step 1 render ---------- */
+function renderVol(){
+ var a=ASSETS[S.asset], dV=a.rv/Math.sqrt(DPY);
+ el('volStats').innerHTML=
+  statHTML("£"+a.spot.toLocaleString(),"spot price")+
+  statHTML(pct(a.rv,0),"realized vol (annual)")+
+  statHTML(pct(a.iv,0),"implied vol (annual)")+
+  statHTML((a.iv>a.rv?"+":"")+pct(a.iv-a.rv,0),"IV vs RV spread",a.iv-a.rv>0.03)+
+  statHTML(pct(dV,2),"1-day move (1σ)")+
+  statHTML(pct(dV*Z95,2),"1-day 95% VaR / £ notional");
+}
+
+/* ---------- live pre-trade read ---------- */
+function renderLive(){
+ el('vRisk').textContent=S.riskPct.toFixed(2)+'%';
+ el('vNot').textContent=S.notPct+'%';
+ el('vStop').textContent=S.stopPct>0?S.stopPct+'%':'none';
+ if(S.dir===0){el('liveRead').innerHTML='You are <b>flat</b>. No position, no risk, no P&L. Sitting out is a legitimate call, especially into a storm.';return}
+ var v=userVaR(),b=riskBudget(),ratio=v/b;
+ var col=ratio<=1.1?'goodpill':(ratio<=1.5?'warnpill':'badpill');
+ el('liveRead').innerHTML='Your position: <b>'+fmt(notional())+'</b> notional ('+(S.dir>0?'long':'short')+
+   '). 1-day 95% VaR: <b>'+fmt(v)+'</b> ('+pct(v/CAPITAL)+' of capital) vs your <b>'+fmt(b)+'</b> budget. '+
+   '<span class="'+col+'">'+(ratio<=1.1?'Within budget.':(ratio<=1.5?'A bit hot ('+ratio.toFixed(1)+'× budget).':'Over-sized ('+ratio.toFixed(1)+'× budget).'))+'</span>';
+}
+
+/* ---------- Monte Carlo P&L fan ---------- */
+function simPaths(){
+ var a=ASSETS[S.asset],s=SCEN[S.scen],rng=mulberry(99),N=500,steps=HORIZON;
+ var dmu=0/DPY, dsig=a.rv/Math.sqrt(DPY)*s.volMult, nz=notional(),dir=S.dir;
+ var bands=[];for(var t=0;t<=steps;t++)bands.push([]);
+ for(var p=0;p<N;p++){var cum=0;bands[0].push(0);
+  for(var t2=1;t2<=steps;t2++){cum+=dmu+dsig*randn(rng);
+    bands[t2].push(dir*nz*cum);}}
+ return bands.map(function(col){col.sort(function(x,y){return x-y});
+   function q(f){return col[Math.min(col.length-1,Math.floor(col.length*f))]}
+   return [q(0.05),q(0.25),q(0.5),q(0.75),q(0.95)]});
+}
+function drawFan(bands,realized,stopLoss){
+ var c=el('fan'),g=c.getContext('2d');g.clearRect(0,0,c.width,c.height);
+ var L=64,R=18,T=16,B=28,n=bands.length-1;
+ var mx=0;bands.forEach(function(b){mx=Math.max(mx,Math.abs(b[0]),Math.abs(b[4]))});
+ mx=Math.max(mx,Math.abs(realized),Math.abs(stopLoss||0))*1.1||1;
+ function X(i){return L+i/n*(c.width-L-R)}
+ function Y(v){return T+(mx-v)/(2*mx)*(c.height-T-B)}
+ g.font='10px sans-serif';
+ [-1,-0.5,0,0.5,1].forEach(function(f){var v=f*mx;g.strokeStyle=f===0?'#C9C6BC':'#EFEDE5';g.beginPath();g.moveTo(L,Y(v));g.lineTo(c.width-R,Y(v));g.stroke();g.fillStyle='#98968E';g.fillText(fmt(v),4,Y(v)+3)});
+ function bandPath(lo,hi){g.beginPath();for(var i=0;i<=n;i++){var x=X(i),y=Y(bands[i][lo]);i?g.lineTo(x,y):g.moveTo(x,y)}for(var j=n;j>=0;j--)g.lineTo(X(j),Y(bands[j][hi]));g.closePath();g.fill()}
+ g.fillStyle='rgba(31,78,121,0.10)';bandPath(0,4);
+ g.fillStyle='rgba(31,78,121,0.20)';bandPath(1,3);
+ g.strokeStyle='#1F4E79';g.lineWidth=2.2;g.beginPath();for(var i2=0;i2<=n;i2++){var x=X(i2),y=Y(bands[i2][2]);i2?g.lineTo(x,y):g.moveTo(x,y)}g.stroke();
+ if(stopLoss!=null&&stopLoss<0){g.strokeStyle='#A03123';g.lineWidth=1.4;g.setLineDash([5,4]);g.beginPath();g.moveTo(L,Y(stopLoss));g.lineTo(c.width-R,Y(stopLoss));g.stroke();g.setLineDash([]);g.fillStyle='#A03123';g.fillText('your stop '+fmt(stopLoss),L+4,Y(stopLoss)-4)}
+ var rx=X(n),ry=Y(realized);g.fillStyle=realized>=0?'#1E7145':'#A03123';g.beginPath();g.arc(rx,ry,5,0,7);g.fill();
+ g.fillStyle=realized>=0?'#1E7145':'#A03123';g.font='bold 11px sans-serif';g.textAlign='right';g.fillText('this crisis: '+fmt(realized),rx-8,ry+(realized>=0?-8:14));g.textAlign='left';
+ g.fillStyle='#6B6A64';g.font='10px sans-serif';g.fillText('days into event',c.width/2-40,c.height-8);
+}
+
+/* ---------- outcome + scoring ---------- */
+function computeOutcome(){
+ var a=ASSETS[S.asset],s=SCEN[S.scen];
+ var shock=shockOf(S.asset,S.scen);
+ var posMove=S.dir*shock;
+ var nz=notional();
+ var stopFrac=S.stopPct/100;
+ var adverse=posMove<0;
+ var effMove=posMove, stopGapped=false, stopHeld=false;
+ if(S.dir!==0 && S.stopPct>0 && adverse){
+   if(s.gap && Math.abs(posMove)>stopFrac){ effMove=posMove; stopGapped=true; }
+   else { effMove=Math.max(posMove,-stopFrac); stopHeld=true; }
+ }
+ var pnl=S.dir===0?0:nz*effMove;
+ var premium=0, hedged=false;
+ if(S.hedge && S.dir>0){
+   var Tn=HORIZON/DPY; premium=nz*a.iv*Math.sqrt(Tn)*0.40;
+   var upside=shock>0?nz*shock:0;
+   pnl=upside-premium; hedged=true;
+ }
+ var stopLossLevel=(S.dir!==0&&S.stopPct>0)?-nz*stopFrac:null;
+ return {shock:shock,posMove:posMove,pnl:pnl,pnlPct:pnl/CAPITAL,premium:premium,hedged:hedged,
+         stopGapped:stopGapped,stopHeld:stopHeld,stopLossLevel:stopLossLevel,nz:nz};
+}
+
+function scoreRow(badge,label,text){var cls={pass:'b-pass',warn:'b-warn',fail:'b-fail',na:'b-na'}[badge];
+ var word={pass:'Pass',warn:'Watch',fail:'Fail',na:'n/a'}[badge];
+ return '<div class="score"><div class="badge '+cls+'">'+word+'</div><div class="txt"><b>'+label+'</b>'+text+'</div></div>'}
+
+function buildScorecard(o){
+ var rows='',score=0,max=0,s=SCEN[S.scen],b=riskBudget(),v=userVaR(),ref=refNotional(),refAdj=ref*s.cut;
+ function add(w){max++;if(w==='pass')score++;else if(w==='warn')score+=0.5}
+
+ if(S.dir===0){
+   rows+=scoreRow('na','Size vs risk budget','You sat flat. No position to size.');
+ } else {
+   var ratio=v/b, w=ratio<=1.1?'pass':(ratio<=1.5?'warn':'fail');add(w);
+   rows+=scoreRow(w,'Size vs risk budget','Your 1-day VaR was '+fmt(v)+' against a '+fmt(b)+' budget ('+ratio.toFixed(1)+'×). '+
+     (w==='pass'?'Sized to your stated risk.':w==='warn'?'A little hot. Trim toward the reference size.':'Over-sized: one bad day breaches the budget you set yourself.'));
+ }
+
+ if(S.scen==='calm'){
+   rows+=scoreRow('na','Cutting into rising vol','Calm regime. Nothing to cut for yet.');
+ } else if(S.dir===0){
+   rows+=scoreRow('pass','Cutting into rising vol','Going flat into a high-vol regime is the maximal cut. Defensible.');add('pass');
+ } else {
+   var big=notional()>refAdj*1.2, some=notional()<=ref*1.2, w2=(notional()<=refAdj*1.2)?'pass':(some?'warn':'fail');add(w2);
+   rows+=scoreRow(w2,'Cutting into rising vol','Implied vol is elevated (×'+s.volMult.toFixed(0)+'). Disciplined size here is around '+Math.round(refAdj/CAPITAL*100)+'% of capital. '+
+     (w2==='pass'?'You reduced risk into the storm.':w2==='warn'?'You trimmed, but not enough for the regime.':'Full size into a spiking-vol regime. The classic way books blow up.'));
+ }
+
+ var lp=o.pnlPct, w3=lp>=-0.10?'pass':(lp>=-0.25?'warn':'fail');add(w3);
+ rows+=scoreRow(w3,'Survival of the drawdown','This crisis moved your P&L to '+fmt(o.pnl)+' ('+pct(o.pnlPct)+' of capital). '+
+   (w3==='pass'?'Survivable. You live to trade the next one.':w3==='warn'?'A heavy but recoverable hit.':'A capital-impairing loss; at this size a single event can end you.'));
+
+ if(S.dir===0){
+   rows+=scoreRow('na','Stop &amp; gap awareness','No position, no stop needed.');
+ } else if(S.stopPct===0){
+   rows+=scoreRow('warn','Stop &amp; gap awareness','No stop set. Fine if size is small, dangerous if not. Nothing defines your exit.');add('warn');
+ } else if(o.stopGapped && !o.hedged){
+   rows+=scoreRow('warn','Stop &amp; gap awareness','Your '+S.stopPct+'% stop gapped: the market jumped past it and you filled far worse. Stops cap orderly losses, not gaps. In a crisis, size is the real protection.');add('warn');
+ } else {
+   rows+=scoreRow('pass','Stop &amp; gap awareness','Exit defined and it held in this regime.');add('pass');
+ }
+
+ if(LEVELS[S.level].hedge){
+   if(o.hedged){rows+=scoreRow('pass','Tail hedge','You paid '+fmt(o.premium)+' for a put; the worst case is now capped near that premium instead of the full drawdown.');add('pass');}
+   else if(S.scen!=='calm'&&S.dir>0){rows+=scoreRow('warn','Tail hedge','Unhedged long into a crisis. A put would have cost premium but capped the tail you just took.');add('warn');}
+   else {rows+=scoreRow('na','Tail hedge','No obvious tail to hedge here.');}
+ }
+
+ el('scorecard').innerHTML=rows;
+ var pctScore=max?score/max:1;
+ var vd=el('verdict');
+ if(pctScore>=0.85){vd.style.background='var(--good-soft)';vd.style.color='var(--good)';vd.innerHTML='<b>Disciplined.</b> Whatever the market did, your risk was controlled and the loss was survivable. That is the job.';}
+ else if(pctScore>=0.55){vd.style.background='var(--warn-soft)';vd.style.color='var(--warn)';vd.innerHTML='<b>Mixed.</b> The idea may be fine, but the risk process has gaps. See the flags above. Direction is not the point; survival is.';}
+ else {vd.style.background='var(--bad-soft)';vd.style.color='var(--bad)';vd.innerHTML='<b>Under-managed risk.</b> Even if this call happened to work, sized like this it wouldn\'t survive a run of them. Fix the size first, the view second.';}
+}
+
+function renderRef(o){
+ var s=SCEN[S.scen],ref=refNotional(),refAdj=ref*s.cut,b=riskBudget();
+ var txt='For a <b>'+S.riskPct.toFixed(2)+'%</b> risk budget on an asset with <b>'+pct(ASSETS[S.asset].rv,0)+'</b> vol, the size that puts your 1-day 95% VaR exactly at budget is around <b>'+Math.round(ref/CAPITAL*100)+'%</b> of capital ('+fmt(ref)+' notional).';
+ if(S.scen!=='calm')txt+=' Because vol is elevated here (×'+s.volMult.toFixed(0)+'), the prudent size is roughly half that, around <b>'+Math.round(refAdj/CAPITAL*100)+'%</b>. You ran '+S.notPct+'%.';
+ else txt+=' You ran '+S.notPct+'%.';
+ if(o.hedged)txt+=' Your put cost '+fmt(o.premium)+' ('+pct(o.premium/CAPITAL,2)+' of capital) and turned an open-ended downside into a known, capped one.';
+ el('refRead').innerHTML=txt;
+}
+
+/* ---------- submit / reset ---------- */
+function submit(){
+ S.submitted=true;
+ var o=computeOutcome();
+ el('outStats').innerHTML=
+  statHTML(fmt(o.pnl),"your P&L this crisis",true)+
+  statHTML(pct(o.pnlPct),"of capital")+
+  statHTML(pct(o.shock,0),ASSETS[S.asset].name.split(' ')[0]+" market move")+
+  statHTML(S.dir===0?'Flat':(S.dir>0?'Long':'Short'),"your positioning")+
+  statHTML(fmt(userVaR()),"pre-trade 1-day VaR");
+ drawFan(simPaths(),o.pnl,o.stopLossLevel);
+ renderRef(o);
+ buildScorecard(o);
+ el('resultPanel').classList.add('show');
+ el('reset').style.display='inline-block';
+ el('submit').textContent='Re-run with changes ↻';
+ el('resultPanel').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetRound(){S.submitted=false;el('resultPanel').classList.remove('show');el('reset').style.display='none';el('submit').textContent='Submit decision & run the crisis →';window.scrollTo({top:0,behavior:'smooth'})}
+
+/* ---------- wiring ---------- */
+function syncDir(){var seg=el('dirSeg').children;for(var i=0;i<seg.length;i++)seg[i].className=(+seg[i].dataset.dir===S.dir?'on':'')}
+function teach(){var on=el('teachToggle').checked;['exVol','exSize','exScore'].forEach(function(id){el(id).classList.toggle('show',on)})}
+
+el('levelSeg').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+ S.level=+b.dataset.lvl;for(var i=0;i<el('levelSeg').children.length;i++)el('levelSeg').children[i].className=(el('levelSeg').children[i]===b?'on':'');
+ applyLevel();renderVol();renderLive();resetRound();});
+el('dirSeg').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;S.dir=+b.dataset.dir;syncDir();renderLive();});
+el('asset').addEventListener('change',function(e){S.asset=e.target.value;renderVol();renderLive();});
+el('scen').addEventListener('change',function(e){S.scen=e.target.value;});
+el('risk').addEventListener('input',function(e){S.riskPct=+e.target.value;renderLive();});
+el('not').addEventListener('input',function(e){S.notPct=+e.target.value;renderLive();});
+el('stop').addEventListener('input',function(e){S.stopPct=+e.target.value;renderLive();});
+el('hedge').addEventListener('change',function(e){S.hedge=e.target.checked;});
+el('teachToggle').addEventListener('change',teach);
+el('submit').addEventListener('click',submit);
+el('reset').addEventListener('click',resetRound);
+
+/* ---------- init ---------- */
+buildAssetSelect();applyLevel();renderVol();renderLive();teach();
+</script>
+</body>
+</html>
