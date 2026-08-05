@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Physical Commodities Toolkit — a zoomable world map of tanker and LNG traffic, the forward curve (contango vs backwardation), grade and regional spreads, and storage-vs-5-year fundamentals. By Niyam Rathod.">
+<title>Physical Commodities Toolkit — Niyam Rathod</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ── Project-hero shell ──────────────────────────────── */
+.project-hero{padding:calc(var(--sp-32)*.35) 0 var(--sp-12);border-bottom:1px solid var(--color-border)}
+.project-hero__back{display:inline-flex;align-items:center;gap:6px;font-size:.8125rem;font-family:var(--font-body);color:var(--color-muted);text-decoration:none;margin-bottom:var(--sp-16);transition:color var(--dur-fast)}
+.project-hero__back:hover{color:var(--color-text)}
+.project-hero__back svg{transition:transform var(--dur-fast)}
+.project-hero__back:hover svg{transform:translateX(-3px)}
+.project-hero__label{font-size:.75rem;font-family:var(--font-body);font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--color-muted);margin-bottom:var(--sp-8)}
+.project-hero__title{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.5rem);font-weight:800;line-height:1.05;letter-spacing:-.02em;color:var(--color-text);margin-bottom:var(--sp-12)}
+.project-hero__desc{font-size:1rem;color:var(--color-muted);max-width:52ch;line-height:1.7;margin-bottom:var(--sp-12)}
+.project-hero__tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
+.lab-section{padding:var(--sp-16) 0 var(--sp-24)}
+
+/* ── Tool CSS variables (palette-mapped) ─────────────── */
+:root{
+--bg:#F4F1EB;--card:#fff;--text:#111111;--muted:#7C7669;--faint:#98968E;--border:#E0DCD2;
+--accent:#1F4E79;--accent-soft:#E8F0F7;--good:#1E7145;--good-soft:#E7F3EC;
+--bad:#A03123;--bad-soft:#F9ECEA;--warn:#9C6500;--warn-soft:#FAF1DE;
+--crude:#2b2b28;--prod:#1F4E79;--lng:#1E7145;--lpg:#9C6500;--dry:#8a6d3b;
+}
+*{box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.wrap{max-width:960px;margin:0 auto;padding:24px 16px 60px}
+a{color:var(--accent)}
+.tabs{display:flex;gap:6px;margin-top:18px;flex-wrap:wrap}
+.tab{border:1px solid var(--border);background:var(--card);color:var(--muted);border-radius:9px;padding:9px 15px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit}
+.tab.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.pane{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-top:10px}
+.pane.hide{display:none}
+canvas{width:100%;height:auto;border:1px solid var(--border);border-radius:9px;background:#fff;margin-top:10px}
+.filterbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.chip{border:1px solid var(--border);background:var(--card);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px}
+.chip .dot{width:9px;height:9px;border-radius:50%}
+.chip.off{opacity:.4}
+.cap{font-size:11.5px;color:var(--muted);margin-top:8px}
+.legend{font-size:11.5px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+.legend span{display:flex;align-items:center;gap:5px}
+.legend .d{width:10px;height:10px;border-radius:50%}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:6px}
+.stat{border:1px solid var(--border);border-radius:9px;padding:8px 9px}
+.stat .v{font-size:16px;font-weight:700;line-height:1.2}
+.stat .l{font-size:10.5px;color:var(--muted);margin-top:1px}
+.stat.hl{background:var(--accent-soft);border-color:#bcd4ea}
+select{border:1px solid var(--border);border-radius:7px;padding:6px 8px;font-size:13px;font-family:inherit;background:var(--card);color:var(--text)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
+.sig{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.s-up{background:var(--good-soft);color:var(--good)} .s-dn{background:var(--bad-soft);color:var(--bad)} .s-fl{background:#F0EFEA;color:var(--faint)} .s-warn{background:var(--warn-soft);color:var(--warn)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12.5px}
+th,td{text-align:right;padding:6px 8px;border-bottom:1px solid var(--border)}
+th:first-child,td:first-child{text-align:left}
+th{font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--faint)}
+.badge{font-size:11px;font-weight:700;padding:2px 9px;border-radius:6px}
+.b-back{background:var(--good-soft);color:var(--good)} .b-cont{background:var(--warn-soft);color:var(--warn)}
+.bandwrap{margin-top:12px}
+.bandrow{margin:12px 0}
+.bandrow .lab{font-size:12px;display:flex;justify-content:space-between;margin-bottom:4px}
+.bandrow .lab b{color:var(--text)} .bandrow .lab span{color:var(--muted)}
+.track{position:relative;height:22px;background:#EDECE4;border-radius:6px;border:1px solid var(--border)}
+.band{position:absolute;top:0;height:100%;background:#DDE7D6;border-radius:5px}
+.avg{position:absolute;top:-3px;height:28px;width:2px;background:var(--faint)}
+.cur{position:absolute;top:-4px;height:30px;width:3px;background:var(--accent);border-radius:2px}
+.tl{position:relative;height:70px;margin:14px 4px 4px}
+.tl .axis{position:absolute;top:34px;left:0;right:0;height:2px;background:var(--border)}
+.tl .ev{position:absolute;top:26px;width:12px;height:12px;border-radius:50%;background:var(--bad);border:2px solid #fff;cursor:pointer;transform:translateX(-50%)}
+.tl .yr{position:absolute;top:48px;font-size:10px;color:var(--faint);transform:translateX(-50%)}
+.evtext{font-size:12.5px;color:var(--text);background:#F4F2EC;border:1px solid var(--border);border-radius:8px;padding:9px 11px;margin-top:6px}
+.lesson{font-size:12.5px;color:var(--muted);margin-top:24px;border-top:1px solid var(--border);padding-top:12px}
+.note{font-size:11.5px;color:var(--faint);margin-top:10px}
+.btn2{border:1px solid var(--border);border-radius:9px;padding:9px 14px;font-size:12.5px;font-family:inherit;cursor:pointer;background:var(--card);color:var(--text)}
+</style>
+</head>
+<body>
+
+<div class="cursor" aria-hidden="true"><div class="cursor__dot"></div></div>
+
+<nav class="nav" aria-label="Main navigation">
+  <div class="nav__inner container">
+    <a href="index.html" class="nav__brand">NR</a>
+    <ul class="nav__links" role="list">
+      <li><a href="index.html#work"    class="nav__link">Work</a></li>
+      <li><a href="index.html#about"   class="nav__link">About</a></li>
+      <li><a href="index.html#contact" class="nav__link">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<section class="project-hero">
+  <div class="container">
+    <a href="index.html#work" class="project-hero__back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>
+      Back to work
+    </a>
+    <p class="project-hero__label">Project 04</p>
+    <h1 class="project-hero__title">Physical Commodities<br>Toolkit</h1>
+    <p class="project-hero__desc">A physical trader's screen built from my BP crude &amp; gas fundamentals work: a zoomable world map of tanker and LNG traffic through the key chokepoints, the forward curve (contango vs backwardation) with grade and regional spreads, and storage-vs-5-year-range fundamentals. Runs entirely in the browser.</p>
+    <ul class="project-hero__tags" role="list">
+      <li class="tag">Crude &amp; Gas</li>
+      <li class="tag">LNG</li>
+      <li class="tag">Ship Tracking</li>
+      <li class="tag">Forward Curve</li>
+      <li class="tag">Storage</li>
+      <li class="tag">Spreads</li>
+      <li class="tag">Fundamentals</li>
+    </ul>
+    <div class="project-insight">
+      <span class="project-insight__label">What this taught me about markets</span>
+      <p class="project-insight__text">Building this made the physical side click: a commodity's price is really about whether the actual barrel or cargo can get to where it's needed. Storage tells you if the market is tight or drowning, chokepoints decide whether supply can even move, and the shape of the forward curve is the market saying which of those it believes. A full tank or a blocked strait moves things more than a scary headline that fades.</p>
+    </div>
+    <div class="project-insight" style="margin-top:var(--sp-8)">
+      <span class="project-insight__label">Why I built this</span>
+      <p class="project-insight__text">After my BP internship modelling crude and gas supply-demand, I wanted one screen that put the whole physical picture in one place, the ships, the storage, and the curve, instead of three tabs that never talked to each other. The map is the way in; the fundamentals and the curve are the substance behind it.</p>
+    </div>
+    <div class="project-insight" style="margin-top:var(--sp-6)">
+      <span class="project-insight__label">What I'd still improve</span>
+      <p class="project-insight__text">The vessels and prices here are illustrative so the page runs offline. The live version plugs into AISStream for real ship positions and the EIA and European gas-storage APIs for the fundamentals, refreshed on the same GitHub Action that runs my morning brief. Cargo contents and freight rates are limited on free data, so the map speaks in vessel types, not what's inside the hull.</p>
+    </div>
+  </div>
+</section>
+
+<section class="lab-section">
+<div class="wrap">
+
+<div class="tabs">
+<button class="tab on" data-t="0">Live map</button>
+<button class="tab" data-t="1">Benchmarks &amp; curve</button>
+<button class="tab" data-t="2">Fundamentals</button>
+</div>
+
+<!-- TAB 0: MAP -->
+<div class="pane" id="p0">
+<div class="filterbar" id="filters"></div>
+<div class="row" style="margin-bottom:8px">
+<button class="btn2" id="zin">+ Zoom in</button>
+<button class="btn2" id="zout">&minus; Zoom out</button>
+<button class="btn2" id="zreset">Reset view</button>
+<span class="cap" style="margin:0">Scroll to zoom, drag to pan, click a ship or pin.</span>
+</div>
+<canvas id="map" width="960" height="384"></canvas>
+<div id="mapInfo" class="evtext" style="margin-top:8px">Click a chokepoint (&#9670;), hub (&#9675;) or event (&#9679;) pin for detail.</div>
+<div class="legend">
+  <span><span class="d" style="background:var(--crude)"></span>Crude tanker</span>
+  <span><span class="d" style="background:var(--prod)"></span>Product tanker</span>
+  <span><span class="d" style="background:var(--lng)"></span>LNG carrier</span>
+  <span><span class="d" style="background:var(--lpg)"></span>LPG carrier</span>
+  <span><span class="d" style="background:var(--dry)"></span>Dry bulk</span>
+  <span>&#9670; chokepoint &nbsp; &#9679; event</span>
+</div>
+<div class="cap">Vessels animate along real shipping lanes and are coloured by carrier type. Use the filter above to isolate crude, products, LNG, LPG or dry bulk. Click a chokepoint for its share of global flow and last disruption, or an event pin for what the market did. Illustrative positions; the live build streams real AIS from aisstream.io filtered to these regions.</div>
+</div>
+
+<!-- TAB 1: BENCHMARKS & CURVE -->
+<div class="pane hide" id="p1">
+<div class="row">
+  <label style="font-size:12px;color:var(--muted)">Benchmark
+    <select id="bench"></select></label>
+  <span id="curveBadge"></span>
+</div>
+<div class="stats" id="benchStats"></div>
+<div class="row"><label style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px"><input type="checkbox" id="cmp"> compare with</label><select id="bench2"></select></div>
+<canvas id="curve" width="900" height="300"></canvas>
+<div id="curveInfo" class="evtext" style="margin-top:6px">Hover or click a point on the curve for month detail.</div>
+<div class="cap">Forward curve, front month to a year out. <b>Backwardation</b> (front above back) says the market is short right now and paying up for prompt barrels; <b>contango</b> (back above front) says it's oversupplied and worth storing. The front&ndash;back spread is the number a physical trader watches.</div>
+
+<div class="row" style="margin-top:16px"><b style="font-size:13px">Signals (illustrative price history)</b></div>
+<div class="stats" id="sigStats"></div>
+<div class="cap">Trend and momentum are price-based; the mean-reversion z-score asks how stretched the front is versus its own range. Read it next to the fundamentals tab, because "rich" during a real shortage is not the same as an overshoot.</div>
+
+<div class="row" style="margin-top:16px"><b style="font-size:13px">Grade &amp; regional spreads</b></div>
+<table id="spreadTable"></table>
+<div class="cap">Brent vs WTI is quality and location; Brent vs Dubai is Atlantic vs Gulf crude; the gas spreads (Henry Hub vs TTF vs JKM) are what decide whether an LNG cargo sails to Europe or Asia.</div>
+
+<div class="row" style="margin-top:18px"><b style="font-size:13px">How the market reacted to past shocks</b></div>
+<div class="tl" id="timeline"></div>
+<div class="evtext" id="evText">Click an event on the timeline.</div>
+</div>
+
+<!-- TAB 2: FUNDAMENTALS -->
+<div class="pane hide" id="p2">
+<div class="cap" style="margin-top:0">Inventories against their 5-year range. Below the average band and falling means tight; up against the top means oversupplied.</div>
+<div class="bandwrap" id="bands"></div>
+<div class="stats" id="fundStats" style="margin-top:16px"></div>
+<div class="cap">Storage economics in one view: where stocks sit versus history, how many days of demand they cover, and net trade as a stand-in for deliveries.</div>
+</div>
+
+<div class="lesson">
+<b>The through-line.</b> Fundamentals and storage set how tight the market is, that tightness shows up as the shape of the forward curve, and the map is where you see whether the physical barrels can actually move to relieve it. Same chain a desk reasons along, in one screen.
+</div>
+<div class="note" id="liveNote"></div>
+
+</div><!-- /.wrap -->
+</section>
+
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__links">
+        <a href="https://github.com/niyamrathod" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/niyam-rathod-153395285" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:niyamrathod@icloud.com">Email</a>
+      </div>
+      <span class="footer__copy">&copy; 2026 Niyam Rathod</span>
+    </div>
+    <div class="footer__wordmark" aria-hidden="true">NIYAM RATHOD</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+"use strict";
+var CONFIG={
+  USE_LIVE_AIS:false,AISSTREAM_KEY:"",
+  USE_LIVE_EIA:false,EIA_KEY:"",
+  USE_LIVE_AGSI:false,AGSI_KEY:""
+};
+function el(i){return document.getElementById(i)}
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function randn(r){return Math.sqrt(-2*Math.log(1-r()))*Math.cos(6.2831853*r())}
+
+var CHOKES=[
+ {n:"Strait of Hormuz",ll:[26.57,56.25],share:"~20-25% of seaborne oil + Qatari LNG",note:"Repeated Iran-linked tanker scares in 2019 and 2024-26; premiums spiked then faded when barrels kept flowing."},
+ {n:"Strait of Malacca",ll:[1.9,102.6],share:"main Gulf-Asia crude & LNG artery",note:"Chronic piracy/congestion risk; no clean alternative for Asia-bound cargoes."},
+ {n:"Suez Canal / SUMED",ll:[30.4,32.35],share:"Europe-Asia short-cut",note:"Ever Given blockage Mar-2021 jammed ~12% of global trade for six days."},
+ {n:"Bab-el-Mandeb",ll:[12.6,43.35],share:"Red Sea gateway to Suez",note:"Houthi attacks from 2024 pushed many tankers onto the long Cape route."},
+ {n:"Turkish Straits (Bosphorus)",ll:[41.1,29.06],share:"Russian & Caspian crude + Black Sea grain",note:"Weather and war-risk delays ripple straight into oil and grain."},
+ {n:"Panama Canal",ll:[9.1,-79.7],share:"US Gulf-Pacific/Asia",note:"2023-24 drought cut transits and lengthened US LNG voyages to Asia."},
+ {n:"Danish Straits",ll:[56.0,11.0],share:"Russian Baltic oil exports",note:"Key exit for Primorsk/Ust-Luga crude; sanctions-era shadow-fleet chokepoint."},
+ {n:"Cape of Good Hope",ll:[-34.8,20.0],share:"the re-route when Suez is unsafe",note:"Adds ~10 days Gulf-Europe; congestion here signals Red Sea disruption."}
+];
+var HUBS=[
+ {n:"Ras Tanura (Saudi crude)",ll:[26.64,50.16]},{n:"Ras Laffan (Qatar LNG)",ll:[25.9,51.6]},
+ {n:"Rotterdam / ARA",ll:[51.95,4.14]},{n:"Singapore",ll:[1.26,103.8]},
+ {n:"Sabine Pass (US LNG)",ll:[29.73,-93.87]},{n:"Bonny (Nigeria crude)",ll:[4.42,7.15]},
+ {n:"Primorsk (Baltic)",ll:[60.34,28.71]},{n:"NW Shelf (Australia LNG)",ll:[-19.6,116.1]}
+];
+var ROUTES=[
+ {id:"gulf-asia",types:["crude","lpg"],pts:[[26.64,50.16],[26.57,56.25],[22,60],[15,68],[6,80],[3,96],[1.9,102.6],[1.26,103.8],[13,113],[22,118],[31,122]]},
+ {id:"gulf-eu",types:["crude","prod"],pts:[[26.64,50.16],[26.57,56.25],[18,60],[13,50],[12.6,43.35],[20,38],[27,35],[30.4,32.35],[33,26],[35,15],[36,-5.6],[43,-9],[49,-5],[51.95,4.14]]},
+ {id:"qatar-asia",types:["lng"],pts:[[25.9,51.6],[26.57,56.25],[22,60],[14,66],[6,80],[3,96],[1.9,102.6],[10,110],[24,120],[33,127]]},
+ {id:"qatar-eu",types:["lng"],pts:[[25.9,51.6],[26.57,56.25],[18,58],[12.6,43.35],[22,37],[30.4,32.35],[34,18],[36,-5.6],[45,-8],[51.95,4.14]]},
+ {id:"usg-eu",types:["lng","crude"],pts:[[29.73,-93.87],[26,-84],[27,-70],[34,-45],[44,-20],[49,-8],[51.95,4.14]]},
+ {id:"usg-asia",types:["lng"],pts:[[29.73,-93.87],[18,-82],[9.1,-79.7],[8,-95],[10,-120],[16,-150],[24,175],[31,140],[33,135]]},
+ {id:"waf-asia",types:["crude"],pts:[[4.42,7.15],[0,4],[-15,8],[-34.8,20],[-30,45],[-10,68],[3,90],[1.9,102.6],[18,114],[28,122]]},
+ {id:"baltic-eu",types:["crude","prod"],pts:[[60.34,28.71],[59,22],[56,11],[56,7],[54,3],[51.95,4.14]]},
+ {id:"blacksea",types:["dry","prod"],pts:[[46.4,30.7],[43,31],[41.1,29.06],[38,25],[35,18],[36,-5.6],[44,-10]]},
+ {id:"aus-asia",types:["lng","dry"],pts:[[-19.6,116.1],[-8,118],[2,112],[14,116],[24,120],[31,122]]}
+];
+var TYPES={crude:"var(--crude)",prod:"var(--prod)",lng:"var(--lng)",lpg:"var(--lpg)",dry:"var(--dry)"};
+var TYPENAME={crude:"Crude tanker",prod:"Product tanker",lng:"LNG carrier",lpg:"LPG carrier",dry:"Dry bulk"};
+var EVENTS=[
+ {yr:2011,ll:[30,18],t:"Libya civil war (2011): ~1.5m b/d of light sweet crude lost. Brent pushed over $125; a genuine supply loss, not just fear."},
+ {yr:2020,ll:[29,-90],t:"COVID demand collapse (Apr-2020): WTI's May contract went negative. Nobody could store the barrels they'd bought."},
+ {yr:2021,ll:[30.4,32.35],t:"Ever Given blocks Suez (Mar-2021): six days, ~12% of world trade stuck; freight and delays spiked, prices less so."},
+ {yr:2022,ll:[47,33],t:"Russia invades Ukraine (2022): oil, gas and grain repriced hard; European TTF gas hit records as Russian flows were cut."},
+ {yr:2024,ll:[12.6,43.35],t:"Red Sea / Houthi attacks (2024): tankers diverted round the Cape, adding ~10 days and lifting freight, not flat price."},
+ {yr:2025,ll:[26.57,56.25],t:"Iran / Hormuz scare (2025-26): Brent spiked ~20% on strait-closure fears, then round-tripped as barrels kept moving."}
+];
+var BENCH={
+ BRENT:{name:"Brent crude",unit:"$/bbl",spot:81.0,shape:-0.35,seed:11},
+ WTI:{name:"WTI crude",unit:"$/bbl",spot:77.2,shape:-0.32,seed:22},
+ DUBAI:{name:"Dubai crude",unit:"$/bbl",spot:80.1,shape:-0.30,seed:33},
+ HH:{name:"Henry Hub gas (US)",unit:"$/MMBtu",spot:3.20,shape:0.10,seed:44},
+ TTF:{name:"TTF gas (Europe)",unit:"$/MMBtu",spot:11.4,shape:0.12,seed:55},
+ JKM:{name:"JKM LNG (Asia)",unit:"$/MMBtu",spot:12.3,shape:0.09,seed:66}
+};
+function buildCurve(b){var a=[];for(var m=0;m<12;m++)a.push(+(b.spot+b.shape*m+(Math.sin(m)*b.spot*0.004)).toFixed(2));return a}
+function buildHistory(b){var r=rng(b.seed),n=120,out=[],p=b.spot,vol=b.spot*0.02,kappa=0.05;
+ for(var i=0;i<n;i++){p+=kappa*(b.spot-p)+vol*randn(r);out.push(+p.toFixed(2))}out[n-1]=b.spot;return out}
+var STORAGE=[
+ {n:"US crude (commercial)",unit:"m bbl",cur:418,min:402,max:471,avg:436,days:26},
+ {n:"US natural gas",unit:"Bcf",cur:2610,min:1990,max:2960,avg:2540,days:34},
+ {n:"EU gas storage",unit:"% full",cur:64,min:48,max:79,avg:66,days:0}
+];
+
+/* ── MAP ── */
+var COL={crude:'#2b2b28',prod:'#1F4E79',lng:'#1E7145',lpg:'#9C6500',dry:'#8a6d3b'};
+var shown={crude:true,prod:true,lng:true,lpg:true,dry:true};
+var vessels=[],mapCv,mctx,baseCv,bctx,W=960,H=384,LON0=-180,LON1=180,LAT0=-60,LAT1=84;
+var view={z:1,x:0,y:0};
+function proj(lat,lon){return [(lon-LON0)/(LON1-LON0)*W,(LAT1-lat)/(LAT1-LAT0)*H]}
+function w2s(wx,wy){return [(wx-view.x)*view.z,(wy-view.y)*view.z]}
+function s2w(sx,sy){return [sx/view.z+view.x,sy/view.z+view.y]}
+function P(lat,lon){var w=proj(lat,lon);return w2s(w[0],w[1])}
+function lerp(a,b,f){return [a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f]}
+function posOnRoute(pts,prog){var seg=(pts.length-1)*prog,i=Math.floor(seg),f=seg-i;if(i>=pts.length-1)return pts[pts.length-1];return lerp(pts[i],pts[i+1],f)}
+function clampView(){var vw=W/view.z,vh=H/view.z;view.x=Math.max(0,Math.min(W-vw,view.x));view.y=Math.max(0,Math.min(H-vh,view.y));if(view.z<=1){view.x=0;view.y=0}}
+
+/* simplified world outline (major landmasses only for performance) */
+var WORLD_SIMPLE=[
+ /* North America */
+ [[-168,72],[-140,70],[-120,74],[-100,74],[-80,73],[-70,70],[-60,70],[-55,52],[-60,46],[-70,44],[-75,40],[-80,32],[-82,25],[-90,30],[-97,26],[-105,20],[-88,16],[-83,10],[-80,9],[-80,8],[-77,7],[-76,9],[-85,22],[-90,21],[-88,18],[-86,16],[-89,14],[-92,18],[-95,19],[-97,22],[-98,26],[-97,28],[-90,30],[-80,26],[-80,32],[-75,35],[-72,41],[-70,44],[-65,45],[-60,46],[-55,47],[-55,52],[-60,47],[-65,48],[-66,50],[-60,47],[-68,55],[-78,60],[-82,55],[-80,63],[-87,65],[-95,70],[-110,70],[-120,74],[-140,70],[-160,60],[-170,64],[-168,66],[-168,72]],
+ /* Greenland simplified */
+ [[-45,83],[-20,84],[-18,77],[-22,70],[-28,68],[-45,68],[-55,70],[-58,75],[-50,83],[-45,83]],
+ /* South America */
+ [[-80,9],[-78,2],[-74,2],[-70,-5],[-73,-15],[-75,-20],[-70,-25],[-70,-33],[-73,-42],[-68,-55],[-65,-55],[-58,-52],[-55,-35],[-50,-30],[-45,-24],[-42,-23],[-42,-20],[-38,-13],[-35,-9],[-35,-6],[-38,-4],[-50,-2],[-52,4],[-58,7],[-62,10],[-65,10],[-70,12],[-73,11],[-72,9],[-76,9],[-80,9]],
+ /* Europe */
+ [[0,50],[2,51],[8,54],[10,58],[15,70],[20,70],[25,70],[30,70],[28,65],[25,60],[30,60],[28,58],[22,57],[18,57],[15,57],[12,55],[10,58],[8,57],[6,58],[5,62],[6,62],[8,57],[10,54],[12,54],[14,53],[18,54],[20,55],[22,57],[24,57],[26,58],[28,60],[30,60],[32,62],[30,65],[28,70],[30,70],[32,68],[35,68],[38,65],[40,66],[42,68],[42,70],[44,68],[48,68],[52,68],[54,68],[56,70],[58,70],[57,65],[55,60],[55,55],[52,48],[50,46],[46,48],[44,44],[40,41],[36,42],[28,43],[25,42],[22,40],[20,40],[16,42],[14,44],[13,46],[12,44],[10,44],[8,44],[6,43],[3,43],[1,41],[0,38],[-2,38],[-5,38],[-8,37],[-10,38],[-9,43],[-8,44],[-2,47],[0,50]],
+ /* Africa */
+ [[-5,36],[1,37],[10,38],[12,37],[15,37],[18,35],[20,37],[24,37],[30,31],[32,31],[32,28],[32,22],[36,12],[40,14],[44,10],[46,12],[44,15],[42,16],[40,20],[38,22],[36,24],[34,27],[32,30],[30,30],[32,31],[35,24],[37,20],[40,15],[44,10],[48,12],[50,12],[42,16],[38,22],[40,25],[38,28],[36,30],[34,30],[32,32],[32,22],[30,16],[28,16],[26,18],[24,20],[22,22],[20,24],[18,28],[16,32],[12,34],[8,36],[2,37],[-2,35],[-5,36]],
+ [[-18,16],[-16,20],[-16,24],[-14,26],[-12,28],[-10,32],[-6,34],[-2,35],[-2,32],[-2,30],[-2,28],[-2,22],[-2,18],[-4,16],[-8,15],[-12,14],[-14,12],[-16,14],[-18,16]],
+ [[12,-4],[14,-2],[16,0],[18,4],[20,8],[22,10],[24,14],[26,18],[28,22],[30,24],[32,22],[34,18],[36,14],[38,10],[36,8],[34,4],[32,0],[30,-4],[28,-8],[26,-12],[24,-16],[22,-18],[20,-18],[18,-14],[16,-8],[14,-4],[12,-4]],
+ [[32,-28],[34,-26],[36,-24],[38,-20],[40,-16],[42,-14],[44,-12],[46,-10],[48,-12],[50,-14],[46,-18],[44,-22],[42,-26],[40,-30],[38,-32],[36,-34],[34,-34],[32,-32],[30,-30],[32,-28]],
+ /* Russia */
+ [[32,68],[40,70],[50,68],[60,68],[70,68],[80,70],[90,72],[100,74],[110,74],[120,74],[130,72],[140,70],[150,68],[160,66],[170,64],[180,68],[180,72],[170,72],[160,72],[150,74],[140,74],[130,74],[120,74],[110,76],[100,76],[90,74],[80,72],[70,72],[60,70],[50,68],[44,66],[40,66],[36,68],[32,68]],
+ [[28,68],[30,65],[28,60],[24,60],[22,62],[24,65],[28,68]],
+ /* Asia */
+ [[40,40],[44,42],[48,42],[52,44],[56,44],[60,44],[64,42],[68,40],[70,36],[72,32],[74,28],[76,24],[78,20],[80,16],[82,14],[84,12],[82,10],[80,10],[78,8],[76,8],[74,10],[72,10],[70,12],[68,14],[66,16],[64,18],[62,20],[60,22],[58,24],[56,26],[54,26],[52,28],[50,30],[48,30],[46,32],[44,34],[42,36],[40,40]],
+ [[60,44],[64,42],[68,38],[70,34],[72,30],[74,26],[76,22],[76,18],[78,12],[80,10],[76,8],[74,6],[72,8],[70,10],[68,14],[66,18],[64,22],[62,24],[60,24],[58,26],[56,26],[52,26],[50,28],[48,30],[50,34],[52,36],[56,38],[58,40],[60,44]],
+ /* Indian subcontinent */
+ [[72,22],[74,20],[76,16],[78,12],[80,10],[78,8],[76,8],[74,10],[72,14],[70,18],[68,22],[66,24],[64,24],[62,22],[60,22],[62,20],[64,18],[66,16],[68,14],[70,12],[72,10],[74,10],[76,8],[78,6],[80,8],[82,10],[84,12],[80,16],[78,18],[76,22],[74,24],[72,22]],
+ /* Southeast Asia */
+ [[100,12],[102,8],[104,2],[104,-2],[102,-4],[100,-4],[98,-2],[96,2],[96,6],[98,10],[100,12]],
+ [[104,4],[106,2],[108,0],[110,-2],[112,-4],[114,-4],[116,-2],[118,2],[120,4],[118,6],[116,8],[114,4],[112,4],[110,4],[108,4],[106,4],[104,4]],
+ [[108,14],[110,16],[112,18],[114,20],[116,22],[118,24],[120,26],[122,28],[120,30],[118,32],[116,32],[114,30],[112,26],[110,22],[108,18],[106,16],[104,16],[102,18],[100,18],[98,20],[98,24],[100,28],[104,30],[108,28],[112,26],[114,28],[116,30],[118,30],[120,28],[122,24],[120,22],[118,20],[116,18],[114,16],[112,14],[110,12],[108,14]],
+ /* Japan */
+ [[130,30],[132,32],[134,34],[136,36],[138,38],[140,40],[142,42],[140,44],[138,42],[136,40],[134,38],[132,36],[130,34],[128,32],[130,30]],
+ /* Australia */
+ [[114,-22],[116,-20],[118,-18],[120,-16],[122,-18],[124,-18],[126,-16],[128,-14],[130,-12],[132,-12],[134,-12],[136,-14],[138,-16],[140,-18],[142,-18],[144,-20],[146,-22],[148,-22],[150,-24],[152,-24],[154,-26],[152,-28],[150,-30],[148,-32],[146,-34],[144,-36],[140,-38],[136,-36],[132,-34],[128,-34],[124,-34],[120,-34],[116,-34],[114,-32],[112,-28],[112,-24],[114,-22]],
+ /* New Zealand */
+ [[170,-44],[172,-42],[174,-40],[172,-38],[170,-40],[168,-44],[170,-44]],
+ [[172,-36],[174,-36],[176,-38],[174,-42],[172,-40],[170,-42],[172,-44],[174,-42],[176,-40],[178,-38],[178,-36],[176,-34],[174,-36],[172,-36]],
+ /* Antarctica simplified */
+ [[-180,-70],[-160,-72],[-140,-70],[-120,-72],[-100,-70],[-80,-72],[-60,-70],[-40,-72],[-20,-70],[0,-68],[20,-68],[40,-70],[60,-68],[80,-70],[100,-68],[120,-70],[140,-72],[160,-70],[180,-70],[180,-90],[-180,-90],[-180,-70]]
+];
+
+function rebuildBase(){
+ if(!baseCv){baseCv=document.createElement('canvas');baseCv.width=W;baseCv.height=H;bctx=baseCv.getContext('2d')}
+ var g=bctx;g.clearRect(0,0,W,H);g.fillStyle='#E7EDF0';g.fillRect(0,0,W,H);
+ g.strokeStyle='#C4C1B6';g.lineWidth=0.6;g.fillStyle='#E6E3D9';
+ WORLD_SIMPLE.forEach(function(poly){g.beginPath();poly.forEach(function(pt,i){var p=P(pt[1],pt[0]);i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1])});g.closePath();g.fill();g.stroke()});
+ ROUTES.forEach(function(rt){g.strokeStyle='rgba(120,116,105,0.55)';g.setLineDash([4,5]);g.lineWidth=1;g.beginPath();rt.pts.forEach(function(pt,i){var p=P(pt[0],pt[1]);i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1])});g.stroke();g.setLineDash([])});
+ HUBS.forEach(function(h){var p=P(h.ll[0],h.ll[1]);g.fillStyle='#fff';g.strokeStyle='#6B6A64';g.lineWidth=1;g.beginPath();g.arc(p[0],p[1],3.2,0,7);g.fill();g.stroke();if(view.z>=2.6){g.fillStyle='#6B6A64';g.font='9px sans-serif';g.fillText(h.n.split(' (')[0],p[0]+6,p[1]+3)}});
+ CHOKES.forEach(function(c){var p=P(c.ll[0],c.ll[1]);g.save();g.translate(p[0],p[1]);g.rotate(Math.PI/4);g.fillStyle='#A03123';g.strokeStyle='#fff';g.lineWidth=1.5;g.fillRect(-5,-5,10,10);g.strokeRect(-5,-5,10,10);g.restore();if(view.z>=2){g.fillStyle='#7a241a';g.font='10px sans-serif';g.fillText(c.n,p[0]+9,p[1]+3)}});
+ EVENTS.forEach(function(ev){var p=P(ev.ll[0],ev.ll[1]);g.fillStyle='#9C6500';g.strokeStyle='#fff';g.lineWidth=2;g.beginPath();g.arc(p[0],p[1],5,0,7);g.fill();g.stroke()});
+}
+function vScreen(v){var pos=posOnRoute(v.rt.pts,v.prog);return P(pos[0],pos[1])}
+function renderMap(){if(!mctx)return;mctx.drawImage(baseCv,0,0);
+ vessels.forEach(function(v){if(!shown[v.type])return;var p=vScreen(v);if(p[0]<-8||p[0]>W+8||p[1]<-8||p[1]>H+8)return;
+  mctx.fillStyle=COL[v.type];mctx.strokeStyle='#fff';mctx.lineWidth=1;mctx.beginPath();mctx.arc(p[0],p[1],view.z>=2?4.4:3.4,0,7);mctx.fill();mctx.stroke();
+  if(view.z>=3.2){mctx.fillStyle='#3a3a36';mctx.font='9px sans-serif';mctx.fillText(v.name,p[0]+6,p[1]-5)}})}
+var SHIPNAMES=['Aurora','Pacific','Nordic','Gulf','Atlantic','Meridian','Stena','Front','Maran','Seaways','Ocean','Cosmic','Ridgebury','Nissos','Almi','Marlin','Horizon','Delta','Vela','Cabo'];
+function shipName(type,r){var pre=type==='lng'?'LNGC':type==='lpg'?'GASC':type==='dry'?'MV':'MT';return pre+' '+SHIPNAMES[Math.floor(r()*SHIPNAMES.length)]+' '+(100+Math.floor(r()*899))}
+function spawnVessels(){var r=rng(2024);ROUTES.forEach(function(rt){var count=3+Math.floor(r()*4);for(var k=0;k<count;k++){var type=rt.types[Math.floor(r()*rt.types.length)];vessels.push({rt:rt,prog:r(),dir:r()<0.5?1:-1,type:type,sp:0.004+r()*0.005,name:shipName(type,r),kn:(11+r()*5).toFixed(1)})}})}
+function stepVessels(){vessels.forEach(function(v){v.prog+=v.sp*v.dir;if(v.prog>=1){v.prog=1;v.dir=-1}else if(v.prog<=0){v.prog=0;v.dir=1}});renderMap()}
+function mapPick(sx,sy){var best=null,bd=16*16;
+ vessels.forEach(function(v){if(!shown[v.type])return;var p=vScreen(v);var d=(p[0]-sx)*(p[0]-sx)+(p[1]-sy)*(p[1]-sy);if(d<bd){bd=d;best={kind:'ship',o:v}}});
+ [['choke',CHOKES],['event',EVENTS],['hub',HUBS]].forEach(function(pr){pr[1].forEach(function(o){var p=P(o.ll[0],o.ll[1]);var d=(p[0]-sx)*(p[0]-sx)+(p[1]-sy)*(p[1]-sy);if(d<bd){bd=d;best={kind:pr[0],o:o}}})});
+ return best}
+function showInfo(best){var box=el('mapInfo');
+ if(!best){box.innerHTML='Click a ship, chokepoint (&#9670;), hub (&#9675;) or event (&#9679;) pin.';return}
+ if(best.kind==='ship'){var v=best.o;box.innerHTML='<b>'+v.name+'</b> — '+TYPENAME[v.type]+' · ~'+v.kn+' kn · lane '+v.rt.id.replace(/-/g,' → ')+'<br><span style="color:#98968E">Illustrative vessel; the live build shows real MMSI/IMO and destination from AIS.</span>'}
+ else if(best.kind==='choke')box.innerHTML='<b>'+best.o.n+'</b> — '+best.o.share+'<br>'+best.o.note;
+ else if(best.kind==='event')box.innerHTML='<b>'+best.o.yr+'</b> '+best.o.t;
+ else box.innerHTML='<b>'+best.o.n+'</b> (loading / discharge hub)'}
+function setZoom(nz,cx,cy){cx=cx==null?W/2:cx;cy=cy==null?H/2:cy;var wpt=s2w(cx,cy);view.z=Math.max(1,Math.min(9,nz));view.x=wpt[0]-cx/view.z;view.y=wpt[1]-cy/view.z;clampView();rebuildBase();renderMap()}
+function initMap(){mapCv=el('map');mctx=mapCv.getContext('2d');rebuildBase();spawnVessels();renderMap();setInterval(stepVessels,140);
+ var drag=false,moved=false,lx=0,ly=0;
+ function sc(e){var r=mapCv.getBoundingClientRect();return [(e.clientX-r.left)*(W/r.width),(e.clientY-r.top)*(H/r.height)]}
+ mapCv.addEventListener('wheel',function(e){e.preventDefault();var s=sc(e);setZoom(view.z*(e.deltaY<0?1.2:1/1.2),s[0],s[1])},{passive:false});
+ mapCv.addEventListener('mousedown',function(e){drag=true;moved=false;var s=sc(e);lx=s[0];ly=s[1]});
+ window.addEventListener('mousemove',function(e){if(!drag)return;var s=sc(e);var dx=s[0]-lx,dy=s[1]-ly;if(Math.abs(dx)+Math.abs(dy)>3)moved=true;view.x-=dx/view.z;view.y-=dy/view.z;lx=s[0];ly=s[1];clampView();rebuildBase();renderMap()});
+ window.addEventListener('mouseup',function(e){if(drag&&!moved){var s=sc(e);if(s[0]>=0&&s[0]<=W&&s[1]>=0&&s[1]<=H)showInfo(mapPick(s[0],s[1]))}drag=false});
+ el('zin').onclick=function(){setZoom(view.z*1.5)};el('zout').onclick=function(){setZoom(view.z/1.5)};el('zreset').onclick=function(){view.z=1;view.x=0;view.y=0;rebuildBase();renderMap()};
+}
+function buildFilters(){var bar=el('filters');bar.innerHTML='';
+ Object.keys(COL).forEach(function(t){var c=document.createElement('div');c.className='chip';c.dataset.t=t;c.innerHTML='<span class="dot" style="background:var(--'+t+')"></span>'+TYPENAME[t];c.onclick=function(){shown[t]=!shown[t];c.classList.toggle('off',!shown[t]);renderMap()};bar.appendChild(c)});
+ var all=document.createElement('div');all.className='chip';all.style.borderStyle='dashed';all.textContent='Reset';all.onclick=function(){Object.keys(COL).forEach(function(t){shown[t]=true});document.querySelectorAll('#filters .chip').forEach(function(c){c.classList.remove('off')});renderMap()};bar.appendChild(all)}
+
+/* ── BENCHMARKS & CURVE ── */
+function buildBenchSelect(){var opt='';for(var k in BENCH)opt+='<option value="'+k+'">'+BENCH[k].name+'</option>';el('bench').innerHTML=opt;var s2=el('bench2');if(s2){s2.innerHTML=opt;s2.value='WTI'}}
+function fmtP(v){return '$'+v.toFixed(2)}
+function renderBench(){
+ var key=el('bench').value,b=BENCH[key],curve=buildCurve(b),hist=buildHistory(b);
+ var front=curve[0],back=curve[curve.length-1],spread=front-back;
+ var back10=hist[hist.length-1]-hist[hist.length-11];
+ var maS=avg(hist.slice(-10)),maL=avg(hist.slice(-40));
+ var mean=avg(hist.slice(-40)),sd=std(hist.slice(-40)),z=(front-mean)/(sd||1);
+ el('benchStats').innerHTML=
+  stat(fmtP(b.spot),'front ('+b.unit+')',true)+
+  stat(fmtP(back),'12-month')+
+  stat((spread>=0?'+':'')+spread.toFixed(2),'front to back')+
+  stat((spread>=0?'backwardation':'contango'),'curve shape');
+ el('curveBadge').innerHTML='<span class="badge '+(spread>=0?'b-back':'b-cont')+'">'+(spread>=0?'BACKWARDATION: tight':'CONTANGO: oversupplied')+'</span>';
+ var cmp=el('cmp')&&el('cmp').checked,curve2=null,name2='';
+ if(cmp){var b2=BENCH[el('bench2').value];curve2=buildCurve(b2);name2=b2.name}
+ curState={curve:curve,curve2:curve2,u:b.unit,name:b.name,name2:name2};
+ drawCurve(curve,b.unit,curve2,-1);
+ var trend=maS>maL*1.002?'up':(maS<maL*0.998?'down':'flat');
+ var mom=back10>0.2?'up':(back10<-0.2?'down':'flat');
+ el('sigStats').innerHTML=
+  sigStat('Trend',trend,trend==='up'?'s-up':trend==='down'?'s-dn':'s-fl',trend==='up'?'rising (10d MA &gt; 40d)':trend==='down'?'falling':'sideways')+
+  sigStat('Momentum',mom,mom==='up'?'s-up':mom==='down'?'s-dn':'s-fl',(back10>=0?'+':'')+back10.toFixed(2)+' over 10 periods')+
+  sigStat('Mean-reversion',Math.abs(z)>1.5?'stretched':'normal',Math.abs(z)>1.5?'s-warn':'s-fl',z.toFixed(2)+'σ vs its own range');
+ renderSpreads();
+}
+function renderSpreads(){
+ var g=function(k){return BENCH[k].spot};
+ var rows='<tr><th>Spread</th><th>Level</th><th>What it tells you</th></tr>';
+ rows+=srow('Brent vs WTI',(g('BRENT')-g('WTI')).toFixed(2)+' $/bbl','Atlantic vs US crude, quality and pipeline logistics');
+ rows+=srow('Brent vs Dubai',(g('BRENT')-g('DUBAI')).toFixed(2)+' $/bbl','light-sweet vs medium-sour; Atlantic vs Gulf');
+ rows+=srow('TTF vs Henry Hub',(g('TTF')-g('HH')).toFixed(2)+' $/MMBtu','Europe vs US gas, the US LNG export incentive');
+ rows+=srow('JKM vs TTF',(g('JKM')-g('TTF')).toFixed(2)+' $/MMBtu','Asia vs Europe, which way LNG cargoes sail');
+ el('spreadTable').innerHTML=rows;
+}
+var curState={curve:[],curve2:null,u:'',name:'',name2:''},curvePts=[];
+function drawCurve(curve,u,curve2,hoverIdx){
+ var c=el('curve'),g=c.getContext('2d');g.clearRect(0,0,c.width,c.height);
+ var L=58,R=20,T=22,B=34,n=curve.length,dec=u.indexOf('MMBtu')>=0?2:0;
+ var all=curve.concat(curve2||[]),mn=Math.min.apply(null,all),mx=Math.max.apply(null,all),pad=(mx-mn)*0.4+0.01;mn-=pad;mx+=pad;
+ function X(i){return L+i/(n-1)*(c.width-L-R)}
+ function Y(v){return T+(mx-v)/(mx-mn)*(c.height-T-B)}
+ g.font='10px sans-serif';
+ for(var k=0;k<=4;k++){var v=mn+(mx-mn)*k/4;g.strokeStyle='#EFEDE5';g.beginPath();g.moveTo(L,Y(v));g.lineTo(c.width-R,Y(v));g.stroke();g.fillStyle='#98968E';g.fillText(v.toFixed(dec),6,Y(v)+3)}
+ for(var mm=0;mm<n;mm+=2){g.fillStyle='#98968E';g.fillText('M'+(mm+1),X(mm)-7,c.height-14)}
+ g.beginPath();g.moveTo(X(0),Y(curve[0]));for(var i=1;i<n;i++)g.lineTo(X(i),Y(curve[i]));g.lineTo(X(n-1),c.height-B);g.lineTo(X(0),c.height-B);g.closePath();g.fillStyle='rgba(31,78,121,0.08)';g.fill();
+ if(curve2){g.strokeStyle='#9C6500';g.lineWidth=2;g.setLineDash([5,4]);g.beginPath();for(var j2=0;j2<curve2.length;j2++){var x2=X(j2),y2=Y(curve2[j2]);j2?g.lineTo(x2,y2):g.moveTo(x2,y2)}g.stroke();g.setLineDash([])}
+ g.strokeStyle='#1F4E79';g.lineWidth=2.4;g.beginPath();curvePts=[];
+ for(var j=0;j<n;j++){var x=X(j),y=Y(curve[j]);curvePts.push({x:x,y:y,v:curve[j],m:j});j?g.lineTo(x,y):g.moveTo(x,y)}g.stroke();
+ for(var p=0;p<n;p++){g.fillStyle='#1F4E79';g.beginPath();g.arc(X(p),Y(curve[p]),2.6,0,7);g.fill()}
+ if(curve2){g.fillStyle='#1F4E79';g.fillRect(L,T-12,10,3);g.fillStyle='#444441';g.fillText(curState.name,L+14,T-9);g.fillStyle='#9C6500';g.fillRect(L+150,T-12,10,3);g.fillStyle='#444441';g.fillText(curState.name2,L+164,T-9)}
+ g.fillStyle='#6B6A64';g.fillText('months forward →',c.width/2-40,c.height-2);
+ if(hoverIdx!=null&&hoverIdx>=0&&hoverIdx<n){var hx=X(hoverIdx),hy=Y(curve[hoverIdx]);
+  g.strokeStyle='#C9C6BC';g.setLineDash([3,3]);g.beginPath();g.moveTo(hx,T);g.lineTo(hx,c.height-B);g.stroke();g.setLineDash([]);
+  g.fillStyle='#A03123';g.beginPath();g.arc(hx,hy,4.5,0,7);g.fill();g.strokeStyle='#fff';g.lineWidth=1.5;g.stroke()}
+}
+function nearestCurveIdx(mx){var best=0,bd=1e9;curvePts.forEach(function(pt){var d=Math.abs(pt.x-mx);if(d<bd){bd=d;best=pt.m}});return best}
+function drawCurveHover(idx,pin){drawCurve(curState.curve,curState.u,curState.curve2,idx);updateCurveInfo(idx,pin)}
+function updateCurveInfo(idx,pin){var box=el('curveInfo');if(idx<0){if(box.dataset.pinned!=='1')box.innerHTML='Hover or click a point on the curve for month detail.';return}
+ var c=curState.curve,front=c[0],v=c[idx],sp=v-front;
+ var t='<b>Month '+(idx+1)+'</b>: $'+v.toFixed(2)+' '+curState.u+' — '+(sp===0?'the front month':(sp>0?'+':'')+sp.toFixed(2)+' vs front ('+(sp>0?'higher further out = contango-ish':'lower further out = backwardation-ish')+')');
+ if(curState.curve2)t+='<br><span style="color:#9C6500">'+curState.name2+' M'+(idx+1)+': $'+curState.curve2[idx].toFixed(2)+'</span>';
+ box.innerHTML=t;box.dataset.pinned=pin?'1':''}
+
+/* ── FUNDAMENTALS ── */
+function renderFund(){
+ var html='';
+ STORAGE.forEach(function(s){
+   var lo=s.min,hi=s.max,span=hi-lo;
+   var toPct=function(v){return (v-lo)/span*100};
+   var pos=s.cur<s.avg?'below average (tighter)':(s.cur>s.avg?'above average (looser)':'at average');
+   html+='<div class="bandrow"><div class="lab"><b>'+s.n+'</b><span>'+s.cur+' '+s.unit+' · '+pos+'</span></div>'+
+     '<div class="track" title="now '+s.cur+' '+s.unit+' · avg '+s.avg+' · 5y range '+lo+'–'+hi+'"><div class="band" style="left:0%;width:100%"></div>'+
+     '<div class="avg" style="left:'+toPct(s.avg)+'%"></div>'+
+     '<div class="cur" style="left:'+toPct(s.cur)+'%"></div></div>'+
+     '<div class="cap" style="display:flex;justify-content:space-between;margin-top:2px">'+
+       '<span>5y low '+lo+'</span><span>avg '+s.avg+'</span><span>5y high '+hi+'</span></div></div>';
+ });
+ el('bands').innerHTML=html;
+ el('fundStats').innerHTML=
+  stat('26 days','US crude cover',true)+
+  stat('34 days','US gas cover')+
+  stat('64%','EU gas full')+
+  stat('-0.4 m b/d','US net crude trade (proxy)');
+}
+
+/* ── TIMELINE ── */
+function renderTimeline(){
+ var t=el('timeline'),y0=2010,y1=2026;t.innerHTML='<div class="axis"></div>';
+ EVENTS.forEach(function(e){
+   var x=(e.yr-y0)/(y1-y0)*100;
+   var d=document.createElement('div');d.className='ev';d.style.left=x+'%';
+   d.onclick=function(){el('evText').textContent=e.t};
+   t.appendChild(d);
+   var yl=document.createElement('div');yl.className='yr';yl.style.left=x+'%';yl.textContent=e.yr;t.appendChild(yl);
+ });
+}
+
+/* ── helpers ── */
+function avg(a){return a.reduce(function(x,y){return x+y},0)/a.length}
+function std(a){var m=avg(a);return Math.sqrt(avg(a.map(function(x){return (x-m)*(x-m)})))}
+function stat(v,l,hl){return '<div class="stat'+(hl?' hl':'')+'"><div class="v">'+v+'</div><div class="l">'+l+'</div></div>'}
+function sigStat(name,val,cls,sub){return '<div class="stat"><div class="v" style="font-size:13px"><span class="sig '+cls+'">'+val.toUpperCase()+'</span></div><div class="l">'+name+': '+sub+'</div></div>'}
+function srow(a,b,c){return '<tr><td>'+a+'</td><td>'+b+'</td><td style="text-align:right;color:#6B6A64">'+c+'</td></tr>'}
+
+/* ── TABS + INIT ── */
+function showTab(n){
+ for(var i=0;i<3;i++)el('p'+i).classList.toggle('hide',i!==n);
+ document.querySelectorAll('.tab').forEach(function(b){b.classList.toggle('on',+b.dataset.t===n)});
+ if(n===1)renderBench();
+ if(n===2)renderFund();
+}
+document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){showTab(+b.dataset.t)})});
+el('bench').addEventListener('change',renderBench);
+['cmp','bench2'].forEach(function(id){var e=el(id);if(e)e.addEventListener('change',renderBench)});
+(function(){var cv=el('curve');
+ cv.addEventListener('mousemove',function(e){var r=cv.getBoundingClientRect();drawCurveHover(nearestCurveIdx((e.clientX-r.left)*(cv.width/r.width)),false)});
+ cv.addEventListener('mouseleave',function(){if(el('curveInfo').dataset.pinned!=='1')drawCurveHover(-1,false)});
+ cv.addEventListener('click',function(e){var r=cv.getBoundingClientRect();drawCurveHover(nearestCurveIdx((e.clientX-r.left)*(cv.width/r.width)),true)});
+})();
+
+el('liveNote').innerHTML='Data note: vessels, prices and storage above are illustrative so the page runs offline. Live build: set the flags in CONFIG and add free keys: AISStream (ship positions), EIA (US energy data), GIE AGSI+ (EU gas storage), refreshed via GitHub Actions.';
+
+buildBenchSelect();buildFilters();renderTimeline();
+initMap();
+</script>
+</body>
+</html>
