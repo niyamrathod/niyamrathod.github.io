@@ -79,15 +79,33 @@ th{font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--fain
 .lesson{font-size:12.5px;color:var(--muted);margin-top:24px;border-top:1px solid var(--border);padding-top:12px}
 .note{font-size:11.5px;color:var(--faint);margin-top:10px}
 .btn2{border:1px solid var(--border);border-radius:9px;padding:9px 14px;font-size:12.5px;font-family:inherit;cursor:pointer;background:var(--card);color:var(--text)}
-/* ── Signals tab ── */
-.sig-header{background:#F4F2EC;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:11px 14px;margin-bottom:4px}
-.sig-header-badge{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
-.sig-header p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.6}
-.sig-section{margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
-.sig-section-title{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+/* ── Signals: learning tool ── */
 .ip2{font-size:11.5px;color:var(--muted);display:flex;flex-direction:column;gap:3px;min-width:130px}
 .val2{font-size:13px;font-weight:700;color:var(--text)}
 input[type=range]{width:100%;margin:0;accent-color:var(--accent)}
+.lesson-intro{background:linear-gradient(135deg,#1F4E79 0%,#2d6aa0 100%);color:#fff;border-radius:10px;padding:16px 20px;margin-bottom:4px}
+.lesson-intro-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:.75;margin-bottom:5px}
+.lesson-intro p{margin:0;font-size:12.5px;line-height:1.65;opacity:.92}
+.lesson-unit{margin-top:26px;padding-top:20px;border-top:1px solid var(--border)}
+.lesson-num{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.lesson-title{font-size:15px;font-weight:700;color:var(--text);margin:0 0 10px 0}
+.concept-card{background:rgba(31,78,121,0.05);border:1px solid rgba(31,78,121,0.14);border-left:3px solid var(--accent);border-radius:8px;padding:12px 14px;margin-bottom:12px;font-size:12.5px;color:#1b3d5f;line-height:1.65}
+.concept-card b{color:var(--accent)}
+.insight-pill{display:inline-flex;align-items:flex-start;gap:7px;background:#FFFBEB;border:1px solid #F59E0B;border-radius:8px;padding:8px 12px;font-size:12px;color:#78350F;margin:6px 0 10px;line-height:1.55}
+.try-box{background:#F8F8F5;border:1px dashed var(--border);border-radius:8px;padding:10px 14px;margin-top:10px}
+.try-box-title{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.quiz-block{margin-top:14px;background:#FFFDF2;border:1px solid #E5D96A;border-radius:8px;padding:13px 15px}
+.quiz-q{font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:6px}
+.quiz-opt{padding:9px 13px;border:1px solid var(--border);border-radius:7px;font-size:12.5px;cursor:pointer;background:#fff;text-align:left;font-family:inherit;line-height:1.5;transition:border-color .15s,background .15s}
+.quiz-opt:hover:not(:disabled){border-color:#bbb;background:#FAFAFA}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{background:rgba(30,113,69,0.09);border-color:var(--good);color:#1a5e38}
+.quiz-opt.wrong{background:rgba(160,49,35,0.07);border-color:var(--bad);color:#8a2a1e}
+.quiz-feedback{margin-top:10px;font-size:12.5px;line-height:1.6;display:none;padding:9px 12px;border-radius:6px}
+.quiz-feedback.show{display:block}
+.quiz-feedback.fb-correct{background:rgba(30,113,69,0.08);color:#1a5e38;border:1px solid rgba(30,113,69,0.2)}
+.quiz-feedback.fb-wrong{background:rgba(160,49,35,0.06);color:#8a2a1e;border:1px solid rgba(160,49,35,0.18)}
 .sig-matrix{border-collapse:separate;border-spacing:4px;margin-top:6px;width:100%;table-layout:fixed}
 .sig-matrix th{font-size:10.5px;color:var(--faint);padding:5px 8px;font-weight:600;text-align:center;letter-spacing:.5px}
 td.sig-cell{padding:10px 12px;font-size:11.5px;border:1px solid var(--border);border-radius:7px;vertical-align:top;line-height:1.5}
@@ -99,6 +117,17 @@ td.sig-cell{padding:10px 12px;font-size:11.5px;border:1px solid var(--border);bo
 .sig-cell-active{outline:2.5px solid var(--accent);outline-offset:0}
 .sig-cell-active.sig-cell-strong-long{outline-color:var(--good)}
 .sig-cell-active.sig-cell-strong-short{outline-color:var(--bad)}
+.sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.sum-card{border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.sum-card-carry{border-color:rgba(31,78,121,0.25);background:rgba(31,78,121,0.03)}
+.sum-head{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:8px}
+.sum-n{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-size:10.5px;font-weight:700;flex-shrink:0}
+.sum-card-carry .sum-n{background:#9C6500}
+.sum-body{display:flex;flex-direction:column;gap:5px}
+.sum-row{font-size:11.5px;padding:5px 8px;border-radius:5px;line-height:1.5}
+.sum-row.good{background:rgba(30,113,69,0.07);color:#1a5e38}
+.sum-row.bad{background:rgba(160,49,35,0.06);color:#8a2a1e}
+@media(max-width:600px){.sum-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -219,11 +248,8 @@ td.sig-cell{padding:10px 12px;font-size:11.5px;border:1px solid var(--border);bo
 
 <!-- TAB 3: SIGNALS -->
 <div class="pane hide" id="p3">
-<div class="sig-header">
- <div class="sig-header-badge">Price-based signals</div>
- <p>These three signals are purely mechanical and price-derived, separate from the physical fundamentals in the other tabs. Commodities are the classic home of systematic trend-following: CTAs and managed-futures funds run variants of exactly these models across energy, metals and agricultural markets. The combined view ties in the forward curve's carry state, because in commodities the roll yield is not a side effect — it is part of the return.</p>
-</div>
-<div class="row" style="margin-top:12px;align-items:center;flex-wrap:wrap;gap:8px">
+
+<div class="row" style="margin-bottom:14px;align-items:center;flex-wrap:wrap;gap:8px">
  <label style="font-size:12px;color:var(--muted)">Instrument
   <select id="sigInstr">
    <option value="BRENT">Brent crude</option>
@@ -231,57 +257,113 @@ td.sig-cell{padding:10px 12px;font-size:11.5px;border:1px solid var(--border);bo
    <option value="TTF">TTF gas (Europe)</option>
   </select>
  </label>
- <span id="sigCarryBadge"></span>
+ <span style="font-size:12px;color:var(--muted)">All lessons use a synthetic price series (seeded, reproducible).</span>
 </div>
 
-<div class="sig-section">
- <div class="sig-section-title">1. Trend — moving-average crossover</div>
- <div class="row" style="gap:20px;flex-wrap:wrap">
-  <label class="ip2">Fast SMA &nbsp;<span class="val2" id="sigFastLbl">20d</span>
-   <input type="range" id="sigFast" min="5" max="50" step="5" value="20">
-  </label>
-  <label class="ip2">Slow SMA &nbsp;<span class="val2" id="sigSlowLbl">100d</span>
-   <input type="range" id="sigSlow" min="20" max="200" step="10" value="100">
-  </label>
- </div>
+<div class="lesson-intro">
+ <div class="lesson-intro-label">How systematic traders read a commodity price</div>
+ <p>Trend, momentum, and mean reversion are the three tools most systematic commodity funds start with. None of them predict the future — they read the recent past in a disciplined, repeatable way. Work through each lesson to understand the logic behind the signal, then use the experiments to build intuition for how the parameters change the output.</p>
+</div>
+
+<!-- LESSON 1 -->
+<div class="lesson-unit">
+ <div class="lesson-num">Lesson 1 of 4</div>
+ <div class="lesson-title">Trend following — the moving-average crossover</div>
+ <div class="concept-card">A moving-average crossover does not predict the future. It <b>confirms that a trend is already happening.</b> When the short-term average crosses above the long-term average, a trend-follower goes long — not because the price must keep rising, but because the evidence says it already has been. CTAs and managed-futures funds run exactly this signal 24/7 across 50+ markets. The edge is not in any individual trade. It is in applying the rule consistently across many uncorrelated assets over years.</div>
  <div id="sigTrendChart"></div>
  <div class="evtext" id="sigTrendNote" style="margin-top:6px"></div>
- <div class="cap">When the fast average crosses above the slow, a trend-follower goes long; shading shows the current signal state (green = long, red = short). The signal is intentionally slow to react: missing a real trend costs more than a few false starts.</div>
+ <div class="insight-pill">&#128161; The signal lags by design. A 20/100 crossover misses the first 5% of a move. That cost is worth it to avoid reacting to the noise visible in the middle of the chart.</div>
+ <div class="quiz-block">
+  <div class="quiz-q">The 20-day SMA just crossed <i>below</i> the 100-day SMA. What does the trend-following signal say?</div>
+  <div class="quiz-opts">
+   <button class="quiz-opt" data-q="q1" data-ans="wrong" data-fb="The slow SMA direction does not determine the signal — the crossover does. When the fast crosses below the slow, the signal flips to short or flat regardless of whether the slow SMA is still rising.">A) Long — the slow SMA is still rising, so the long-term trend is intact</button>
+   <button class="quiz-opt" data-q="q1" data-ans="correct" data-fb="Correct. The crossover flips the signal to short or flat. The fast average has turned down enough to pull below the slow average, meaning recent prices are weaker than the longer-term baseline.">B) Short or flat — the fast average has crossed below the slow</button>
+   <button class="quiz-opt" data-q="q1" data-ans="wrong" data-fb="Most trend systems act on the crossover immediately. Waiting for multi-day confirmation is a parameter choice, but the default rule is to act at the crossover.">C) Wait — one crossover is not enough, hold until confirmed over 3 days</button>
+  </div>
+  <div class="quiz-feedback" id="qf-q1"></div>
+ </div>
+ <div class="try-box">
+  <div class="try-box-title">Experiment: drag the windows</div>
+  <div class="row" style="gap:20px;flex-wrap:wrap">
+   <label class="ip2">Fast SMA &nbsp;<span class="val2" id="sigFastLbl">20d</span>
+    <input type="range" id="sigFast" min="5" max="50" step="5" value="20">
+   </label>
+   <label class="ip2">Slow SMA &nbsp;<span class="val2" id="sigSlowLbl">100d</span>
+    <input type="range" id="sigSlow" min="20" max="200" step="10" value="100">
+   </label>
+  </div>
+  <div class="cap" style="margin-top:6px">Set the fast SMA to 5 days and watch the green/red shading flicker through the choppy middle section. That rapid switching is called whipsawing — being stopped in and out for small losses each time. Longer windows give cleaner signals but miss the start and end of every trend.</div>
+ </div>
 </div>
 
-<div class="sig-section">
- <div class="sig-section-title">2. Momentum — trailing N-day return</div>
- <div class="row">
-  <label class="ip2">Lookback &nbsp;<span class="val2" id="sigMomLbl">120d</span>
-   <input type="range" id="sigMom" min="40" max="250" step="10" value="120">
-  </label>
- </div>
+<!-- LESSON 2 -->
+<div class="lesson-unit">
+ <div class="lesson-num">Lesson 2 of 4</div>
+ <div class="lesson-title">Time-series momentum — the trailing return</div>
+ <div class="concept-card">Momentum asks a simpler question: <b>is this market higher than it was N months ago?</b> If yes, go long. The "12-1" label from equity research means a 12-month lookback skipping the most recent month to avoid microstructure noise. In commodities, traders often use shorter windows because supply shocks resolve faster than in equities.<br><br>Unlike the crossover, momentum produces a single number: the total return over the lookback window. <b>Positive = long. Negative = short.</b> Nothing more.</div>
  <div id="sigMomChart"></div>
  <div class="evtext" id="sigMomNote" style="margin-top:6px"></div>
- <div class="cap">The signal is the sign of the N-day return. Positive bar = price is higher than it was N days ago. In commodities the classic window is 12 months (hence "12-1"), but shorter windows work in energy where supply shocks resolve faster than in equities.</div>
+ <div class="insight-pill">&#128161; Momentum and trend-following often agree — but not always. A slow SMA crossover can stay long even when the trailing 4-month return is negative. They are measuring different things.</div>
+ <div class="quiz-block">
+  <div class="quiz-q">The 120-day return for Brent crude is &minus;11%. What does the momentum signal say?</div>
+  <div class="quiz-opts">
+   <button class="quiz-opt" data-q="q2" data-ans="wrong" data-fb="The momentum signal ignores moving averages. It looks only at the N-day trailing return. A −11% return means price is lower than it was 120 days ago — that is a short signal, regardless of where the SMAs are.">A) Long — the long-term SMA trend is still upward</button>
+   <button class="quiz-opt" data-q="q2" data-ans="correct" data-fb="Correct. The rule is the sign of the trailing return. −11% is negative, so the signal is short. The mechanism is deliberately simple.">B) Short — the trailing return is negative, signal flips bearish</button>
+   <button class="quiz-opt" data-q="q2" data-ans="wrong" data-fb="There is no neutral zone in a basic momentum rule. Some managers add a dead-zone filter around zero, but −11% is too large to treat as neutral.">C) Neutral — −11% is within normal commodity volatility</button>
+  </div>
+  <div class="quiz-feedback" id="qf-q2"></div>
+ </div>
+ <div class="try-box">
+  <div class="try-box-title">Experiment: change the lookback period</div>
+  <div class="row">
+   <label class="ip2">Lookback &nbsp;<span class="val2" id="sigMomLbl">120d</span>
+    <input type="range" id="sigMom" min="40" max="250" step="10" value="120">
+   </label>
+  </div>
+  <div class="cap" style="margin-top:6px">Shorten to 40 days and the signal catches the price shock earlier but also flips more during the choppy period. Extend to 250 days and the signal barely moves — it is carrying information from almost a year ago, so today's shock barely registers.</div>
+ </div>
 </div>
 
-<div class="sig-section">
- <div class="sig-section-title">3. Mean reversion — z-score vs rolling mean</div>
- <div class="row" style="gap:20px;flex-wrap:wrap">
-  <label class="ip2">Window &nbsp;<span class="val2" id="sigMrWLbl">20d</span>
-   <input type="range" id="sigMrW" min="5" max="60" step="5" value="20">
-  </label>
-  <label class="ip2">Band (&plusmn;) &nbsp;<span class="val2" id="sigMrUpLbl">&plusmn;2</span>
-   <input type="range" id="sigMrUp" min="1" max="4" step="0.5" value="2">
-  </label>
- </div>
+<!-- LESSON 3 -->
+<div class="lesson-unit">
+ <div class="lesson-num">Lesson 3 of 4</div>
+ <div class="lesson-title">Mean reversion — when to fade the move</div>
+ <div class="concept-card">Mean reversion is the <b>opposite bet to trend-following.</b> It says: prices that move far from their recent average tend to snap back. A z-score above +2 means the price is more than 2 standard deviations above its rolling mean — statistically unusual enough to fade.<br><br>Commodities can sustain genuine trends when supply is structurally short, but they also over-react to news. Mean reversion captures the snap-back after the overshoot. The key question every time: is this a real structural move, or just noise that will reverse?</div>
  <div id="sigMrChart"></div>
  <div class="evtext" id="sigMrNote" style="margin-top:6px"></div>
- <div class="cap">Mean reversion and trend-following compete directly. Commodities tend to trend on genuine supply shocks but mean-revert once the shock is priced in. A z-score beyond &plusmn;2 is unusual enough to fade, but size carefully: commodity price moves have fat tails, so extremes are more common than a normal distribution implies.</div>
+ <div class="insight-pill">&#9888;&#65039; During the price shock on this chart, trend says short and mean reversion says long. The conflict is real — which signal you follow depends on whether you believe the shock is structural or temporary.</div>
+ <div class="quiz-block">
+  <div class="quiz-q">The z-score just hit +2.6. What does the mean-reversion signal say?</div>
+  <div class="quiz-opts">
+   <button class="quiz-opt" data-q="q3" data-ans="wrong" data-fb="That is the momentum logic. Mean reversion does the opposite: when price is stretched above average, the signal goes short, expecting a pullback to the mean.">A) Buy more — a high z-score confirms strong upward price momentum</button>
+   <button class="quiz-opt" data-q="q3" data-ans="correct" data-fb="Correct. A z-score of +2.6 means the price is 2.6 standard deviations above its rolling mean. The mean-reversion signal goes short, betting the price will revert toward the average.">B) Sell / go short — price is stretched 2.6&sigma; above average, expect a pullback</button>
+   <button class="quiz-opt" data-q="q3" data-ans="wrong" data-fb="The standard threshold is ±2. +2.6 is already past it. Waiting for +3 means giving up part of the move, and the price may reverse before reaching that level.">C) Wait — only act when z-score exceeds +3 for stronger confirmation</button>
+  </div>
+  <div class="quiz-feedback" id="qf-q3"></div>
+ </div>
+ <div class="try-box">
+  <div class="try-box-title">Experiment: change the sensitivity</div>
+  <div class="row" style="gap:20px;flex-wrap:wrap">
+   <label class="ip2">Window &nbsp;<span class="val2" id="sigMrWLbl">20d</span>
+    <input type="range" id="sigMrW" min="5" max="60" step="5" value="20">
+   </label>
+   <label class="ip2">Band (&plusmn;) &nbsp;<span class="val2" id="sigMrUpLbl">&plusmn;2</span>
+    <input type="range" id="sigMrUp" min="1" max="4" step="0.5" value="2">
+   </label>
+  </div>
+  <div class="cap" style="margin-top:6px">Narrow the band to &plusmn;1 and the signal fires almost constantly — too much noise. Widen to &plusmn;3 and it almost never fires. The &plusmn;2 default balances signal frequency against statistical significance.</div>
+ </div>
 </div>
 
-<div class="sig-section">
- <div class="sig-section-title">4. Combined: carry &times; momentum</div>
- <div class="row" style="align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px">
-  <label style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px">
-   <input type="checkbox" id="sigCarryOverride" style="width:auto">
-   Override carry (auto-reads from forward curve above)
+<!-- LESSON 4 -->
+<div class="lesson-unit">
+ <div class="lesson-num">Lesson 4 of 4</div>
+ <div class="lesson-title">Why carry changes everything in commodities</div>
+ <div class="concept-card">In equities, you either ride a signal or you do not. In commodities, the forward curve gives you a <b>third source of return: the roll yield.</b><br><br>When the curve is in <b>backwardation</b> — front month priced above back months — a long futures position earns a positive roll yield as the near contract expires and rolls into the cheaper far one. <b>Contango</b> does the reverse: it charges you to hold a long. This asymmetry is unique to commodity futures. Backwardation does not just help a long — it pays you even if the price goes nowhere.</div>
+ <div class="row" style="margin:10px 0;align-items:center;flex-wrap:wrap;gap:10px">
+  <span id="sigCarryBadge"></span>
+  <label style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px">
+   <input type="checkbox" id="sigCarryOverride" style="width:auto"> Override carry state
   </label>
   <select id="sigCarryManual" style="display:none">
    <option value="back">Backwardation</option>
@@ -289,8 +371,53 @@ td.sig-cell{padding:10px 12px;font-size:11.5px;border:1px solid var(--border);bo
   </select>
  </div>
  <div id="sigMatrix"></div>
- <div class="cap" style="margin-top:10px">The highlighted cell is the current combined state. Commodities are unusual: the forward curve is not just a price forecast, it is a real source of return. Backwardation pays a roll yield to hold a long; contango charges you. That asymmetry is why backwardation + positive momentum is the strongest systematic long setup, and why managed-futures funds over-weight commodity longs when the curve is inverted.</div>
+ <div class="quiz-block" style="margin-top:14px">
+  <div class="quiz-q">Brent is in backwardation and the 120-day momentum signal is positive. What is the combined signal?</div>
+  <div class="quiz-opts">
+   <button class="quiz-opt" data-q="q4" data-ans="correct" data-fb="Correct. Backwardation + positive momentum is the strongest long setup in commodity trend-following. The roll yield pays you to hold the position while the trend works in your favour. Most CTA funds over-weight commodity longs when the curve is inverted for exactly this reason.">A) Strongest Long — carry and momentum both point up</button>
+   <button class="quiz-opt" data-q="q4" data-ans="wrong" data-fb="Weak Long applies when momentum is positive but the curve is in contango — so carry fights the signal. Backwardation strengthens a long, it does not weaken it.">B) Weak Long — the carry partially offsets the momentum signal</button>
+   <button class="quiz-opt" data-q="q4" data-ans="wrong" data-fb="Backwardation reinforces a long. The carry here is a tailwind, not a headwind. Neutral would apply only if carry and momentum pointed in opposite directions.">C) Neutral — carry and momentum cancel each other out</button>
+  </div>
+  <div class="quiz-feedback" id="qf-q4"></div>
+ </div>
 </div>
+
+<!-- SUMMARY -->
+<div class="lesson-unit">
+ <div class="lesson-num">Summary</div>
+ <div class="lesson-title">When each signal works — and when it fails</div>
+ <div class="sum-grid">
+  <div class="sum-card">
+   <div class="sum-head"><span class="sum-n">1</span>Trend following</div>
+   <div class="sum-body">
+    <div class="sum-row good">Works when supply shocks create sustained directional moves: OPEC cuts, production outages, demand surges that take months to resolve.</div>
+    <div class="sum-row bad">Fails when price oscillates without conviction, generating repeated whipsaws and small losses on each reversal.</div>
+   </div>
+  </div>
+  <div class="sum-card">
+   <div class="sum-head"><span class="sum-n">2</span>Momentum</div>
+   <div class="sum-body">
+    <div class="sum-row good">Works when a trend is mature and being reinforced by physical flows and fund positioning all moving the same direction.</div>
+    <div class="sum-row bad">Fails when the lookback window straddles a regime change, carrying stale bullish or bearish information into the new environment.</div>
+   </div>
+  </div>
+  <div class="sum-card">
+   <div class="sum-head"><span class="sum-n">3</span>Mean reversion</div>
+   <div class="sum-body">
+    <div class="sum-row good">Works when a shock gets over-priced and the physical market adjusts, pulling price back toward equilibrium.</div>
+    <div class="sum-row bad">Fails when a structural shift makes the "stretched" level the new normal. Selling a real OPEC cut as noise is expensive.</div>
+   </div>
+  </div>
+  <div class="sum-card sum-card-carry">
+   <div class="sum-head"><span class="sum-n">+</span>Roll yield (carry)</div>
+   <div class="sum-body">
+    <div class="sum-row good">Backwardation: paid to hold a long even if price is flat. Amplifies any long signal — the market is tight, storage is low.</div>
+    <div class="sum-row bad">Contango: charged to hold a long. Acts as a constant drag on every long position regardless of the price signal.</div>
+   </div>
+  </div>
+ </div>
+</div>
+
 </div>
 
 <div class="lesson">
@@ -656,13 +783,27 @@ function signalZones(signals,dates){
 
 var _sigPL={paper_bgcolor:'transparent',plot_bgcolor:'transparent',
  font:{family:"'Inter',system-ui,sans-serif",size:10.5,color:'#7C7669'},
- margin:{t:10,r:12,b:36,l:54},
+ margin:{t:34,r:12,b:36,l:54},
  xaxis:{gridcolor:'#EFEDE5',linecolor:'#E0DCD2',tickfont:{size:10},nticks:8},
  yaxis:{gridcolor:'#EFEDE5',linecolor:'#E0DCD2',tickfont:{size:10}},
- legend:{orientation:'h',y:1.1,x:0,font:{size:10}},height:210};
+ legend:{orientation:'h',y:1.14,x:0,font:{size:10}},height:235};
 var _sigCfg={displayModeBar:false,responsive:true};
 function _yl(extra){return Object.assign({},_sigPL.yaxis,extra);}
 function _layout(extra){return Object.assign({},_sigPL,extra);}
+function _ann(x,y,text,ax,ay,col){return{x:x,y:y,xref:'x',yref:'y',text:text,
+ showarrow:true,arrowhead:2,arrowsize:.8,arrowwidth:1.3,ax:ax,ay:ay,
+ font:{size:10.5,color:col||'#1F4E79'},arrowcolor:col||'#1F4E79',
+ bgcolor:'rgba(255,255,255,0.93)',bordercolor:col||'#1F4E79',
+ borderwidth:1,borderpad:4,captureevents:false};}
+function _argMin(arr){var v=Infinity,i=-1;arr.forEach(function(x,j){if(x!==null&&x<v){v=x;i=j;}});return i;}
+function _firstCross(a,b,dir,after){
+ for(var i=Math.max(1,after||0);i<a.length;i++){
+  if(a[i]===null||b[i]===null||a[i-1]===null||b[i-1]===null)continue;
+  if(dir===1&&a[i-1]<=b[i-1]&&a[i]>b[i])return i;
+  if(dir===-1&&a[i-1]>=b[i-1]&&a[i]<b[i])return i;
+ }
+ return -1;
+}
 
 function renderSignals(){
  if(!el('p3')||el('p3').classList.contains('hide'))return;
@@ -676,55 +817,77 @@ function renderSignals(){
  el('sigMrUpLbl').textContent='±'+mrUp;
 
  var ps=loadPriceSeries(key),dates=ps.dates,prices=ps.prices;
+ var cfg=SIG_CFG[key];
 
- /* TREND */
+ /* ─ TREND ─ */
  var fast=smaSeries(prices,fastW),slow=smaSeries(prices,slowW);
  var tSig=fast.map(function(f,i){return(f!==null&&slow[i]!==null)?(f>slow[i]?1:-1):null;});
  var zones=signalZones(tSig,dates);
  var sh1=zones.map(function(z){return{type:'rect',xref:'x',yref:'paper',x0:z.x0,x1:z.x1,y0:0,y1:1,
   fillcolor:z.sig===1?'rgba(30,113,69,0.07)':'rgba(160,49,35,0.07)',line:{width:0}};});
+ var bullI=_firstCross(fast,slow,1);
+ var bearI=_firstCross(fast,slow,-1,260);
+ var tAnns=[];
+ if(bullI>0)tAnns.push(_ann(dates[bullI],fast[bullI],'Fast crosses above slow<br>&#8594; signal LONG',46,-44,'#1E7145'));
+ if(bearI>0)tAnns.push(_ann(dates[bearI],fast[bearI],'Chop regime: first bearish<br>crossover &#8594; signal flips',-56,44,'#A03123'));
+ if(508<prices.length)tAnns.push(_ann(dates[508],prices[508],'Supply shock<br>(gap-down)',28,52,'#A03123'));
+ var lastT=tSig.filter(function(x){return x!==null;}).slice(-1)[0];
  Plotly.react('sigTrendChart',[
   {x:dates,y:prices,name:'Price',type:'scatter',mode:'lines',line:{color:'#1F4E79',width:1.5},hovertemplate:'%{x}<br>$%{y:.2f}<extra></extra>'},
   {x:dates,y:fast,name:fastW+'d SMA',type:'scatter',mode:'lines',line:{color:'#9C6500',width:1.5,dash:'dot'},hovertemplate:'%{y:.2f}<extra></extra>'},
   {x:dates,y:slow,name:slowW+'d SMA',type:'scatter',mode:'lines',line:{color:'#A03123',width:1.5,dash:'dash'},hovertemplate:'%{y:.2f}<extra></extra>'}
- ],_layout({shapes:sh1,yaxis:_yl({title:{text:SIG_CFG[key].unit,font:{size:10}}})}),_sigCfg);
- var lastT=tSig.filter(function(x){return x!==null;}).slice(-1)[0];
- el('sigTrendNote').innerHTML=lastT===1
-  ?'Signal: <b>LONG.</b> The '+fastW+'d average is above the '+slowW+'d average. Trend-followers hold long here.'
-  :'Signal: <b>SHORT.</b> The '+fastW+'d average is below the '+slowW+'d average. Trend-followers are short or flat.';
+ ],_layout({shapes:sh1,annotations:tAnns,yaxis:_yl({title:{text:cfg.unit,font:{size:10}}})}),_sigCfg);
+ el('sigTrendNote').innerHTML='Current signal: <b>'+(lastT===1
+  ?'LONG — fast SMA ('+fastW+'d) is above slow SMA ('+slowW+'d). Green shading marks the active long window.'
+  :'SHORT — fast SMA ('+fastW+'d) is below slow SMA ('+slowW+'d). Red shading marks the short window.')+'</b>';
 
- /* MOMENTUM */
+ /* ─ MOMENTUM ─ */
  var mRet=rollingReturn(prices,momW);
  var lastMom=mRet.filter(function(x){return x!==null;}).slice(-1)[0];
  var momSig=lastMom>=0?1:-1;
+ var mMinI=_argMin(mRet);
+ var mPosSample=Math.min(Math.floor(momW*1.4),238);
+ var mAnns=[];
+ if(mMinI>0&&mRet[mMinI]!==null)
+  mAnns.push(_ann(dates[mMinI],mRet[mMinI],'Largest negative return<br>&#8594; momentum flips SHORT',44,-46,'#A03123'));
+ if(mRet[mPosSample]!==null&&mRet[mPosSample]>0)
+  mAnns.push(_ann(dates[mPosSample],mRet[mPosSample],'Sustained uptrend:<br>momentum stays LONG',-64,-44,'#1E7145'));
  Plotly.react('sigMomChart',[{
   x:dates,y:mRet,name:momW+'d return (%)',type:'bar',
   marker:{color:mRet.map(function(v){return v===null?'transparent':(v>=0?'rgba(30,113,69,0.75)':'rgba(160,49,35,0.75)');})},
   hovertemplate:'%{x}<br>%{y:.2f}%<extra></extra>'
- }],_layout({yaxis:_yl({title:{text:'Return (%)',font:{size:10}},zeroline:true,zerolinecolor:'#C9C6BC',zerolinewidth:1.2})}),_sigCfg);
- el('sigMomNote').innerHTML=momSig===1
-  ?'Signal: <b>LONG.</b> The '+momW+'d return is positive ('+lastMom.toFixed(1)+'%). Momentum says the trend is carrying; ride it.'
-  :'Signal: <b>SHORT.</b> The '+momW+'d return is negative ('+lastMom.toFixed(1)+'%). Price is lower than '+momW+' days ago; momentum is bearish.';
+ }],_layout({annotations:mAnns,yaxis:_yl({title:{text:'Return (%)',font:{size:10}},zeroline:true,zerolinecolor:'#C9C6BC',zerolinewidth:1.2})}),_sigCfg);
+ el('sigMomNote').innerHTML='Current signal: <b>'+(momSig===1
+  ?'LONG — '+momW+'d return is +'+lastMom.toFixed(1)+'%. Price is higher than it was '+momW+' days ago.'
+  :'SHORT — '+momW+'d return is '+lastMom.toFixed(1)+'%. Price is lower than it was '+momW+' days ago.')+'</b>';
 
- /* MEAN REVERSION */
+ /* ─ MEAN REVERSION ─ */
  var zs=zscoreSeries(prices,mrW);
  var lastZ=zs.filter(function(x){return x!==null;}).slice(-1)[0];
  var mrSig=lastZ>mrUp?-1:(lastZ<-mrUp?1:0);
  var sh3=[
   {type:'line',xref:'paper',yref:'y',x0:0,x1:1,y0:mrUp, y1:mrUp, line:{color:'rgba(160,49,35,0.55)',width:1.2,dash:'dash'}},
   {type:'line',xref:'paper',yref:'y',x0:0,x1:1,y0:-mrUp,y1:-mrUp,line:{color:'rgba(30,113,69,0.55)',width:1.2,dash:'dash'}},
-  {type:'rect',xref:'paper',yref:'y',x0:0,x1:1,y0:mrUp, y1:mrUp+6, fillcolor:'rgba(160,49,35,0.05)',line:{width:0}},
-  {type:'rect',xref:'paper',yref:'y',x0:0,x1:1,y0:-mrUp-6,y1:-mrUp,fillcolor:'rgba(30,113,69,0.05)',line:{width:0}}
+  {type:'rect',xref:'paper',yref:'y',x0:0,x1:1,y0:mrUp, y1:mrUp+8, fillcolor:'rgba(160,49,35,0.05)',line:{width:0}},
+  {type:'rect',xref:'paper',yref:'y',x0:0,x1:1,y0:-mrUp-8,y1:-mrUp,fillcolor:'rgba(30,113,69,0.05)',line:{width:0}}
  ];
+ var zMinI=_argMin(zs);
+ var zAnns=[];
+ if(zMinI>0&&zs[zMinI]<-mrUp)
+  zAnns.push(_ann(dates[zMinI],zs[zMinI],'Extreme low z-score<br>&#8594; mean-reversion says BUY',42,-46,'#1E7145'));
+ var zOverI=-1;
+ for(var zi=0;zi<zs.length;zi++){if(zs[zi]!==null&&zs[zi]>mrUp){zOverI=zi;break;}}
+ if(zOverI>0)
+  zAnns.push(_ann(dates[zOverI],zs[zOverI],'Z above +'+mrUp+'<br>&#8594; mean-reversion says SELL',-64,44,'#A03123'));
  Plotly.react('sigMrChart',[{
   x:dates,y:zs,name:'Z-score',type:'scatter',mode:'lines',
   line:{color:'#1F4E79',width:1.5},hovertemplate:'%{x}<br>z = %{y:.3f}<extra></extra>'
- }],_layout({shapes:sh3,yaxis:_yl({title:{text:'Z-score',font:{size:10}},zeroline:true,zerolinecolor:'#C9C6BC',zerolinewidth:1})}),_sigCfg);
- el('sigMrNote').innerHTML=mrSig===0
-  ?'Signal: <b>FLAT.</b> Z-score is '+lastZ.toFixed(2)+', within ±'+mrUp+'. Not stretched enough to fade; mean-reversion signal is inactive.'
+ }],_layout({shapes:sh3,annotations:zAnns,yaxis:_yl({title:{text:'Z-score',font:{size:10}},zeroline:true,zerolinecolor:'#C9C6BC',zerolinewidth:1})}),_sigCfg);
+ el('sigMrNote').innerHTML='Current signal: <b>'+(mrSig===0
+  ?'FLAT — z-score is '+lastZ.toFixed(2)+', within ±'+mrUp+'. No stretched condition; signal is inactive.'
   :mrSig===1
-  ?'Signal: <b>LONG.</b> Z-score is '+lastZ.toFixed(2)+', below −'+mrUp+'. Price is unusually cheap vs its '+mrW+'d average; mean-reversion traders would buy the dip.'
-  :'Signal: <b>SHORT.</b> Z-score is '+lastZ.toFixed(2)+', above +'+mrUp+'. Price is unusually rich vs its '+mrW+'d average; mean-reversion traders would fade and sell.';
+  ?'LONG — z-score is '+lastZ.toFixed(2)+', below −'+mrUp+'. Price is unusually cheap vs its '+mrW+'d average; mean-reversion says buy.'
+  :'SHORT — z-score is '+lastZ.toFixed(2)+', above +'+mrUp+'. Price is unusually rich vs its '+mrW+'d average; mean-reversion says sell.')+'</b>';
 
  renderCombined(momSig,key);
 }
@@ -732,27 +895,27 @@ function renderSignals(){
 function renderCombined(momSig,instrKey){
  var benchKey=SIG_CFG[instrKey].benchKey;
  var b=BENCH[benchKey],curve=buildCurve(b);
- var autoSpread=curve[0]-curve[curve.length-1]; // positive = backwardation
+ var autoSpread=curve[0]-curve[curve.length-1];
  var ov=el('sigCarryOverride')&&el('sigCarryOverride').checked;
  var carryState=ov?(el('sigCarryManual').value==='back'?1:-1):(autoSpread>=0?1:-1);
  var rollYield=ov?(carryState===1?Math.abs(autoSpread):-Math.abs(autoSpread)):autoSpread;
  el('sigCarryBadge').innerHTML=(carryState===1
   ?'<span class="badge b-back">BACKWARDATION</span>'
   :'<span class="badge b-cont">CONTANGO</span>')+
-  ' <span style="color:var(--muted);font-size:11.5px">roll yield: '+(rollYield>=0?'+':'')+rollYield.toFixed(2)+' per unit (front vs 12m back)</span>';
+  ' <span style="color:var(--muted);font-size:11.5px">roll yield: '+(rollYield>=0?'+':'')+rollYield.toFixed(2)+' per unit</span>';
  var CELLS=[
-  {mom:1, carry:1, cls:'sig-cell-strong-long', label:'Strongest Long',  desc:'Backwardation + positive momentum. Roll yield pays you to hold the trend. Classic CTA long setup.'},
-  {mom:1, carry:-1,cls:'sig-cell-weak',        label:'Weak Long',        desc:'Momentum is up but contango charges you to hold. The roll yield fights the trend.'},
-  {mom:-1,carry:1, cls:'sig-cell-weak',        label:'Weak Short',       desc:'Momentum is bearish but backwardation means the market is tight. Carry and momentum disagree.'},
-  {mom:-1,carry:-1,cls:'sig-cell-strong-short',label:'Strongest Short',  desc:'Contango + negative momentum. Roll yield reinforces the downtrend. Classic CTA short setup.'}
+  {mom:1, carry:1, cls:'sig-cell-strong-long', label:'Strongest Long',  desc:'Roll yield pays you to hold; momentum says the trend is up. Both point the same direction.'},
+  {mom:1, carry:-1,cls:'sig-cell-weak',        label:'Weak Long',        desc:'Momentum is up but contango charges you to hold. The roll yield fights the trend signal.'},
+  {mom:-1,carry:1, cls:'sig-cell-weak',        label:'Weak Short',       desc:'Momentum is down but backwardation means the physical market is tight. Carry fights the short.'},
+  {mom:-1,carry:-1,cls:'sig-cell-strong-short',label:'Strongest Short',  desc:'Roll yield charges holders and momentum is down. Both reinforce the short.'}
  ];
  var html='<table class="sig-matrix"><tr><th></th><th>&#9650; Backwardation</th><th>&#9660; Contango</th></tr>';
- html+='<tr><th style="text-align:left;width:120px">Momentum up &#8593;</th>';
+ html+='<tr><th style="text-align:left;width:120px;font-size:11px;font-weight:600">Momentum up &#8593;</th>';
  [CELLS[0],CELLS[1]].forEach(function(c){
   var a=(momSig===c.mom&&carryState===c.carry);
   html+='<td class="sig-cell '+c.cls+(a?' sig-cell-active':'')+'"><b>'+c.label+'</b><span>'+c.desc+'</span></td>';
  });
- html+='</tr><tr><th style="text-align:left">Momentum down &#8595;</th>';
+ html+='</tr><tr><th style="text-align:left;font-size:11px;font-weight:600">Momentum down &#8595;</th>';
  [CELLS[2],CELLS[3]].forEach(function(c){
   var a=(momSig===c.mom&&carryState===c.carry);
   html+='<td class="sig-cell '+c.cls+(a?' sig-cell-active':'')+'"><b>'+c.label+'</b><span>'+c.desc+'</span></td>';
@@ -776,6 +939,15 @@ el('sigInstr').addEventListener('change',renderSignals);
 ['sigFast','sigSlow','sigMom','sigMrW','sigMrUp'].forEach(function(id){el(id).addEventListener('input',renderSignals);});
 el('sigCarryOverride').addEventListener('change',function(){el('sigCarryManual').style.display=this.checked?'inline-block':'none';renderSignals();});
 el('sigCarryManual').addEventListener('change',renderSignals);
+document.addEventListener('click',function(e){
+ var btn=e.target.closest('.quiz-opt');
+ if(!btn||btn.disabled)return;
+ var q=btn.dataset.q;
+ document.querySelectorAll('[data-q="'+q+'"]').forEach(function(b){b.disabled=true;if(b.dataset.ans==='correct')b.classList.add('correct');});
+ if(btn.dataset.ans!=='correct')btn.classList.add('wrong');
+ var fb=el('qf-'+q);
+ if(fb){fb.textContent=btn.dataset.fb;fb.className='quiz-feedback show fb-'+(btn.dataset.ans==='correct'?'correct':'wrong');}
+});
 (function(){var cv=el('curve');
  cv.addEventListener('mousemove',function(e){var r=cv.getBoundingClientRect();drawCurveHover(nearestCurveIdx((e.clientX-r.left)*(cv.width/r.width)),false)});
  cv.addEventListener('mouseleave',function(){if(el('curveInfo').dataset.pinned!=='1')drawCurveHover(-1,false)});
