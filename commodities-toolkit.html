@@ -79,6 +79,26 @@ th{font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--fain
 .lesson{font-size:12.5px;color:var(--muted);margin-top:24px;border-top:1px solid var(--border);padding-top:12px}
 .note{font-size:11.5px;color:var(--faint);margin-top:10px}
 .btn2{border:1px solid var(--border);border-radius:9px;padding:9px 14px;font-size:12.5px;font-family:inherit;cursor:pointer;background:var(--card);color:var(--text)}
+/* ── Signals tab ── */
+.sig-header{background:#F4F2EC;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:11px 14px;margin-bottom:4px}
+.sig-header-badge{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+.sig-header p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.6}
+.sig-section{margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
+.sig-section-title{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.ip2{font-size:11.5px;color:var(--muted);display:flex;flex-direction:column;gap:3px;min-width:130px}
+.val2{font-size:13px;font-weight:700;color:var(--text)}
+input[type=range]{width:100%;margin:0;accent-color:var(--accent)}
+.sig-matrix{border-collapse:separate;border-spacing:4px;margin-top:6px;width:100%;table-layout:fixed}
+.sig-matrix th{font-size:10.5px;color:var(--faint);padding:5px 8px;font-weight:600;text-align:center;letter-spacing:.5px}
+td.sig-cell{padding:10px 12px;font-size:11.5px;border:1px solid var(--border);border-radius:7px;vertical-align:top;line-height:1.5}
+.sig-cell b{display:block;font-size:12px;margin-bottom:3px}
+.sig-cell span{color:var(--muted);font-size:11px}
+.sig-cell-strong-long{background:rgba(30,113,69,0.06)}
+.sig-cell-strong-short{background:rgba(160,49,35,0.06)}
+.sig-cell-weak{background:#FAFAF8}
+.sig-cell-active{outline:2.5px solid var(--accent);outline-offset:0}
+.sig-cell-active.sig-cell-strong-long{outline-color:var(--good)}
+.sig-cell-active.sig-cell-strong-short{outline-color:var(--bad)}
 </style>
 </head>
 <body>
@@ -138,6 +158,7 @@ th{font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--fain
 <button class="tab on" data-t="0">Live map</button>
 <button class="tab" data-t="1">Benchmarks &amp; curve</button>
 <button class="tab" data-t="2">Fundamentals</button>
+<button class="tab" data-t="3">Signals</button>
 </div>
 
 <!-- TAB 0: MAP -->
@@ -196,6 +217,82 @@ th{font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--fain
 <div class="cap">Storage economics in one view: where stocks sit versus history, how many days of demand they cover, and net trade as a stand-in for deliveries.</div>
 </div>
 
+<!-- TAB 3: SIGNALS -->
+<div class="pane hide" id="p3">
+<div class="sig-header">
+ <div class="sig-header-badge">Price-based signals</div>
+ <p>These three signals are purely mechanical and price-derived, separate from the physical fundamentals in the other tabs. Commodities are the classic home of systematic trend-following: CTAs and managed-futures funds run variants of exactly these models across energy, metals and agricultural markets. The combined view ties in the forward curve's carry state, because in commodities the roll yield is not a side effect — it is part of the return.</p>
+</div>
+<div class="row" style="margin-top:12px;align-items:center;flex-wrap:wrap;gap:8px">
+ <label style="font-size:12px;color:var(--muted)">Instrument
+  <select id="sigInstr">
+   <option value="BRENT">Brent crude</option>
+   <option value="WTI">WTI crude</option>
+   <option value="TTF">TTF gas (Europe)</option>
+  </select>
+ </label>
+ <span id="sigCarryBadge"></span>
+</div>
+
+<div class="sig-section">
+ <div class="sig-section-title">1. Trend — moving-average crossover</div>
+ <div class="row" style="gap:20px;flex-wrap:wrap">
+  <label class="ip2">Fast SMA &nbsp;<span class="val2" id="sigFastLbl">20d</span>
+   <input type="range" id="sigFast" min="5" max="50" step="5" value="20">
+  </label>
+  <label class="ip2">Slow SMA &nbsp;<span class="val2" id="sigSlowLbl">100d</span>
+   <input type="range" id="sigSlow" min="20" max="200" step="10" value="100">
+  </label>
+ </div>
+ <div id="sigTrendChart"></div>
+ <div class="evtext" id="sigTrendNote" style="margin-top:6px"></div>
+ <div class="cap">When the fast average crosses above the slow, a trend-follower goes long; shading shows the current signal state (green = long, red = short). The signal is intentionally slow to react: missing a real trend costs more than a few false starts.</div>
+</div>
+
+<div class="sig-section">
+ <div class="sig-section-title">2. Momentum — trailing N-day return</div>
+ <div class="row">
+  <label class="ip2">Lookback &nbsp;<span class="val2" id="sigMomLbl">120d</span>
+   <input type="range" id="sigMom" min="40" max="250" step="10" value="120">
+  </label>
+ </div>
+ <div id="sigMomChart"></div>
+ <div class="evtext" id="sigMomNote" style="margin-top:6px"></div>
+ <div class="cap">The signal is the sign of the N-day return. Positive bar = price is higher than it was N days ago. In commodities the classic window is 12 months (hence "12-1"), but shorter windows work in energy where supply shocks resolve faster than in equities.</div>
+</div>
+
+<div class="sig-section">
+ <div class="sig-section-title">3. Mean reversion — z-score vs rolling mean</div>
+ <div class="row" style="gap:20px;flex-wrap:wrap">
+  <label class="ip2">Window &nbsp;<span class="val2" id="sigMrWLbl">20d</span>
+   <input type="range" id="sigMrW" min="5" max="60" step="5" value="20">
+  </label>
+  <label class="ip2">Band (&plusmn;) &nbsp;<span class="val2" id="sigMrUpLbl">&plusmn;2</span>
+   <input type="range" id="sigMrUp" min="1" max="4" step="0.5" value="2">
+  </label>
+ </div>
+ <div id="sigMrChart"></div>
+ <div class="evtext" id="sigMrNote" style="margin-top:6px"></div>
+ <div class="cap">Mean reversion and trend-following compete directly. Commodities tend to trend on genuine supply shocks but mean-revert once the shock is priced in. A z-score beyond &plusmn;2 is unusual enough to fade, but size carefully: commodity price moves have fat tails, so extremes are more common than a normal distribution implies.</div>
+</div>
+
+<div class="sig-section">
+ <div class="sig-section-title">4. Combined: carry &times; momentum</div>
+ <div class="row" style="align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px">
+  <label style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px">
+   <input type="checkbox" id="sigCarryOverride" style="width:auto">
+   Override carry (auto-reads from forward curve above)
+  </label>
+  <select id="sigCarryManual" style="display:none">
+   <option value="back">Backwardation</option>
+   <option value="cont">Contango</option>
+  </select>
+ </div>
+ <div id="sigMatrix"></div>
+ <div class="cap" style="margin-top:10px">The highlighted cell is the current combined state. Commodities are unusual: the forward curve is not just a price forecast, it is a real source of return. Backwardation pays a roll yield to hold a long; contango charges you. That asymmetry is why backwardation + positive momentum is the strongest systematic long setup, and why managed-futures funds over-weight commodity longs when the curve is inverted.</div>
+</div>
+</div>
+
 <div class="lesson">
 <b>The through-line.</b> Fundamentals and storage set how tight the market is, that tightness shows up as the shape of the forward curve, and the map is where you see whether the physical barrels can actually move to relieve it. Same chain a desk reasons along, in one screen.
 </div>
@@ -223,6 +320,7 @@ th{font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--fain
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
 <script src="js/main.js"></script>
 
 <script>
@@ -491,16 +589,193 @@ function stat(v,l,hl){return '<div class="stat'+(hl?' hl':'')+'"><div class="v">
 function sigStat(name,val,cls,sub){return '<div class="stat"><div class="v" style="font-size:13px"><span class="sig '+cls+'">'+val.toUpperCase()+'</span></div><div class="l">'+name+': '+sub+'</div></div>'}
 function srow(a,b,c){return '<tr><td>'+a+'</td><td>'+b+'</td><td style="text-align:right;color:#6B6A64">'+c+'</td></tr>'}
 
+/* ── SIGNALS ── */
+
+/*
+ * Instrument configs for the Signals tab.
+ * benchKey maps to BENCH for carry-state reading.
+ */
+var SIG_CFG={
+ BRENT:{name:'Brent crude',unit:'$/bbl',  start:78,  vol:0.012,seed:501,benchKey:'BRENT'},
+ WTI:  {name:'WTI crude',  unit:'$/bbl',  start:74,  vol:0.013,seed:502,benchKey:'WTI'},
+ TTF:  {name:'TTF gas',    unit:'$/MMBtu',start:10.5,vol:0.018,seed:503,benchKey:'TTF'}
+};
+
+/*
+ * loadPriceSeries(key) -- synthetic 750-trading-day series.
+ * LIVE HOOK: replace this function body to pull from EIA, Bloomberg, or your
+ * existing data source. Expected return: {dates: string[], prices: number[]}.
+ */
+function loadPriceSeries(key){
+ var cfg=SIG_CFG[key],r=rng(cfg.seed),N=750,p=cfg.start;
+ var prices=[],dates=[],d=new Date('2021-07-01');
+ for(var i=0;i<N;i++){
+  do{d=new Date(d.getTime()+86400000)}while(d.getDay()===0||d.getDay()===6);
+  dates.push(d.toISOString().slice(0,10));
+  var drift,vol;
+  if(i<250){drift=cfg.start*0.00025;vol=cfg.vol;}
+  else if(i<500){drift=(cfg.start*1.18-p)*0.025;vol=cfg.vol*1.7;}
+  else if(i<560){drift=-cfg.start*0.0045;vol=cfg.vol*2.8;if(i===508)p*=0.88;}
+  else{drift=cfg.start*0.0002;vol=cfg.vol*1.1;}
+  p=Math.max(cfg.start*0.28,p+drift+vol*p*randn(r));
+  prices.push(+p.toFixed(2));
+ }
+ return{dates:dates,prices:prices};
+}
+
+function smaSeries(prices,w){
+ var out=new Array(prices.length).fill(null);
+ for(var i=w-1;i<prices.length;i++){var s=0;for(var j=i-w+1;j<=i;j++)s+=prices[j];out[i]=+(s/w).toFixed(2);}
+ return out;
+}
+function rollingReturn(prices,w){
+ var out=new Array(prices.length).fill(null);
+ for(var i=w;i<prices.length;i++)out[i]=+((prices[i]/prices[i-w]-1)*100).toFixed(2);
+ return out;
+}
+function zscoreSeries(prices,w){
+ var out=new Array(prices.length).fill(null);
+ for(var i=w-1;i<prices.length;i++){
+  var sl=prices.slice(i-w+1,i+1);
+  var m=sl.reduce(function(a,b){return a+b},0)/w;
+  var s=Math.sqrt(sl.reduce(function(a,b){return a+(b-m)*(b-m)},0)/w);
+  out[i]=s>0?+((prices[i]-m)/s).toFixed(3):0;
+ }
+ return out;
+}
+function signalZones(signals,dates){
+ var zones=[],cur=null;
+ for(var i=0;i<signals.length;i++){
+  if(signals[i]===null)continue;
+  if(!cur||cur.sig!==signals[i]){if(cur){cur.x1=dates[i-1];zones.push(cur);}cur={sig:signals[i],x0:dates[i],x1:dates[i]};}
+  else cur.x1=dates[i];
+ }
+ if(cur)zones.push(cur);
+ return zones;
+}
+
+var _sigPL={paper_bgcolor:'transparent',plot_bgcolor:'transparent',
+ font:{family:"'Inter',system-ui,sans-serif",size:10.5,color:'#7C7669'},
+ margin:{t:10,r:12,b:36,l:54},
+ xaxis:{gridcolor:'#EFEDE5',linecolor:'#E0DCD2',tickfont:{size:10},nticks:8},
+ yaxis:{gridcolor:'#EFEDE5',linecolor:'#E0DCD2',tickfont:{size:10}},
+ legend:{orientation:'h',y:1.1,x:0,font:{size:10}},height:210};
+var _sigCfg={displayModeBar:false,responsive:true};
+function _yl(extra){return Object.assign({},_sigPL.yaxis,extra);}
+function _layout(extra){return Object.assign({},_sigPL,extra);}
+
+function renderSignals(){
+ if(!el('p3')||el('p3').classList.contains('hide'))return;
+ var key=el('sigInstr').value;
+ var fastW=+el('sigFast').value,slowW=+el('sigSlow').value;
+ var momW=+el('sigMom').value,mrW=+el('sigMrW').value,mrUp=+el('sigMrUp').value;
+ el('sigFastLbl').textContent=fastW+'d';
+ el('sigSlowLbl').textContent=slowW+'d';
+ el('sigMomLbl').textContent=momW+'d';
+ el('sigMrWLbl').textContent=mrW+'d';
+ el('sigMrUpLbl').textContent='±'+mrUp;
+
+ var ps=loadPriceSeries(key),dates=ps.dates,prices=ps.prices;
+
+ /* TREND */
+ var fast=smaSeries(prices,fastW),slow=smaSeries(prices,slowW);
+ var tSig=fast.map(function(f,i){return(f!==null&&slow[i]!==null)?(f>slow[i]?1:-1):null;});
+ var zones=signalZones(tSig,dates);
+ var sh1=zones.map(function(z){return{type:'rect',xref:'x',yref:'paper',x0:z.x0,x1:z.x1,y0:0,y1:1,
+  fillcolor:z.sig===1?'rgba(30,113,69,0.07)':'rgba(160,49,35,0.07)',line:{width:0}};});
+ Plotly.react('sigTrendChart',[
+  {x:dates,y:prices,name:'Price',type:'scatter',mode:'lines',line:{color:'#1F4E79',width:1.5},hovertemplate:'%{x}<br>$%{y:.2f}<extra></extra>'},
+  {x:dates,y:fast,name:fastW+'d SMA',type:'scatter',mode:'lines',line:{color:'#9C6500',width:1.5,dash:'dot'},hovertemplate:'%{y:.2f}<extra></extra>'},
+  {x:dates,y:slow,name:slowW+'d SMA',type:'scatter',mode:'lines',line:{color:'#A03123',width:1.5,dash:'dash'},hovertemplate:'%{y:.2f}<extra></extra>'}
+ ],_layout({shapes:sh1,yaxis:_yl({title:{text:SIG_CFG[key].unit,font:{size:10}}})}),_sigCfg);
+ var lastT=tSig.filter(function(x){return x!==null;}).slice(-1)[0];
+ el('sigTrendNote').innerHTML=lastT===1
+  ?'Signal: <b>LONG.</b> The '+fastW+'d average is above the '+slowW+'d average. Trend-followers hold long here.'
+  :'Signal: <b>SHORT.</b> The '+fastW+'d average is below the '+slowW+'d average. Trend-followers are short or flat.';
+
+ /* MOMENTUM */
+ var mRet=rollingReturn(prices,momW);
+ var lastMom=mRet.filter(function(x){return x!==null;}).slice(-1)[0];
+ var momSig=lastMom>=0?1:-1;
+ Plotly.react('sigMomChart',[{
+  x:dates,y:mRet,name:momW+'d return (%)',type:'bar',
+  marker:{color:mRet.map(function(v){return v===null?'transparent':(v>=0?'rgba(30,113,69,0.75)':'rgba(160,49,35,0.75)');})},
+  hovertemplate:'%{x}<br>%{y:.2f}%<extra></extra>'
+ }],_layout({yaxis:_yl({title:{text:'Return (%)',font:{size:10}},zeroline:true,zerolinecolor:'#C9C6BC',zerolinewidth:1.2})}),_sigCfg);
+ el('sigMomNote').innerHTML=momSig===1
+  ?'Signal: <b>LONG.</b> The '+momW+'d return is positive ('+lastMom.toFixed(1)+'%). Momentum says the trend is carrying; ride it.'
+  :'Signal: <b>SHORT.</b> The '+momW+'d return is negative ('+lastMom.toFixed(1)+'%). Price is lower than '+momW+' days ago; momentum is bearish.';
+
+ /* MEAN REVERSION */
+ var zs=zscoreSeries(prices,mrW);
+ var lastZ=zs.filter(function(x){return x!==null;}).slice(-1)[0];
+ var mrSig=lastZ>mrUp?-1:(lastZ<-mrUp?1:0);
+ var sh3=[
+  {type:'line',xref:'paper',yref:'y',x0:0,x1:1,y0:mrUp, y1:mrUp, line:{color:'rgba(160,49,35,0.55)',width:1.2,dash:'dash'}},
+  {type:'line',xref:'paper',yref:'y',x0:0,x1:1,y0:-mrUp,y1:-mrUp,line:{color:'rgba(30,113,69,0.55)',width:1.2,dash:'dash'}},
+  {type:'rect',xref:'paper',yref:'y',x0:0,x1:1,y0:mrUp, y1:mrUp+6, fillcolor:'rgba(160,49,35,0.05)',line:{width:0}},
+  {type:'rect',xref:'paper',yref:'y',x0:0,x1:1,y0:-mrUp-6,y1:-mrUp,fillcolor:'rgba(30,113,69,0.05)',line:{width:0}}
+ ];
+ Plotly.react('sigMrChart',[{
+  x:dates,y:zs,name:'Z-score',type:'scatter',mode:'lines',
+  line:{color:'#1F4E79',width:1.5},hovertemplate:'%{x}<br>z = %{y:.3f}<extra></extra>'
+ }],_layout({shapes:sh3,yaxis:_yl({title:{text:'Z-score',font:{size:10}},zeroline:true,zerolinecolor:'#C9C6BC',zerolinewidth:1})}),_sigCfg);
+ el('sigMrNote').innerHTML=mrSig===0
+  ?'Signal: <b>FLAT.</b> Z-score is '+lastZ.toFixed(2)+', within ±'+mrUp+'. Not stretched enough to fade; mean-reversion signal is inactive.'
+  :mrSig===1
+  ?'Signal: <b>LONG.</b> Z-score is '+lastZ.toFixed(2)+', below −'+mrUp+'. Price is unusually cheap vs its '+mrW+'d average; mean-reversion traders would buy the dip.'
+  :'Signal: <b>SHORT.</b> Z-score is '+lastZ.toFixed(2)+', above +'+mrUp+'. Price is unusually rich vs its '+mrW+'d average; mean-reversion traders would fade and sell.';
+
+ renderCombined(momSig,key);
+}
+
+function renderCombined(momSig,instrKey){
+ var benchKey=SIG_CFG[instrKey].benchKey;
+ var b=BENCH[benchKey],curve=buildCurve(b);
+ var autoSpread=curve[0]-curve[curve.length-1]; // positive = backwardation
+ var ov=el('sigCarryOverride')&&el('sigCarryOverride').checked;
+ var carryState=ov?(el('sigCarryManual').value==='back'?1:-1):(autoSpread>=0?1:-1);
+ var rollYield=ov?(carryState===1?Math.abs(autoSpread):-Math.abs(autoSpread)):autoSpread;
+ el('sigCarryBadge').innerHTML=(carryState===1
+  ?'<span class="badge b-back">BACKWARDATION</span>'
+  :'<span class="badge b-cont">CONTANGO</span>')+
+  ' <span style="color:var(--muted);font-size:11.5px">roll yield: '+(rollYield>=0?'+':'')+rollYield.toFixed(2)+' per unit (front vs 12m back)</span>';
+ var CELLS=[
+  {mom:1, carry:1, cls:'sig-cell-strong-long', label:'Strongest Long',  desc:'Backwardation + positive momentum. Roll yield pays you to hold the trend. Classic CTA long setup.'},
+  {mom:1, carry:-1,cls:'sig-cell-weak',        label:'Weak Long',        desc:'Momentum is up but contango charges you to hold. The roll yield fights the trend.'},
+  {mom:-1,carry:1, cls:'sig-cell-weak',        label:'Weak Short',       desc:'Momentum is bearish but backwardation means the market is tight. Carry and momentum disagree.'},
+  {mom:-1,carry:-1,cls:'sig-cell-strong-short',label:'Strongest Short',  desc:'Contango + negative momentum. Roll yield reinforces the downtrend. Classic CTA short setup.'}
+ ];
+ var html='<table class="sig-matrix"><tr><th></th><th>&#9650; Backwardation</th><th>&#9660; Contango</th></tr>';
+ html+='<tr><th style="text-align:left;width:120px">Momentum up &#8593;</th>';
+ [CELLS[0],CELLS[1]].forEach(function(c){
+  var a=(momSig===c.mom&&carryState===c.carry);
+  html+='<td class="sig-cell '+c.cls+(a?' sig-cell-active':'')+'"><b>'+c.label+'</b><span>'+c.desc+'</span></td>';
+ });
+ html+='</tr><tr><th style="text-align:left">Momentum down &#8595;</th>';
+ [CELLS[2],CELLS[3]].forEach(function(c){
+  var a=(momSig===c.mom&&carryState===c.carry);
+  html+='<td class="sig-cell '+c.cls+(a?' sig-cell-active':'')+'"><b>'+c.label+'</b><span>'+c.desc+'</span></td>';
+ });
+ html+='</tr></table>';
+ el('sigMatrix').innerHTML=html;
+}
+
 /* ── TABS + INIT ── */
 function showTab(n){
- for(var i=0;i<3;i++)el('p'+i).classList.toggle('hide',i!==n);
+ for(var i=0;i<4;i++)el('p'+i).classList.toggle('hide',i!==n);
  document.querySelectorAll('.tab').forEach(function(b){b.classList.toggle('on',+b.dataset.t===n)});
  if(n===1)renderBench();
  if(n===2)renderFund();
+ if(n===3)renderSignals();
 }
 document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){showTab(+b.dataset.t)})});
 el('bench').addEventListener('change',renderBench);
 ['cmp','bench2'].forEach(function(id){var e=el(id);if(e)e.addEventListener('change',renderBench)});
+el('sigInstr').addEventListener('change',renderSignals);
+['sigFast','sigSlow','sigMom','sigMrW','sigMrUp'].forEach(function(id){el(id).addEventListener('input',renderSignals);});
+el('sigCarryOverride').addEventListener('change',function(){el('sigCarryManual').style.display=this.checked?'inline-block':'none';renderSignals();});
+el('sigCarryManual').addEventListener('change',renderSignals);
 (function(){var cv=el('curve');
  cv.addEventListener('mousemove',function(e){var r=cv.getBoundingClientRect();drawCurveHover(nearestCurveIdx((e.clientX-r.left)*(cv.width/r.width)),false)});
  cv.addEventListener('mouseleave',function(){if(el('curveInfo').dataset.pinned!=='1')drawCurveHover(-1,false)});
