@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap">
 
 <!--
-  Niyam â this is a standalone, self-contained page. Drop learn.html into your site repo.
+  Niyam, this is a standalone, self-contained page. Drop learn.html into your site repo.
   Adjust the nav hrefs below (marked NAV) to match your routing (e.g. index.html#work).
   Everything else (search, filters, interactive tools) works with no build step or dependencies.
 -->
@@ -262,13 +262,13 @@
     <header>
       <p class="eyebrow">Concept library</p>
       <h1>Learn</h1>
-      <p class="stand">The mechanics behind the tools I build â rates, FX, commodities, options and risk â explained by <b>playing with them</b>, not reading about them. Every card is an interactive graph you can pull apart until the idea clicks.</p>
+      <p class="stand">The mechanics behind the tools I build, rates, FX, commodities, options and risk, explained by <b>playing with them</b>, not reading about them. Every card is an interactive graph you can pull apart until the idea clicks.</p>
     </header>
 
     <div class="controls">
       <div class="searchbox">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-        <input id="search" type="text" placeholder="Search concepts â try &quot;curve&quot;, &quot;vol&quot;, &quot;collar&quot;â¦" autocomplete="off">
+        <input id="search" type="text" placeholder="Search concepts, try &quot;curve&quot;, &quot;vol&quot;, &quot;collar&quot;..." autocomplete="off">
       </div>
       <div class="chips" id="chips"></div>
       <p class="count" id="count"></p>
@@ -280,12 +280,12 @@
 
   <!-- ============ DETAIL ============ -->
   <div id="detail">
-    <button class="back" id="back">â All concepts</button>
+    <button class="back" id="back">← All concepts</button>
     <p class="d-cat" id="d-cat"></p>
     <h1 id="d-title"></h1>
     <p class="d-stand" id="d-stand"></p>
     <div id="d-body"></div>
-    <p class="disclaimer">Educational tools â simplified for intuition, not production pricing or investment advice. Figures are illustrative.</p>
+    <p class="disclaimer">Educational tools, simplified for intuition, not production pricing or investment advice. Figures are illustrative.</p>
   </div>
 </div>
 
@@ -388,7 +388,7 @@
       tags:["options","hedging","oil","gap risk","payoff"], interactive:true,
       project:"Physical Commodities Toolkit & Trade Pitch Builder", projectUrl:"index.html#work",
       summary:"Why a stop can't protect a gappy market, and how a collar hedges a long trade for near-zero cost. Drag the strikes and watch the payoff.",
-      stand:"You're long a market that gaps overnight on headlines. A stop-loss won't save you. Here's the option structure that will â and how to make it pay for itself.",
+      stand:"You're long a market that gaps overnight on headlines. A stop-loss won't save you. Here's the option structure that will, and how to make it pay for itself.",
       build:collarTool
     },
     {
@@ -404,7 +404,7 @@
       tags:["rates","duration","dv01","convexity","bonds"], interactive:true,
       project:"Market Analysis Tools", projectUrl:"index.html#work",
       summary:"Why bond prices fall when yields rise, why the curve is convex, and what DV01 means for a desk. Slide the yield.",
-      stand:"Price and yield move in opposite directions â but not in a straight line. That curvature is convexity, and DV01 is how a desk measures the risk.",
+      stand:"Price and yield move in opposite directions, but not in a straight line. That curvature is convexity, and DV01 is how a desk measures the risk.",
       build:durationTool
     },
     {
@@ -419,15 +419,15 @@
       id:"correlation", title:"Correlation & diversification", cat:"Portfolio & Risk",
       tags:["portfolio","correlation","diversification","volatility","crisis"], interactive:true,
       project:"Portfolio Analysis Suite", projectUrl:"index.html#work",
-      summary:"Slide correlation from â1 to +1 and watch diversification appear and vanish â the exact thing that fails in a crisis.",
-      stand:"Two 20%-vol assets don't make a 20%-vol portfolio â unless they're perfectly correlated. Diversification is a free lunch that a crisis takes away.",
+      summary:"Slide correlation from −1 to +1 and watch diversification appear and vanish, the exact thing that fails in a crisis.",
+      stand:"Two 20%-vol assets don't make a 20%-vol portfolio, unless they're perfectly correlated. Diversification is a free lunch that a crisis takes away.",
       build:correlationTool
     },
     {
       id:"position-sizing", title:"Volatility & position sizing", cat:"Portfolio & Risk",
       tags:["risk","sizing","volatility","stop","kelly"], interactive:true,
       project:"Volatility, Sizing & Risk Trainer", projectUrl:"index.html#work",
-      summary:"Set your account, risk budget and the asset's volatility â the tool sizes the position so one bad trade can't sink you.",
+      summary:"Set your account, risk budget and the asset's volatility, the tool sizes the position so one bad trade can't sink you.",
       stand:"Good traders don't size by conviction, they size by risk. The more volatile the asset, the smaller the position for the same risk budget.",
       build:sizingTool
     },
@@ -435,16 +435,16 @@
       id:"reaction-function", title:"The central-bank reaction function", cat:"Macro",
       tags:["macro","fed","inflation","rates","policy"], interactive:true,
       project:"Macro dashboards (Schonfeld)", projectUrl:"index.html#work",
-      summary:"Move inflation and the jobs picture and see whether the Fed should hold, cut or hike â and why sticky inflation blocks a cut.",
-      stand:"A central bank has one tool and two jobs. When inflation and employment disagree, it has to pick â and that choice is the whole game for rates.",
+      summary:"Move inflation and the jobs picture and see whether the Fed should hold, cut or hike, and why sticky inflation blocks a cut.",
+      stand:"A central bank has one tool and two jobs. When inflation and employment disagree, it has to pick, and that choice is the whole game for rates.",
       build:reactionTool
     },
     {
       id:"momentum-mean-reversion", title:"Momentum, trend & mean reversion", cat:"Trading Styles",
       tags:["momentum","mean reversion","trend","autocorrelation","signals"], interactive:true,
       project:"PL 2026/27 Predictor (Model vs Market)", projectUrl:"index.html#work",
-      summary:"Dial a market from trending to mean-reverting and watch the price path change character â then see which style makes money in each.",
-      stand:"Some markets keep going; others snap back. The single parameter behind that â return autocorrelation â decides whether you ride trends or fade extremes.",
+      summary:"Dial a market from trending to mean-reverting and watch the price path change character, then see which style makes money in each.",
+      stand:"Some markets keep going; others snap back. The single parameter behind that, return autocorrelation, decides whether you ride trends or fade extremes.",
       build:momentumTool
     },
     {
@@ -452,14 +452,14 @@
       tags:["positioning","crowding","squeeze","sentiment","unwind"], interactive:true,
       project:"Trade Pitch Builder (what kills it)", projectUrl:"index.html#work",
       summary:"See why a trade everyone loves is dangerous: crank up the crowding and watch the unwind get violent.",
-      stand:"A great thesis with everyone already on it is a bad trade. When there's no marginal buyer left, the only way out is down â fast.",
+      stand:"A great thesis with everyone already on it is a bad trade. When there's no marginal buyer left, the only way out is down, fast.",
       build:positioningTool
     },
     {
       id:"alpha-beta", title:"Alpha & beta", cat:"Portfolio & Risk",
       tags:["alpha","beta","capm","systematic","regression"], interactive:true,
       project:"Portfolio Analysis Suite", projectUrl:"index.html#work",
-      summary:"Set a stock's beta, alpha and noise and watch the scatter vs the market â the line's slope is beta, its lift is alpha.",
+      summary:"Set a stock's beta, alpha and noise and watch the scatter vs the market, the line's slope is beta, its lift is alpha.",
       stand:"Beta is the market you can't take credit for; alpha is the bit you can. Separating them is how a book's returns get judged.",
       build:alphaBetaTool
     },
@@ -467,7 +467,7 @@
       id:"sharpe-ratio", title:"The Sharpe ratio", cat:"Portfolio & Risk",
       tags:["sharpe","risk-adjusted","sortino","information ratio","volatility"], interactive:true,
       project:"Portfolio Analysis Suite", projectUrl:"index.html#work",
-      summary:"Return alone is a vanity metric. Slide return, vol and the risk-free rate to see return per unit of risk â and where the bar actually is.",
+      summary:"Return alone is a vanity metric. Slide return, vol and the risk-free rate to see return per unit of risk, and where the bar actually is.",
       stand:"A 30% return at 60% vol is worse than 8% at 5%. Sharpe is how desks compare returns on a level, risk-adjusted playing field.",
       build:sharpeTool
     },
@@ -475,7 +475,7 @@
       id:"diversification-concentration", title:"Diversification vs concentration", cat:"Portfolio & Risk",
       tags:["diversification","concentration","idiosyncratic","systematic","conviction"], interactive:true,
       project:"Portfolio Analysis Suite", projectUrl:"index.html#work",
-      summary:"Add holdings and watch risk fall â but only to a floor it can't break. See exactly what diversification removes and what it can't.",
+      summary:"Add holdings and watch risk fall, but only to a floor it can't break. See exactly what diversification removes and what it can't.",
       stand:"Diversification protects you from what you don't know; concentration expresses what you do. Here's the maths of the trade-off.",
       build:diversConcTool
     },
@@ -483,7 +483,7 @@
       id:"sigma-moves", title:"Standard-deviation moves & fat tails", cat:"Portfolio & Risk",
       tags:["standard deviation","sigma","fat tails","distribution","tail risk"], interactive:true,
       project:"Volatility, Sizing & Risk Trainer", projectUrl:"index.html#work",
-      summary:"See how rare a '3-sigma move' should be â then why markets deliver them far more often than the bell curve says.",
+      summary:"See how rare a '3-sigma move' should be, then why markets deliver them far more often than the bell curve says.",
       stand:"'A 4-sigma day' sounds precise. The catch: markets have fatter tails than the normal curve, so those days aren't nearly as rare as the maths claims.",
       build:sigmaTool
     },
@@ -491,7 +491,7 @@
       id:"curve-positioning", title:"Positioning on the yield curve", cat:"Rates",
       tags:["rates","duration","steepener","flattener","butterfly","relative value"], interactive:true,
       project:"Market Analysis Tools", projectUrl:"index.html#work",
-      summary:"Pick your view on rates and on the curve â the tool tells you the trade: outright duration, a steepener/flattener, or a fly.",
+      summary:"Pick your view on rates and on the curve, the tool tells you the trade: outright duration, a steepener/flattener, or a fly.",
       stand:"You can bet on three different things with bonds: the level of rates, the slope of the curve, and its curvature. Each is a distinct trade.",
       build:curvePosTool
     },
@@ -499,7 +499,7 @@
       id:"risk-on-risk-off", title:"Risk-on / risk-off & safe havens", cat:"Macro",
       tags:["risk-on","risk-off","safe haven","JPY","CHF","gold","flight to quality"], interactive:true,
       project:"Macro dashboards (Schonfeld)", projectUrl:"index.html#work",
-      summary:"Slide market sentiment from panic to euphoria and watch every asset class rotate â and see which currencies are the havens.",
+      summary:"Slide market sentiment from panic to euphoria and watch every asset class rotate, and see which currencies are the havens.",
       stand:"On big days the whole market moves as one animal: toward risk or away from it. Knowing what rallies in each mode is cross-asset literacy 101.",
       build:riskOnOffTool
     },
@@ -507,15 +507,15 @@
       id:"regimes", title:"Regimes & regime transitions", cat:"Macro",
       tags:["regime","goldilocks","reflation","stagflation","growth","inflation"], interactive:true,
       project:"Macro dashboards & daily brief", projectUrl:"index.html#work",
-      summary:"Move growth and inflation across the master 2Ã2 â Goldilocks, reflation, stagflation, slowdown â and get the asset playbook for each.",
-      stand:"Almost everything macro reduces to two axes: is growth rising or falling, and is inflation rising or falling. That grid is the map â and the edge is spotting the shift early.",
+      summary:"Move growth and inflation across the master 2×2, Goldilocks, reflation, stagflation, slowdown, and get the asset playbook for each.",
+      stand:"Almost everything macro reduces to two axes: is growth rising or falling, and is inflation rising or falling. That grid is the map, and the edge is spotting the shift early.",
       build:regimeTool
     },
     {
       id:"carry-trade", title:"The FX carry trade", cat:"FX",
       tags:["fx","carry","JPY","funding","risk-off","yen"], interactive:true,
       project:"Macro & markets (BP / Schonfeld)", projectUrl:"index.html#work",
-      summary:"Borrow a low-yield currency, park it in a high-yield one, pocket the difference â until a risk-off shock unwinds it all at once. See the trade-off.",
+      summary:"Borrow a low-yield currency, park it in a high-yield one, pocket the difference, until a risk-off shock unwinds it all at once. See the trade-off.",
       stand:"Carry is the steadiest-looking return in FX and the one that ends careers. It earns a little every day and gives it all back in a week.",
       build:carryTool
     },
@@ -523,15 +523,15 @@
       id:"rate-differentials", title:"Rate differentials & interest-rate parity", cat:"FX",
       tags:["fx","interest rate parity","USDJPY","yield differential","forwards"], interactive:true,
       project:"Market Analysis Tools", projectUrl:"index.html#work",
-      summary:"Why the USâJapan yield gap is the single biggest driver of USD/JPY, and what forwards and interest-rate parity actually say.",
-      stand:"Over the medium term, majors trade on the gap between two countries' interest rates. Move the US and Japan rates and watch the pair â and the carry â respond.",
+      summary:"Why the US–Japan yield gap is the single biggest driver of USD/JPY, and what forwards and interest-rate parity actually say.",
+      stand:"Over the medium term, majors trade on the gap between two countries' interest rates. Move the US and Japan rates and watch the pair, and the carry, respond.",
       build:rateDiffTool
     },
     {
       id:"dollar-smile", title:"The dollar smile", cat:"FX",
       tags:["fx","dollar","DXY","safe haven","risk","growth"], interactive:true,
       project:"Macro dashboards (Schonfeld)", projectUrl:"index.html#work",
-      summary:"The dollar is strong in a crisis AND when the US booms â and weak in the sleepy middle. See why USD strength is a smile, not a line.",
+      summary:"The dollar is strong in a crisis AND when the US booms, and weak in the sleepy middle. See why USD strength is a smile, not a line.",
       stand:"The dollar wins at both extremes: haven demand when the world panics, yield and growth demand when the US races ahead. It only sags in the benign middle.",
       build:dollarSmileTool
     },
@@ -539,7 +539,7 @@
       id:"ppp", title:"Purchasing power parity", cat:"FX",
       tags:["fx","ppp","inflation","fair value","big mac","real exchange rate"], interactive:true,
       project:"Macro dashboards & daily brief", projectUrl:"index.html#work",
-      summary:"The long-run anchor for currencies: the higher-inflation country's money loses value over time. See the drift â and why it's useless for timing.",
+      summary:"The long-run anchor for currencies: the higher-inflation country's money loses value over time. See the drift, and why it's useless for timing.",
       stand:"Over decades, exchange rates drift so a basket of goods costs the same everywhere. Over months, they ignore it completely. Both facts matter.",
       build:pppTool
     },
@@ -547,7 +547,7 @@
       id:"greeks", title:"The option greeks", cat:"Options & Derivatives",
       tags:["options","delta","gamma","vega","theta","hedging"], interactive:true,
       project:"Trade Pitch Builder", projectUrl:"index.html#work",
-      summary:"Move spot, vol and time on a live option and watch delta, gamma, vega and theta respond â the four dials every options desk lives by.",
+      summary:"Move spot, vol and time on a live option and watch delta, gamma, vega and theta respond, the four dials every options desk lives by.",
       stand:"An option's price depends on four things moving at once. The greeks are just the speedometers: how much the option moves when spot, vol or time changes.",
       build:greeksTool
     },
@@ -555,7 +555,7 @@
       id:"implied-vs-realised-vol", title:"Implied vs realised vol", cat:"Options & Derivatives",
       tags:["volatility","implied","realised","vol risk premium","options"], interactive:true,
       project:"Volatility, Sizing & Risk Trainer", projectUrl:"index.html#work",
-      summary:"The vol you pay for an option (implied) usually exceeds the vol that actually shows up (realised). See the premium â and why selling it is dangerous.",
+      summary:"The vol you pay for an option (implied) usually exceeds the vol that actually shows up (realised). See the premium, and why selling it is dangerous.",
       stand:"Implied vol is the market's forecast of movement; realised is what happened. The gap between them is one of the most traded edges in markets.",
       build:ivRvTool
     },
@@ -564,13 +564,13 @@
       tags:["skew","smile","implied vol","puts","crash risk"], interactive:true,
       project:"Trade Pitch Builder", projectUrl:"index.html#work",
       summary:"Options at different strikes trade at different implied vols. Tilt the skew and see why downside puts cost more than the model says they should.",
-      stand:"If markets were truly normal, every strike would have the same implied vol. They don't â downside protection is systematically dearer. That shape is the skew.",
+      stand:"If markets were truly normal, every strike would have the same implied vol. They don't, downside protection is systematically dearer. That shape is the skew.",
       build:skewTool
     },
     {
       id:"structured-products", title:"Structured products", cat:"Options & Derivatives",
       tags:["structuring","capital protection","autocallable","notes","options"], interactive:true,
-      project:"Your structuring target â how the desk builds payoffs", projectUrl:"index.html#work",
+      project:"Your structuring target, how the desk builds payoffs", projectUrl:"index.html#work",
       summary:"Build a capital-protected note from a bond plus an option, and see the payoff. The core of what a structuring desk actually does.",
       stand:"A structured product is just a bond and some options in a wrapper. Understanding how the pieces combine into a client payoff is the structurer's whole job.",
       build:structuredTool
@@ -579,7 +579,7 @@
       id:"credit-spreads", title:"Credit spreads & default risk", cat:"Credit",
       tags:["credit","spread","default","recovery","IG","HY"], interactive:true,
       project:"Market Risk Methodology (Deutsche Bank)", projectUrl:"index.html#work",
-      summary:"Set a bond's default odds and recovery rate and see the fair spread fall out â the price of lending to something that might not pay you back.",
+      summary:"Set a bond's default odds and recovery rate and see the fair spread fall out, the price of lending to something that might not pay you back.",
       stand:"A credit spread is the extra yield over govvies you demand for taking default risk. Strip it down and it's expected loss plus a premium for the fear.",
       build:creditSpreadsTool
     },
@@ -587,7 +587,7 @@
       id:"credit-cycle", title:"The credit cycle", cat:"Credit",
       tags:["credit","cycle","spreads","default","leverage"], interactive:true,
       project:"Macro dashboards (Schonfeld)", projectUrl:"index.html#work",
-      summary:"Walk through the credit cycle â repair, recovery, expansion, downturn â and watch spreads and the right positioning change with it.",
+      summary:"Walk through the credit cycle, repair, recovery, expansion, downturn, and watch spreads and the right positioning change with it.",
       stand:"Credit moves in a cycle of loosening and tightening lending. Knowing where you are tells you whether to own credit or hide from it.",
       build:creditCycleTool
     },
@@ -596,14 +596,14 @@
       tags:["equities","valuation","P/E","multiple","re-rating"], interactive:true,
       project:"Portfolio Analysis Suite", projectUrl:"index.html#work",
       summary:"See what actually justifies a P/E: growth and the discount rate. Move them and watch the fair multiple expand and compress.",
-      stand:"Price = earnings Ã a multiple. Half of equity returns come from earnings growing; the other half from the multiple re-rating â and rates drive that.",
+      stand:"Price = earnings × a multiple. Half of equity returns come from earnings growing; the other half from the multiple re-rating, and rates drive that.",
       build:equityMultTool
     },
     {
       id:"factor-investing", title:"Factor investing", cat:"Equities",
       tags:["factors","value","quality","momentum","size","low vol"], interactive:false,
       project:"Portfolio Analysis Suite", projectUrl:"index.html#work",
-      summary:"Value, quality, momentum, size, low-vol â the systematic styles that explain much of a portfolio's returns, and when each works.",
+      summary:"Value, quality, momentum, size, low-vol, the systematic styles that explain much of a portfolio's returns, and when each works.",
       stand:"Beyond the market itself, a handful of persistent factors explain why some stocks beat others. Knowing them is how returns get attributed.",
       build:factorTool
     },
@@ -611,7 +611,7 @@
       id:"sector-rotation", title:"Sector rotation", cat:"Equities",
       tags:["sectors","cyclicals","defensives","rotation","cycle"], interactive:false,
       project:"Macro dashboards & daily brief", projectUrl:"index.html#work",
-      summary:"Which sectors lead at each stage of the cycle â and why cyclicals and defensives take turns as growth ebbs and flows.",
+      summary:"Which sectors lead at each stage of the cycle, and why cyclicals and defensives take turns as growth ebbs and flows.",
       stand:"Money doesn't leave the equity market in a slowdown so much as rotate within it. The map of what leads when is sector rotation.",
       build:sectorTool
     },
@@ -619,7 +619,7 @@
       id:"breakevens-real-yields", title:"Real yields & breakevens", cat:"Rates",
       tags:["rates","real yield","breakeven","TIPS","inflation expectations"], interactive:true,
       project:"Market Analysis Tools", projectUrl:"index.html#work",
-      summary:"Split a nominal yield into its real and inflation-expectation parts â the exact decomposition that tells you what's driving a bond sell-off.",
+      summary:"Split a nominal yield into its real and inflation-expectation parts, the exact decomposition that tells you what's driving a bond sell-off.",
       stand:"A nominal yield is two things stacked: the real yield plus expected inflation (the breakeven). Which one is moving changes the whole story.",
       build:breakevenTool
     },
@@ -627,23 +627,23 @@
       id:"var-stress", title:"VaR & stress testing", cat:"Portfolio & Risk",
       tags:["var","risk","stress test","tail","expected shortfall"], interactive:true,
       project:"Market Risk Methodology (Deutsche Bank)", projectUrl:"index.html#work",
-      summary:"Set your portfolio's volatility and a confidence level to get its Value-at-Risk â then see exactly what VaR hides in the tail.",
-      stand:"VaR answers 'how bad is a normal bad day?' It's the industry's core risk number â and its blind spot in the tail is why stress testing exists.",
+      summary:"Set your portfolio's volatility and a confidence level to get its Value-at-Risk, then see exactly what VaR hides in the tail.",
+      stand:"VaR answers 'how bad is a normal bad day?' It's the industry's core risk number, and its blind spot in the tail is why stress testing exists.",
       build:varTool
     },
     {
       id:"business-cycle", title:"The business cycle", cat:"Macro",
       tags:["macro","cycle","recession","PMI","leading indicators"], interactive:true,
       project:"Macro dashboards & daily brief", projectUrl:"index.html#work",
-      summary:"Walk the economy through expansion, peak, contraction and trough â and see which indicators lead and how assets tilt at each stage.",
-      stand:"Economies breathe in a cycle. Reading which phase you're in â and spotting the turn early â sits underneath almost every macro call.",
+      summary:"Walk the economy through expansion, peak, contraction and trough, and see which indicators lead and how assets tilt at each stage.",
+      stand:"Economies breathe in a cycle. Reading which phase you're in, and spotting the turn early, sits underneath almost every macro call.",
       build:businessCycleTool
     },
     {
       id:"boj-intervention", title:"FX intervention & the BOJ", cat:"FX",
       tags:["fx","intervention","BOJ","MOF","USDJPY","reserves"], interactive:false,
-      project:"USD/JPY â one of my live views", projectUrl:"index.html#views",
-      summary:"How and why a government steps into the FX market to move its own currency â with USD/JPY as the live case study.",
+      project:"USD/JPY, one of my live views", projectUrl:"index.html#views",
+      summary:"How and why a government steps into the FX market to move its own currency, with USD/JPY as the live case study.",
       stand:"When a currency moves too far too fast, the authorities can intervene directly. It rarely reverses a trend, but it can break one's back briefly.",
       build:bojTool
     },
@@ -651,7 +651,7 @@
       id:"crack-spread", title:"Crack spreads & refining margins", cat:"Commodities",
       tags:["commodities","refining","crack spread","crude","products"], interactive:true,
       project:"Physical Commodities Toolkit (BP)", projectUrl:"index.html#work",
-      summary:"A refiner buys crude and sells petrol and diesel. The gap â the crack spread â is its margin. Move the prices and watch it move.",
+      summary:"A refiner buys crude and sells petrol and diesel. The gap, the crack spread, is its margin. Move the prices and watch it move.",
       stand:"Refiners are long products and short crude. The 3-2-1 crack spread is the single number that says whether refining is minting money or losing it.",
       build:crackTool
     },
@@ -660,15 +660,15 @@
       tags:["commodities","storage","carry","contango","arbitrage"], interactive:true,
       project:"Physical Commodities Toolkit (BP)", projectUrl:"index.html#work",
       summary:"What links the spot price to the futures curve: storage cost and financing. See when it pays to buy oil, store it, and sell it forward.",
-      stand:"The forward curve isn't free-floating â it's tethered to spot by the cost of storing and financing the physical barrel. That tether caps how steep contango can get.",
+      stand:"The forward curve isn't free-floating, it's tethered to spot by the cost of storing and financing the physical barrel. That tether caps how steep contango can get.",
       build:storageTool
     },
     {
       id:"grade-location", title:"Grade & location spreads", cat:"Commodities",
       tags:["commodities","brent","wti","freight","chokepoints","quality"], interactive:true,
-      project:"Physical Commodities Toolkit â chokepoint map (BP)", projectUrl:"index.html#work",
-      summary:"Not all crude is equal, and geography costs money. See when it pays to ship a barrel from one hub to another â and what a chokepoint does.",
-      stand:"A barrel's price depends on its quality and where it sits. Grade and location spreads are the physical trader's bread and butter â and they blow out when a chokepoint is threatened.",
+      project:"Physical Commodities Toolkit, chokepoint map (BP)", projectUrl:"index.html#work",
+      summary:"Not all crude is equal, and geography costs money. See when it pays to ship a barrel from one hub to another, and what a chokepoint does.",
+      stand:"A barrel's price depends on its quality and where it sits. Grade and location spreads are the physical trader's bread and butter, and they blow out when a chokepoint is threatened.",
       build:gradeTool
     },
     {
@@ -699,9 +699,9 @@
       slider({seed:s,key:'entry',label:'Entry (long from)',min:70,max:100,step:1,value:88,fmt:function(v){return '$'+v;}})+
       slider({seed:s,key:'put',label:'Put strike (floor)',min:70,max:96,step:1,value:84,fmt:function(v){return '$'+v;}})+
       slider({seed:s,key:'call',label:'Call strike (cap / target)',min:96,max:130,step:1,value:110,fmt:function(v){return '$'+v;}})+
-      slider({seed:s,key:'prem',label:'Net premium (put â call)',min:-3,max:6,step:0.5,value:0,fmt:function(v){return (v>0?'+':'')+'$'+v;}});
+      slider({seed:s,key:'prem',label:'Net premium (put − call)',min:-3,max:6,step:0.5,value:0,fmt:function(v){return (v>0?'+':'')+'$'+v;}});
     host.innerHTML =
-      '<div class="prose"><p>You bought oil and you want a hard floor a weekend gap can\'t jump over. Buy a <b>put</b> for the floor; sell a <b>call</b> at your target to pay for it. The green line is your profit and loss at expiry â drag the strikes and watch the box change shape.</p></div>'+
+      '<div class="prose"><p>You bought oil and you want a hard floor a weekend gap can\'t jump over. Buy a <b>put</b> for the floor; sell a <b>call</b> at your target to pay for it. The green line is your profit and loss at expiry, drag the strikes and watch the box change shape.</p></div>'+
       toolShell('Payoff at expiry ($/bbl)', c, 'collarPlot',
         '<div class="stat"><span class="k">Max loss</span><span class="v" id="cl_floor" style="color:var(--loss)"></span></div>'+
         '<div class="stat"><span class="k">Max gain</span><span class="v" id="cl_cap" style="color:var(--profit)"></span></div>'+
@@ -709,8 +709,8 @@
         '<div class="stat"><span class="k">Reward : risk</span><span class="v" id="cl_rr"></span></div>')+
       '<div class="prose">'+
         '<h4>Read it in one line</h4>'+
-        '<p>You\'re risking the small floor to make the way-bigger cap â in exchange for giving up any gain above your own target. A stop is free but a gap leaps over it; the put is a <b>contract</b>, so it holds no matter where the market opens.</p>'+
-        '<div class="callout">Interview line: <i>"I\'d collar it â long the put for a gap-proof floor, short the call at my target to fund it, so the downside protection is near-free and I only give up upside I was closing out anyway."</i></div>'+
+        '<p>You\'re risking the small floor to make the way-bigger cap, in exchange for giving up any gain above your own target. A stop is free but a gap leaps over it; the put is a <b>contract</b>, so it holds no matter where the market opens.</p>'+
+        '<div class="callout">Interview line: <i>"I\'d collar it, long the put for a gap-proof floor, short the call at my target to fund it, so the downside protection is near-free and I only give up upside I was closing out anyway."</i></div>'+
       '</div>';
     function draw(){
       var E=num(id('entry')), KP=num(id('put')), KC=num(id('call')), prem=num(id('prem'));
@@ -731,10 +731,10 @@
       document.getElementById('cl_floor').textContent = fmtUsd(floor);
       document.getElementById('cl_cap').textContent = '+'+fmtUsd(cap).replace('$','$');
       document.getElementById('cl_be').textContent = '$'+be.toFixed(0);
-      document.getElementById('cl_rr').textContent = floor<0 ? (cap/Math.abs(floor)).toFixed(1)+' : 1' : 'â';
+      document.getElementById('cl_rr').textContent = floor<0 ? (cap/Math.abs(floor)).toFixed(1)+' : 1' : '—';
     }
     function id(k){ return 'sl_'+Math.round(s*1e6)+'_'+k; }
-    function fmtUsd(v){ return (v<0?'â$':'$')+Math.abs(v).toFixed(0); }
+    function fmtUsd(v){ return (v<0?'−$':'$')+Math.abs(v).toFixed(0); }
     ['entry','put','call','prem'].forEach(function(k){ bind(id(k),draw); });
     draw();
   }
@@ -745,16 +745,16 @@
       slider({seed:s,key:'front',label:'Front end Â· 2y (Fed policy)',min:1,max:6,step:0.1,value:3.6,fmt:function(v){return v.toFixed(1)+'%';}})+
       slider({seed:s,key:'long',label:'Long end Â· 30y (term premium)',min:1,max:7,step:0.1,value:5.2,fmt:function(v){return v.toFixed(1)+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>Each dot is the yield on a bond of that maturity. The line joining them is <b>the curve</b>. The single most-watched number is <b>2s10s</b> â the 10-year minus the 2-year. Move the two ends and watch the shape (and the story) change.</p></div>'+
-      toolShell('US Treasury curve â yield by maturity', c, 'ycPlot',
+      '<div class="prose"><p>Each dot is the yield on a bond of that maturity. The line joining them is <b>the curve</b>. The single most-watched number is <b>2s10s</b>, the 10-year minus the 2-year. Move the two ends and watch the shape (and the story) change.</p></div>'+
+      toolShell('US Treasury curve, yield by maturity', c, 'ycPlot',
         '<div class="stat"><span class="k">2s10s spread</span><span class="v" id="yc_spread"></span></div>'+
         '<div class="stat"><span class="k">Shape</span><span class="v" id="yc_shape" style="font-size:16px"></span></div>')+
       '<div class="prose">'+
         '<h4>What each shape means</h4>'+
-        '<p><b>Upward / steep:</b> the normal, healthy state â investors demand more to lend for longer. <b>Flat:</b> the market is unsure. <b>Inverted</b> (2s10s below zero): the market expects the Fed to be cutting hard later â historically a recession warning.</p>'+
+        '<p><b>Upward / steep:</b> the normal, healthy state, investors demand more to lend for longer. <b>Flat:</b> the market is unsure. <b>Inverted</b> (2s10s below zero): the market expects the Fed to be cutting hard later, historically a recession warning.</p>'+
         '<h4>Steepener vs flattener</h4>'+
-        '<p>A <b>steepener</b> is a trade that profits if the curve steepens (the gap widens); a <b>flattener</b> profits if it narrows. Two flavours matter: a <b>bull steepener</b> (front end falls faster â yields down, bonds rally, usually the Fed easing) and a <b>bear steepener</b> (long end rises faster â yields up, bonds sell off, usually fiscal or inflation worry). Today\'s market â long end pinned near highs while the front sits still â is the bear-steepening story.</p>'+
-        '<div class="callout">Why desks trade the curve <i>DV01-neutral</i>: they want the bet to be on the <b>shape</b>, not on rates going up or down overall â so they size the two legs to cancel out the parallel move. That\'s exactly what my Market Analysis Tools project sizes.</div>'+
+        '<p>A <b>steepener</b> is a trade that profits if the curve steepens (the gap widens); a <b>flattener</b> profits if it narrows. Two flavours matter: a <b>bull steepener</b> (front end falls faster, yields down, bonds rally, usually the Fed easing) and a <b>bear steepener</b> (long end rises faster, yields up, bonds sell off, usually fiscal or inflation worry). Today\'s market, long end pinned near highs while the front sits still, is the bear-steepening story.</p>'+
+        '<div class="callout">Why desks trade the curve <i>DV01-neutral</i>: they want the bet to be on the <b>shape</b>, not on rates going up or down overall, so they size the two legs to cancel out the parallel move. That\'s exactly what my Market Analysis Tools project sizes.</div>'+
       '</div>';
     function draw(){
       var f=num(id('front')), l=num(id('long'));
@@ -773,9 +773,9 @@
         xlabel:'maturity', ylabel:'yield', aria:'yield curve'
       });
       var sp=spread*100;
-      var e=document.getElementById('yc_spread'); e.textContent=(sp>=0?'+':'â')+Math.abs(sp).toFixed(0)+' bp';
+      var e=document.getElementById('yc_spread'); e.textContent=(sp>=0?'+':'−')+Math.abs(sp).toFixed(0)+' bp';
       e.style.color = sp>=0?'var(--profit)':'var(--loss)';
-      document.getElementById('yc_shape').textContent = sp<-5?'Inverted â ':(sp<20?'Flat':'Upward-sloping');
+      document.getElementById('yc_shape').textContent = sp<-5?'Inverted ⚠':(sp<20?'Flat':'Upward-sloping');
     }
     ['front','long'].forEach(function(k){bind(id(k),draw);}); draw();
   }
@@ -785,18 +785,18 @@
     var CPN=4, N=10, F=100;
     var c=slider({seed:s,key:'y',label:'Market yield',min:1,max:9,step:0.05,value:4,fmt:function(v){return v.toFixed(2)+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>Take a 10-year bond that pays a fixed <b>4% coupon</b>. Its price isn\'t fixed â it moves so its yield matches whatever the market demands. Slide the yield and watch the price. Notice two things: it moves the <i>opposite</i> way, and the line <i>curves</i>.</p></div>'+
+      '<div class="prose"><p>Take a 10-year bond that pays a fixed <b>4% coupon</b>. Its price isn\'t fixed, it moves so its yield matches whatever the market demands. Slide the yield and watch the price. Notice two things: it moves the <i>opposite</i> way, and the line <i>curves</i>.</p></div>'+
       toolShell('Price of a 10y 4% bond vs its yield', c, 'durPlot',
         '<div class="stat"><span class="k">Price</span><span class="v" id="du_px"></span></div>'+
         '<div class="stat"><span class="k">DV01 (per $1m)</span><span class="v" id="du_dv"></span></div>'+
         '<div class="stat"><span class="k">Mod. duration</span><span class="v" id="du_dur"></span></div>')+
       '<div class="prose">'+
         '<h4>Why opposite?</h4>'+
-        '<p>The coupon is fixed at 4. If the market now wants 6, nobody pays full price for a 4% bond â so its <b>price falls</b> until the return works out to 6. Yields up â prices down, always.</p>'+
+        '<p>The coupon is fixed at 4. If the market now wants 6, nobody pays full price for a 4% bond, so its <b>price falls</b> until the return works out to 6. Yields up ⇒ prices down, always.</p>'+
         '<h4>Why curved (convexity)?</h4>'+
         '<p>The line bows toward the origin. That curvature is <b>convexity</b>, and it\'s good news if you own the bond: prices rise a bit <i>more</i> when yields fall than they drop when yields rise by the same amount.</p>'+
         '<h4>What\'s DV01?</h4>'+
-        '<p><b>DV01 = dollar value of 1 basis point.</b> It\'s how much you make or lose if the yield moves 0.01%. A desk hedges by matching DV01 across positions so a small rate wiggle nets to zero â the backbone of the steepener sizing in my rates project.</p>'+
+        '<p><b>DV01 = dollar value of 1 basis point.</b> It\'s how much you make or lose if the yield moves 0.01%. A desk hedges by matching DV01 across positions so a small rate wiggle nets to zero, the backbone of the steepener sizing in my rates project.</p>'+
       '</div>';
     function price(y){ y=y/100; var p=0; for(var t=1;t<=N;t++) p+=CPN/Math.pow(1+y,t); p+=F/Math.pow(1+y,N); return p; }
     function draw(){
@@ -822,18 +822,18 @@
 
   function forwardCurveTool(host){
     seed=0.44; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
-    var c=slider({seed:s,key:'slope',label:'Curve slope (back â front)',min:-8,max:8,step:0.5,value:4,fmt:function(v){return (v>0?'+':'')+'$'+v;}});
+    var c=slider({seed:s,key:'slope',label:'Curve slope (back − front)',min:-8,max:8,step:0.5,value:4,fmt:function(v){return (v>0?'+':'')+'$'+v;}});
     host.innerHTML=
-      '<div class="prose"><p>Futures let you buy oil for delivery in 1, 2, 3â¦ months. Plot those prices and you get the <b>forward curve</b>. Whether it slopes up or down decides if simply <i>holding</i> a long position makes or loses you money over time. Slide the slope.</p></div>'+
-      toolShell('Oil futures curve â price by delivery month', c, 'fcPlot',
+      '<div class="prose"><p>Futures let you buy oil for delivery in 1, 2, 3... months. Plot those prices and you get the <b>forward curve</b>. Whether it slopes up or down decides if simply <i>holding</i> a long position makes or loses you money over time. Slide the slope.</p></div>'+
+      toolShell('Oil futures curve, price by delivery month', c, 'fcPlot',
         '<div class="stat"><span class="k">State</span><span class="v" id="fc_state" style="font-size:16px"></span></div>'+
         '<div class="stat"><span class="k">Roll yield / month</span><span class="v" id="fc_roll"></span></div>')+
       '<div class="prose">'+
         '<h4>Contango (upward): time bleeds you</h4>'+
-        '<p>Far months cost <i>more</i> than the front. To stay long you must keep selling the cheap expiring contract and buying the pricier next one â a small loss every roll. That\'s <b>negative roll yield</b>, and it\'s the tax on being long a contango market even if spot never moves.</p>'+
+        '<p>Far months cost <i>more</i> than the front. To stay long you must keep selling the cheap expiring contract and buying the pricier next one, a small loss every roll. That\'s <b>negative roll yield</b>, and it\'s the tax on being long a contango market even if spot never moves.</p>'+
         '<h4>Backwardation (downward): time pays you</h4>'+
-        '<p>Far months cost <i>less</i>. Now each roll sells an expensive contract and buys a cheaper one â a small gain. <b>Positive roll yield.</b> Backwardation usually signals tight physical supply â exactly the Iran-sanctions setup we discussed.</p>'+
-        '<div class="callout">This is the carry engine behind my Physical Commodities Toolkit â a trade can be right on direction and still bleed out if the curve is against you.</div>'+
+        '<p>Far months cost <i>less</i>. Now each roll sells an expensive contract and buys a cheaper one, a small gain. <b>Positive roll yield.</b> Backwardation usually signals tight physical supply, exactly the Iran-sanctions setup we discussed.</p>'+
+        '<div class="callout">This is the carry engine behind my Physical Commodities Toolkit, a trade can be right on direction and still bleed out if the curve is against you.</div>'+
       '</div>';
     function draw(){
       var sl=num(id('slope')); setv(id('slope'),(sl>0?'+':'')+'$'+sl);
@@ -851,7 +851,7 @@
       st.textContent = Math.abs(sl)<0.6?'Flat':(sl>0?'Contango':'Backwardation');
       st.style.color = Math.abs(sl)<0.6?'var(--muted)':(sl>0?'var(--loss)':'var(--profit)');
       var r=document.getElementById('fc_roll');
-      r.textContent=(roll>=0?'+':'â')+'$'+Math.abs(roll).toFixed(2);
+      r.textContent=(roll>=0?'+':'−')+'$'+Math.abs(roll).toFixed(2);
       r.style.color = roll>=0?'var(--profit)':'var(--loss)';
     }
     bind(id('slope'),draw); draw();
@@ -862,15 +862,15 @@
     var c=slider({seed:s,key:'rho',label:'Correlation between the two assets',min:-1,max:1,step:0.05,value:0.2,fmt:function(v){return v.toFixed(2);}});
     var s1=0.20,s2=0.20;
     host.innerHTML=
-      '<div class="prose"><p>Two assets, each with <b>20% volatility</b>, split 50/50. You\'d guess the portfolio is also 20% vol â but it isn\'t, unless they move in lockstep. The curve shows portfolio vol as correlation runs from â1 to +1. Slide it.</p></div>'+
+      '<div class="prose"><p>Two assets, each with <b>20% volatility</b>, split 50/50. You\'d guess the portfolio is also 20% vol, but it isn\'t, unless they move in lockstep. The curve shows portfolio vol as correlation runs from −1 to +1. Slide it.</p></div>'+
       toolShell('Portfolio volatility vs correlation (two 20%-vol assets, 50/50)', c, 'corrPlot',
         '<div class="stat"><span class="k">Portfolio vol</span><span class="v" id="co_vol"></span></div>'+
         '<div class="stat"><span class="k">Diversification benefit</span><span class="v" id="co_ben" style="color:var(--profit)"></span></div>')+
       '<div class="prose">'+
         '<h4>The free lunch</h4>'+
-        '<p>At correlation +1 the assets are the same bet â no diversification, portfolio vol stays 20%. As correlation falls, their moves partly cancel and portfolio vol <b>drops</b>. At â1 they perfectly offset. That reduction in risk for no loss of expected return is the closest thing markets have to a free lunch.</p>'+
+        '<p>At correlation +1 the assets are the same bet, no diversification, portfolio vol stays 20%. As correlation falls, their moves partly cancel and portfolio vol <b>drops</b>. At −1 they perfectly offset. That reduction in risk for no loss of expected return is the closest thing markets have to a free lunch.</p>'+
         '<h4>Why crises hurt</h4>'+
-        '<p>In a panic, <i>everything</i> sells off together â correlations snap toward +1 exactly when you need them low. Your diversification evaporates at the worst moment. That\'s the failure mode my Portfolio Analysis Suite is built to stress-test.</p>'+
+        '<p>In a panic, <i>everything</i> sells off together, correlations snap toward +1 exactly when you need them low. Your diversification evaporates at the worst moment. That\'s the failure mode my Portfolio Analysis Suite is built to stress-test.</p>'+
       '</div>';
     function draw(){
       var rho=num(id('rho')); setv(id('rho'),rho.toFixed(2));
@@ -887,7 +887,7 @@
         xlabel:'correlation (Ï)', ylabel:'portfolio vol', aria:'portfolio vol vs correlation'
       });
       document.getElementById('co_vol').textContent=v.toFixed(1)+'%';
-      document.getElementById('co_ben').textContent='â'+(20-v).toFixed(1)+' pts';
+      document.getElementById('co_ben').textContent='−'+(20-v).toFixed(1)+' pts';
     }
     bind(id('rho'),draw); draw();
   }
@@ -899,7 +899,7 @@
       slider({seed:s,key:'risk',label:'Risk per trade',min:0.25,max:5,step:0.25,value:1,fmt:function(v){return v+'%';}})+
       slider({seed:s,key:'vol',label:'Asset volatility (annual)',min:10,max:120,step:5,value:40,fmt:function(v){return v+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>The pro question isn\'t "how much do I want to buy" â it\'s "how much can I lose if I\'m wrong, and how big can the position be so that loss stays inside my budget." Set your rules; the tool sizes it. Watch the position <b>shrink as volatility rises</b>.</p></div>'+
+      '<div class="prose"><p>The pro question isn\'t "how much do I want to buy", it\'s "how much can I lose if I\'m wrong, and how big can the position be so that loss stays inside my budget." Set your rules; the tool sizes it. Watch the position <b>shrink as volatility rises</b>.</p></div>'+
       toolShell('Risk-based position sizing', c, null,
         '<div class="stat"><span class="k">Risk budget (Â£)</span><span class="v" id="sz_budget"></span></div>'+
         '<div class="stat"><span class="k">Stop distance</span><span class="v" id="sz_stop"></span></div>'+
@@ -909,8 +909,8 @@
     host.insertAdjacentHTML('beforeend',
       '<div class="prose">'+
         '<h4>The logic</h4>'+
-        '<p><b>Risk budget = account Ã risk%.</b> That\'s the most you\'ll lose on this one trade. Your <b>stop distance</b> should scale with the asset\'s volatility â a wild asset needs a wider stop or it\'ll be knocked out by noise. Then <b>position size = risk budget Ã· stop distance</b>. Bigger vol â wider stop â smaller position for the same risk. That\'s vol-targeting in one line.</p>'+
-        '<div class="callout">This is the discipline my Volatility, Sizing & Risk Trainer grades â it scores your <i>process</i>, not whether the market happened to go your way.</div>'+
+        '<p><b>Risk budget = account × risk%.</b> That\'s the most you\'ll lose on this one trade. Your <b>stop distance</b> should scale with the asset\'s volatility, a wild asset needs a wider stop or it\'ll be knocked out by noise. Then <b>position size = risk budget ÷ stop distance</b>. Bigger vol ⇒ wider stop ⇒ smaller position for the same risk. That\'s vol-targeting in one line.</p>'+
+        '<div class="callout">This is the discipline my Volatility, Sizing & Risk Trainer grades, it scores your <i>process</i>, not whether the market happened to go your way.</div>'+
       '</div>');
     function draw(){
       var acct=num(id('acct')), risk=num(id('risk')), vol=num(id('vol'));
@@ -934,7 +934,7 @@
       slider({seed:s,key:'infl',label:'Inflation',min:0,max:7,step:0.1,value:3.4,fmt:function(v){return v.toFixed(1)+'%';}})+
       slider({seed:s,key:'jobs',label:'Labour market (jobs added, k/mo)',min:-100,max:300,step:10,value:-20,fmt:function(v){return (v>0?'+':'')+v+'k';}});
     host.innerHTML=
-      '<div class="prose"><p>The Fed has a <b>dual mandate</b>: 2% inflation <i>and</i> maximum employment. One tool â the interest rate â for two jobs. When the two disagree, it has to choose. Move the sliders and see the call.</p></div>'+
+      '<div class="prose"><p>The Fed has a <b>dual mandate</b>: 2% inflation <i>and</i> maximum employment. One tool, the interest rate, for two jobs. When the two disagree, it has to choose. Move the sliders and see the call.</p></div>'+
       toolShell('Simplified policy call (target inflation = 2%)', c, null,
         '<div class="stat"><span class="k">Inflation gap</span><span class="v" id="rx_ig"></span></div>'+
         '<div class="stat"><span class="k">Jobs signal</span><span class="v" id="rx_js"></span></div>'+
@@ -942,15 +942,15 @@
     host.insertAdjacentHTML('beforeend',
       '<div class="prose">'+
         '<h4>How to read it</h4>'+
-        '<p>Inflation well above 2% pushes toward <b>hikes</b>; a weak jobs market pushes toward <b>cuts</b>. When inflation is high <i>and</i> jobs are weak, the mandates conflict â the Fed usually <b>holds</b>, defending its inflation credibility, and only cuts once inflation is under control or the labour market is truly breaking.</p>'+
-        '<div class="callout">The trap to notice: try high inflation <i>with</i> weak jobs (today\'s setup). The tool won\'t give you a cut â because cutting into hot inflation would make prices worse. That\'s why "sticky inflation â the Fed can\'t cut" is the key reflex for rates.</div>'+
-        '<p style="color:var(--faint);font-size:13px">Simplified teaching heuristic â the real reaction function weighs far more (expectations, financial conditions, the supply/demand split of the shock).</p>'+
+        '<p>Inflation well above 2% pushes toward <b>hikes</b>; a weak jobs market pushes toward <b>cuts</b>. When inflation is high <i>and</i> jobs are weak, the mandates conflict, the Fed usually <b>holds</b>, defending its inflation credibility, and only cuts once inflation is under control or the labour market is truly breaking.</p>'+
+        '<div class="callout">The trap to notice: try high inflation <i>with</i> weak jobs (today\'s setup). The tool won\'t give you a cut, because cutting into hot inflation would make prices worse. That\'s why "sticky inflation → the Fed can\'t cut" is the key reflex for rates.</div>'+
+        '<p style="color:var(--faint);font-size:13px">Simplified teaching heuristic, the real reaction function weighs far more (expectations, financial conditions, the supply/demand split of the shock).</p>'+
       '</div>');
     function draw(){
       var infl=num(id('infl')), jobs=num(id('jobs'));
       setv(id('infl'),infl.toFixed(1)+'%'); setv(id('jobs'),(jobs>0?'+':'')+jobs+'k');
       var gap=infl-2;
-      document.getElementById('rx_ig').textContent=(gap>=0?'+':'â')+Math.abs(gap).toFixed(1)+' pts';
+      document.getElementById('rx_ig').textContent=(gap>=0?'+':'−')+Math.abs(gap).toFixed(1)+' pts';
       document.getElementById('rx_ig').style.color = gap>0.5?'var(--loss)':(gap<-0.3?'var(--profit)':'var(--muted)');
       var js=document.getElementById('rx_js');
       js.textContent = jobs<0?'Contracting':(jobs<80?'Weak':(jobs<180?'Solid':'Hot'));
@@ -959,7 +959,7 @@
       var call, cls;
       var hot = gap>0.75, cool = gap<0.25, weak = jobs<60, strong = jobs>150;
       if(hot && !weak){ call='HIKE'; cls='v-hike'; }
-      else if(hot && weak){ call='HOLD'; cls='v-hold'; }      // conflict â hold, credibility
+      else if(hot && weak){ call='HOLD'; cls='v-hold'; }      // conflict → hold, credibility
       else if(cool && weak){ call='CUT'; cls='v-cut'; }
       else if(cool && strong){ call='HOLD'; cls='v-hold'; }
       else if(gap>=0.25 && gap<=0.75 && weak){ call='HOLD'; cls='v-hold'; }
@@ -974,16 +974,16 @@
     seed=0.81; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
     var c=slider({seed:s,key:'phi',label:'Return autocorrelation (Ï)',min:-0.9,max:0.9,step:0.05,value:0.45,fmt:function(v){return v.toFixed(2);}});
     host.innerHTML=
-      '<div class="prose"><p>One number decides a market\'s personality: how much this period\'s move predicts the next. Positive Ï means moves <b>persist</b> â a trend. Negative Ï means they <b>reverse</b> â mean reversion. Zero is a coin-flip random walk. Slide it and watch the same random shocks build very different paths.</p></div>'+
+      '<div class="prose"><p>One number decides a market\'s personality: how much this period\'s move predicts the next. Positive Ï means moves <b>persist</b>, a trend. Negative Ï means they <b>reverse</b>, mean reversion. Zero is a coin-flip random walk. Slide it and watch the same random shocks build very different paths.</p></div>'+
       toolShell('Synthetic price path (same shocks, different Ï)', c, 'momPlot',
         '<div class="stat"><span class="k">Character</span><span class="v" id="mo_char" style="font-size:17px"></span></div>'+
         '<div class="stat"><span class="k">Which style wins</span><span class="v" id="mo_style" style="font-size:15px"></span></div>')+
       '<div class="prose">'+
         '<h4>Momentum vs mean reversion</h4>'+
-        '<p><b>Momentum / trend-following</b> buys what\'s rising and sells what\'s falling â it prints money when Ï &gt; 0 and the trend runs. <b>Mean reversion</b> does the opposite: it fades extremes, betting price snaps back to an average â it wins when Ï &lt; 0. A <b>trend</b> is just sustained momentum on a longer horizon.</p>'+
+        '<p><b>Momentum / trend-following</b> buys what\'s rising and sells what\'s falling, it prints money when Ï &gt; 0 and the trend runs. <b>Mean reversion</b> does the opposite: it fades extremes, betting price snaps back to an average, it wins when Ï &lt; 0. A <b>trend</b> is just sustained momentum on a longer horizon.</p>'+
         '<h4>Horizon is everything</h4>'+
-        '<p>The same market can be both, depending on the clock. Very short-term prices often mean-revert (noise, market-making); the classic <b>3â12 month</b> window trends (the momentum factor); over many years prices mean-revert to fundamentals/valuation. Match your signal to your horizon or the edge inverts on you.</p>'+
-        '<div class="callout">The risk in momentum is the <b>crash</b>: trends persist, persist, then reverse violently (Ï flips). That\'s the bridge to the next concept â crowding.</div>'+
+        '<p>The same market can be both, depending on the clock. Very short-term prices often mean-revert (noise, market-making); the classic <b>3–12 month</b> window trends (the momentum factor); over many years prices mean-revert to fundamentals/valuation. Match your signal to your horizon or the edge inverts on you.</p>'+
+        '<div class="callout">The risk in momentum is the <b>crash</b>: trends persist, persist, then reverse violently (Ï flips). That\'s the bridge to the next concept, crowding.</div>'+
       '</div>';
     var r=rng(7), noise=[]; for(var i=0;i<160;i++) noise.push(randn(r));
     function draw(){
@@ -1001,7 +1001,7 @@
       var ch=document.getElementById('mo_char'), st=document.getElementById('mo_style');
       if(phi>0.15){ ch.textContent='Trending'; ch.style.color='var(--profit)'; st.textContent='Momentum / trend-following'; }
       else if(phi<-0.15){ ch.textContent='Mean-reverting'; ch.style.color='var(--loss)'; st.textContent='Fade the extremes'; }
-      else { ch.textContent='Random walk'; ch.style.color='var(--muted)'; st.textContent='Neither â no edge from path'; }
+      else { ch.textContent='Random walk'; ch.style.color='var(--muted)'; st.textContent='Neither, no edge from path'; }
     }
     bind(id('phi'),draw); draw();
   }
@@ -1010,16 +1010,16 @@
     seed=0.82; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
     var c=slider({seed:s,key:'crowd',label:'How crowded is the trade?',min:0,max:100,step:5,value:70,fmt:function(v){return v+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>Imagine a trade that works â price grinds higher and more money piles in (the rising line is positioning). The more crowded it gets, the fewer buyers are left to keep it going. When the catalyst comes, everyone reaches for the same exit at once. Slide the crowding and watch the unwind.</p></div>'+
+      '<div class="prose"><p>Imagine a trade that works, price grinds higher and more money piles in (the rising line is positioning). The more crowded it gets, the fewer buyers are left to keep it going. When the catalyst comes, everyone reaches for the same exit at once. Slide the crowding and watch the unwind.</p></div>'+
       toolShell('Price as a crowded trade unwinds', c, 'posPlot',
         '<div class="stat"><span class="k">Reversal risk</span><span class="v" id="po_risk" style="font-size:16px"></span></div>'+
         '<div class="stat"><span class="k">Give-back from peak</span><span class="v" id="po_dd" style="color:var(--loss)"></span></div>')+
       '<div class="prose">'+
         '<h4>Why crowding is dangerous</h4>'+
-        '<p>Price needs a marginal buyer. When positioning is extreme, that buyer is gone â so the trade becomes asymmetric: limited further upside, large downside if sentiment turns. The unwind is violent precisely because everyone is on the same side (a <b>squeeze</b>).</p>'+
+        '<p>Price needs a marginal buyer. When positioning is extreme, that buyer is gone, so the trade becomes asymmetric: limited further upside, large downside if sentiment turns. The unwind is violent precisely because everyone is on the same side (a <b>squeeze</b>).</p>'+
         '<h4>How desks gauge positioning</h4>'+
-        '<p>CFTC Commitment-of-Traders, fund-manager surveys (e.g. BofA), prime-broker positioning, put/call ratios, and simple "who\'s left to buy?" logic. The <b>pain trade</b> is the move that hurts the most people â often the one that happens. This is exactly the "what would make me wrong / what kills it" discipline in a good pitch.</p>'+
-        '<div class="callout">Consensus isn\'t automatically wrong â but a crowded consensus offers terrible risk/reward. Best entries are often when a good thesis is <i>under</i>-owned.</div>'+
+        '<p>CFTC Commitment-of-Traders, fund-manager surveys (e.g. BofA), prime-broker positioning, put/call ratios, and simple "who\'s left to buy?" logic. The <b>pain trade</b> is the move that hurts the most people, often the one that happens. This is exactly the "what would make me wrong / what kills it" discipline in a good pitch.</p>'+
+        '<div class="callout">Consensus isn\'t automatically wrong, but a crowded consensus offers terrible risk/reward. Best entries are often when a good thesis is <i>under</i>-owned.</div>'+
       '</div>';
     function draw(){
       var cr=num(id('crowd'))/100; setv(id('crowd'),Math.round(cr*100)+'%');
@@ -1042,7 +1042,7 @@
       var rk=document.getElementById('po_risk');
       rk.textContent = cr<0.3?'Low':(cr<0.6?'Elevated':(cr<0.85?'High':'Extreme'));
       rk.style.color = cr<0.3?'var(--profit)':(cr<0.6?'var(--accent-ink)':'var(--loss)');
-      document.getElementById('po_dd').textContent='â'+dd.toFixed(0)+'%';
+      document.getElementById('po_dd').textContent='−'+dd.toFixed(0)+'%';
     }
     bind(id('crowd'),draw); draw();
   }
@@ -1054,17 +1054,17 @@
       slider({seed:s,key:'alpha',label:'Alpha (skill, % / month)',min:-1,max:1,step:0.1,value:0.3,fmt:function(v){return (v>0?'+':'')+v.toFixed(1)+'%';}})+
       slider({seed:s,key:'noise',label:'Idiosyncratic noise',min:0,max:4,step:0.25,value:1.5,fmt:function(v){return v.toFixed(1)+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>Each dot is one month: the market\'s return across, the stock\'s return up. Fit a line through them and you\'ve split the stock into two parts â the <b>slope is beta</b> (how much it moves with the market) and the <b>height of the line is alpha</b> (the return that isn\'t explained by the market). Drag the sliders.</p></div>'+
+      '<div class="prose"><p>Each dot is one month: the market\'s return across, the stock\'s return up. Fit a line through them and you\'ve split the stock into two parts, the <b>slope is beta</b> (how much it moves with the market) and the <b>height of the line is alpha</b> (the return that isn\'t explained by the market). Drag the sliders.</p></div>'+
       toolShell('Stock return vs market return (monthly)', c, 'abPlot',
         '<div class="stat"><span class="k">Beta</span><span class="v" id="ab_b"></span></div>'+
         '<div class="stat"><span class="k">Alpha (annualised)</span><span class="v" id="ab_a"></span></div>'+
         '<div class="stat"><span class="k">RÂ² (market-explained)</span><span class="v" id="ab_r"></span></div>')+
       '<div class="prose">'+
-        '<h4>Beta â the risk you didn\'t create</h4>'+
-        '<p>Beta 1 moves with the index; beta 1.5 amplifies it; beta 0.5 dampens it. A big return on high beta in a rising market is just leverage to the market â not skill. Beta is <b>systematic</b> risk you can get cheaply from an index.</p>'+
-        '<h4>Alpha â the bit you can take credit for</h4>'+
-        '<p>Alpha is return <i>above</i> what beta explains â the payoff to genuine edge. It\'s what active managers charge for and what a trading book is ultimately judged on. <b>RÂ²</b> tells you how much of the moves the market explains; low RÂ² (lots of noise) means the beta/alpha estimate is shakier.</p>'+
-        '<div class="callout">CAPM in one line: return â risk-free + Î² Ã (market â risk-free) + Î±. Everything to the left of Î± is the market renting you its risk; Î± is yours.</div>'+
+        '<h4>Beta, the risk you didn\'t create</h4>'+
+        '<p>Beta 1 moves with the index; beta 1.5 amplifies it; beta 0.5 dampens it. A big return on high beta in a rising market is just leverage to the market, not skill. Beta is <b>systematic</b> risk you can get cheaply from an index.</p>'+
+        '<h4>Alpha, the bit you can take credit for</h4>'+
+        '<p>Alpha is return <i>above</i> what beta explains, the payoff to genuine edge. It\'s what active managers charge for and what a trading book is ultimately judged on. <b>RÂ²</b> tells you how much of the moves the market explains; low RÂ² (lots of noise) means the beta/alpha estimate is shakier.</p>'+
+        '<div class="callout">CAPM in one line: return ≈ risk-free + β × (market − risk-free) + α. Everything to the left of α is the market renting you its risk; α is yours.</div>'+
       '</div>';
     var r=rng(11), mkt=[]; for(var i=0;i<44;i++) mkt.push((r()-0.5)*16); // market returns spread ~ Â±8%
     function draw(){
@@ -1100,15 +1100,15 @@
       slider({seed:s,key:'vol',label:'Annual volatility',min:3,max:60,step:1,value:10,fmt:function(v){return v+'%';}})+
       slider({seed:s,key:'rf',label:'Risk-free rate',min:0,max:8,step:0.25,value:4,fmt:function(v){return v.toFixed(2)+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>Return is only half the story â the question is how much risk you took to get it. The Sharpe ratio is <b>(return â risk-free) Ã· volatility</b>: excess return per unit of risk. Slide the three inputs and watch where you land against the bar the industry actually uses.</p></div>'+
+      '<div class="prose"><p>Return is only half the story, the question is how much risk you took to get it. The Sharpe ratio is <b>(return − risk-free) ÷ volatility</b>: excess return per unit of risk. Slide the three inputs and watch where you land against the bar the industry actually uses.</p></div>'+
       toolShell('Return per unit of risk', c,'shPlot',
         '<div class="stat"><span class="k">Sharpe ratio</span><span class="v" id="sh_val" style="font-size:26px"></span></div>'+
         '<div class="stat"><span class="k">Verdict</span><span class="v" id="sh_band" style="font-size:15px"></span></div>')+
       '<div class="prose">'+
         '<h4>Why it beats raw return</h4>'+
-        '<p>A 30% return at 60% vol has a Sharpe under 0.5 â you were paid poorly for a wild ride, and one bad year wipes you out. 8% at 5% vol (Sharpe ~0.8+) is the steadier, better business. Rough industry read: <b>&lt;1 unremarkable, 1â2 good, 2â3 excellent, &gt;3 suspiciously good</b> (check for hidden tail risk).</p>'+
+        '<p>A 30% return at 60% vol has a Sharpe under 0.5, you were paid poorly for a wild ride, and one bad year wipes you out. 8% at 5% vol (Sharpe ~0.8+) is the steadier, better business. Rough industry read: <b>&lt;1 unremarkable, 1–2 good, 2–3 excellent, &gt;3 suspiciously good</b> (check for hidden tail risk).</p>'+
         '<h4>Its cousins</h4>'+
-        '<p><b>Sortino</b> divides by <i>downside</i> volatility only â it stops penalising you for upside swings. <b>Information ratio</b> is alpha Ã· tracking error â the Sharpe of your <i>active</i> bets against a benchmark. And beware: Sharpe assumes roughly normal returns, so a strategy that sells tail risk can show a lovely Sharpe right up until it blows up.</p>'+
+        '<p><b>Sortino</b> divides by <i>downside</i> volatility only, it stops penalising you for upside swings. <b>Information ratio</b> is alpha ÷ tracking error, the Sharpe of your <i>active</i> bets against a benchmark. And beware: Sharpe assumes roughly normal returns, so a strategy that sells tail risk can show a lovely Sharpe right up until it blows up.</p>'+
       '</div>';
     function draw(){
       var ret=num(id('ret')), vol=num(id('vol')), rf=num(id('rf'));
@@ -1116,7 +1116,7 @@
       var sh=(ret-rf)/vol;
       document.getElementById('sh_val').textContent=sh.toFixed(2);
       var band=document.getElementById('sh_band');
-      var txt = sh<1?'Unremarkable':(sh<2?'Good':(sh<3?'Excellent':'Elite â verify tail risk'));
+      var txt = sh<1?'Unremarkable':(sh<2?'Good':(sh<3?'Excellent':'Elite, verify tail risk'));
       band.textContent=txt; band.style.color = sh<1?'var(--muted)':(sh<2?'var(--accent-ink)':'var(--profit)');
       function bar(label,val,ref){ var pct=Math.max(0,Math.min(100,val/3*100)); var col= val<1?'var(--faint)':(val<2?'var(--accent)':'var(--profit)');
         return '<div class="sbar"><span class="sl">'+label+'</span><div class="sbar-track"><div class="sbar-fill" style="width:'+pct+'%;background:'+col+'"></div></div><span class="sv">'+val.toFixed(2)+'</span></div>'; }
@@ -1137,16 +1137,16 @@
       slider({seed:s,key:'n',label:'Number of holdings',min:1,max:50,step:1,value:8,fmt:function(v){return v;}})+
       slider({seed:s,key:'rho',label:'Average correlation between them',min:0,max:0.9,step:0.05,value:0.3,fmt:function(v){return v.toFixed(2);}});
     host.innerHTML=
-      '<div class="prose"><p>Start with one 25%-vol position and keep adding equally-weighted names. Portfolio risk falls fast at first â then hits a <b>floor it can\'t break through</b>. That floor is the market risk you can never diversify away. Slide the number of holdings and the average correlation.</p></div>'+
+      '<div class="prose"><p>Start with one 25%-vol position and keep adding equally-weighted names. Portfolio risk falls fast at first, then hits a <b>floor it can\'t break through</b>. That floor is the market risk you can never diversify away. Slide the number of holdings and the average correlation.</p></div>'+
       toolShell('Portfolio volatility as you add holdings', c,'dcPlot',
         '<div class="stat"><span class="k">Portfolio vol</span><span class="v" id="dc_vol"></span></div>'+
         '<div class="stat"><span class="k">Undiversifiable floor</span><span class="v" id="dc_floor"></span></div>')+
       '<div class="prose">'+
         '<h4>Two kinds of risk</h4>'+
-        '<p><b>Idiosyncratic</b> (single-name) risk averages out as you add positions â that\'s the steep early drop. <b>Systematic</b> (market) risk is shared by everything and stays â that\'s the floor, equal to 25% Ã â(correlation). Higher correlation â higher floor â diversification helps less.</p>'+
+        '<p><b>Idiosyncratic</b> (single-name) risk averages out as you add positions, that\'s the steep early drop. <b>Systematic</b> (market) risk is shared by everything and stays, that\'s the floor, equal to 25% × √(correlation). Higher correlation ⇒ higher floor ⇒ diversification helps less.</p>'+
         '<h4>The concentration case</h4>'+
-        '<p>Diversification also <b>dilutes your alpha</b>: your 30th-best idea drags down your best. Concentration puts capital where your edge is â higher idiosyncratic risk, but that\'s the risk you\'re actually paid to take if you\'re right. The rule of thumb: <b>diversify the risks you have no view on; concentrate where you do.</b></p>'+
-        '<div class="callout">"Diversification is protection against ignorance; it makes little sense if you know what you\'re doing" (Buffett) â versus the multi-strat model that diversifies many small edges. Both are valid; they\'re different businesses.</div>'+
+        '<p>Diversification also <b>dilutes your alpha</b>: your 30th-best idea drags down your best. Concentration puts capital where your edge is, higher idiosyncratic risk, but that\'s the risk you\'re actually paid to take if you\'re right. The rule of thumb: <b>diversify the risks you have no view on; concentrate where you do.</b></p>'+
+        '<div class="callout">"Diversification is protection against ignorance; it makes little sense if you know what you\'re doing" (Buffett), versus the multi-strat model that diversifies many small edges. Both are valid; they\'re different businesses.</div>'+
       '</div>';
     function vol(n,rho){ return SIG*Math.sqrt((1+rho*(n-1))/n); }
     function draw(){
@@ -1175,16 +1175,16 @@
     seed=0.86; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
     var c=slider({seed:s,key:'k',label:'Size of move (standard deviations)',min:0.5,max:5,step:0.1,value:3,fmt:function(v){return v.toFixed(1)+'Ï';}});
     host.innerHTML=
-      '<div class="prose"><p>Volatility is one standard deviation (1Ï) of returns. A "3-sigma move" is one three times that size. The bell curve says such moves are rare â the shaded tails show <i>how</i> rare. Slide the threshold and read off the odds. Then read why markets break this maths.</p></div>'+
-      toolShell('The normal distribution â how rare is a big move?', c,'sgPlot',
+      '<div class="prose"><p>Volatility is one standard deviation (1Ï) of returns. A "3-sigma move" is one three times that size. The bell curve says such moves are rare, the shaded tails show <i>how</i> rare. Slide the threshold and read off the odds. Then read why markets break this maths.</p></div>'+
+      toolShell('The normal distribution, how rare is a big move?', c,'sgPlot',
         '<div class="stat"><span class="k">Chance on a given day</span><span class="v" id="sg_p"></span></div>'+
         '<div class="stat"><span class="k">Normal curve says: about once every</span><span class="v" id="sg_freq" style="font-size:16px"></span></div>')+
       '<div class="prose">'+
         '<h4>Reading the curve</h4>'+
         '<p>About <b>68%</b> of days land within Â±1Ï, <b>95%</b> within Â±2Ï, <b>99.7%</b> within Â±3Ï. So a 3Ï down-day should, in theory, happen roughly once every 1.5 years; a 4Ï move about once a century.</p>'+
         '<h4>Why markets have fat tails</h4>'+
-        '<p>Reality delivers those extremes far more often than the bell curve allows â volatility clusters (calm, then chaos), and panics feed on themselves. Black Monday 1987 was a ~20Ï move under the normal model â which should be impossible in the life of the universe, yet it happened. The lesson: <b>never size your book as if the tails are Gaussian.</b> The bell curve is a decent guide to the middle and a dangerous liar about the edges.</p>'+
-        '<div class="callout">Good or bad? A large <i>adverse</i> Ï move is what blows up a book sized for normal tails. A large <i>favourable</i> one is why cheap convexity (long options, defined-risk bets) pays off â you keep the upside tail, cap the downside.</div>'+
+        '<p>Reality delivers those extremes far more often than the bell curve allows, volatility clusters (calm, then chaos), and panics feed on themselves. Black Monday 1987 was a ~20Ï move under the normal model, which should be impossible in the life of the universe, yet it happened. The lesson: <b>never size your book as if the tails are Gaussian.</b> The bell curve is a decent guide to the middle and a dangerous liar about the edges.</p>'+
+        '<div class="callout">Good or bad? A large <i>adverse</i> Ï move is what blows up a book sized for normal tails. A large <i>favourable</i> one is why cheap convexity (long options, defined-risk bets) pays off, you keep the upside tail, cap the downside.</div>'+
       '</div>';
     function draw(){
       var k=num(id('k')); setv(id('k'),k.toFixed(1)+'Ï');
@@ -1221,21 +1221,21 @@
       '</div>'+
       '<div class="prose">'+
         '<h4>Three independent bets</h4>'+
-        '<p><b>Directional (duration):</b> long bonds if you think yields fall, short if they rise. This is a bet on the <i>level</i> of rates. <b>Curve (relative value):</b> a steepener profits if the long end rises relative to the front (or the front falls relative to the long); a flattener is the reverse. <b>Butterfly:</b> trades the belly (e.g. 5y) against the wings (2y &amp; 10y) â a bet purely on curvature.</p>'+
+        '<p><b>Directional (duration):</b> long bonds if you think yields fall, short if they rise. This is a bet on the <i>level</i> of rates. <b>Curve (relative value):</b> a steepener profits if the long end rises relative to the front (or the front falls relative to the long); a flattener is the reverse. <b>Butterfly:</b> trades the belly (e.g. 5y) against the wings (2y &amp; 10y), a bet purely on curvature.</p>'+
         '<h4>Why DV01-neutral matters</h4>'+
-        '<p>A pure curve trade should profit from the <i>shape</i> changing, not from rates going up or down overall. So desks size the two legs to have equal-and-opposite DV01 â the parallel move cancels, isolating the slope bet. That sizing is exactly what my Market Analysis Tools project computes.</p>'+
-        '<div class="callout">Bull = yields falling (prices up); bear = yields rising. So "bull steepener" = front-led rally; "bear steepener" = long-end-led sell-off â today\'s tape.</div>'+
+        '<p>A pure curve trade should profit from the <i>shape</i> changing, not from rates going up or down overall. So desks size the two legs to have equal-and-opposite DV01, the parallel move cancels, isolating the slope bet. That sizing is exactly what my Market Analysis Tools project computes.</p>'+
+        '<div class="callout">Bull = yields falling (prices up); bear = yields rising. So "bull steepener" = front-led rally; "bear steepener" = long-end-led sell-off, today\'s tape.</div>'+
       '</div>';
     function draw(){
       var t, d;
       if(rates==='unchanged' && curve==='steepen'){ t='DV01-neutral 2s10s steepener'; d='Pure slope bet: receive the front leg, pay the long leg, sized to cancel any parallel move.'; }
       else if(rates==='unchanged' && curve==='flatten'){ t='DV01-neutral 2s10s flattener'; d='Pure slope bet the other way: pay the front, receive the long, DV01-matched.'; }
-      else if(rates==='unchanged' && curve==='unchanged'){ t='No rates trade â look at carry/roll or a butterfly'; d='No level or slope view. If the belly looks rich/cheap, express curvature with a 2s5s10s fly.'; }
-      else if(rates==='down' && curve==='steepen'){ t='Bull steepener â long the front end'; d='Yields falling, front falling faster (Fed easing). Be long short-dated duration / receive the 2y.'; }
-      else if(rates==='down' && curve==='flatten'){ t='Bull flattener â long the long end'; d='Yields falling, long end falling faster (flight to quality / growth fears). Be long 10sâ30s duration.'; }
+      else if(rates==='unchanged' && curve==='unchanged'){ t='No rates trade, look at carry/roll or a butterfly'; d='No level or slope view. If the belly looks rich/cheap, express curvature with a 2s5s10s fly.'; }
+      else if(rates==='down' && curve==='steepen'){ t='Bull steepener, long the front end'; d='Yields falling, front falling faster (Fed easing). Be long short-dated duration / receive the 2y.'; }
+      else if(rates==='down' && curve==='flatten'){ t='Bull flattener, long the long end'; d='Yields falling, long end falling faster (flight to quality / growth fears). Be long 10s–30s duration.'; }
       else if(rates==='down' && curve==='unchanged'){ t='Outright long duration'; d='Pure level view: buy bonds across the curve, no slope bet.'; }
-      else if(rates==='up' && curve==='steepen'){ t='Bear steepener â short the long end'; d='Yields rising, long end rising faster (fiscal / inflation / term premium â today). Short 30y duration.'; }
-      else if(rates==='up' && curve==='flatten'){ t='Bear flattener â short the front end'; d='Yields rising, front rising faster (hawkish Fed repricing). Pay the 2y / short front duration.'; }
+      else if(rates==='up' && curve==='steepen'){ t='Bear steepener, short the long end'; d='Yields rising, long end rising faster (fiscal / inflation / term premium, today). Short 30y duration.'; }
+      else if(rates==='up' && curve==='flatten'){ t='Bear flattener, short the front end'; d='Yields rising, front rising faster (hawkish Fed repricing). Pay the 2y / short front duration.'; }
       else { t='Outright short duration'; d='Pure level view: sell bonds across the curve, no slope bet.'; }
       document.getElementById('cp_trade').textContent=t;
       document.getElementById('cp_desc').textContent=d;
@@ -1258,14 +1258,14 @@
       {n:'Japanese yen', b:-0.85},{n:'Swiss franc', b:-0.75},{n:'VIX (fear index)', b:-1.0}
     ];
     host.innerHTML=
-      '<div class="prose"><p>On the days that matter, markets stop trading their own stories and move as one: <b>toward risk</b> (chase return) or <b>away from it</b> (flight to safety). Slide sentiment and watch each asset rotate â green rises, red falls.</p></div>'+
+      '<div class="prose"><p>On the days that matter, markets stop trading their own stories and move as one: <b>toward risk</b> (chase return) or <b>away from it</b> (flight to safety). Slide sentiment and watch each asset rotate, green rises, red falls.</p></div>'+
       '<div class="tool"><p class="tool-head">Cross-asset response to sentiment</p><div class="sliders">'+c+'</div>'+
         '<div class="rr-list" id="rr"></div></div>'+
       '<div class="prose">'+
         '<h4>Risk-on vs risk-off</h4>'+
-        '<p><b>Risk-on:</b> equities, high-yield credit (spreads tighten), EM and commodity-linked FX, oil/copper, crypto all rally; safe havens are sold. <b>Risk-off:</b> money sprints to safety â Treasuries and gold rally, the dollar and havens bid, credit spreads blow out, VIX spikes, equities and EM sell hard.</p>'+
+        '<p><b>Risk-on:</b> equities, high-yield credit (spreads tighten), EM and commodity-linked FX, oil/copper, crypto all rally; safe havens are sold. <b>Risk-off:</b> money sprints to safety, Treasuries and gold rally, the dollar and havens bid, credit spreads blow out, VIX spikes, equities and EM sell hard.</p>'+
         '<h4>The safe-haven currencies</h4>'+
-        '<p><b>USD</b> â the world\'s reserve and funding currency; in a crunch everyone needs dollars (liquidity). <b>JPY</b> â Japan\'s huge overseas assets get repatriated and carry trades funded in cheap yen unwind, so yen surges exactly when risk sells off. <b>CHF</b> â deep current-account surplus, political stability, credible central bank. Gold sits alongside as the non-fiat haven.</p>'+
+        '<p><b>USD</b>, the world\'s reserve and funding currency; in a crunch everyone needs dollars (liquidity). <b>JPY</b>, Japan\'s huge overseas assets get repatriated and carry trades funded in cheap yen unwind, so yen surges exactly when risk sells off. <b>CHF</b>, deep current-account surplus, political stability, credible central bank. Gold sits alongside as the non-fiat haven.</p>'+
         '<div class="callout">What desks actually do in risk-off: cut gross and net exposure, buy downside protection (puts), rotate into defensives/quality, raise cash, and add duration and gold. Preserve capital first; hunt bargains once the dust settles.</div>'+
       '</div>';
     function draw(){
@@ -1292,29 +1292,29 @@
       slider({seed:s,key:'g',label:'Growth',min:-100,max:100,step:5,value:40,fmt:function(v){return v<0?'slowing '+v:(v>0?'accelerating +'+v:'flat');}})+
       slider({seed:s,key:'i',label:'Inflation',min:-100,max:100,step:5,value:-30,fmt:function(v){return v<0?'falling '+v:(v>0?'rising +'+v:'flat');}});
     var cells=[
-      {key:'reflation', n:'Reflation', d:'growth â Â· inflation â', pos:'tr'},
-      {key:'goldilocks', n:'Goldilocks', d:'growth â Â· inflation â', pos:'tl'},
-      {key:'stagflation', n:'Stagflation', d:'growth â Â· inflation â', pos:'br'},
-      {key:'slowdown', n:'Deflationary slowdown', d:'growth â Â· inflation â', pos:'bl'}
+      {key:'reflation', n:'Reflation', d:'growth ↑ Â· inflation ↑', pos:'tr'},
+      {key:'goldilocks', n:'Goldilocks', d:'growth ↑ Â· inflation ↓', pos:'tl'},
+      {key:'stagflation', n:'Stagflation', d:'growth ↓ Â· inflation ↑', pos:'br'},
+      {key:'slowdown', n:'Deflationary slowdown', d:'growth ↓ Â· inflation ↓', pos:'bl'}
     ];
     host.innerHTML=
       '<div class="prose"><p>Nearly all macro reduces to two questions: is <b>growth</b> rising or falling, and is <b>inflation</b> rising or falling? That gives four regimes, each with assets it favours. Move the dot and read the playbook.</p></div>'+
-      '<div class="tool"><p class="tool-head">The growth Ã inflation map</p><div class="sliders">'+c+'</div>'+
-        '<div class="quad-wrap"><span class="qaxis-y">â inflation high Â· low â</span><div class="quad" id="quad">'+
-          '<div class="qcell" data-k="stagflation"><span class="qn">Stagflation</span><span class="qd">growth â Â· inflation â</span></div>'+
-          '<div class="qcell" data-k="reflation"><span class="qn">Reflation</span><span class="qd">growth â Â· inflation â</span></div>'+
-          '<div class="qcell" data-k="slowdown"><span class="qn">Slowdown</span><span class="qd">growth â Â· inflation â</span></div>'+
-          '<div class="qcell" data-k="goldilocks"><span class="qn">Goldilocks</span><span class="qd">growth â Â· inflation â</span></div>'+
+      '<div class="tool"><p class="tool-head">The growth × inflation map</p><div class="sliders">'+c+'</div>'+
+        '<div class="quad-wrap"><span class="qaxis-y">← inflation high Â· low →</span><div class="quad" id="quad">'+
+          '<div class="qcell" data-k="stagflation"><span class="qn">Stagflation</span><span class="qd">growth ↓ Â· inflation ↑</span></div>'+
+          '<div class="qcell" data-k="reflation"><span class="qn">Reflation</span><span class="qd">growth ↑ Â· inflation ↑</span></div>'+
+          '<div class="qcell" data-k="slowdown"><span class="qn">Slowdown</span><span class="qd">growth ↓ Â· inflation ↓</span></div>'+
+          '<div class="qcell" data-k="goldilocks"><span class="qn">Goldilocks</span><span class="qd">growth ↑ Â· inflation ↓</span></div>'+
           '<div class="qdot" id="qdot"></div>'+
-        '</div><div class="qaxis">â growth low Â· high â</div></div>'+
+        '</div><div class="qaxis">← growth low Â· high →</div></div>'+
         '<div class="trade-out"><p class="tk">Regime &amp; playbook</p><p class="tv" id="rg_name"></p><p class="td" id="rg_play"></p></div>'+
       '</div>'+
       '<div class="prose">'+
         '<h4>The four regimes</h4>'+
-        '<p><b>Goldilocks</b> (growth up, inflation cool): the best backdrop for risk â equities and credit rally, vol low. <b>Reflation</b> (both rising): cyclicals, value, financials, commodities and real assets lead; rates rise and the curve steepens. <b>Stagflation</b> (growth down, inflation up): the nightmare â commodities and gold hold up while both bonds and equities struggle (2022). <b>Deflationary slowdown</b> (both falling): long-dated government bonds win, quality and defensives hold, cyclicals and credit suffer.</p>'+
-        '<h4>Spotting the transition â where the money is</h4>'+
-        '<p>Markets shift regime <i>before</i> the official data confirms it, so watch the leading tells: <b>PMIs/ISM</b> and jobless claims for growth; <b>breakevens and inflation swaps</b> for inflation; the <b>yield curve</b>, <b>credit spreads</b>, <b>commodity prices</b> and <b>earnings revisions</b> for the turn. Transitions are when correlations flip and old playbooks stop working â the biggest P&amp;L (and the biggest blow-ups) live there. The classic error is fighting the last regime.</p>'+
-        '<div class="callout">This is the lens behind the macro dashboards I built at Schonfeld and my daily brief â locate the regime, then position for the <i>next</i> one.</div>'+
+        '<p><b>Goldilocks</b> (growth up, inflation cool): the best backdrop for risk, equities and credit rally, vol low. <b>Reflation</b> (both rising): cyclicals, value, financials, commodities and real assets lead; rates rise and the curve steepens. <b>Stagflation</b> (growth down, inflation up): the nightmare, commodities and gold hold up while both bonds and equities struggle (2022). <b>Deflationary slowdown</b> (both falling): long-dated government bonds win, quality and defensives hold, cyclicals and credit suffer.</p>'+
+        '<h4>Spotting the transition, where the money is</h4>'+
+        '<p>Markets shift regime <i>before</i> the official data confirms it, so watch the leading tells: <b>PMIs/ISM</b> and jobless claims for growth; <b>breakevens and inflation swaps</b> for inflation; the <b>yield curve</b>, <b>credit spreads</b>, <b>commodity prices</b> and <b>earnings revisions</b> for the turn. Transitions are when correlations flip and old playbooks stop working, the biggest P&amp;L (and the biggest blow-ups) live there. The classic error is fighting the last regime.</p>'+
+        '<div class="callout">This is the lens behind the macro dashboards I built at Schonfeld and my daily brief, locate the regime, then position for the <i>next</i> one.</div>'+
       '</div>';
     var play={
       goldilocks:'Risk-on. Overweight equities (esp. growth/quality), tighten into credit, low vol favours carry. Duration fine. "Buy the dip."',
@@ -1345,16 +1345,16 @@
       slider({seed:s,key:'diff',label:'Interest-rate differential (carry)',min:0,max:8,step:0.25,value:4,fmt:function(v){return v.toFixed(2)+'%';}})+
       slider({seed:s,key:'shock',label:'Size of the risk-off unwind',min:0,max:100,step:5,value:45,fmt:function(v){return v+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>Borrow where rates are low (say the yen), invest where they\'re high, and you earn the gap â the <b>carry</b> â every single day. The line climbs steadily. Then a risk-off shock hits, everyone unwinds at once, and the high-yield currency drops. Slide the differential and the shock and watch the trade-off.</p></div>'+
+      '<div class="prose"><p>Borrow where rates are low (say the yen), invest where they\'re high, and you earn the gap, the <b>carry</b>, every single day. The line climbs steadily. Then a risk-off shock hits, everyone unwinds at once, and the high-yield currency drops. Slide the differential and the shock and watch the trade-off.</p></div>'+
       toolShell('Cumulative return of a carry trade over ~18 months', c, 'carPlot',
         '<div class="stat"><span class="k">Annual carry</span><span class="v" id="ca_c" style="color:var(--profit)"></span></div>'+
         '<div class="stat"><span class="k">Unwind drawdown</span><span class="v" id="ca_dd" style="color:var(--loss)"></span></div>'+
         '<div class="stat"><span class="k">Carry wiped out</span><span class="v" id="ca_w" style="font-size:16px"></span></div>')+
       '<div class="prose">'+
-        '<h4>Why it\'s seductive â and dangerous</h4>'+
-        '<p>Day to day, carry is the smoothest return in macro: a steady drip with a beautiful Sharpe. The catch is a <b>fat left tail</b>. High-carry currencies behave like risk assets, so when markets panic the carry trade unwinds violently â months of gains gone in days. The desk phrase is "picking up pennies in front of a steamroller."</p>'+
+        '<h4>Why it\'s seductive, and dangerous</h4>'+
+        '<p>Day to day, carry is the smoothest return in macro: a steady drip with a beautiful Sharpe. The catch is a <b>fat left tail</b>. High-carry currencies behave like risk assets, so when markets panic the carry trade unwinds violently, months of gains gone in days. The desk phrase is "picking up pennies in front of a steamroller."</p>'+
         '<h4>Where the yen comes in</h4>'+
-        '<p>The yen is the classic <b>funding currency</b> â rates were near zero for decades, so traders borrow yen to buy higher-yielders. That\'s why, in a risk-off event, the yen <i>surges</i>: everyone buys back yen to close the trade at once. It ties straight to my USD/JPY view â the carry and the BOJ are two sides of the same pair.</p>'+
+        '<p>The yen is the classic <b>funding currency</b>, rates were near zero for decades, so traders borrow yen to buy higher-yielders. That\'s why, in a risk-off event, the yen <i>surges</i>: everyone buys back yen to close the trade at once. It ties straight to my USD/JPY view, the carry and the BOJ are two sides of the same pair.</p>'+
         '<div class="callout">Carry works in calm and dies in chaos. Sizing it as if the good days are the whole story is exactly the mistake the sigma-moves and crowding concepts warn about.</div>'+
       '</div>';
     function draw(){
@@ -1375,8 +1375,8 @@
         xlabel:'months held', ylabel:'cumulative return', aria:'carry trade path'
       });
       document.getElementById('ca_c').textContent='+'+diff.toFixed(2)+'%';
-      document.getElementById('ca_dd').textContent='â'+crashFull.toFixed(1)+'%';
-      document.getElementById('ca_w').textContent = diff>0 ? (crashFull/diff*12).toFixed(0)+' months' : 'â';
+      document.getElementById('ca_dd').textContent='−'+crashFull.toFixed(1)+'%';
+      document.getElementById('ca_w').textContent = diff>0 ? (crashFull/diff*12).toFixed(0)+' months' : '∞';
     }
     ['diff','shock'].forEach(function(k){bind(id(k),draw);}); draw();
   }
@@ -1387,15 +1387,15 @@
       slider({seed:s,key:'us',label:'US 2-year yield',min:0,max:6,step:0.1,value:4.3,fmt:function(v){return v.toFixed(1)+'%';}})+
       slider({seed:s,key:'jp',label:'Japan 2-year yield',min:0,max:3,step:0.1,value:0.6,fmt:function(v){return v.toFixed(1)+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>Money flows toward higher yields, so a currency\'s value tracks the <b>gap</b> between its interest rates and another\'s. The USâJapan 2-year gap is the textbook driver of USD/JPY. Move the two rates and watch the pair â and the carry you\'d earn being long it.</p></div>'+
-      toolShell('USD/JPY vs the USâJapan 2y yield gap (illustrative)', c, 'rdPlot',
+      '<div class="prose"><p>Money flows toward higher yields, so a currency\'s value tracks the <b>gap</b> between its interest rates and another\'s. The US–Japan 2-year gap is the textbook driver of USD/JPY. Move the two rates and watch the pair, and the carry you\'d earn being long it.</p></div>'+
+      toolShell('USD/JPY vs the US–Japan 2y yield gap (illustrative)', c, 'rdPlot',
         '<div class="stat"><span class="k">2y differential</span><span class="v" id="rd_diff"></span></div>'+
         '<div class="stat"><span class="k">Carry (long USD/JPY)</span><span class="v" id="rd_carry" style="color:var(--profit)"></span></div>')+
       '<div class="prose">'+
-        '<h4>Interest-rate parity â the no-arbitrage rule</h4>'+
+        '<h4>Interest-rate parity, the no-arbitrage rule</h4>'+
         '<p><b>Covered IRP</b> says the forward exchange rate must offset the rate gap exactly, or you\'d have free money: the higher-yield currency trades at a <b>forward discount</b>. So in theory the extra interest is cancelled by expected depreciation.</p>'+
         '<h4>...and why carry works anyway</h4>'+
-        '<p><b>Uncovered IRP</b> says spot should drift to wipe out the carry â but empirically it often <i>doesn\'t</i> (the "forward premium puzzle"). Spot tends to follow the differential instead, which is why higher-rate currencies frequently strengthen and the carry trade pays. This gap between theory and reality is where a lot of FX P&amp;L lives.</p>'+
+        '<p><b>Uncovered IRP</b> says spot should drift to wipe out the carry, but empirically it often <i>doesn\'t</i> (the "forward premium puzzle"). Spot tends to follow the differential instead, which is why higher-rate currencies frequently strengthen and the carry trade pays. This gap between theory and reality is where a lot of FX P&amp;L lives.</p>'+
         '<div class="callout">Practical read for USD/JPY: watch the US 2y vs the JGB 2y. When the Fed is high and the BOJ pinned near zero, the gap is wide and USD/JPY is heavy to the topside; the risk is the BOJ finally tightening and the gap snapping shut.</div>'+
       '</div>';
     function draw(){
@@ -1411,9 +1411,9 @@
         series:[{pts:pts, color:'--accent', width:2.8}],
         markers:[{p:diff,v:fx(diff),color:'--profit',t:'Â¥'+fx(diff).toFixed(0),dx:8,dy:-8}],
         guides:[{p:diff}],
-        xlabel:'US â Japan 2y differential', ylabel:'USD/JPY', aria:'usdjpy vs rate differential'
+        xlabel:'US − Japan 2y differential', ylabel:'USD/JPY', aria:'usdjpy vs rate differential'
       });
-      var e=document.getElementById('rd_diff'); e.textContent=(diff>=0?'+':'â')+Math.abs(diff*100).toFixed(0)+' bp';
+      var e=document.getElementById('rd_diff'); e.textContent=(diff>=0?'+':'−')+Math.abs(diff*100).toFixed(0)+' bp';
       e.style.color = diff>=0?'var(--profit)':'var(--loss)';
       document.getElementById('rd_carry').textContent=(diff>=0?'+':'')+diff.toFixed(2)+'% / yr';
     }
@@ -1424,16 +1424,16 @@
     seed=0.93; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
     var c=slider({seed:s,key:'x',label:'World state',min:-100,max:100,step:5,value:-60,fmt:function(v){return v<-33?'global risk-off':(v>33?'US outperforming':'sluggish middle');}});
     host.innerHTML=
-      '<div class="prose"><p>You\'d think the dollar just tracks US growth in a straight line. It doesn\'t â it\'s <b>strong at both ends</b>. In a global panic everyone runs to dollars (safety); when the US economy races ahead, money chases US yields and growth. It\'s only weak in the dull middle. Slide across the states and watch the smile.</p></div>'+
+      '<div class="prose"><p>You\'d think the dollar just tracks US growth in a straight line. It doesn\'t, it\'s <b>strong at both ends</b>. In a global panic everyone runs to dollars (safety); when the US economy races ahead, money chases US yields and growth. It\'s only weak in the dull middle. Slide across the states and watch the smile.</p></div>'+
       toolShell('Dollar strength across world states', c, 'dsPlot',
         '<div class="stat"><span class="k">Regime</span><span class="v" id="ds_reg" style="font-size:16px"></span></div>'+
         '<div class="stat"><span class="k">Dollar</span><span class="v" id="ds_dir"></span></div>')+
       '<div class="prose">'+
-        '<h4>The left side â the haven bid</h4>'+
+        '<h4>The left side, the haven bid</h4>'+
         '<p>When markets crash, the dollar rallies regardless of what the US economy is doing: it\'s the world\'s reserve and funding currency, and in a crunch everyone scrambles for dollar liquidity. This is the same flight-to-quality behind the risk-off concept.</p>'+
-        '<h4>The right side â the growth/yield bid</h4>'+
-        '<p>When the US grows faster and pays higher rates than everyone else ("US exceptionalism"), capital flows in to capture that return, lifting the dollar. <b>The dip in the middle</b> is the benign, boring world â decent global growth, no US standout, no panic â where the dollar softens and higher-beta currencies do best.</p>'+
-        '<div class="callout">Trading use: to be bearish the dollar you usually need the <i>middle</i> â synchronised global growth with the US no longer exceptional. Both a US boom and a US-led scare tend to bid it.</div>'+
+        '<h4>The right side, the growth/yield bid</h4>'+
+        '<p>When the US grows faster and pays higher rates than everyone else ("US exceptionalism"), capital flows in to capture that return, lifting the dollar. <b>The dip in the middle</b> is the benign, boring world, decent global growth, no US standout, no panic, where the dollar softens and higher-beta currencies do best.</p>'+
+        '<div class="callout">Trading use: to be bearish the dollar you usually need the <i>middle</i>, synchronised global growth with the US no longer exceptional. Both a US boom and a US-led scare tend to bid it.</div>'+
       '</div>';
     function draw(){
       var x=num(id('x'));
@@ -1458,9 +1458,9 @@
 
   function pppTool(host){
     seed=0.94; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
-    var c=slider({seed:s,key:'d',label:'Inflation gap (home â foreign)',min:-4,max:8,step:0.5,value:3,fmt:function(v){return (v>0?'+':'')+v.toFixed(1)+'%';}});
+    var c=slider({seed:s,key:'d',label:'Inflation gap (home − foreign)',min:-4,max:8,step:0.5,value:3,fmt:function(v){return (v>0?'+':'')+v.toFixed(1)+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>If prices rise faster at home than abroad, your money buys less over time â so your currency should slowly <b>lose value</b> to keep a basket of goods costing the same everywhere. That\'s purchasing power parity. Slide the inflation gap and watch the 10-year drift.</p></div>'+
+      '<div class="prose"><p>If prices rise faster at home than abroad, your money buys less over time, so your currency should slowly <b>lose value</b> to keep a basket of goods costing the same everywhere. That\'s purchasing power parity. Slide the inflation gap and watch the 10-year drift.</p></div>'+
       toolShell('Home-currency value over 10 years (PPP drift)', c, 'ppPlot',
         '<div class="stat"><span class="k">Implied drift</span><span class="v" id="pp_a"></span></div>'+
         '<div class="stat"><span class="k">Over 10 years</span><span class="v" id="pp_c"></span></div>')+
@@ -1468,7 +1468,7 @@
         '<h4>The long-run anchor</h4>'+
         '<p>PPP is the idea behind the Economist\'s <b>Big Mac index</b>: the same burger should cost roughly the same everywhere once you convert currencies, and if it doesn\'t, the "expensive" currency is overvalued. A higher-inflation currency has to depreciate over time to restore that balance.</p>'+
         '<h4>Why it\'s useless for timing</h4>'+
-        '<p>PPP holds over <b>decades</b>, not months. Rate differentials, capital flows and risk sentiment push currencies far from PPP fair value for years at a stretch â the <b>real exchange rate</b> can stay stretched for a whole cycle. So treat PPP as a gravity that eventually pulls, not a signal you can trade on this quarter.</p>'+
+        '<p>PPP holds over <b>decades</b>, not months. Rate differentials, capital flows and risk sentiment push currencies far from PPP fair value for years at a stretch, the <b>real exchange rate</b> can stay stretched for a whole cycle. So treat PPP as a gravity that eventually pulls, not a signal you can trade on this quarter.</p>'+
         '<div class="callout">Rule of thumb: use rate differentials and positioning for the next few months, and PPP only to sense-check whether a currency is cheap or dear in the very long run.</div>'+
       '</div>';
     function draw(){
@@ -1483,8 +1483,8 @@
         guides:[],
         xlabel:'years', ylabel:'home-currency value (index)', aria:'ppp drift'
       });
-      document.getElementById('pp_a').textContent=(d>0?'â':'+')+Math.abs(d).toFixed(1)+'% / yr';
-      document.getElementById('pp_c').textContent=(end<100?'â':'+')+Math.abs(100-end).toFixed(0)+'%';
+      document.getElementById('pp_a').textContent=(d>0?'−':'+')+Math.abs(d).toFixed(1)+'% / yr';
+      document.getElementById('pp_c').textContent=(end<100?'−':'+')+Math.abs(100-end).toFixed(0)+'%';
     }
     bind(id('d'),draw); draw();
   }
@@ -1497,7 +1497,7 @@
       slider({seed:s,key:'vol',label:'Implied volatility',min:10,max:60,step:1,value:25,fmt:function(v){return v+'%';}})+
       slider({seed:s,key:'t',label:'Time to expiry',min:0.05,max:1,step:0.05,value:0.5,fmt:function(v){return Math.round(v*12)+'m';}});
     host.innerHTML=
-      '<div class="prose"><p>Here\'s a call option struck at 100. Its price (the curve) bends as spot moves â and that bend is where the greeks live. <b>Delta</b> is the slope, <b>gamma</b> is how fast the slope changes, <b>vega</b> is sensitivity to vol, <b>theta</b> is the daily bleed from time passing. Move the sliders and watch all four.</p></div>'+
+      '<div class="prose"><p>Here\'s a call option struck at 100. Its price (the curve) bends as spot moves, and that bend is where the greeks live. <b>Delta</b> is the slope, <b>gamma</b> is how fast the slope changes, <b>vega</b> is sensitivity to vol, <b>theta</b> is the daily bleed from time passing. Move the sliders and watch all four.</p></div>'+
       toolShell('Call option value vs spot (Black-Scholes)', c, 'grPlot',
         '<div class="stat"><span class="k">Option price</span><span class="v" id="gr_px"></span></div>'+
         '<div class="stat"><span class="k">Delta</span><span class="v" id="gr_d"></span></div>'+
@@ -1506,7 +1506,7 @@
         '<div class="stat"><span class="k">Theta /day</span><span class="v" id="gr_t" style="color:var(--loss)"></span></div>')+
       '<div class="prose">'+
         '<h4>The four dials</h4>'+
-        '<p><b>Delta</b> (0â1 for a call) is both your directional exposure and your hedge ratio â a 0.5 delta means the option moves like half a share, so you\'d short half a share to be neutral. <b>Gamma</b> is the rate delta changes: high near the strike, and it\'s what makes a hedged option position still make money in a big move. <b>Vega</b> is your exposure to implied vol rising or falling. <b>Theta</b> is time decay â every day that passes, an option loses a little value, which is the price you pay for optionality.</p>'+
+        '<p><b>Delta</b> (0→1 for a call) is both your directional exposure and your hedge ratio, a 0.5 delta means the option moves like half a share, so you\'d short half a share to be neutral. <b>Gamma</b> is the rate delta changes: high near the strike, and it\'s what makes a hedged option position still make money in a big move. <b>Vega</b> is your exposure to implied vol rising or falling. <b>Theta</b> is time decay, every day that passes, an option loses a little value, which is the price you pay for optionality.</p>'+
         '<div class="callout">The desk shorthand: <b>long options = long gamma, long vega, short theta.</b> You want movement (gamma) and rising vol (vega), and you\'re paying rent (theta) to own that. Selling options flips all three.</div>'+
       '</div>';
     function bs(S,vol,T){ vol=vol/100; var sq=vol*Math.sqrt(T);
@@ -1534,7 +1534,7 @@
       document.getElementById('gr_d').textContent=g.delta.toFixed(2);
       document.getElementById('gr_g').textContent=g.gamma.toFixed(3);
       document.getElementById('gr_v').textContent='$'+g.vega.toFixed(2);
-      document.getElementById('gr_t').textContent='â$'+Math.abs(g.theta).toFixed(3);
+      document.getElementById('gr_t').textContent='−$'+Math.abs(g.theta).toFixed(3);
     }
     ['spot','vol','t'].forEach(function(k){bind(id(k),draw);}); draw();
   }
@@ -1545,17 +1545,17 @@
       slider({seed:s,key:'iv',label:'Implied vol (what you pay)',min:8,max:45,step:1,value:20,fmt:function(v){return v+'%';}})+
       slider({seed:s,key:'rv',label:'Realised vol (what happens)',min:8,max:45,step:1,value:15,fmt:function(v){return v+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>When you buy an option you pay for <b>implied</b> vol â the market\'s forecast of how much things will move. What actually shows up is <b>realised</b> vol. On average implied sits <i>above</i> realised: that persistent gap is the <b>vol risk premium</b>. Slide both and see who wins.</p></div>'+
-      '<div class="tool"><p class="tool-head">Implied vs realised â and the premium</p><div class="sliders">'+c+'</div>'+
+      '<div class="prose"><p>When you buy an option you pay for <b>implied</b> vol, the market\'s forecast of how much things will move. What actually shows up is <b>realised</b> vol. On average implied sits <i>above</i> realised: that persistent gap is the <b>vol risk premium</b>. Slide both and see who wins.</p></div>'+
+      '<div class="tool"><p class="tool-head">Implied vs realised, and the premium</p><div class="sliders">'+c+'</div>'+
         '<div id="ivrvBars" style="padding:8px 2px"></div>'+
         '<div class="readout"><div class="stat"><span class="k">Vol risk premium</span><span class="v" id="iv_prem"></span></div>'+
         '<div class="stat"><span class="k">Edge belongs to</span><span class="v" id="iv_who" style="font-size:15px"></span></div></div></div>'+
       '<div class="prose">'+
         '<h4>Why implied usually beats realised</h4>'+
-        '<p>Investors pay up for protection â there\'s structural demand to <i>buy</i> insurance (puts), so options are priced a touch rich. Sellers of that insurance collect the premium, which is why systematically <b>selling vol</b> makes money most of the time.</p>'+
+        '<p>Investors pay up for protection, there\'s structural demand to <i>buy</i> insurance (puts), so options are priced a touch rich. Sellers of that insurance collect the premium, which is why systematically <b>selling vol</b> makes money most of the time.</p>'+
         '<h4>...and why it can ruin you</h4>'+
-        '<p>"Most of the time" is the trap. When a shock hits, realised vol explodes past implied and the short-vol seller takes a huge loss â the same fat-tailed, picking-up-pennies profile as the carry trade. The edge is real but the tail is brutal; size it like it can go against you 5Ã, because occasionally it does.</p>'+
-        '<div class="callout">Rule of thumb: implied &gt; realised â options look expensive, lean toward selling premium (carefully). Realised &gt; implied â options are cheap, own optionality.</div>'+
+        '<p>"Most of the time" is the trap. When a shock hits, realised vol explodes past implied and the short-vol seller takes a huge loss, the same fat-tailed, picking-up-pennies profile as the carry trade. The edge is real but the tail is brutal; size it like it can go against you 5×, because occasionally it does.</p>'+
+        '<div class="callout">Rule of thumb: implied &gt; realised → options look expensive, lean toward selling premium (carefully). Realised &gt; implied → options are cheap, own optionality.</div>'+
       '</div>';
     function draw(){
       var iv=num(id('iv')), rv=num(id('rv'));
@@ -1576,16 +1576,16 @@
       slider({seed:s,key:'skew',label:'Skew steepness',min:0,max:100,step:5,value:55,fmt:function(v){return v+'%';}})+
       slider({seed:s,key:'lvl',label:'Overall vol level',min:10,max:45,step:1,value:20,fmt:function(v){return v+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>If markets were truly normal, every strike would trade at the same implied vol â a flat line. Instead, downside strikes (puts) trade at <b>higher</b> implied vol than upside ones. That downward tilt is the <b>skew</b>. Steepen it and watch the crash premium build.</p></div>'+
+      '<div class="prose"><p>If markets were truly normal, every strike would trade at the same implied vol, a flat line. Instead, downside strikes (puts) trade at <b>higher</b> implied vol than upside ones. That downward tilt is the <b>skew</b>. Steepen it and watch the crash premium build.</p></div>'+
       toolShell('Implied vol by strike (equity skew)', c, 'skPlot',
         '<div class="stat"><span class="k">90% put IV</span><span class="v" id="sk_put"></span></div>'+
         '<div class="stat"><span class="k">110% call IV</span><span class="v" id="sk_call"></span></div>'+
-        '<div class="stat"><span class="k">Skew (put â call)</span><span class="v" id="sk_diff" style="color:var(--loss)"></span></div>')+
+        '<div class="stat"><span class="k">Skew (put − call)</span><span class="v" id="sk_diff" style="color:var(--loss)"></span></div>')+
       '<div class="prose">'+
         '<h4>Why the skew exists</h4>'+
-        '<p>Two reasons. First, <b>crash fear</b>: equity markets fall faster than they rise, so downside protection is genuinely worth more â the normal model underprices it. Second, <b>demand</b>: everyone wants to buy puts to hedge and sell calls for income, and that flow pushes put vols up and call vols down. The result is a persistent tilt, steepest exactly when fear is high.</p>'+
+        '<p>Two reasons. First, <b>crash fear</b>: equity markets fall faster than they rise, so downside protection is genuinely worth more, the normal model underprices it. Second, <b>demand</b>: everyone wants to buy puts to hedge and sell calls for income, and that flow pushes put vols up and call vols down. The result is a persistent tilt, steepest exactly when fear is high.</p>'+
         '<h4>How desks use it</h4>'+
-        '<p>The skew is tradeable in its own right â a <b>risk reversal</b> (sell a call, buy a put, or vice versa) is a pure bet on it. And it warns you: a suddenly steepening skew means the market is paying up for crash protection, often before the crash.</p>'+
+        '<p>The skew is tradeable in its own right, a <b>risk reversal</b> (sell a call, buy a put, or vice versa) is a pure bet on it. And it warns you: a suddenly steepening skew means the market is paying up for crash protection, often before the crash.</p>'+
       '</div>';
     function draw(){
       var sk=num(id('skew'))/100, lvl=num(id('lvl'));
@@ -1613,15 +1613,15 @@
       slider({seed:s,key:'prot',label:'Capital protected',min:80,max:100,step:5,value:100,fmt:function(v){return v+'%';}})+
       slider({seed:s,key:'part',label:'Upside participation',min:20,max:150,step:10,value:70,fmt:function(v){return v+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>A capital-protected note is the classic structured product, and it\'s just two things in a wrapper: a <b>zero-coupon bond</b> that grows back to your money at maturity, plus a <b>call option</b> for the upside. The bond gives the floor; the interest you give up buys the option. Here\'s the client payoff â slide the protection and participation.</p></div>'+
+      '<div class="prose"><p>A capital-protected note is the classic structured product, and it\'s just two things in a wrapper: a <b>zero-coupon bond</b> that grows back to your money at maturity, plus a <b>call option</b> for the upside. The bond gives the floor; the interest you give up buys the option. Here\'s the client payoff, slide the protection and participation.</p></div>'+
       toolShell('Note payoff vs the underlying at maturity', c, 'stPlot',
         '<div class="stat"><span class="k">Downside floor</span><span class="v" id="st_floor" style="color:var(--profit)"></span></div>'+
         '<div class="stat"><span class="k">You capture</span><span class="v" id="st_part"></span></div>')+
       '<div class="prose">'+
         '<h4>How the desk builds it</h4>'+
-        '<p>Say a client invests 100 for 5 years. The structurer buys a zero-coupon bond that costs ~85 today and matures at 100 â that guarantees the capital back. The remaining ~15 buys call options on the underlying. More option budget (lower protection, or lower rates making the bond cheaper) buys more <b>participation</b> in the upside. That\'s the entire trade-off you\'re sliding.</p>'+
-        '<h4>Autocallables â the other big one</h4>'+
-        '<p>An <b>autocallable</b> pays a chunky coupon and automatically redeems early if the underlying is above a level on an observation date â but has a <b>downside barrier</b>: breach it and the client eats the losses. It\'s income in exchange for selling tail risk. Great yield in calm markets, painful when the barrier breaks.</p>'+
+        '<p>Say a client invests 100 for 5 years. The structurer buys a zero-coupon bond that costs ~85 today and matures at 100, that guarantees the capital back. The remaining ~15 buys call options on the underlying. More option budget (lower protection, or lower rates making the bond cheaper) buys more <b>participation</b> in the upside. That\'s the entire trade-off you\'re sliding.</p>'+
+        '<h4>Autocallables, the other big one</h4>'+
+        '<p>An <b>autocallable</b> pays a chunky coupon and automatically redeems early if the underlying is above a level on an observation date, but has a <b>downside barrier</b>: breach it and the client eats the losses. It\'s income in exchange for selling tail risk. Great yield in calm markets, painful when the barrier breaks.</p>'+
         '<div class="callout">The structurer\'s job: turn a client\'s view and risk appetite into a payoff, price the option legs, and manage what the desk is left holding. This is the seat you\'re aiming for.</div>'+
       '</div>';
     function draw(){
@@ -1651,15 +1651,15 @@
       slider({seed:s,key:'pd',label:'Annual default probability',min:0.1,max:12,step:0.1,value:2,fmt:function(v){return v.toFixed(1)+'%';}})+
       slider({seed:s,key:'rec',label:'Recovery if it defaults',min:0,max:80,step:5,value:40,fmt:function(v){return v+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>A credit spread is the extra yield over a government bond you demand for lending to something that might not pay you back. At its core it compensates you for <b>expected loss</b> = default odds Ã the bit you don\'t recover. Slide the two and watch the fair spread.</p></div>'+
+      '<div class="prose"><p>A credit spread is the extra yield over a government bond you demand for lending to something that might not pay you back. At its core it compensates you for <b>expected loss</b> = default odds × the bit you don\'t recover. Slide the two and watch the fair spread.</p></div>'+
       toolShell('Fair credit spread vs default probability', c, 'csPlot',
         '<div class="stat"><span class="k">Expected-loss spread</span><span class="v" id="cs_spr"></span></div>'+
         '<div class="stat"><span class="k">Rating bucket</span><span class="v" id="cs_band" style="font-size:15px"></span></div>')+
       '<div class="prose">'+
         '<h4>What a spread pays you for</h4>'+
-        '<p>The floor is <b>expected loss</b>: default probability Ã loss-given-default (1 â recovery). But real spreads sit <i>above</i> that â investors also demand a <b>risk premium</b> (defaults cluster in bad times, exactly when you can least afford them) and a <b>liquidity premium</b> (corporate bonds are harder to sell). So the traded spread is expected loss plus fear plus illiquidity.</p>'+
+        '<p>The floor is <b>expected loss</b>: default probability × loss-given-default (1 − recovery). But real spreads sit <i>above</i> that, investors also demand a <b>risk premium</b> (defaults cluster in bad times, exactly when you can least afford them) and a <b>liquidity premium</b> (corporate bonds are harder to sell). So the traded spread is expected loss plus fear plus illiquidity.</p>'+
         '<h4>IG vs HY</h4>'+
-        '<p><b>Investment grade</b> (BBBâ and up) trades tight â tens to low hundreds of basis points â because default is unlikely. <b>High yield</b> ("junk") pays hundreds to thousands of bp for real default risk. Spreads are the market\'s live gauge of corporate stress: they blow out in a downturn long before defaults actually spike.</p>'+
+        '<p><b>Investment grade</b> (BBB− and up) trades tight, tens to low hundreds of basis points, because default is unlikely. <b>High yield</b> ("junk") pays hundreds to thousands of bp for real default risk. Spreads are the market\'s live gauge of corporate stress: they blow out in a downturn long before defaults actually spike.</p>'+
       '</div>';
     function draw(){
       var pd=num(id('pd')), rec=num(id('rec'))/100;
@@ -1692,7 +1692,7 @@
         '<div class="stat"><span class="k">Spreads</span><span class="v" id="cc_sp"></span></div>')+
       '<div class="prose">'+
         '<h4>The four phases</h4>'+
-        '<p><b>Repair</b> (after a crisis): spreads very wide, defaults peaking, but this is the best <i>forward</i> return â you\'re paid richly to take risk others are fleeing. <b>Recovery</b>: spreads tighten fast, balance sheets heal, own credit. <b>Expansion</b>: spreads tight, leverage building, complacency â carry is fine but the risk/reward is getting poor. <b>Downturn</b>: spreads gap wider, defaults rise â get defensive, up in quality, into cash.</p>'+
+        '<p><b>Repair</b> (after a crisis): spreads very wide, defaults peaking, but this is the best <i>forward</i> return, you\'re paid richly to take risk others are fleeing. <b>Recovery</b>: spreads tighten fast, balance sheets heal, own credit. <b>Expansion</b>: spreads tight, leverage building, complacency, carry is fine but the risk/reward is getting poor. <b>Downturn</b>: spreads gap wider, defaults rise, get defensive, up in quality, into cash.</p>'+
         '<div class="callout">The tell: credit usually <b>leads</b> equities. When spreads start widening while stocks are still making highs, the credit market is warning you the cycle is turning.</div>'+
       '</div>';
     function draw(){
@@ -1709,7 +1709,7 @@
         guides:[{p:p}],
         xlabel:'cycle progression', ylabel:'IG+HY blended spread', aria:'credit cycle'
       });
-      var phase = p<20?'Repair':(p<55?'Recovery / expansion':(p<85?'Late cycle â downturn':'Repair'));
+      var phase = p<20?'Repair':(p<55?'Recovery / expansion':(p<85?'Late cycle → downturn':'Repair'));
       document.getElementById('cc_ph').textContent=phase;
       var sp=spr(p); document.getElementById('cc_sp').textContent=Math.round(sp)+' bp';
     }
@@ -1722,15 +1722,15 @@
       slider({seed:s,key:'g',label:'Long-run earnings growth',min:0,max:10,step:0.5,value:4,fmt:function(v){return v.toFixed(1)+'%';}})+
       slider({seed:s,key:'r',label:'Discount rate (required return)',min:6,max:14,step:0.5,value:9,fmt:function(v){return v.toFixed(1)+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>A stock\'s price is its earnings times a <b>multiple</b> (the P/E). What justifies the multiple? Really two things: how fast earnings grow, and the return investors demand (which tracks interest rates). The fair P/E is roughly 1 Ã· (discount rate â growth). Move them and watch it swing.</p></div>'+
+      '<div class="prose"><p>A stock\'s price is its earnings times a <b>multiple</b> (the P/E). What justifies the multiple? Really two things: how fast earnings grow, and the return investors demand (which tracks interest rates). The fair P/E is roughly 1 ÷ (discount rate − growth). Move them and watch it swing.</p></div>'+
       toolShell('Justified P/E vs earnings growth', c, 'emPlot',
         '<div class="stat"><span class="k">Justified P/E</span><span class="v" id="em_pe"></span></div>'+
         '<div class="stat"><span class="k">Implied earnings yield</span><span class="v" id="em_ey"></span></div>')+
       '<div class="prose">'+
         '<h4>Two sources of return</h4>'+
-        '<p>Equity returns come from earnings <i>growing</i> and from the multiple <i>re-rating</i>. In a good year both work; the danger is paying a high multiple that then compresses. Notice how sensitive the P/E is as growth approaches the discount rate â small changes in either move valuations a lot. That\'s why long-duration growth stocks are so rate-sensitive.</p>'+
+        '<p>Equity returns come from earnings <i>growing</i> and from the multiple <i>re-rating</i>. In a good year both work; the danger is paying a high multiple that then compresses. Notice how sensitive the P/E is as growth approaches the discount rate, small changes in either move valuations a lot. That\'s why long-duration growth stocks are so rate-sensitive.</p>'+
         '<h4>What moves the multiple</h4>'+
-        '<p>Multiples <b>expand</b> when rates fall (lower discount rate), growth expectations rise, or risk appetite is high; they <b>compress</b> when rates rise or fear returns. 2022 was a pure multiple-compression bear market â earnings held up, but higher rates crushed P/Es. Related gauges: forward vs trailing P/E, PEG (P/E Ã· growth), and EV/EBITDA for cross-company comparisons.</p>'+
+        '<p>Multiples <b>expand</b> when rates fall (lower discount rate), growth expectations rise, or risk appetite is high; they <b>compress</b> when rates rise or fear returns. 2022 was a pure multiple-compression bear market, earnings held up, but higher rates crushed P/Es. Related gauges: forward vs trailing P/E, PEG (P/E ÷ growth), and EV/EBITDA for cross-company comparisons.</p>'+
       '</div>';
     function draw(){
       var g=num(id('g')), r=num(id('r'));
@@ -1755,8 +1755,8 @@
 
   function factorTool(host){
     host.innerHTML=
-      '<div class="prose"><p>Beyond the market itself (beta), decades of data show a handful of <b>factors</b> â shared characteristics â that explain why some stocks systematically beat others. A portfolio\'s returns can be decomposed into its exposure to these. Here are the big five and when each tends to work.</p>'+
-        '<table><thead><tr><th>Factor</th><th>What it buys</th><th>Works best whenâ¦</th></tr></thead><tbody>'+
+      '<div class="prose"><p>Beyond the market itself (beta), decades of data show a handful of <b>factors</b>, shared characteristics, that explain why some stocks systematically beat others. A portfolio\'s returns can be decomposed into its exposure to these. Here are the big five and when each tends to work.</p>'+
+        '<table><thead><tr><th>Factor</th><th>What it buys</th><th>Works best when...</th></tr></thead><tbody>'+
         '<tr><td>Value</td><td>Cheap stocks (low P/E, P/B) over expensive ones</td><td>Recovery / reflation; rising rates</td></tr>'+
         '<tr><td>Momentum</td><td>Recent winners over recent losers</td><td>Trending markets; mid-cycle</td></tr>'+
         '<tr><td>Quality</td><td>High profitability, low debt, stable earnings</td><td>Late cycle / slowdowns; flight to safety</td></tr>'+
@@ -1764,23 +1764,23 @@
         '<tr><td>Low volatility</td><td>Boring, stable stocks</td><td>Downturns; defensive regimes</td></tr>'+
         '</tbody></table>'+
         '<h4>Why factors matter</h4>'+
-        '<p>They\'re the equity equivalent of style in trading: a manager who "beats the market" may just be tilted to value or momentum â that\'s <b>factor exposure</b>, not necessarily skill (alpha). Factors are cyclical: value can underperform for years then roar back, so they diversify each other. This is the lens behind my Portfolio Analysis Suite\'s attribution.</p>'+
-        '<div class="callout">Interview-ready framing: "Is this return alpha, or just a factor tilt I could have bought cheaply?" â the same alpha-vs-beta question, one level deeper.</div>'+
+        '<p>They\'re the equity equivalent of style in trading: a manager who "beats the market" may just be tilted to value or momentum, that\'s <b>factor exposure</b>, not necessarily skill (alpha). Factors are cyclical: value can underperform for years then roar back, so they diversify each other. This is the lens behind my Portfolio Analysis Suite\'s attribution.</p>'+
+        '<div class="callout">Interview-ready framing: "Is this return alpha, or just a factor tilt I could have bought cheaply?", the same alpha-vs-beta question, one level deeper.</div>'+
       '</div>';
   }
 
   function sectorTool(host){
     host.innerHTML=
-      '<div class="prose"><p>In a slowdown money rarely leaves equities entirely â it <b>rotates</b> from economically-sensitive sectors into defensive ones. Which sectors lead maps onto the business cycle. The classic rotation:</p>'+
+      '<div class="prose"><p>In a slowdown money rarely leaves equities entirely, it <b>rotates</b> from economically-sensitive sectors into defensive ones. Which sectors lead maps onto the business cycle. The classic rotation:</p>'+
         '<table><thead><tr><th>Cycle phase</th><th>Leaders</th><th>Character</th></tr></thead><tbody>'+
         '<tr><td>Early recovery</td><td>Financials, consumer discretionary, industrials</td><td>Cyclical, rate-sensitive, high beta</td></tr>'+
         '<tr><td>Mid cycle</td><td>Technology, industrials</td><td>Growth &amp; capex</td></tr>'+
         '<tr><td>Late cycle</td><td>Energy, materials</td><td>Inflation-sensitive, real assets</td></tr>'+
-        '<tr><td>Recession</td><td>Utilities, staples, healthcare</td><td>Defensive â steady demand</td></tr>'+
+        '<tr><td>Recession</td><td>Utilities, staples, healthcare</td><td>Defensive, steady demand</td></tr>'+
         '</tbody></table>'+
         '<h4>Cyclicals vs defensives</h4>'+
-        '<p><b>Cyclicals</b> (banks, autos, industrials, discretionary) live and die with growth â they lead out of a trough and get hit first into a downturn. <b>Defensives</b> (utilities, consumer staples, healthcare) sell things people buy in any weather, so they hold up when growth rolls over. The ratio of cyclicals-to-defensives is itself a real-time read on where the market thinks the cycle is.</p>'+
-        '<div class="callout">This connects the equity market straight to the regime and business-cycle tools â sector leadership is the cycle expressing itself inside the stock market.</div>'+
+        '<p><b>Cyclicals</b> (banks, autos, industrials, discretionary) live and die with growth, they lead out of a trough and get hit first into a downturn. <b>Defensives</b> (utilities, consumer staples, healthcare) sell things people buy in any weather, so they hold up when growth rolls over. The ratio of cyclicals-to-defensives is itself a real-time read on where the market thinks the cycle is.</p>'+
+        '<div class="callout">This connects the equity market straight to the regime and business-cycle tools, sector leadership is the cycle expressing itself inside the stock market.</div>'+
       '</div>';
   }
 
@@ -1797,8 +1797,8 @@
         '<div class="readout"><div class="stat"><span class="k">Nominal 10y</span><span class="v" id="be_nom"></span></div></div></div>'+
       '<div class="prose">'+
         '<h4>Why the split matters</h4>'+
-        '<p>When a bond sells off (nominal yield rises), the two pieces tell different stories. If it\'s the <b>real yield</b> rising, that\'s about growth, Fed policy or term premium â tighter financial conditions, bad for equities (especially growth). If it\'s the <b>breakeven</b> rising, the market is repricing <i>inflation</i> higher. Same headline yield, opposite drivers.</p>'+
-        '<div class="callout">This is exactly the test from our first conversation: is the long-end sell-off real yields (fiscal / term premium) or breakevens (inflation fear)? Watch which leg is doing the moving â that\'s the tell.</div>'+
+        '<p>When a bond sells off (nominal yield rises), the two pieces tell different stories. If it\'s the <b>real yield</b> rising, that\'s about growth, Fed policy or term premium, tighter financial conditions, bad for equities (especially growth). If it\'s the <b>breakeven</b> rising, the market is repricing <i>inflation</i> higher. Same headline yield, opposite drivers.</p>'+
+        '<div class="callout">This is exactly the test from our first conversation: is the long-end sell-off real yields (fiscal / term premium) or breakevens (inflation fear)? Watch which leg is doing the moving, that\'s the tell.</div>'+
       '</div>';
     function draw(){
       var real=num(id('real')), be=num(id('be'));
@@ -1822,16 +1822,16 @@
     // inverse normal (Acklam approx, simplified via bisection on normcdf)
     function invnorm(pp){ var lo=-6,hi=6,mid; for(var i=0;i<60;i++){ mid=(lo+hi)/2; if(normcdf(mid)<pp) lo=mid; else hi=mid; } return mid; }
     host.innerHTML=
-      '<div class="prose"><p><b>Value-at-Risk</b> answers one question: on a normal bad day, how much could I lose? Pick a confidence level and it draws the line the loss should stay inside that often. The shaded tail is what VaR is measuring â and, crucially, what it ignores beyond that line. Slide vol and confidence.</p></div>'+
+      '<div class="prose"><p><b>Value-at-Risk</b> answers one question: on a normal bad day, how much could I lose? Pick a confidence level and it draws the line the loss should stay inside that often. The shaded tail is what VaR is measuring, and, crucially, what it ignores beyond that line. Slide vol and confidence.</p></div>'+
       toolShell('Distribution of daily P&L (Â£1m portfolio)', c, 'vrPlot',
         '<div class="stat"><span class="k">1-day VaR</span><span class="v" id="vr_var" style="color:var(--loss)"></span></div>'+
         '<div class="stat"><span class="k">As % of book</span><span class="v" id="vr_pct"></span></div>'+
         '<div class="stat"><span class="k">Meaning</span><span class="v" id="vr_txt" style="font-size:13px"></span></div>')+
       '<div class="prose">'+
-        '<h4>What VaR is â and isn\'t</h4>'+
-        '<p>95% VaR of Â£20k means: on 95 days out of 100 you lose less than Â£20k. It says <b>nothing</b> about the other 5 days â the loss could be Â£25k or Â£250k. VaR measures the edge of the tail, not what\'s inside it. <b>Expected Shortfall</b> (the average loss <i>given</i> you\'re in the tail) fixes part of that, which is why regulators now prefer it.</p>'+
+        '<h4>What VaR is, and isn\'t</h4>'+
+        '<p>95% VaR of Â£20k means: on 95 days out of 100 you lose less than Â£20k. It says <b>nothing</b> about the other 5 days, the loss could be Â£25k or Â£250k. VaR measures the edge of the tail, not what\'s inside it. <b>Expected Shortfall</b> (the average loss <i>given</i> you\'re in the tail) fixes part of that, which is why regulators now prefer it.</p>'+
         '<h4>Why stress testing exists</h4>'+
-        '<p>VaR assumes a roughly normal distribution â and markets have fat tails (see the sigma-moves concept). So VaR systematically understates disaster risk; it looked fine right up to 2008. <b>Stress testing</b> throws away the bell curve and asks "what happens in a repeat of 2008, or a 2022 rates shock, or a 1987?" â scenario-based, not probability-based. That combination, VaR for the everyday and stress tests for the tail, is the market-risk framework I worked on at Deutsche.</p>'+
+        '<p>VaR assumes a roughly normal distribution, and markets have fat tails (see the sigma-moves concept). So VaR systematically understates disaster risk; it looked fine right up to 2008. <b>Stress testing</b> throws away the bell curve and asks "what happens in a repeat of 2008, or a 2022 rates shock, or a 1987?", scenario-based, not probability-based. That combination, VaR for the everyday and stress tests for the tail, is the market-risk framework I worked on at Deutsche.</p>'+
       '</div>';
     function draw(){
       var vol=num(id('vol')), conf=num(id('conf'))/100;
@@ -1851,7 +1851,7 @@
         guides:[{p:-varPct,t:'VaR',side:'l'}],
         xlabel:'daily P&L', ylabel:'likelihood', aria:'VaR distribution'
       });
-      document.getElementById('vr_var').textContent='âÂ£'+Math.round(varGbp).toLocaleString();
+      document.getElementById('vr_var').textContent='−Â£'+Math.round(varGbp).toLocaleString();
       document.getElementById('vr_pct').textContent=varPct.toFixed(2)+'%';
       document.getElementById('vr_txt').textContent=Math.round(conf*100)+'% of days lose less than this';
     }
@@ -1862,15 +1862,15 @@
     seed=0.361; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
     var c=slider({seed:s,key:'p',label:'Where are we in the cycle?',min:0,max:100,step:2,value:25,fmt:function(v){return v+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>Economies expand and contract in a repeating wave. Reading which phase you\'re in â and spotting the turn before the data confirms it â sits underneath almost every macro decision. Slide along the cycle and read the phase and the tilt.</p></div>'+
+      '<div class="prose"><p>Economies expand and contract in a repeating wave. Reading which phase you\'re in, and spotting the turn before the data confirms it, sits underneath almost every macro decision. Slide along the cycle and read the phase and the tilt.</p></div>'+
       toolShell('The business cycle', c, 'bcPlot',
         '<div class="stat"><span class="k">Phase</span><span class="v" id="bc_ph" style="font-size:16px"></span></div>'+
         '<div class="stat"><span class="k">Typical tilt</span><span class="v" id="bc_tilt" style="font-size:13px"></span></div>')+
       '<div class="prose">'+
         '<h4>The four phases</h4>'+
-        '<p><b>Expansion:</b> growth accelerating, unemployment falling, risk assets and cyclicals lead. <b>Peak:</b> growth hot, inflation and rates rising, late-cycle plays (energy, materials) shine, curve often flattens. <b>Contraction/recession:</b> growth falling, defensives and bonds win, credit spreads widen. <b>Trough:</b> the darkest data, but where forward returns are best â the market bottoms <i>before</i> the economy does.</p>'+
+        '<p><b>Expansion:</b> growth accelerating, unemployment falling, risk assets and cyclicals lead. <b>Peak:</b> growth hot, inflation and rates rising, late-cycle plays (energy, materials) shine, curve often flattens. <b>Contraction/recession:</b> growth falling, defensives and bonds win, credit spreads widen. <b>Trough:</b> the darkest data, but where forward returns are best, the market bottoms <i>before</i> the economy does.</p>'+
         '<h4>Leading vs lagging</h4>'+
-        '<p>Time your read with <b>leading</b> indicators â PMIs/ISM, jobless claims, building permits, the yield curve, credit spixes â not <b>lagging</b> ones like unemployment and CPI, which confirm what already happened. The whole edge is that markets discount the <i>next</i> phase, so you position ahead of the crowd, not with it.</p>'+
+        '<p>Time your read with <b>leading</b> indicators, PMIs/ISM, jobless claims, building permits, the yield curve, credit spixes, not <b>lagging</b> ones like unemployment and CPI, which confirm what already happened. The whole edge is that markets discount the <i>next</i> phase, so you position ahead of the crowd, not with it.</p>'+
         '<div class="callout">Pair this with the regime tool: the business cycle is the growth axis over time; the regime grid adds the inflation axis at a point in time.</div>'+
       '</div>';
     function draw(){
@@ -1899,14 +1899,14 @@
 
   function bojTool(host){
     host.innerHTML=
-      '<div class="prose"><p>When a currency moves too far, too fast, the government can step directly into the market to move it â <b>FX intervention</b>. Japan is the textbook case, and it ties straight to my USD/JPY view.</p>'+
+      '<div class="prose"><p>When a currency moves too far, too fast, the government can step directly into the market to move it, <b>FX intervention</b>. Japan is the textbook case, and it ties straight to my USD/JPY view.</p>'+
         '<h4>How it works</h4>'+
-        '<p>In Japan the <b>Ministry of Finance</b> decides and the <b>BOJ</b> executes. To strengthen a weak yen, they <b>sell dollar reserves and buy yen</b> â a huge market order that spikes the yen. (To weaken the yen they\'d do the reverse, printing yen to buy foreign assets.) It\'s blunt, expensive, and finite: you can only sell the reserves you have.</p>'+
+        '<p>In Japan the <b>Ministry of Finance</b> decides and the <b>BOJ</b> executes. To strengthen a weak yen, they <b>sell dollar reserves and buy yen</b>, a huge market order that spikes the yen. (To weaken the yen they\'d do the reverse, printing yen to buy foreign assets.) It\'s blunt, expensive, and finite: you can only sell the reserves you have.</p>'+
         '<h4>When and why</h4>'+
-        '<p>Authorities intervene against <b>speed and disorder</b>, not a level per se â the official line is always "we\'re watching excessive, one-sided moves." For USD/JPY, the market watches the pace of the move and prior intervention zones (the 150s+ have drawn action). Verbal warnings ("jawboning") come first; actual intervention second.</p>'+
+        '<p>Authorities intervene against <b>speed and disorder</b>, not a level per se, the official line is always "we\'re watching excessive, one-sided moves." For USD/JPY, the market watches the pace of the move and prior intervention zones (the 150s+ have drawn action). Verbal warnings ("jawboning") come first; actual intervention second.</p>'+
         '<h4>Does it work?</h4>'+
-        '<p>Rarely reverses a trend driven by fundamentals â if the USâJapan rate gap is wide (see the rate-differentials concept), intervention only buys time. But it can force a violent short-term reversal that punishes crowded yen shorts, which is why positioning matters so much around it. Intervention plus a BOJ policy shift together is what actually turns the pair.</p>'+
-        '<div class="callout">Trading read: near intervention zones, a crowded short-yen (long USD/JPY) trade carries fat two-way tail risk â exactly the positioning-and-crowding lesson applied to FX.</div>'+
+        '<p>Rarely reverses a trend driven by fundamentals, if the US–Japan rate gap is wide (see the rate-differentials concept), intervention only buys time. But it can force a violent short-term reversal that punishes crowded yen shorts, which is why positioning matters so much around it. Intervention plus a BOJ policy shift together is what actually turns the pair.</p>'+
+        '<div class="callout">Trading read: near intervention zones, a crowded short-yen (long USD/JPY) trade carries fat two-way tail risk, exactly the positioning-and-crowding lesson applied to FX.</div>'+
       '</div>';
   }
 
@@ -1917,15 +1917,15 @@
       slider({seed:s,key:'gaso',label:'Gasoline (petrol)',min:60,max:150,step:1,value:104,fmt:function(v){return '$'+v;}})+
       slider({seed:s,key:'diesel',label:'Diesel / distillate',min:60,max:160,step:1,value:116,fmt:function(v){return '$'+v;}});
     host.innerHTML=
-      '<div class="prose"><p>A refinery buys crude, splits it, and sells the products â mostly petrol and diesel. Its margin is the <b>crack spread</b>. The industry benchmark is the <b>3-2-1</b>: take 3 barrels of crude, assume they make 2 of petrol and 1 of diesel, and see what\'s left. Move the three prices and watch the margin.</p></div>'+
+      '<div class="prose"><p>A refinery buys crude, splits it, and sells the products, mostly petrol and diesel. Its margin is the <b>crack spread</b>. The industry benchmark is the <b>3-2-1</b>: take 3 barrels of crude, assume they make 2 of petrol and 1 of diesel, and see what\'s left. Move the three prices and watch the margin.</p></div>'+
       toolShell('3-2-1 crack spread ($/bbl) vs crude price', c, 'crPlot',
         '<div class="stat"><span class="k">3-2-1 crack</span><span class="v" id="cr_val"></span></div>'+
         '<div class="stat"><span class="k">Refiner is</span><span class="v" id="cr_state" style="font-size:15px"></span></div>')+
       '<div class="prose">'+
         '<h4>Long products, short crude</h4>'+
-        '<p>A refiner\'s P&amp;L rises when products outrun crude and gets crushed when crude outruns products. So refiners <b>hedge</b> by locking the crack: buy crude futures, sell product futures. A wide crack means fat margins â refineries run flat-out â more crude demand and more product supply, which eventually narrows it again.</p>'+
+        '<p>A refiner\'s P&amp;L rises when products outrun crude and gets crushed when crude outruns products. So refiners <b>hedge</b> by locking the crack: buy crude futures, sell product futures. A wide crack means fat margins → refineries run flat-out → more crude demand and more product supply, which eventually narrows it again.</p>'+
         '<h4>What moves it</h4>'+
-        '<p>Refinery outages, driving-season demand, cold snaps (diesel/heating), and export bottlenecks all swing cracks. It\'s a core physical-desk signal â exactly the kind of relationship in my BP commodities toolkit: the flat price is one thing, but the <i>spread</i> is where the refining economics live.</p>'+
+        '<p>Refinery outages, driving-season demand, cold snaps (diesel/heating), and export bottlenecks all swing cracks. It\'s a core physical-desk signal, exactly the kind of relationship in my BP commodities toolkit: the flat price is one thing, but the <i>spread</i> is where the refining economics live.</p>'+
       '</div>';
     function crack(cr,g,d){ return (2*g + d - 3*cr)/3; }
     function draw(){
@@ -1956,15 +1956,15 @@
       slider({seed:s,key:'sto',label:'Storage cost',min:0,max:2,step:0.1,value:0.5,fmt:function(v){return '$'+v.toFixed(1)+'/bbl/mo';}})+
       slider({seed:s,key:'fin',label:'Financing rate',min:0,max:8,step:0.25,value:4.5,fmt:function(v){return v.toFixed(2)+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>Why is a barrel for delivery in 6 months priced differently from one today? Because to hold the physical barrel you pay to <b>store</b> it and to <b>finance</b> it. Add those up and you get the fair slope of the futures curve â the cost of carry. Slide the two costs.</p></div>'+
+      '<div class="prose"><p>Why is a barrel for delivery in 6 months priced differently from one today? Because to hold the physical barrel you pay to <b>store</b> it and to <b>finance</b> it. Add those up and you get the fair slope of the futures curve, the cost of carry. Slide the two costs.</p></div>'+
       toolShell('Fair futures curve built from carry (spot = $85)', c, 'stoPlot',
         '<div class="stat"><span class="k">Fair 6m carry</span><span class="v" id="sto_carry"></span></div>'+
         '<div class="stat"><span class="k">Curve shape</span><span class="v" id="sto_shape" style="font-size:15px"></span></div>')+
       '<div class="prose">'+
         '<h4>The cash-and-carry arbitrage</h4>'+
-        '<p>If the market\'s contango is <i>wider</i> than the true cost of carry, it\'s free money: buy the physical barrel now, pay to store and finance it, and sell it forward at the fatter price â lock in the difference risk-free. Traders piling into that trade push the curve back toward fair value. So <b>storage + financing caps how steep contango can get.</b></p>'+
+        '<p>If the market\'s contango is <i>wider</i> than the true cost of carry, it\'s free money: buy the physical barrel now, pay to store and finance it, and sell it forward at the fatter price, lock in the difference risk-free. Traders piling into that trade push the curve back toward fair value. So <b>storage + financing caps how steep contango can get.</b></p>'+
         '<h4>The extremes</h4>'+
-        '<p>In 2020 the world ran out of storage â the front collapsed (briefly negative) and contango blew out so far that traders hired <b>tankers as floating storage</b>. The opposite, <b>backwardation</b>, means the market pays you to hold the physical (a high "convenience yield") because supply is tight now â the Iran-sanctions setup. This is the storage-vs-5yr-range logic in my commodities toolkit.</p>'+
+        '<p>In 2020 the world ran out of storage, the front collapsed (briefly negative) and contango blew out so far that traders hired <b>tankers as floating storage</b>. The opposite, <b>backwardation</b>, means the market pays you to hold the physical (a high "convenience yield") because supply is tight now, the Iran-sanctions setup. This is the storage-vs-5yr-range logic in my commodities toolkit.</p>'+
       '</div>';
     function draw(){
       var sto=num(id('sto')), fin=num(id('fin'));
@@ -1988,18 +1988,18 @@
   function gradeTool(host){
     seed=0.373; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
     var c=
-      slider({seed:s,key:'diff',label:'Price at hub B â hub A',min:-6,max:10,step:0.5,value:4,fmt:function(v){return (v>0?'+':'')+'$'+v;}})+
-      slider({seed:s,key:'freight',label:'Freight cost AâB',min:0,max:10,step:0.5,value:3,fmt:function(v){return '$'+v;}});
+      slider({seed:s,key:'diff',label:'Price at hub B − hub A',min:-6,max:10,step:0.5,value:4,fmt:function(v){return (v>0?'+':'')+'$'+v;}})+
+      slider({seed:s,key:'freight',label:'Freight cost A→B',min:0,max:10,step:0.5,value:3,fmt:function(v){return '$'+v;}});
     host.innerHTML=
-      '<div class="prose"><p>The same barrel is worth different amounts in different places â and moving it costs money. A physical trader buys where crude is cheap and ships it where it\'s dear, <b>if</b> the price gap beats the freight. Slide the location spread and the freight and see whether the arb is open.</p></div>'+
+      '<div class="prose"><p>The same barrel is worth different amounts in different places, and moving it costs money. A physical trader buys where crude is cheap and ships it where it\'s dear, <b>if</b> the price gap beats the freight. Slide the location spread and the freight and see whether the arb is open.</p></div>'+
       toolShell('Arbitrage margin vs freight cost', c, 'grPlotC',
         '<div class="stat"><span class="k">Arb margin</span><span class="v" id="gd_arb"></span></div>'+
         '<div class="stat"><span class="k">Trade</span><span class="v" id="gd_state" style="font-size:15px"></span></div>')+
       '<div class="prose">'+
-        '<h4>Grade spreads â quality</h4>'+
+        '<h4>Grade spreads, quality</h4>'+
         '<p>Crude varies by <b>density</b> (light vs heavy) and <b>sulphur</b> (sweet vs sour). Light-sweet (like Brent/WTI) is easier to refine into high-value products, so it trades at a premium; heavy-sour trades at a discount. The <b>Brent-WTI spread</b> is the most-watched grade/location spread of all.</p>'+
-        '<h4>Location spreads â geography &amp; chokepoints</h4>'+
-        '<p>Location spreads are set by transport cost and bottlenecks. When a <b>chokepoint</b> â Hormuz, the Suez Canal, the Malacca or Bosphorus straits â is threatened, freight rates spike and regional spreads blow out, because the cost (or risk) of moving barrels there jumps. That\'s exactly what my BP chokepoint map tracks: a geopolitical flare-up at a strait reprices every barrel downstream of it.</p>'+
+        '<h4>Location spreads, geography &amp; chokepoints</h4>'+
+        '<p>Location spreads are set by transport cost and bottlenecks. When a <b>chokepoint</b>, Hormuz, the Suez Canal, the Malacca or Bosphorus straits, is threatened, freight rates spike and regional spreads blow out, because the cost (or risk) of moving barrels there jumps. That\'s exactly what my BP chokepoint map tracks: a geopolitical flare-up at a strait reprices every barrel downstream of it.</p>'+
       '</div>';
     function draw(){
       var diff=num(id('diff')), fr=num(id('freight'));
@@ -2010,12 +2010,12 @@
         xticks:[0,2,4,6,8,10], xfmt:function(v){return '$'+v;},
         yticks:[Math.round(Math.min(-6,diff-8)),0,Math.round(Math.max(6,diff))], yfmt:function(v){return (v>0?'+':'')+'$'+v;},
         series:[{fn:function(f){return diff-f;}, color:(arb>=0?'--profit':'--loss'), fill:'x', fillSigned:true, width:2.6}],
-        markers:[{p:fr,v:arb,color:'--accent',t:(arb>=0?'+':'â')+'$'+Math.abs(arb).toFixed(1),dx:8,dy:arb>=0?-8:16}],
+        markers:[{p:fr,v:arb,color:'--accent',t:(arb>=0?'+':'−')+'$'+Math.abs(arb).toFixed(1),dx:8,dy:arb>=0?-8:16}],
         guides:[{p:fr}],
-        xlabel:'freight cost AâB', ylabel:'arb margin ($/bbl)', aria:'location arb'
+        xlabel:'freight cost A→B', ylabel:'arb margin ($/bbl)', aria:'location arb'
       });
-      var a=document.getElementById('gd_arb'); a.textContent=(arb>=0?'+':'â')+'$'+Math.abs(arb).toFixed(2); a.style.color=arb>=0?'var(--profit)':'var(--loss)';
-      document.getElementById('gd_state').textContent = arb>0?'Ship it â arb open':'Leave it â freight too high';
+      var a=document.getElementById('gd_arb'); a.textContent=(arb>=0?'+':'−')+'$'+Math.abs(arb).toFixed(2); a.style.color=arb>=0?'var(--profit)':'var(--loss)';
+      document.getElementById('gd_state').textContent = arb>0?'Ship it, arb open':'Leave it, freight too high';
     }
     ['diff','freight'].forEach(function(k){bind(id(k),draw);}); draw();
   }
@@ -2027,15 +2027,15 @@
       slider({seed:s,key:'sup',label:'Supply change (% of market)',min:-4,max:4,step:0.25,value:0,fmt:function(v){return (v>0?'+':'')+v.toFixed(2)+'%';}})+
       slider({seed:s,key:'dem',label:'Demand change (% of market)',min:-4,max:4,step:0.25,value:0,fmt:function(v){return (v>0?'+':'')+v.toFixed(2)+'%';}});
     host.innerHTML=
-      '<div class="prose"><p>In the short run almost nobody drives less because petrol went up 10% â oil demand is <b>inelastic</b>. So when supply and demand don\'t match, price has to do all the adjusting, and it moves a lot. Shift supply (think an OPEC+ decision) or demand and watch the price whip.</p></div>'+
+      '<div class="prose"><p>In the short run almost nobody drives less because petrol went up 10%, oil demand is <b>inelastic</b>. So when supply and demand don\'t match, price has to do all the adjusting, and it moves a lot. Shift supply (think an OPEC+ decision) or demand and watch the price whip.</p></div>'+
       toolShell('Price impact vs the supply-demand balance', c, 'opPlot',
         '<div class="stat"><span class="k">Market balance</span><span class="v" id="op_bal" style="font-size:15px"></span></div>'+
         '<div class="stat"><span class="k">Est. price impact</span><span class="v" id="op_px"></span></div>')+
       '<div class="prose">'+
-        '<h4>Why small gaps â big moves</h4>'+
-        '<p>With demand barely responding to price, a ~1% shortfall can\'t be closed by people using less â so price spikes until some marginal demand finally gives way. That inelasticity is the whole reason oil is so volatile, and why removing even a few hundred thousand barrels (sanctions, an outage) moves the flat price hard.</p>'+
+        '<h4>Why small gaps → big moves</h4>'+
+        '<p>With demand barely responding to price, a ~1% shortfall can\'t be closed by people using less, so price spikes until some marginal demand finally gives way. That inelasticity is the whole reason oil is so volatile, and why removing even a few hundred thousand barrels (sanctions, an outage) moves the flat price hard.</p>'+
         '<h4>OPEC+ and spare capacity</h4>'+
-        '<p>OPEC+ manages this by <b>adjusting output</b> â cutting to support price, adding to cap it. Its real power is <b>spare capacity</b>: the barrels (mostly Saudi) it can bring on quickly. That spare cushion is the market\'s shock absorber â when it\'s thin, the risk premium in price balloons because there\'s no buffer for the next disruption. This is the supply-demand balance I modelled at BP; the Iran-sanctions story is a deficit shock playing out in real time.</p>'+
+        '<p>OPEC+ manages this by <b>adjusting output</b>, cutting to support price, adding to cap it. Its real power is <b>spare capacity</b>: the barrels (mostly Saudi) it can bring on quickly. That spare cushion is the market\'s shock absorber, when it\'s thin, the risk premium in price balloons because there\'s no buffer for the next disruption. This is the supply-demand balance I modelled at BP; the Iran-sanctions story is a deficit shock playing out in real time.</p>'+
       '</div>';
     function draw(){
       var sup=num(id('sup')), dem=num(id('dem'));
@@ -2050,7 +2050,7 @@
         series:[{fn:px, color:'--accent', width:2.8}],
         markers:[{p:net,v:px(net),color:(px(net)>=0?'--profit':'--loss'),t:(px(net)>=0?'+':'')+px(net).toFixed(0)+'%',dx:8,dy:-8}],
         guides:[{p:net}],
-        xlabel:'balance (surplus â )', ylabel:'price impact', aria:'oil balance price impact'
+        xlabel:'balance (surplus → )', ylabel:'price impact', aria:'oil balance price impact'
       });
       var b=document.getElementById('op_bal');
       b.textContent = Math.abs(net)<0.1?'Balanced':(net>0?'Surplus '+net.toFixed(2)+'%':'Deficit '+Math.abs(net).toFixed(2)+'%');
@@ -2106,7 +2106,7 @@
     var body=document.getElementById('d-body'); body.innerHTML="";
     c.build(body);
     // project link
-    var pl=el('a',{'class':'project-link',href:c.projectUrl},'â See it applied â '+c.project);
+    var pl=el('a',{'class':'project-link',href:c.projectUrl},'↗ See it applied, '+c.project);
     body.appendChild(pl);
     window.scrollTo(0,0);
   }
