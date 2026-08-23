@@ -1,0 +1,2129 @@
+﻿<title>Learn</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap">
+
+<!--
+  Niyam â this is a standalone, self-contained page. Drop learn.html into your site repo.
+  Adjust the nav hrefs below (marked NAV) to match your routing (e.g. index.html#work).
+  Everything else (search, filters, interactive tools) works with no build step or dependencies.
+-->
+
+<style>
+  :root{
+    --paper:#F4F1EB; --surface:#FFFFFF; --surface-2:#F4F1EB;
+    --ink:#111111; --muted:#7C7669; --faint:#98968E;
+    --line:#E0DCD2; --line-strong:#C8C4BC;
+    --grid:rgba(17,17,17,.07);
+    --accent:#A96A15; --accent-ink:#8A560F; --accent-soft:rgba(169,106,21,.12);
+    --profit:#1E7A6B; --profit-fill:rgba(30,122,107,.15);
+    --loss:#B34428; --loss-fill:rgba(179,68,40,.14);
+    --chip:#EDE9E1; --chip-on:#111111; --chip-on-ink:#F4F1EB;
+    --shadow:0 1px 2px rgba(17,17,17,.04),0 10px 30px rgba(17,17,17,.06);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#14181A; --surface:#1B2124; --surface-2:#212a2e;
+      --ink:#E9ECE6; --muted:#9CA6AB; --faint:#6C767C;
+      --line:#2A3237; --line-strong:#374149;
+      --grid:rgba(233,236,230,.10);
+      --accent:#E0A34A; --accent-ink:#EBB86E; --accent-soft:rgba(224,163,74,.15);
+      --profit:#54BBA6; --profit-fill:rgba(84,187,166,.16);
+      --loss:#E37B5E; --loss-fill:rgba(227,123,94,.15);
+      --chip:#232b2f; --chip-on:#E9ECE6; --chip-on-ink:#14181A;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.38);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14181A; --surface:#1B2124; --surface-2:#212a2e;
+    --ink:#E9ECE6; --muted:#9CA6AB; --faint:#6C767C;
+    --line:#2A3237; --line-strong:#374149;
+    --grid:rgba(233,236,230,.10);
+    --accent:#E0A34A; --accent-ink:#EBB86E; --accent-soft:rgba(224,163,74,.15);
+    --profit:#54BBA6; --profit-fill:rgba(84,187,166,.16);
+    --loss:#E37B5E; --loss-fill:rgba(227,123,94,.15);
+    --chip:#232b2f; --chip-on:#E9ECE6; --chip-on-ink:#14181A;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.38);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+
+  /* ---- nav ---- */
+  nav{
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+    padding:20px clamp(18px,4vw,44px); border-bottom:1px solid var(--line);
+    background:var(--paper); position:sticky; top:0; z-index:20;
+    backdrop-filter:saturate(1.1);
+  }
+  .brand{font-family:ui-monospace,monospace; font-size:13px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--ink); text-decoration:none; font-weight:500;}
+  .navlinks{display:flex; gap:clamp(14px,3vw,30px); flex-wrap:wrap}
+  .navlinks a{font-family:ui-monospace,monospace; font-size:12.5px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .15s;}
+  .navlinks a:hover{color:var(--ink)}
+  .navlinks a.active{color:var(--accent-ink); font-weight:500}
+
+  .wrap{max-width:1060px; margin:0 auto; padding:clamp(28px,5vw,60px) clamp(18px,4vw,44px) 90px;}
+
+  /* ---- hero ---- */
+  .eyebrow{font-family:ui-monospace,monospace; font-size:12.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--accent); margin:0 0 14px; display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:""; width:26px; height:2px; background:var(--accent);}
+  h1{font-family:"Syne",system-ui,sans-serif; font-weight:700; font-size:clamp(38px,8vw,68px);
+    line-height:1.0; letter-spacing:-.015em; margin:0 0 18px;}
+  .stand{font-size:clamp(16px,2.4vw,19px); color:var(--muted); max-width:62ch; margin:0;}
+  .stand b{color:var(--ink); font-weight:600;}
+
+  /* ---- controls ---- */
+  .controls{margin-top:clamp(30px,5vw,46px);}
+  .searchbox{position:relative; max-width:520px;}
+  .searchbox svg{position:absolute; left:15px; top:50%; transform:translateY(-50%); color:var(--faint);}
+  #search{
+    width:100%; padding:14px 16px 14px 44px; font-size:15.5px; font-family:inherit;
+    color:var(--ink); background:var(--surface); border:1px solid var(--line-strong);
+    border-radius:12px; outline:none; transition:border-color .15s, box-shadow .15s;
+  }
+  #search::placeholder{color:var(--faint)}
+  #search:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft);}
+
+  .chips{display:flex; gap:9px; flex-wrap:wrap; margin-top:16px;}
+  .chip{font-family:ui-monospace,monospace; font-size:12px; letter-spacing:.04em;
+    padding:7px 13px; border-radius:999px; border:1px solid var(--line-strong);
+    background:var(--chip); color:var(--muted); cursor:pointer; transition:all .15s; white-space:nowrap;}
+  .chip:hover{color:var(--ink); border-color:var(--faint)}
+  .chip.on{background:var(--chip-on); color:var(--chip-on-ink); border-color:var(--chip-on);}
+  .count{font-family:ui-monospace,monospace; font-size:12.5px; color:var(--faint); margin:18px 0 0;}
+
+  /* ---- card grid ---- */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px; margin-top:14px;}
+  .concept-card{
+    text-align:left; background:var(--surface); border:1px solid var(--line);
+    border-radius:var(--radius); padding:22px 22px 20px; cursor:pointer; font-family:inherit;
+    box-shadow:var(--shadow); transition:transform .16s, border-color .16s, box-shadow .16s;
+    display:flex; flex-direction:column; gap:10px; color:inherit;
+  }
+  .concept-card:hover{transform:translateY(-3px); border-color:var(--line-strong);
+    box-shadow:0 2px 4px rgba(46,42,36,.06),0 16px 40px rgba(46,42,36,.10);}
+  .card-top{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .cat-tag{font-family:ui-monospace,monospace; font-size:10.5px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--accent-ink);}
+  .badge{font-family:ui-monospace,monospace; font-size:10px; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--profit); border:1px solid var(--profit);
+    border-radius:999px; padding:2px 8px; opacity:.9;}
+  .concept-card h3{font-family:"Syne",system-ui,sans-serif; font-weight:700; font-size:21px;
+    line-height:1.15; margin:0; letter-spacing:-.01em;}
+  .concept-card p{font-size:14px; color:var(--muted); margin:0; flex:1;}
+  .tagrow{display:flex; gap:6px; flex-wrap:wrap; margin-top:2px;}
+  .tag{font-family:ui-monospace,monospace; font-size:10.5px; color:var(--faint);
+    background:var(--surface-2); border:1px solid var(--line); border-radius:6px; padding:2px 7px;}
+  .empty{color:var(--muted); font-size:15px; margin-top:30px; padding:24px;
+    border:1px dashed var(--line-strong); border-radius:12px; text-align:center;}
+
+  /* ---- concept detail view ---- */
+  #detail{display:none}
+  .back{display:inline-flex; align-items:center; gap:8px; font-family:ui-monospace,monospace;
+    font-size:12.5px; letter-spacing:.06em; color:var(--muted); background:none; border:none;
+    cursor:pointer; padding:6px 0; margin-bottom:8px;}
+  .back:hover{color:var(--accent-ink)}
+  .d-cat{font-family:ui-monospace,monospace; font-size:12px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); margin:6px 0 10px;}
+  #detail h1{font-size:clamp(30px,6vw,48px); margin-bottom:14px;}
+  .d-stand{font-size:clamp(16px,2.3vw,18.5px); color:var(--muted); max-width:64ch; margin:0 0 6px;}
+
+  .tool{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:clamp(16px,2.5vw,26px); margin:28px 0;}
+  .tool-head{font-family:ui-monospace,monospace; font-size:11.5px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--faint); margin:0 0 4px;}
+  .sliders{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px 22px; margin-top:6px;}
+  .slider{display:flex; flex-direction:column; gap:4px;}
+  .slider label{font-size:13px; color:var(--muted); display:flex; justify-content:space-between; gap:8px;}
+  .slider .val{font-family:ui-monospace,monospace; color:var(--ink); font-weight:500;}
+  input[type=range]{-webkit-appearance:none; appearance:none; width:100%; height:4px; border-radius:4px;
+    background:var(--line-strong); outline:none; cursor:pointer;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; appearance:none; width:18px; height:18px;
+    border-radius:50%; background:var(--accent); border:2px solid var(--surface); box-shadow:0 1px 3px rgba(0,0,0,.25);}
+  input[type=range]::-moz-range-thumb{width:18px; height:18px; border:2px solid var(--surface);
+    border-radius:50%; background:var(--accent); box-shadow:0 1px 3px rgba(0,0,0,.25);}
+  .readout{display:flex; gap:22px; flex-wrap:wrap; margin-top:16px; padding-top:16px; border-top:1px solid var(--line);}
+  .stat{display:flex; flex-direction:column;}
+  .stat .k{font-family:ui-monospace,monospace; font-size:11px; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--faint);}
+  .stat .v{font-family:ui-monospace,monospace; font-size:22px; font-weight:500; font-variant-numeric:tabular-nums;}
+  svg.plot{display:block; width:100%; height:auto; overflow:visible; margin-top:4px;}
+  .tick-label{font-family:ui-monospace,monospace; fill:var(--muted); font-size:11px;}
+  .axis-label{font-family:ui-monospace,monospace; fill:var(--faint); font-size:11px;}
+  .plot-anno{font-family:"Inter",sans-serif; font-size:12px; font-weight:600;}
+  .plot-legend{display:flex; gap:18px; flex-wrap:wrap; font-family:ui-monospace,monospace;
+    font-size:12px; color:var(--muted); margin-bottom:4px;}
+  .plot-legend span{display:inline-flex; align-items:center; gap:7px;}
+  .sw{width:20px; border-top-width:3px; border-top-style:solid; display:inline-block;}
+
+  .prose{max-width:66ch;}
+  .prose h4{font-family:"Syne",system-ui,sans-serif; font-weight:700; font-size:21px; margin:30px 0 8px; letter-spacing:-.01em;}
+  .prose p{margin:0 0 14px; font-size:16px;}
+  .prose b{font-weight:600}
+  .prose .callout{background:var(--accent-soft); border-left:3px solid var(--accent);
+    border-radius:10px; padding:14px 18px; font-size:15px;}
+  .verdict{font-family:ui-monospace,monospace; font-weight:500; padding:3px 10px; border-radius:8px; font-size:15px;}
+  .v-hold{background:var(--accent-soft); color:var(--accent-ink);}
+  .v-cut{background:var(--profit-fill); color:var(--profit);}
+  .v-hike{background:var(--loss-fill); color:var(--loss);}
+  .project-link{display:inline-flex; align-items:center; gap:8px; margin-top:8px;
+    font-family:ui-monospace,monospace; font-size:13px; color:var(--accent-ink); text-decoration:none;
+    border:1px solid var(--line-strong); border-radius:10px; padding:9px 14px; transition:all .15s;}
+  .project-link:hover{border-color:var(--accent); background:var(--accent-soft);}
+
+  .disclaimer{margin-top:36px; padding-top:18px; border-top:1px solid var(--line);
+    color:var(--faint); font-size:12.5px; max-width:72ch;}
+
+  /* selector chips inside tools */
+  .optrow{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:6px 0;}
+  .optrow .lab{font-size:13px; color:var(--muted); min-width:112px;}
+  .optrow .opts{display:flex; gap:8px; flex-wrap:wrap;}
+  .opt{font-family:ui-monospace,monospace; font-size:12.5px; padding:7px 14px; border-radius:999px;
+    border:1px solid var(--line-strong); background:var(--chip); color:var(--muted); cursor:pointer; transition:all .15s;}
+  .opt:hover{color:var(--ink); border-color:var(--faint);}
+  .opt.on{background:var(--chip-on); color:var(--chip-on-ink); border-color:var(--chip-on);}
+  .trade-out{margin-top:16px; padding:16px 18px; border-radius:12px; background:var(--accent-soft);
+    border-left:3px solid var(--accent);}
+  .trade-out .tk{font-family:ui-monospace,monospace; font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--accent-ink); margin:0 0 4px;}
+  .trade-out .tv{font-size:17px; font-weight:600; margin:0;}
+  .trade-out .td{font-size:14px; color:var(--muted); margin:6px 0 0;}
+
+  /* risk-on/off asset bars */
+  .rr-list{display:flex; flex-direction:column; gap:9px; margin-top:6px;}
+  .rr-row{display:grid; grid-template-columns:132px 1fr; align-items:center; gap:12px;}
+  .rr-row .nm{font-size:13.5px; color:var(--ink);}
+  .rr-track{position:relative; height:22px; background:var(--surface-2); border-radius:6px; border:1px solid var(--line); overflow:hidden;}
+  .rr-mid{position:absolute; left:50%; top:0; bottom:0; width:1px; background:var(--faint); opacity:.5;}
+  .rr-fill{position:absolute; top:3px; bottom:3px; border-radius:4px; transition:all .12s ease;}
+
+  /* regime quadrant */
+  .quad-wrap{position:relative; margin-top:8px;}
+  .quad{position:relative; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;
+    gap:3px; aspect-ratio:1/.72; max-width:520px; margin:6px auto 0;}
+  .qcell{border-radius:10px; padding:12px 14px; display:flex; flex-direction:column; justify-content:flex-end;
+    background:var(--surface-2); border:1px solid var(--line); transition:all .15s;}
+  .qcell.active{background:var(--accent-soft); border-color:var(--accent);}
+  .qcell .qn{font-family:"Syne",system-ui,sans-serif; font-weight:700; font-size:16px;}
+  .qcell .qd{font-size:11.5px; color:var(--muted); margin-top:2px; line-height:1.35;}
+  .qdot{position:absolute; width:16px; height:16px; border-radius:50%; background:var(--accent);
+    border:3px solid var(--surface); box-shadow:0 2px 6px rgba(0,0,0,.3); transform:translate(-50%,-50%);
+    transition:left .12s ease, top .12s ease; z-index:2;}
+  .qaxis{font-family:ui-monospace,monospace; font-size:10.5px; color:var(--faint); text-align:center; margin-top:6px;}
+  .qaxis-y{position:absolute; left:-8px; top:50%; transform:rotate(-90deg) translateX(50%); transform-origin:left;
+    font-family:ui-monospace,monospace; font-size:10.5px; color:var(--faint); white-space:nowrap;}
+
+  /* sharpe gauge bars */
+  .sbar{display:grid; grid-template-columns:120px 1fr 54px; align-items:center; gap:12px; margin:8px 0;}
+  .sbar .sl{font-size:13px; color:var(--muted);}
+  .sbar-track{height:16px; background:var(--surface-2); border:1px solid var(--line); border-radius:5px; overflow:hidden;}
+  .sbar-fill{height:100%; background:var(--accent); border-radius:5px; transition:width .12s;}
+  .sbar .sv{font-family:ui-monospace,monospace; font-size:14px; text-align:right;}
+
+  /* stacked decomposition bar */
+  .stackbar{display:flex; height:44px; border-radius:8px; overflow:hidden; border:1px solid var(--line); margin:10px 0;}
+  .stackseg{display:flex; align-items:center; justify-content:center; font-family:ui-monospace,monospace;
+    font-size:12.5px; color:#fff; transition:flex-basis .15s; white-space:nowrap; overflow:hidden;}
+  .stacklegend{display:flex; gap:18px; flex-wrap:wrap; font-family:ui-monospace,monospace; font-size:12px; color:var(--muted);}
+  .stacklegend span{display:inline-flex; align-items:center; gap:7px;}
+  .stacklegend i{width:12px; height:12px; border-radius:3px; display:inline-block;}
+  .prose table{width:100%; border-collapse:collapse; margin:10px 0 18px; font-size:14.5px;}
+  .prose th,.prose td{text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .prose th{font-family:ui-monospace,monospace; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); font-weight:500;}
+  .prose td:first-child{font-weight:600; white-space:nowrap;}
+</style>
+
+<nav>
+  <!-- NAV: point these at your real routes -->
+  <a class="brand" href="index.html">Niyam Rathod</a>
+  <div class="navlinks">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#views">Views</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="learn.html" class="active">Learn</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <!-- ============ HUB ============ -->
+  <div id="hub">
+    <header>
+      <p class="eyebrow">Concept library</p>
+      <h1>Learn</h1>
+      <p class="stand">The mechanics behind the tools I build â rates, FX, commodities, options and risk â explained by <b>playing with them</b>, not reading about them. Every card is an interactive graph you can pull apart until the idea clicks.</p>
+    </header>
+
+    <div class="controls">
+      <div class="searchbox">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="search" type="text" placeholder="Search concepts â try &quot;curve&quot;, &quot;vol&quot;, &quot;collar&quot;â¦" autocomplete="off">
+      </div>
+      <div class="chips" id="chips"></div>
+      <p class="count" id="count"></p>
+    </div>
+
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" style="display:none">No concepts match that. Try a different word or clear the filter.</div>
+  </div>
+
+  <!-- ============ DETAIL ============ -->
+  <div id="detail">
+    <button class="back" id="back">â All concepts</button>
+    <p class="d-cat" id="d-cat"></p>
+    <h1 id="d-title"></h1>
+    <p class="d-stand" id="d-stand"></p>
+    <div id="d-body"></div>
+    <p class="disclaimer">Educational tools â simplified for intuition, not production pricing or investment advice. Figures are illustrative.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+  function el(tag, attrs, html){ var e=document.createElement(tag); if(attrs) for(var k in attrs) e.setAttribute(k,attrs[k]); if(html!=null) e.innerHTML=html; return e; }
+  // deterministic pseudo-randomness (stable charts across redraws)
+  function rng(seed){ var s=seed||1; return function(){ s=(s*1103515245+12345)&0x7fffffff; return s/0x7fffffff; }; }
+  function randn(r){ var u=Math.max(1e-9,r()), v=r(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+  function erf(x){ var t=1/(1+0.3275911*Math.abs(x));
+    var y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);
+    return x>=0?y:-y; }
+  function normcdf(x){ return 0.5*(1+erf(x/Math.SQRT2)); }
+  function normpdf(x){ return Math.exp(-x*x/2)/Math.sqrt(2*Math.PI); }
+  function interp(pts,x){ if(!pts||!pts.length) return 0; if(x<=pts[0][0]) return pts[0][1];
+    for(var i=1;i<pts.length;i++){ if(x<=pts[i][0]){ var a=pts[i-1],b=pts[i], t=(x-a[0])/((b[0]-a[0])||1); return a[1]+t*(b[1]-a[1]); } }
+    return pts[pts.length-1][1]; }
+
+  /* ---------- generic plot engine ---------- */
+  function plot(cfg){
+    var W=660,H=380, L=58,R=26,T=28,B=48;
+    var xmin=cfg.xmin, xmax=cfg.xmax, ymin=cfg.ymin, ymax=cfg.ymax;
+    function X(p){ return L+(p-xmin)/(xmax-xmin)*(W-L-R); }
+    function Y(v){ return T+(ymax-v)/(ymax-ymin)*(H-T-B); }
+    var zeroY = (ymin<0 && ymax>0) ? Y(0) : Y(ymin);
+    var s='<svg class="plot" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+(cfg.aria||'chart')+'">';
+    (cfg.yticks||[]).forEach(function(v){
+      s+='<line x1="'+L+'" y1="'+Y(v)+'" x2="'+(W-R)+'" y2="'+Y(v)+'" stroke="'+css('--grid')+'" stroke-width="1"/>';
+      s+='<text class="tick-label" x="'+(L-9)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+cfg.yfmt(v)+'</text>';
+    });
+    (cfg.xticks||[]).forEach(function(p){
+      s+='<text class="tick-label" x="'+X(p)+'" y="'+(H-B+18)+'" text-anchor="middle">'+cfg.xfmt(p)+'</text>';
+    });
+    // fills
+    (cfg.series||[]).forEach(function(se){
+      if(!se.fill) return;
+      var valAt = se.fn ? se.fn : function(xx){ return interp(se.pts, xx); };
+      var step=(xmax-xmin)/300, pts=[];
+      for(var p=xmin;p<=xmax+1e-9;p+=step){ var vv=valAt(p); pts.push({x:X(p), v:vv, py:Y(vv)}); }
+      var polys=[], cur=null, curSign=0;
+      for(var i=0;i<pts.length;i++){
+        var sign=pts[i].v>=0?1:-1;
+        if(cur===null){ cur=[[pts[i].x,zeroY],[pts[i].x,pts[i].py]]; curSign=sign; continue; }
+        var prev=pts[i-1];
+        if(sign!==curSign && prev.v!==0){
+          var t=(0-prev.v)/(pts[i].v-prev.v), cx=prev.x+t*(pts[i].x-prev.x);
+          cur.push([cx,zeroY]); polys.push({sign:curSign,pts:cur});
+          cur=[[cx,zeroY],[pts[i].x,pts[i].py]]; curSign=sign;
+        } else cur.push([pts[i].x,pts[i].py]);
+      }
+      if(cur){ cur.push([pts[pts.length-1].x,zeroY]); polys.push({sign:curSign,pts:cur}); }
+      polys.forEach(function(pl){
+        var f = se.fillSigned ? (pl.sign>0?css('--profit-fill'):css('--loss-fill')) : css(se.fill);
+        s+='<polygon points="'+pl.pts.map(function(a){return a[0].toFixed(1)+','+a[1].toFixed(1);}).join(' ')+'" fill="'+f+'"/>';
+      });
+    });
+    // guides
+    (cfg.guides||[]).forEach(function(g){
+      s+='<line x1="'+X(g.p)+'" y1="'+T+'" x2="'+X(g.p)+'" y2="'+(H-B)+'" stroke="'+css('--faint')+'" stroke-width="1" stroke-dasharray="2 4" opacity=".7"/>';
+      if(g.t) s+='<text class="tick-label" x="'+(X(g.p)+(g.side==='l'?-6:6))+'" y="'+(T+12)+'" text-anchor="'+(g.side==='l'?'end':'start')+'" fill="'+css('--muted')+'">'+g.t+'</text>';
+    });
+    // baseline
+    if(ymin<0 && ymax>0) s+='<line x1="'+L+'" y1="'+zeroY+'" x2="'+(W-R)+'" y2="'+zeroY+'" stroke="'+css('--ink')+'" stroke-width="1.3" opacity=".5"/>';
+    // series lines + dots
+    (cfg.series||[]).forEach(function(se){
+      if(!se.hideLine){
+        var step=(xmax-xmin)/300, d='';
+        if(se.pts){ se.pts.forEach(function(pt,i){ d+=(i?' L':'M')+X(pt[0]).toFixed(1)+' '+Y(pt[1]).toFixed(1); }); }
+        else { for(var p=xmin;p<=xmax+1e-9;p+=step){ d+=(d?' L':'M')+X(p).toFixed(1)+' '+Y(se.fn(p)).toFixed(1); } }
+        s+='<path d="'+d+'" fill="none" stroke="'+css(se.color||'--accent')+'" stroke-width="'+(se.width||2.6)+'"'+(se.dash?' stroke-dasharray="6 5"':'')+' stroke-linejoin="round" stroke-linecap="round"'+(se.cls?' class="'+se.cls+'"':'')+'/>';
+      }
+      if(se.dots && se.pts) se.pts.forEach(function(pt){ s+='<circle cx="'+X(pt[0]).toFixed(1)+'" cy="'+Y(pt[1]).toFixed(1)+'" r="'+(se.r||4)+'" fill="'+css(se.color||'--accent')+'"'+(se.dotOpacity?' opacity="'+se.dotOpacity+'"':'')+' stroke="'+css('--surface')+'" stroke-width="1"/>'; });
+    });
+    // markers
+    (cfg.markers||[]).forEach(function(m){
+      s+='<circle cx="'+X(m.p)+'" cy="'+Y(m.v)+'" r="5" fill="'+css(m.color||'--accent')+'" stroke="'+css('--surface')+'" stroke-width="2"/>';
+      if(m.t) s+='<text class="plot-anno" x="'+(X(m.p)+(m.dx||8))+'" y="'+(Y(m.v)+(m.dy||-8))+'" text-anchor="'+(m.anchor||'start')+'" fill="'+css(m.color||'--accent')+'">'+m.t+'</text>';
+    });
+    if(cfg.xlabel) s+='<text class="axis-label" x="'+((L+W-R)/2)+'" y="'+(H-6)+'" text-anchor="middle">'+cfg.xlabel+'</text>';
+    if(cfg.ylabel) s+='<text class="axis-label" x="16" y="'+((T+H-B)/2)+'" text-anchor="middle" transform="rotate(-90 16 '+((T+H-B)/2)+')">'+cfg.ylabel+'</text>';
+    s+='</svg>';
+    return s;
+  }
+
+  function slider(o){ // returns {html, id}
+    var id='sl_'+Math.round((o.seed||0)*1e6)+'_'+o.key;
+    return '<div class="slider"><label>'+o.label+' <span class="val" id="'+id+'v">'+o.fmt(o.value)+'</span></label>'+
+      '<input type="range" id="'+id+'" min="'+o.min+'" max="'+o.max+'" step="'+o.step+'" value="'+o.value+'"></div>';
+  }
+
+  /* ================= CONCEPTS ================= */
+  var CATS = ["Rates","FX","Commodities","Options & Derivatives","Equities","Credit","Trading Styles","Portfolio & Risk","Macro"];
+
+  var CONCEPTS = [
+    {
+      id:"collar", title:"Protective puts & the collar", cat:"Options & Derivatives",
+      tags:["options","hedging","oil","gap risk","payoff"], interactive:true,
+      project:"Physical Commodities Toolkit & Trade Pitch Builder", projectUrl:"index.html#work",
+      summary:"Why a stop can't protect a gappy market, and how a collar hedges a long trade for near-zero cost. Drag the strikes and watch the payoff.",
+      stand:"You're long a market that gaps overnight on headlines. A stop-loss won't save you. Here's the option structure that will â and how to make it pay for itself.",
+      build:collarTool
+    },
+    {
+      id:"yield-curve", title:"The yield curve & steepeners", cat:"Rates",
+      tags:["rates","curve","2s10s","steepener","term premium"], interactive:true,
+      project:"Market Analysis Tools", projectUrl:"index.html#work",
+      summary:"Bend the front and long end yourself to see the 2s10s spread, inversion, and what a bull vs bear steepener actually is.",
+      stand:"The shape of the curve is the market's whole story about growth, inflation and the Fed. Move the ends and read what each shape is telling you.",
+      build:yieldCurveTool
+    },
+    {
+      id:"duration", title:"Bond prices, yields & DV01", cat:"Rates",
+      tags:["rates","duration","dv01","convexity","bonds"], interactive:true,
+      project:"Market Analysis Tools", projectUrl:"index.html#work",
+      summary:"Why bond prices fall when yields rise, why the curve is convex, and what DV01 means for a desk. Slide the yield.",
+      stand:"Price and yield move in opposite directions â but not in a straight line. That curvature is convexity, and DV01 is how a desk measures the risk.",
+      build:durationTool
+    },
+    {
+      id:"forward-curve", title:"Contango & backwardation", cat:"Commodities",
+      tags:["commodities","futures","roll yield","carry","oil"], interactive:true,
+      project:"Physical Commodities Toolkit", projectUrl:"index.html#work",
+      summary:"Tilt the futures curve and see whether holding a long position earns or bleeds carry as you roll.",
+      stand:"A commodity's forward curve decides whether time is on your side. Contango bleeds you; backwardation pays you. Here's why.",
+      build:forwardCurveTool
+    },
+    {
+      id:"correlation", title:"Correlation & diversification", cat:"Portfolio & Risk",
+      tags:["portfolio","correlation","diversification","volatility","crisis"], interactive:true,
+      project:"Portfolio Analysis Suite", projectUrl:"index.html#work",
+      summary:"Slide correlation from â1 to +1 and watch diversification appear and vanish â the exact thing that fails in a crisis.",
+      stand:"Two 20%-vol assets don't make a 20%-vol portfolio â unless they're perfectly correlated. Diversification is a free lunch that a crisis takes away.",
+      build:correlationTool
+    },
+    {
+      id:"position-sizing", title:"Volatility & position sizing", cat:"Portfolio & Risk",
+      tags:["risk","sizing","volatility","stop","kelly"], interactive:true,
+      project:"Volatility, Sizing & Risk Trainer", projectUrl:"index.html#work",
+      summary:"Set your account, risk budget and the asset's volatility â the tool sizes the position so one bad trade can't sink you.",
+      stand:"Good traders don't size by conviction, they size by risk. The more volatile the asset, the smaller the position for the same risk budget.",
+      build:sizingTool
+    },
+    {
+      id:"reaction-function", title:"The central-bank reaction function", cat:"Macro",
+      tags:["macro","fed","inflation","rates","policy"], interactive:true,
+      project:"Macro dashboards (Schonfeld)", projectUrl:"index.html#work",
+      summary:"Move inflation and the jobs picture and see whether the Fed should hold, cut or hike â and why sticky inflation blocks a cut.",
+      stand:"A central bank has one tool and two jobs. When inflation and employment disagree, it has to pick â and that choice is the whole game for rates.",
+      build:reactionTool
+    },
+    {
+      id:"momentum-mean-reversion", title:"Momentum, trend & mean reversion", cat:"Trading Styles",
+      tags:["momentum","mean reversion","trend","autocorrelation","signals"], interactive:true,
+      project:"PL 2026/27 Predictor (Model vs Market)", projectUrl:"index.html#work",
+      summary:"Dial a market from trending to mean-reverting and watch the price path change character â then see which style makes money in each.",
+      stand:"Some markets keep going; others snap back. The single parameter behind that â return autocorrelation â decides whether you ride trends or fade extremes.",
+      build:momentumTool
+    },
+    {
+      id:"positioning-crowding", title:"Positioning & crowded trades", cat:"Trading Styles",
+      tags:["positioning","crowding","squeeze","sentiment","unwind"], interactive:true,
+      project:"Trade Pitch Builder (what kills it)", projectUrl:"index.html#work",
+      summary:"See why a trade everyone loves is dangerous: crank up the crowding and watch the unwind get violent.",
+      stand:"A great thesis with everyone already on it is a bad trade. When there's no marginal buyer left, the only way out is down â fast.",
+      build:positioningTool
+    },
+    {
+      id:"alpha-beta", title:"Alpha & beta", cat:"Portfolio & Risk",
+      tags:["alpha","beta","capm","systematic","regression"], interactive:true,
+      project:"Portfolio Analysis Suite", projectUrl:"index.html#work",
+      summary:"Set a stock's beta, alpha and noise and watch the scatter vs the market â the line's slope is beta, its lift is alpha.",
+      stand:"Beta is the market you can't take credit for; alpha is the bit you can. Separating them is how a book's returns get judged.",
+      build:alphaBetaTool
+    },
+    {
+      id:"sharpe-ratio", title:"The Sharpe ratio", cat:"Portfolio & Risk",
+      tags:["sharpe","risk-adjusted","sortino","information ratio","volatility"], interactive:true,
+      project:"Portfolio Analysis Suite", projectUrl:"index.html#work",
+      summary:"Return alone is a vanity metric. Slide return, vol and the risk-free rate to see return per unit of risk â and where the bar actually is.",
+      stand:"A 30% return at 60% vol is worse than 8% at 5%. Sharpe is how desks compare returns on a level, risk-adjusted playing field.",
+      build:sharpeTool
+    },
+    {
+      id:"diversification-concentration", title:"Diversification vs concentration", cat:"Portfolio & Risk",
+      tags:["diversification","concentration","idiosyncratic","systematic","conviction"], interactive:true,
+      project:"Portfolio Analysis Suite", projectUrl:"index.html#work",
+      summary:"Add holdings and watch risk fall â but only to a floor it can't break. See exactly what diversification removes and what it can't.",
+      stand:"Diversification protects you from what you don't know; concentration expresses what you do. Here's the maths of the trade-off.",
+      build:diversConcTool
+    },
+    {
+      id:"sigma-moves", title:"Standard-deviation moves & fat tails", cat:"Portfolio & Risk",
+      tags:["standard deviation","sigma","fat tails","distribution","tail risk"], interactive:true,
+      project:"Volatility, Sizing & Risk Trainer", projectUrl:"index.html#work",
+      summary:"See how rare a '3-sigma move' should be â then why markets deliver them far more often than the bell curve says.",
+      stand:"'A 4-sigma day' sounds precise. The catch: markets have fatter tails than the normal curve, so those days aren't nearly as rare as the maths claims.",
+      build:sigmaTool
+    },
+    {
+      id:"curve-positioning", title:"Positioning on the yield curve", cat:"Rates",
+      tags:["rates","duration","steepener","flattener","butterfly","relative value"], interactive:true,
+      project:"Market Analysis Tools", projectUrl:"index.html#work",
+      summary:"Pick your view on rates and on the curve â the tool tells you the trade: outright duration, a steepener/flattener, or a fly.",
+      stand:"You can bet on three different things with bonds: the level of rates, the slope of the curve, and its curvature. Each is a distinct trade.",
+      build:curvePosTool
+    },
+    {
+      id:"risk-on-risk-off", title:"Risk-on / risk-off & safe havens", cat:"Macro",
+      tags:["risk-on","risk-off","safe haven","JPY","CHF","gold","flight to quality"], interactive:true,
+      project:"Macro dashboards (Schonfeld)", projectUrl:"index.html#work",
+      summary:"Slide market sentiment from panic to euphoria and watch every asset class rotate â and see which currencies are the havens.",
+      stand:"On big days the whole market moves as one animal: toward risk or away from it. Knowing what rallies in each mode is cross-asset literacy 101.",
+      build:riskOnOffTool
+    },
+    {
+      id:"regimes", title:"Regimes & regime transitions", cat:"Macro",
+      tags:["regime","goldilocks","reflation","stagflation","growth","inflation"], interactive:true,
+      project:"Macro dashboards & daily brief", projectUrl:"index.html#work",
+      summary:"Move growth and inflation across the master 2Ã2 â Goldilocks, reflation, stagflation, slowdown â and get the asset playbook for each.",
+      stand:"Almost everything macro reduces to two axes: is growth rising or falling, and is inflation rising or falling. That grid is the map â and the edge is spotting the shift early.",
+      build:regimeTool
+    },
+    {
+      id:"carry-trade", title:"The FX carry trade", cat:"FX",
+      tags:["fx","carry","JPY","funding","risk-off","yen"], interactive:true,
+      project:"Macro & markets (BP / Schonfeld)", projectUrl:"index.html#work",
+      summary:"Borrow a low-yield currency, park it in a high-yield one, pocket the difference â until a risk-off shock unwinds it all at once. See the trade-off.",
+      stand:"Carry is the steadiest-looking return in FX and the one that ends careers. It earns a little every day and gives it all back in a week.",
+      build:carryTool
+    },
+    {
+      id:"rate-differentials", title:"Rate differentials & interest-rate parity", cat:"FX",
+      tags:["fx","interest rate parity","USDJPY","yield differential","forwards"], interactive:true,
+      project:"Market Analysis Tools", projectUrl:"index.html#work",
+      summary:"Why the USâJapan yield gap is the single biggest driver of USD/JPY, and what forwards and interest-rate parity actually say.",
+      stand:"Over the medium term, majors trade on the gap between two countries' interest rates. Move the US and Japan rates and watch the pair â and the carry â respond.",
+      build:rateDiffTool
+    },
+    {
+      id:"dollar-smile", title:"The dollar smile", cat:"FX",
+      tags:["fx","dollar","DXY","safe haven","risk","growth"], interactive:true,
+      project:"Macro dashboards (Schonfeld)", projectUrl:"index.html#work",
+      summary:"The dollar is strong in a crisis AND when the US booms â and weak in the sleepy middle. See why USD strength is a smile, not a line.",
+      stand:"The dollar wins at both extremes: haven demand when the world panics, yield and growth demand when the US races ahead. It only sags in the benign middle.",
+      build:dollarSmileTool
+    },
+    {
+      id:"ppp", title:"Purchasing power parity", cat:"FX",
+      tags:["fx","ppp","inflation","fair value","big mac","real exchange rate"], interactive:true,
+      project:"Macro dashboards & daily brief", projectUrl:"index.html#work",
+      summary:"The long-run anchor for currencies: the higher-inflation country's money loses value over time. See the drift â and why it's useless for timing.",
+      stand:"Over decades, exchange rates drift so a basket of goods costs the same everywhere. Over months, they ignore it completely. Both facts matter.",
+      build:pppTool
+    },
+    {
+      id:"greeks", title:"The option greeks", cat:"Options & Derivatives",
+      tags:["options","delta","gamma","vega","theta","hedging"], interactive:true,
+      project:"Trade Pitch Builder", projectUrl:"index.html#work",
+      summary:"Move spot, vol and time on a live option and watch delta, gamma, vega and theta respond â the four dials every options desk lives by.",
+      stand:"An option's price depends on four things moving at once. The greeks are just the speedometers: how much the option moves when spot, vol or time changes.",
+      build:greeksTool
+    },
+    {
+      id:"implied-vs-realised-vol", title:"Implied vs realised vol", cat:"Options & Derivatives",
+      tags:["volatility","implied","realised","vol risk premium","options"], interactive:true,
+      project:"Volatility, Sizing & Risk Trainer", projectUrl:"index.html#work",
+      summary:"The vol you pay for an option (implied) usually exceeds the vol that actually shows up (realised). See the premium â and why selling it is dangerous.",
+      stand:"Implied vol is the market's forecast of movement; realised is what happened. The gap between them is one of the most traded edges in markets.",
+      build:ivRvTool
+    },
+    {
+      id:"vol-skew", title:"The volatility skew", cat:"Options & Derivatives",
+      tags:["skew","smile","implied vol","puts","crash risk"], interactive:true,
+      project:"Trade Pitch Builder", projectUrl:"index.html#work",
+      summary:"Options at different strikes trade at different implied vols. Tilt the skew and see why downside puts cost more than the model says they should.",
+      stand:"If markets were truly normal, every strike would have the same implied vol. They don't â downside protection is systematically dearer. That shape is the skew.",
+      build:skewTool
+    },
+    {
+      id:"structured-products", title:"Structured products", cat:"Options & Derivatives",
+      tags:["structuring","capital protection","autocallable","notes","options"], interactive:true,
+      project:"Your structuring target â how the desk builds payoffs", projectUrl:"index.html#work",
+      summary:"Build a capital-protected note from a bond plus an option, and see the payoff. The core of what a structuring desk actually does.",
+      stand:"A structured product is just a bond and some options in a wrapper. Understanding how the pieces combine into a client payoff is the structurer's whole job.",
+      build:structuredTool
+    },
+    {
+      id:"credit-spreads", title:"Credit spreads & default risk", cat:"Credit",
+      tags:["credit","spread","default","recovery","IG","HY"], interactive:true,
+      project:"Market Risk Methodology (Deutsche Bank)", projectUrl:"index.html#work",
+      summary:"Set a bond's default odds and recovery rate and see the fair spread fall out â the price of lending to something that might not pay you back.",
+      stand:"A credit spread is the extra yield over govvies you demand for taking default risk. Strip it down and it's expected loss plus a premium for the fear.",
+      build:creditSpreadsTool
+    },
+    {
+      id:"credit-cycle", title:"The credit cycle", cat:"Credit",
+      tags:["credit","cycle","spreads","default","leverage"], interactive:true,
+      project:"Macro dashboards (Schonfeld)", projectUrl:"index.html#work",
+      summary:"Walk through the credit cycle â repair, recovery, expansion, downturn â and watch spreads and the right positioning change with it.",
+      stand:"Credit moves in a cycle of loosening and tightening lending. Knowing where you are tells you whether to own credit or hide from it.",
+      build:creditCycleTool
+    },
+    {
+      id:"equity-multiples", title:"Equity multiples (P/E)", cat:"Equities",
+      tags:["equities","valuation","P/E","multiple","re-rating"], interactive:true,
+      project:"Portfolio Analysis Suite", projectUrl:"index.html#work",
+      summary:"See what actually justifies a P/E: growth and the discount rate. Move them and watch the fair multiple expand and compress.",
+      stand:"Price = earnings Ã a multiple. Half of equity returns come from earnings growing; the other half from the multiple re-rating â and rates drive that.",
+      build:equityMultTool
+    },
+    {
+      id:"factor-investing", title:"Factor investing", cat:"Equities",
+      tags:["factors","value","quality","momentum","size","low vol"], interactive:false,
+      project:"Portfolio Analysis Suite", projectUrl:"index.html#work",
+      summary:"Value, quality, momentum, size, low-vol â the systematic styles that explain much of a portfolio's returns, and when each works.",
+      stand:"Beyond the market itself, a handful of persistent factors explain why some stocks beat others. Knowing them is how returns get attributed.",
+      build:factorTool
+    },
+    {
+      id:"sector-rotation", title:"Sector rotation", cat:"Equities",
+      tags:["sectors","cyclicals","defensives","rotation","cycle"], interactive:false,
+      project:"Macro dashboards & daily brief", projectUrl:"index.html#work",
+      summary:"Which sectors lead at each stage of the cycle â and why cyclicals and defensives take turns as growth ebbs and flows.",
+      stand:"Money doesn't leave the equity market in a slowdown so much as rotate within it. The map of what leads when is sector rotation.",
+      build:sectorTool
+    },
+    {
+      id:"breakevens-real-yields", title:"Real yields & breakevens", cat:"Rates",
+      tags:["rates","real yield","breakeven","TIPS","inflation expectations"], interactive:true,
+      project:"Market Analysis Tools", projectUrl:"index.html#work",
+      summary:"Split a nominal yield into its real and inflation-expectation parts â the exact decomposition that tells you what's driving a bond sell-off.",
+      stand:"A nominal yield is two things stacked: the real yield plus expected inflation (the breakeven). Which one is moving changes the whole story.",
+      build:breakevenTool
+    },
+    {
+      id:"var-stress", title:"VaR & stress testing", cat:"Portfolio & Risk",
+      tags:["var","risk","stress test","tail","expected shortfall"], interactive:true,
+      project:"Market Risk Methodology (Deutsche Bank)", projectUrl:"index.html#work",
+      summary:"Set your portfolio's volatility and a confidence level to get its Value-at-Risk â then see exactly what VaR hides in the tail.",
+      stand:"VaR answers 'how bad is a normal bad day?' It's the industry's core risk number â and its blind spot in the tail is why stress testing exists.",
+      build:varTool
+    },
+    {
+      id:"business-cycle", title:"The business cycle", cat:"Macro",
+      tags:["macro","cycle","recession","PMI","leading indicators"], interactive:true,
+      project:"Macro dashboards & daily brief", projectUrl:"index.html#work",
+      summary:"Walk the economy through expansion, peak, contraction and trough â and see which indicators lead and how assets tilt at each stage.",
+      stand:"Economies breathe in a cycle. Reading which phase you're in â and spotting the turn early â sits underneath almost every macro call.",
+      build:businessCycleTool
+    },
+    {
+      id:"boj-intervention", title:"FX intervention & the BOJ", cat:"FX",
+      tags:["fx","intervention","BOJ","MOF","USDJPY","reserves"], interactive:false,
+      project:"USD/JPY â one of my live views", projectUrl:"index.html#views",
+      summary:"How and why a government steps into the FX market to move its own currency â with USD/JPY as the live case study.",
+      stand:"When a currency moves too far too fast, the authorities can intervene directly. It rarely reverses a trend, but it can break one's back briefly.",
+      build:bojTool
+    },
+    {
+      id:"crack-spread", title:"Crack spreads & refining margins", cat:"Commodities",
+      tags:["commodities","refining","crack spread","crude","products"], interactive:true,
+      project:"Physical Commodities Toolkit (BP)", projectUrl:"index.html#work",
+      summary:"A refiner buys crude and sells petrol and diesel. The gap â the crack spread â is its margin. Move the prices and watch it move.",
+      stand:"Refiners are long products and short crude. The 3-2-1 crack spread is the single number that says whether refining is minting money or losing it.",
+      build:crackTool
+    },
+    {
+      id:"storage-carry", title:"Storage & the cost of carry", cat:"Commodities",
+      tags:["commodities","storage","carry","contango","arbitrage"], interactive:true,
+      project:"Physical Commodities Toolkit (BP)", projectUrl:"index.html#work",
+      summary:"What links the spot price to the futures curve: storage cost and financing. See when it pays to buy oil, store it, and sell it forward.",
+      stand:"The forward curve isn't free-floating â it's tethered to spot by the cost of storing and financing the physical barrel. That tether caps how steep contango can get.",
+      build:storageTool
+    },
+    {
+      id:"grade-location", title:"Grade & location spreads", cat:"Commodities",
+      tags:["commodities","brent","wti","freight","chokepoints","quality"], interactive:true,
+      project:"Physical Commodities Toolkit â chokepoint map (BP)", projectUrl:"index.html#work",
+      summary:"Not all crude is equal, and geography costs money. See when it pays to ship a barrel from one hub to another â and what a chokepoint does.",
+      stand:"A barrel's price depends on its quality and where it sits. Grade and location spreads are the physical trader's bread and butter â and they blow out when a chokepoint is threatened.",
+      build:gradeTool
+    },
+    {
+      id:"opec-balance", title:"OPEC, spare capacity & the balance", cat:"Commodities",
+      tags:["commodities","opec","supply","demand","elasticity","spare capacity"], interactive:true,
+      project:"Crude supply-demand modelling (BP)", projectUrl:"index.html#work",
+      summary:"Oil demand barely flexes on price short-term, so tiny supply-demand gaps cause huge price moves. Shift supply and demand and see the whiplash.",
+      stand:"Because oil is inelastic in the short run, a 1-2% imbalance can swing the price 10-20%. That leverage is why OPEC's output decisions and spare capacity matter so much.",
+      build:opecTool
+    }
+  ];
+
+  /* ---------- individual tools ---------- */
+  function toolShell(head, controlsHtml, plotId, readoutHtml){
+    return '<div class="tool"><p class="tool-head">'+head+'</p>'+
+      '<div class="sliders">'+controlsHtml+'</div>'+
+      '<div id="'+plotId+'"></div>'+
+      (readoutHtml?'<div class="readout">'+readoutHtml+'</div>':'')+'</div>';
+  }
+  function bind(id, fn){ var e=document.getElementById(id); if(e) e.addEventListener('input',fn); }
+  function setv(id,txt){ var e=document.getElementById(id+'v'); if(e) e.textContent=txt; }
+  function num(id){ return parseFloat(document.getElementById(id).value); }
+  var seed=0.1;
+
+  function collarTool(host){
+    seed=0.11; var s=seed;
+    var c=
+      slider({seed:s,key:'entry',label:'Entry (long from)',min:70,max:100,step:1,value:88,fmt:function(v){return '$'+v;}})+
+      slider({seed:s,key:'put',label:'Put strike (floor)',min:70,max:96,step:1,value:84,fmt:function(v){return '$'+v;}})+
+      slider({seed:s,key:'call',label:'Call strike (cap / target)',min:96,max:130,step:1,value:110,fmt:function(v){return '$'+v;}})+
+      slider({seed:s,key:'prem',label:'Net premium (put â call)',min:-3,max:6,step:0.5,value:0,fmt:function(v){return (v>0?'+':'')+'$'+v;}});
+    host.innerHTML =
+      '<div class="prose"><p>You bought oil and you want a hard floor a weekend gap can\'t jump over. Buy a <b>put</b> for the floor; sell a <b>call</b> at your target to pay for it. The green line is your profit and loss at expiry â drag the strikes and watch the box change shape.</p></div>'+
+      toolShell('Payoff at expiry ($/bbl)', c, 'collarPlot',
+        '<div class="stat"><span class="k">Max loss</span><span class="v" id="cl_floor" style="color:var(--loss)"></span></div>'+
+        '<div class="stat"><span class="k">Max gain</span><span class="v" id="cl_cap" style="color:var(--profit)"></span></div>'+
+        '<div class="stat"><span class="k">Breakeven</span><span class="v" id="cl_be"></span></div>'+
+        '<div class="stat"><span class="k">Reward : risk</span><span class="v" id="cl_rr"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Read it in one line</h4>'+
+        '<p>You\'re risking the small floor to make the way-bigger cap â in exchange for giving up any gain above your own target. A stop is free but a gap leaps over it; the put is a <b>contract</b>, so it holds no matter where the market opens.</p>'+
+        '<div class="callout">Interview line: <i>"I\'d collar it â long the put for a gap-proof floor, short the call at my target to fund it, so the downside protection is near-free and I only give up upside I was closing out anyway."</i></div>'+
+      '</div>';
+    function draw(){
+      var E=num(id('entry')), KP=num(id('put')), KC=num(id('call')), prem=num(id('prem'));
+      setv(id('entry'),'$'+E); setv(id('put'),'$'+KP); setv(id('call'),'$'+KC); setv(id('prem'),(prem>0?'+':'')+'$'+prem);
+      // per-barrel payoff of long future + long put(KP) + short call(KC), net premium `prem` paid
+      function pay(p){ return (p-E) + Math.max(KP-p,0) - Math.max(p-KC,0) - prem; }
+      var floor=pay(KP-5), cap=pay(KC+5), be=E+prem;
+      var xmin=Math.max(60,KP-14), xmax=KC+14;
+      document.getElementById('collarPlot').innerHTML = plot({
+        xmin:xmin,xmax:xmax, ymin:Math.min(floor-3,-6), ymax:cap+4,
+        xticks:[Math.round(xmin), KP, E, KC, Math.round(xmax)], xfmt:function(v){return v;},
+        yticks:[Math.round(Math.min(floor-3,-6)/5)*5,0,Math.round(cap/2/5)*5,Math.round(cap)], yfmt:function(v){return (v>0?'+':'')+v;},
+        guides:[{p:KP,t:'put',side:'l'},{p:KC,t:'call',side:'l'}],
+        series:[{fn:pay, color:'--profit', fill:'x', fillSigned:true, width:2.8}],
+        markers:[{p:be,v:0,color:'--accent',t:'B/E '+be.toFixed(0),dx:6,dy:-10}],
+        xlabel:'oil price at expiry ($/bbl)', ylabel:'P&L ($/bbl)', aria:'collar payoff'
+      });
+      document.getElementById('cl_floor').textContent = fmtUsd(floor);
+      document.getElementById('cl_cap').textContent = '+'+fmtUsd(cap).replace('$','$');
+      document.getElementById('cl_be').textContent = '$'+be.toFixed(0);
+      document.getElementById('cl_rr').textContent = floor<0 ? (cap/Math.abs(floor)).toFixed(1)+' : 1' : 'â';
+    }
+    function id(k){ return 'sl_'+Math.round(s*1e6)+'_'+k; }
+    function fmtUsd(v){ return (v<0?'â$':'$')+Math.abs(v).toFixed(0); }
+    ['entry','put','call','prem'].forEach(function(k){ bind(id(k),draw); });
+    draw();
+  }
+
+  function yieldCurveTool(host){
+    seed=0.22; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'front',label:'Front end Â· 2y (Fed policy)',min:1,max:6,step:0.1,value:3.6,fmt:function(v){return v.toFixed(1)+'%';}})+
+      slider({seed:s,key:'long',label:'Long end Â· 30y (term premium)',min:1,max:7,step:0.1,value:5.2,fmt:function(v){return v.toFixed(1)+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>Each dot is the yield on a bond of that maturity. The line joining them is <b>the curve</b>. The single most-watched number is <b>2s10s</b> â the 10-year minus the 2-year. Move the two ends and watch the shape (and the story) change.</p></div>'+
+      toolShell('US Treasury curve â yield by maturity', c, 'ycPlot',
+        '<div class="stat"><span class="k">2s10s spread</span><span class="v" id="yc_spread"></span></div>'+
+        '<div class="stat"><span class="k">Shape</span><span class="v" id="yc_shape" style="font-size:16px"></span></div>')+
+      '<div class="prose">'+
+        '<h4>What each shape means</h4>'+
+        '<p><b>Upward / steep:</b> the normal, healthy state â investors demand more to lend for longer. <b>Flat:</b> the market is unsure. <b>Inverted</b> (2s10s below zero): the market expects the Fed to be cutting hard later â historically a recession warning.</p>'+
+        '<h4>Steepener vs flattener</h4>'+
+        '<p>A <b>steepener</b> is a trade that profits if the curve steepens (the gap widens); a <b>flattener</b> profits if it narrows. Two flavours matter: a <b>bull steepener</b> (front end falls faster â yields down, bonds rally, usually the Fed easing) and a <b>bear steepener</b> (long end rises faster â yields up, bonds sell off, usually fiscal or inflation worry). Today\'s market â long end pinned near highs while the front sits still â is the bear-steepening story.</p>'+
+        '<div class="callout">Why desks trade the curve <i>DV01-neutral</i>: they want the bet to be on the <b>shape</b>, not on rates going up or down overall â so they size the two legs to cancel out the parallel move. That\'s exactly what my Market Analysis Tools project sizes.</div>'+
+      '</div>';
+    function draw(){
+      var f=num(id('front')), l=num(id('long'));
+      setv(id('front'),f.toFixed(1)+'%'); setv(id('long'),l.toFixed(1)+'%');
+      // maturities 2,5,10,30 on log-ish x; interpolate 5 and 10 along a curved path
+      var m=[2,5,10,30];
+      function yld(mat){ var t=(Math.log(mat)-Math.log(2))/(Math.log(30)-Math.log(2)); return f+(l-f)*Math.pow(t,0.72); }
+      var pts=m.map(function(x){return [x,yld(x)];});
+      var spread=yld(10)-yld(2);
+      var ymin=Math.min(f,l)-0.6, ymax=Math.max(f,l)+0.6;
+      document.getElementById('ycPlot').innerHTML=plot({
+        xmin:2,xmax:30, ymin:ymin, ymax:ymax,
+        xticks:[2,5,10,30], xfmt:function(v){return v+'y';},
+        yticks:[ymin+0.3, (ymin+ymax)/2, ymax-0.3].map(function(v){return Math.round(v*10)/10;}), yfmt:function(v){return v.toFixed(1)+'%';},
+        series:[{pts:pts, color:'--accent', width:2.8, dots:true}],
+        xlabel:'maturity', ylabel:'yield', aria:'yield curve'
+      });
+      var sp=spread*100;
+      var e=document.getElementById('yc_spread'); e.textContent=(sp>=0?'+':'â')+Math.abs(sp).toFixed(0)+' bp';
+      e.style.color = sp>=0?'var(--profit)':'var(--loss)';
+      document.getElementById('yc_shape').textContent = sp<-5?'Inverted â ':(sp<20?'Flat':'Upward-sloping');
+    }
+    ['front','long'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function durationTool(host){
+    seed=0.33; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var CPN=4, N=10, F=100;
+    var c=slider({seed:s,key:'y',label:'Market yield',min:1,max:9,step:0.05,value:4,fmt:function(v){return v.toFixed(2)+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>Take a 10-year bond that pays a fixed <b>4% coupon</b>. Its price isn\'t fixed â it moves so its yield matches whatever the market demands. Slide the yield and watch the price. Notice two things: it moves the <i>opposite</i> way, and the line <i>curves</i>.</p></div>'+
+      toolShell('Price of a 10y 4% bond vs its yield', c, 'durPlot',
+        '<div class="stat"><span class="k">Price</span><span class="v" id="du_px"></span></div>'+
+        '<div class="stat"><span class="k">DV01 (per $1m)</span><span class="v" id="du_dv"></span></div>'+
+        '<div class="stat"><span class="k">Mod. duration</span><span class="v" id="du_dur"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Why opposite?</h4>'+
+        '<p>The coupon is fixed at 4. If the market now wants 6, nobody pays full price for a 4% bond â so its <b>price falls</b> until the return works out to 6. Yields up â prices down, always.</p>'+
+        '<h4>Why curved (convexity)?</h4>'+
+        '<p>The line bows toward the origin. That curvature is <b>convexity</b>, and it\'s good news if you own the bond: prices rise a bit <i>more</i> when yields fall than they drop when yields rise by the same amount.</p>'+
+        '<h4>What\'s DV01?</h4>'+
+        '<p><b>DV01 = dollar value of 1 basis point.</b> It\'s how much you make or lose if the yield moves 0.01%. A desk hedges by matching DV01 across positions so a small rate wiggle nets to zero â the backbone of the steepener sizing in my rates project.</p>'+
+      '</div>';
+    function price(y){ y=y/100; var p=0; for(var t=1;t<=N;t++) p+=CPN/Math.pow(1+y,t); p+=F/Math.pow(1+y,N); return p; }
+    function draw(){
+      var y=num(id('y')); setv(id('y'),y.toFixed(2)+'%');
+      var px=price(y), dv01=(price(y)-price(y+0.01)); // price change per 1bp on $100 face
+      var moddur=(price(y-0.01)-price(y+0.01))/(2*px*0.0001)/100; // approx modified duration (years)
+      var pts=[]; for(var yy=1;yy<=9.001;yy+=0.1) pts.push([yy,price(yy)]);
+      document.getElementById('durPlot').innerHTML=plot({
+        xmin:1,xmax:9, ymin:price(9)-4, ymax:price(1)+4,
+        xticks:[1,3,5,7,9], xfmt:function(v){return v+'%';},
+        yticks:[70,85,100,115,130].filter(function(v){return v>=price(9)-4&&v<=price(1)+4;}), yfmt:function(v){return '$'+v;},
+        series:[{pts:pts, color:'--accent', width:2.8}],
+        markers:[{p:y,v:px,color:'--profit',t:'$'+px.toFixed(1),dx:8,dy:-8}],
+        guides:[{p:y}],
+        xlabel:'yield', ylabel:'price ($)', aria:'bond price vs yield'
+      });
+      document.getElementById('du_px').textContent='$'+px.toFixed(2);
+      document.getElementById('du_dv').textContent='$'+(dv01*10000).toFixed(0); // $1m face = 10,000 x $100
+      document.getElementById('du_dur').textContent=moddur.toFixed(1)+' yrs';
+    }
+    bind(id('y'),draw); draw();
+  }
+
+  function forwardCurveTool(host){
+    seed=0.44; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=slider({seed:s,key:'slope',label:'Curve slope (back â front)',min:-8,max:8,step:0.5,value:4,fmt:function(v){return (v>0?'+':'')+'$'+v;}});
+    host.innerHTML=
+      '<div class="prose"><p>Futures let you buy oil for delivery in 1, 2, 3â¦ months. Plot those prices and you get the <b>forward curve</b>. Whether it slopes up or down decides if simply <i>holding</i> a long position makes or loses you money over time. Slide the slope.</p></div>'+
+      toolShell('Oil futures curve â price by delivery month', c, 'fcPlot',
+        '<div class="stat"><span class="k">State</span><span class="v" id="fc_state" style="font-size:16px"></span></div>'+
+        '<div class="stat"><span class="k">Roll yield / month</span><span class="v" id="fc_roll"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Contango (upward): time bleeds you</h4>'+
+        '<p>Far months cost <i>more</i> than the front. To stay long you must keep selling the cheap expiring contract and buying the pricier next one â a small loss every roll. That\'s <b>negative roll yield</b>, and it\'s the tax on being long a contango market even if spot never moves.</p>'+
+        '<h4>Backwardation (downward): time pays you</h4>'+
+        '<p>Far months cost <i>less</i>. Now each roll sells an expensive contract and buys a cheaper one â a small gain. <b>Positive roll yield.</b> Backwardation usually signals tight physical supply â exactly the Iran-sanctions setup we discussed.</p>'+
+        '<div class="callout">This is the carry engine behind my Physical Commodities Toolkit â a trade can be right on direction and still bleed out if the curve is against you.</div>'+
+      '</div>';
+    function draw(){
+      var sl=num(id('slope')); setv(id('slope'),(sl>0?'+':'')+'$'+sl);
+      var front=88, months=[0,1,2,3,4,5,6];
+      var pts=months.map(function(m){return [m, front + sl*(m/6)];});
+      var roll = -sl/6; // per-month roll yield for a long holder (contango sl>0 => negative)
+      document.getElementById('fcPlot').innerHTML=plot({
+        xmin:0,xmax:6, ymin:front-9, ymax:front+9,
+        xticks:[0,1,2,3,4,5,6], xfmt:function(v){return v===0?'spot':'M'+v;},
+        yticks:[front-6,front,front+6], yfmt:function(v){return '$'+v;},
+        series:[{pts:pts, color:(sl>0?'--loss':'--profit'), width:2.8, dots:true}],
+        xlabel:'delivery month', ylabel:'futures price', aria:'forward curve'
+      });
+      var st=document.getElementById('fc_state');
+      st.textContent = Math.abs(sl)<0.6?'Flat':(sl>0?'Contango':'Backwardation');
+      st.style.color = Math.abs(sl)<0.6?'var(--muted)':(sl>0?'var(--loss)':'var(--profit)');
+      var r=document.getElementById('fc_roll');
+      r.textContent=(roll>=0?'+':'â')+'$'+Math.abs(roll).toFixed(2);
+      r.style.color = roll>=0?'var(--profit)':'var(--loss)';
+    }
+    bind(id('slope'),draw); draw();
+  }
+
+  function correlationTool(host){
+    seed=0.55; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=slider({seed:s,key:'rho',label:'Correlation between the two assets',min:-1,max:1,step:0.05,value:0.2,fmt:function(v){return v.toFixed(2);}});
+    var s1=0.20,s2=0.20;
+    host.innerHTML=
+      '<div class="prose"><p>Two assets, each with <b>20% volatility</b>, split 50/50. You\'d guess the portfolio is also 20% vol â but it isn\'t, unless they move in lockstep. The curve shows portfolio vol as correlation runs from â1 to +1. Slide it.</p></div>'+
+      toolShell('Portfolio volatility vs correlation (two 20%-vol assets, 50/50)', c, 'corrPlot',
+        '<div class="stat"><span class="k">Portfolio vol</span><span class="v" id="co_vol"></span></div>'+
+        '<div class="stat"><span class="k">Diversification benefit</span><span class="v" id="co_ben" style="color:var(--profit)"></span></div>')+
+      '<div class="prose">'+
+        '<h4>The free lunch</h4>'+
+        '<p>At correlation +1 the assets are the same bet â no diversification, portfolio vol stays 20%. As correlation falls, their moves partly cancel and portfolio vol <b>drops</b>. At â1 they perfectly offset. That reduction in risk for no loss of expected return is the closest thing markets have to a free lunch.</p>'+
+        '<h4>Why crises hurt</h4>'+
+        '<p>In a panic, <i>everything</i> sells off together â correlations snap toward +1 exactly when you need them low. Your diversification evaporates at the worst moment. That\'s the failure mode my Portfolio Analysis Suite is built to stress-test.</p>'+
+      '</div>';
+    function draw(){
+      var rho=num(id('rho')); setv(id('rho'),rho.toFixed(2));
+      function vol(r){ return Math.sqrt(0.25*s1*s1+0.25*s2*s2+2*0.5*0.5*r*s1*s2); }
+      var pts=[]; for(var r=-1;r<=1.001;r+=0.05) pts.push([r,vol(r)*100]);
+      var v=vol(rho)*100;
+      document.getElementById('corrPlot').innerHTML=plot({
+        xmin:-1,xmax:1, ymin:0, ymax:22,
+        xticks:[-1,-0.5,0,0.5,1], xfmt:function(v){return v;},
+        yticks:[0,5,10,15,20], yfmt:function(v){return v+'%';},
+        series:[{pts:pts, color:'--accent', width:2.8}],
+        markers:[{p:rho,v:v,color:'--profit',t:v.toFixed(1)+'%',dx:8,dy:-8}],
+        guides:[{p:rho}],
+        xlabel:'correlation (Ï)', ylabel:'portfolio vol', aria:'portfolio vol vs correlation'
+      });
+      document.getElementById('co_vol').textContent=v.toFixed(1)+'%';
+      document.getElementById('co_ben').textContent='â'+(20-v).toFixed(1)+' pts';
+    }
+    bind(id('rho'),draw); draw();
+  }
+
+  function sizingTool(host){
+    seed=0.66; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'acct',label:'Account size',min:10000,max:1000000,step:10000,value:100000,fmt:function(v){return 'Â£'+(v/1000)+'k';}})+
+      slider({seed:s,key:'risk',label:'Risk per trade',min:0.25,max:5,step:0.25,value:1,fmt:function(v){return v+'%';}})+
+      slider({seed:s,key:'vol',label:'Asset volatility (annual)',min:10,max:120,step:5,value:40,fmt:function(v){return v+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>The pro question isn\'t "how much do I want to buy" â it\'s "how much can I lose if I\'m wrong, and how big can the position be so that loss stays inside my budget." Set your rules; the tool sizes it. Watch the position <b>shrink as volatility rises</b>.</p></div>'+
+      toolShell('Risk-based position sizing', c, null,
+        '<div class="stat"><span class="k">Risk budget (Â£)</span><span class="v" id="sz_budget"></span></div>'+
+        '<div class="stat"><span class="k">Stop distance</span><span class="v" id="sz_stop"></span></div>'+
+        '<div class="stat"><span class="k">Position size</span><span class="v" id="sz_pos" style="color:var(--profit)"></span></div>'+
+        '<div class="stat"><span class="k">% of account</span><span class="v" id="sz_pct"></span></div>');
+    // fix: readout lives inside toolShell; add prose after
+    host.insertAdjacentHTML('beforeend',
+      '<div class="prose">'+
+        '<h4>The logic</h4>'+
+        '<p><b>Risk budget = account Ã risk%.</b> That\'s the most you\'ll lose on this one trade. Your <b>stop distance</b> should scale with the asset\'s volatility â a wild asset needs a wider stop or it\'ll be knocked out by noise. Then <b>position size = risk budget Ã· stop distance</b>. Bigger vol â wider stop â smaller position for the same risk. That\'s vol-targeting in one line.</p>'+
+        '<div class="callout">This is the discipline my Volatility, Sizing & Risk Trainer grades â it scores your <i>process</i>, not whether the market happened to go your way.</div>'+
+      '</div>');
+    function draw(){
+      var acct=num(id('acct')), risk=num(id('risk')), vol=num(id('vol'));
+      setv(id('acct'),'Â£'+(acct/1000)+'k'); setv(id('risk'),risk+'%'); setv(id('vol'),vol+'%');
+      var budget=acct*risk/100;
+      var stopPct=vol/Math.sqrt(52); // ~1-week move as a sensible stop distance
+      var pos=budget/(stopPct/100);
+      document.getElementById('sz_budget').textContent='Â£'+Math.round(budget).toLocaleString();
+      document.getElementById('sz_stop').textContent=stopPct.toFixed(1)+'%';
+      var pe=document.getElementById('sz_pos');
+      pe.textContent='Â£'+Math.round(pos).toLocaleString();
+      var pct=pos/acct*100;
+      document.getElementById('sz_pct').textContent=pct.toFixed(0)+'%';
+    }
+    ['acct','risk','vol'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function reactionTool(host){
+    seed=0.77; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'infl',label:'Inflation',min:0,max:7,step:0.1,value:3.4,fmt:function(v){return v.toFixed(1)+'%';}})+
+      slider({seed:s,key:'jobs',label:'Labour market (jobs added, k/mo)',min:-100,max:300,step:10,value:-20,fmt:function(v){return (v>0?'+':'')+v+'k';}});
+    host.innerHTML=
+      '<div class="prose"><p>The Fed has a <b>dual mandate</b>: 2% inflation <i>and</i> maximum employment. One tool â the interest rate â for two jobs. When the two disagree, it has to choose. Move the sliders and see the call.</p></div>'+
+      toolShell('Simplified policy call (target inflation = 2%)', c, null,
+        '<div class="stat"><span class="k">Inflation gap</span><span class="v" id="rx_ig"></span></div>'+
+        '<div class="stat"><span class="k">Jobs signal</span><span class="v" id="rx_js"></span></div>'+
+        '<div class="stat"><span class="k">Likely call</span><span class="v" id="rx_call"></span></div>');
+    host.insertAdjacentHTML('beforeend',
+      '<div class="prose">'+
+        '<h4>How to read it</h4>'+
+        '<p>Inflation well above 2% pushes toward <b>hikes</b>; a weak jobs market pushes toward <b>cuts</b>. When inflation is high <i>and</i> jobs are weak, the mandates conflict â the Fed usually <b>holds</b>, defending its inflation credibility, and only cuts once inflation is under control or the labour market is truly breaking.</p>'+
+        '<div class="callout">The trap to notice: try high inflation <i>with</i> weak jobs (today\'s setup). The tool won\'t give you a cut â because cutting into hot inflation would make prices worse. That\'s why "sticky inflation â the Fed can\'t cut" is the key reflex for rates.</div>'+
+        '<p style="color:var(--faint);font-size:13px">Simplified teaching heuristic â the real reaction function weighs far more (expectations, financial conditions, the supply/demand split of the shock).</p>'+
+      '</div>');
+    function draw(){
+      var infl=num(id('infl')), jobs=num(id('jobs'));
+      setv(id('infl'),infl.toFixed(1)+'%'); setv(id('jobs'),(jobs>0?'+':'')+jobs+'k');
+      var gap=infl-2;
+      document.getElementById('rx_ig').textContent=(gap>=0?'+':'â')+Math.abs(gap).toFixed(1)+' pts';
+      document.getElementById('rx_ig').style.color = gap>0.5?'var(--loss)':(gap<-0.3?'var(--profit)':'var(--muted)');
+      var js=document.getElementById('rx_js');
+      js.textContent = jobs<0?'Contracting':(jobs<80?'Weak':(jobs<180?'Solid':'Hot'));
+      js.style.color = jobs<0?'var(--loss)':(jobs<80?'var(--accent-ink)':'var(--profit)');
+      // decision heuristic
+      var call, cls;
+      var hot = gap>0.75, cool = gap<0.25, weak = jobs<60, strong = jobs>150;
+      if(hot && !weak){ call='HIKE'; cls='v-hike'; }
+      else if(hot && weak){ call='HOLD'; cls='v-hold'; }      // conflict â hold, credibility
+      else if(cool && weak){ call='CUT'; cls='v-cut'; }
+      else if(cool && strong){ call='HOLD'; cls='v-hold'; }
+      else if(gap>=0.25 && gap<=0.75 && weak){ call='HOLD'; cls='v-hold'; }
+      else { call='HOLD'; cls='v-hold'; }
+      var ce=document.getElementById('rx_call');
+      ce.innerHTML='<span class="verdict '+cls+'">'+call+'</span>'; ce.style.fontSize='15px';
+    }
+    ['infl','jobs'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function momentumTool(host){
+    seed=0.81; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=slider({seed:s,key:'phi',label:'Return autocorrelation (Ï)',min:-0.9,max:0.9,step:0.05,value:0.45,fmt:function(v){return v.toFixed(2);}});
+    host.innerHTML=
+      '<div class="prose"><p>One number decides a market\'s personality: how much this period\'s move predicts the next. Positive Ï means moves <b>persist</b> â a trend. Negative Ï means they <b>reverse</b> â mean reversion. Zero is a coin-flip random walk. Slide it and watch the same random shocks build very different paths.</p></div>'+
+      toolShell('Synthetic price path (same shocks, different Ï)', c, 'momPlot',
+        '<div class="stat"><span class="k">Character</span><span class="v" id="mo_char" style="font-size:17px"></span></div>'+
+        '<div class="stat"><span class="k">Which style wins</span><span class="v" id="mo_style" style="font-size:15px"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Momentum vs mean reversion</h4>'+
+        '<p><b>Momentum / trend-following</b> buys what\'s rising and sells what\'s falling â it prints money when Ï &gt; 0 and the trend runs. <b>Mean reversion</b> does the opposite: it fades extremes, betting price snaps back to an average â it wins when Ï &lt; 0. A <b>trend</b> is just sustained momentum on a longer horizon.</p>'+
+        '<h4>Horizon is everything</h4>'+
+        '<p>The same market can be both, depending on the clock. Very short-term prices often mean-revert (noise, market-making); the classic <b>3â12 month</b> window trends (the momentum factor); over many years prices mean-revert to fundamentals/valuation. Match your signal to your horizon or the edge inverts on you.</p>'+
+        '<div class="callout">The risk in momentum is the <b>crash</b>: trends persist, persist, then reverse violently (Ï flips). That\'s the bridge to the next concept â crowding.</div>'+
+      '</div>';
+    var r=rng(7), noise=[]; for(var i=0;i<160;i++) noise.push(randn(r));
+    function draw(){
+      var phi=num(id('phi')); setv(id('phi'),phi.toFixed(2));
+      var ret=0, px=100, pts=[[0,100]], min=100,max=100;
+      for(var i=1;i<=140;i++){ ret=phi*ret+(1-Math.abs(phi)*0.6)*noise[i]*1.1; px=px*(1+ret/100); pts.push([i,px]); if(px<min)min=px; if(px>max)max=px; }
+      var pad=(max-min)*0.12+2;
+      document.getElementById('momPlot').innerHTML=plot({
+        xmin:0,xmax:140, ymin:min-pad, ymax:max+pad,
+        xticks:[0,35,70,105,140], xfmt:function(v){return v;},
+        yticks:[Math.round(min), Math.round((min+max)/2), Math.round(max)], yfmt:function(v){return v;},
+        series:[{pts:pts,color:'--accent',width:2.4}],
+        xlabel:'time', ylabel:'price', aria:'price path'
+      });
+      var ch=document.getElementById('mo_char'), st=document.getElementById('mo_style');
+      if(phi>0.15){ ch.textContent='Trending'; ch.style.color='var(--profit)'; st.textContent='Momentum / trend-following'; }
+      else if(phi<-0.15){ ch.textContent='Mean-reverting'; ch.style.color='var(--loss)'; st.textContent='Fade the extremes'; }
+      else { ch.textContent='Random walk'; ch.style.color='var(--muted)'; st.textContent='Neither â no edge from path'; }
+    }
+    bind(id('phi'),draw); draw();
+  }
+
+  function positioningTool(host){
+    seed=0.82; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=slider({seed:s,key:'crowd',label:'How crowded is the trade?',min:0,max:100,step:5,value:70,fmt:function(v){return v+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>Imagine a trade that works â price grinds higher and more money piles in (the rising line is positioning). The more crowded it gets, the fewer buyers are left to keep it going. When the catalyst comes, everyone reaches for the same exit at once. Slide the crowding and watch the unwind.</p></div>'+
+      toolShell('Price as a crowded trade unwinds', c, 'posPlot',
+        '<div class="stat"><span class="k">Reversal risk</span><span class="v" id="po_risk" style="font-size:16px"></span></div>'+
+        '<div class="stat"><span class="k">Give-back from peak</span><span class="v" id="po_dd" style="color:var(--loss)"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Why crowding is dangerous</h4>'+
+        '<p>Price needs a marginal buyer. When positioning is extreme, that buyer is gone â so the trade becomes asymmetric: limited further upside, large downside if sentiment turns. The unwind is violent precisely because everyone is on the same side (a <b>squeeze</b>).</p>'+
+        '<h4>How desks gauge positioning</h4>'+
+        '<p>CFTC Commitment-of-Traders, fund-manager surveys (e.g. BofA), prime-broker positioning, put/call ratios, and simple "who\'s left to buy?" logic. The <b>pain trade</b> is the move that hurts the most people â often the one that happens. This is exactly the "what would make me wrong / what kills it" discipline in a good pitch.</p>'+
+        '<div class="callout">Consensus isn\'t automatically wrong â but a crowded consensus offers terrible risk/reward. Best entries are often when a good thesis is <i>under</i>-owned.</div>'+
+      '</div>';
+    function draw(){
+      var cr=num(id('crowd'))/100; setv(id('crowd'),Math.round(cr*100)+'%');
+      var peak=90, pts=[], px=100;
+      for(var t=0;t<=140;t++){
+        var v;
+        if(t<=peak){ v=100+30*(t/peak); }             // steady grind up +30%
+        else { var f=(t-peak)/(140-peak); v=130 - (130*0.35*cr)*Math.pow(f,0.65); } // squeeze down, scaled by crowding
+        pts.push([t,v]); px=v;
+      }
+      var dd=(130-px)/130*100;
+      document.getElementById('posPlot').innerHTML=plot({
+        xmin:0,xmax:140, ymin:80, ymax:136,
+        xticks:[0,45,90,140], xfmt:function(v){return v===90?'peak':v;},
+        yticks:[90,100,110,120,130], yfmt:function(v){return v;},
+        series:[{pts:pts,color:(cr>0.5?'--loss':'--accent'),width:2.6}],
+        guides:[{p:90,t:'crowd peaks',side:'l'}],
+        xlabel:'time', ylabel:'price (indexed)', aria:'crowded trade unwind'
+      });
+      var rk=document.getElementById('po_risk');
+      rk.textContent = cr<0.3?'Low':(cr<0.6?'Elevated':(cr<0.85?'High':'Extreme'));
+      rk.style.color = cr<0.3?'var(--profit)':(cr<0.6?'var(--accent-ink)':'var(--loss)');
+      document.getElementById('po_dd').textContent='â'+dd.toFixed(0)+'%';
+    }
+    bind(id('crowd'),draw); draw();
+  }
+
+  function alphaBetaTool(host){
+    seed=0.83; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'beta',label:'Beta (market sensitivity)',min:0,max:2,step:0.1,value:1.2,fmt:function(v){return v.toFixed(1);}})+
+      slider({seed:s,key:'alpha',label:'Alpha (skill, % / month)',min:-1,max:1,step:0.1,value:0.3,fmt:function(v){return (v>0?'+':'')+v.toFixed(1)+'%';}})+
+      slider({seed:s,key:'noise',label:'Idiosyncratic noise',min:0,max:4,step:0.25,value:1.5,fmt:function(v){return v.toFixed(1)+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>Each dot is one month: the market\'s return across, the stock\'s return up. Fit a line through them and you\'ve split the stock into two parts â the <b>slope is beta</b> (how much it moves with the market) and the <b>height of the line is alpha</b> (the return that isn\'t explained by the market). Drag the sliders.</p></div>'+
+      toolShell('Stock return vs market return (monthly)', c, 'abPlot',
+        '<div class="stat"><span class="k">Beta</span><span class="v" id="ab_b"></span></div>'+
+        '<div class="stat"><span class="k">Alpha (annualised)</span><span class="v" id="ab_a"></span></div>'+
+        '<div class="stat"><span class="k">RÂ² (market-explained)</span><span class="v" id="ab_r"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Beta â the risk you didn\'t create</h4>'+
+        '<p>Beta 1 moves with the index; beta 1.5 amplifies it; beta 0.5 dampens it. A big return on high beta in a rising market is just leverage to the market â not skill. Beta is <b>systematic</b> risk you can get cheaply from an index.</p>'+
+        '<h4>Alpha â the bit you can take credit for</h4>'+
+        '<p>Alpha is return <i>above</i> what beta explains â the payoff to genuine edge. It\'s what active managers charge for and what a trading book is ultimately judged on. <b>RÂ²</b> tells you how much of the moves the market explains; low RÂ² (lots of noise) means the beta/alpha estimate is shakier.</p>'+
+        '<div class="callout">CAPM in one line: return â risk-free + Î² Ã (market â risk-free) + Î±. Everything to the left of Î± is the market renting you its risk; Î± is yours.</div>'+
+      '</div>';
+    var r=rng(11), mkt=[]; for(var i=0;i<44;i++) mkt.push((r()-0.5)*16); // market returns spread ~ Â±8%
+    function draw(){
+      var b=num(id('beta')), a=num(id('alpha')), nz=num(id('noise'));
+      setv(id('beta'),b.toFixed(1)); setv(id('alpha'),(a>0?'+':'')+a.toFixed(1)+'%'); setv(id('noise'),nz.toFixed(1)+'%');
+      var rr=rng(23), pts=[], ys=[], resid=[];
+      for(var i=0;i<mkt.length;i++){ var e=randn(rr)*nz; var y=a+b*mkt[i]+e; pts.push([mkt[i],y]); ys.push(y); resid.push(e); }
+      var meanY=ys.reduce(function(p,q){return p+q;},0)/ys.length;
+      var ssTot=ys.reduce(function(p,q){return p+(q-meanY)*(q-meanY);},0);
+      var ssRes=resid.reduce(function(p,q){return p+q*q;},0);
+      var r2=Math.max(0,Math.min(1,1-ssRes/ssTot));
+      document.getElementById('abPlot').innerHTML=plot({
+        xmin:-10,xmax:10, ymin:-16, ymax:16,
+        xticks:[-8,-4,0,4,8], xfmt:function(v){return (v>0?'+':'')+v+'%';},
+        yticks:[-12,-6,0,6,12], yfmt:function(v){return (v>0?'+':'')+v+'%';},
+        series:[
+          {pts:pts, hideLine:true, dots:true, r:3.4, color:'--accent', dotOpacity:0.7},
+          {pts:[[-10,a+b*-10],[10,a+b*10]], color:'--profit', width:2.4}
+        ],
+        xlabel:'market return', ylabel:'stock return', aria:'alpha beta scatter'
+      });
+      document.getElementById('ab_b').textContent=b.toFixed(2);
+      var ae=document.getElementById('ab_a'); ae.textContent=(a>0?'+':'')+(a*12).toFixed(1)+'%'; ae.style.color=a>0?'var(--profit)':(a<0?'var(--loss)':'var(--ink)');
+      document.getElementById('ab_r').textContent=(r2*100).toFixed(0)+'%';
+    }
+    ['beta','alpha','noise'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function sharpeTool(host){
+    seed=0.84; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'ret',label:'Annual return',min:0,max:40,step:1,value:12,fmt:function(v){return v+'%';}})+
+      slider({seed:s,key:'vol',label:'Annual volatility',min:3,max:60,step:1,value:10,fmt:function(v){return v+'%';}})+
+      slider({seed:s,key:'rf',label:'Risk-free rate',min:0,max:8,step:0.25,value:4,fmt:function(v){return v.toFixed(2)+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>Return is only half the story â the question is how much risk you took to get it. The Sharpe ratio is <b>(return â risk-free) Ã· volatility</b>: excess return per unit of risk. Slide the three inputs and watch where you land against the bar the industry actually uses.</p></div>'+
+      toolShell('Return per unit of risk', c,'shPlot',
+        '<div class="stat"><span class="k">Sharpe ratio</span><span class="v" id="sh_val" style="font-size:26px"></span></div>'+
+        '<div class="stat"><span class="k">Verdict</span><span class="v" id="sh_band" style="font-size:15px"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Why it beats raw return</h4>'+
+        '<p>A 30% return at 60% vol has a Sharpe under 0.5 â you were paid poorly for a wild ride, and one bad year wipes you out. 8% at 5% vol (Sharpe ~0.8+) is the steadier, better business. Rough industry read: <b>&lt;1 unremarkable, 1â2 good, 2â3 excellent, &gt;3 suspiciously good</b> (check for hidden tail risk).</p>'+
+        '<h4>Its cousins</h4>'+
+        '<p><b>Sortino</b> divides by <i>downside</i> volatility only â it stops penalising you for upside swings. <b>Information ratio</b> is alpha Ã· tracking error â the Sharpe of your <i>active</i> bets against a benchmark. And beware: Sharpe assumes roughly normal returns, so a strategy that sells tail risk can show a lovely Sharpe right up until it blows up.</p>'+
+      '</div>';
+    function draw(){
+      var ret=num(id('ret')), vol=num(id('vol')), rf=num(id('rf'));
+      setv(id('ret'),ret+'%'); setv(id('vol'),vol+'%'); setv(id('rf'),rf.toFixed(2)+'%');
+      var sh=(ret-rf)/vol;
+      document.getElementById('sh_val').textContent=sh.toFixed(2);
+      var band=document.getElementById('sh_band');
+      var txt = sh<1?'Unremarkable':(sh<2?'Good':(sh<3?'Excellent':'Elite â verify tail risk'));
+      band.textContent=txt; band.style.color = sh<1?'var(--muted)':(sh<2?'var(--accent-ink)':'var(--profit)');
+      function bar(label,val,ref){ var pct=Math.max(0,Math.min(100,val/3*100)); var col= val<1?'var(--faint)':(val<2?'var(--accent)':'var(--profit)');
+        return '<div class="sbar"><span class="sl">'+label+'</span><div class="sbar-track"><div class="sbar-fill" style="width:'+pct+'%;background:'+col+'"></div></div><span class="sv">'+val.toFixed(2)+'</span></div>'; }
+      document.getElementById('shPlot').innerHTML=
+        '<div style="padding:6px 2px">'+
+        bar('This strategy', sh)+
+        bar('"Good" bar', 1)+
+        bar('"Excellent" bar', 2)+
+        '<p style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;color:var(--faint);margin:6px 0 0">scale caps at 3.0</p></div>';
+    }
+    ['ret','vol','rf'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function diversConcTool(host){
+    seed=0.85; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var SIG=25;
+    var c=
+      slider({seed:s,key:'n',label:'Number of holdings',min:1,max:50,step:1,value:8,fmt:function(v){return v;}})+
+      slider({seed:s,key:'rho',label:'Average correlation between them',min:0,max:0.9,step:0.05,value:0.3,fmt:function(v){return v.toFixed(2);}});
+    host.innerHTML=
+      '<div class="prose"><p>Start with one 25%-vol position and keep adding equally-weighted names. Portfolio risk falls fast at first â then hits a <b>floor it can\'t break through</b>. That floor is the market risk you can never diversify away. Slide the number of holdings and the average correlation.</p></div>'+
+      toolShell('Portfolio volatility as you add holdings', c,'dcPlot',
+        '<div class="stat"><span class="k">Portfolio vol</span><span class="v" id="dc_vol"></span></div>'+
+        '<div class="stat"><span class="k">Undiversifiable floor</span><span class="v" id="dc_floor"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Two kinds of risk</h4>'+
+        '<p><b>Idiosyncratic</b> (single-name) risk averages out as you add positions â that\'s the steep early drop. <b>Systematic</b> (market) risk is shared by everything and stays â that\'s the floor, equal to 25% Ã â(correlation). Higher correlation â higher floor â diversification helps less.</p>'+
+        '<h4>The concentration case</h4>'+
+        '<p>Diversification also <b>dilutes your alpha</b>: your 30th-best idea drags down your best. Concentration puts capital where your edge is â higher idiosyncratic risk, but that\'s the risk you\'re actually paid to take if you\'re right. The rule of thumb: <b>diversify the risks you have no view on; concentrate where you do.</b></p>'+
+        '<div class="callout">"Diversification is protection against ignorance; it makes little sense if you know what you\'re doing" (Buffett) â versus the multi-strat model that diversifies many small edges. Both are valid; they\'re different businesses.</div>'+
+      '</div>';
+    function vol(n,rho){ return SIG*Math.sqrt((1+rho*(n-1))/n); }
+    function draw(){
+      var n=num(id('n')), rho=num(id('rho'));
+      setv(id('n'),n); setv(id('rho'),rho.toFixed(2));
+      var pts=[]; for(var k=1;k<=50;k++) pts.push([k,vol(k,rho)]);
+      var floor=SIG*Math.sqrt(rho), cur=vol(n,rho);
+      document.getElementById('dcPlot').innerHTML=plot({
+        xmin:1,xmax:50, ymin:0, ymax:26,
+        xticks:[1,10,20,30,40,50], xfmt:function(v){return v;},
+        yticks:[0,5,10,15,20,25], yfmt:function(v){return v+'%';},
+        series:[
+          {pts:[[1,floor],[50,floor]], color:'--faint', width:1.5, dash:true},
+          {pts:pts, color:'--accent', width:2.8}
+        ],
+        markers:[{p:n,v:cur,color:'--profit',t:cur.toFixed(1)+'%',dx:8,dy:-8}],
+        xlabel:'number of holdings', ylabel:'portfolio vol', aria:'diversification curve'
+      });
+      document.getElementById('dc_vol').textContent=cur.toFixed(1)+'%';
+      document.getElementById('dc_floor').textContent=floor.toFixed(1)+'%';
+    }
+    ['n','rho'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function sigmaTool(host){
+    seed=0.86; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=slider({seed:s,key:'k',label:'Size of move (standard deviations)',min:0.5,max:5,step:0.1,value:3,fmt:function(v){return v.toFixed(1)+'Ï';}});
+    host.innerHTML=
+      '<div class="prose"><p>Volatility is one standard deviation (1Ï) of returns. A "3-sigma move" is one three times that size. The bell curve says such moves are rare â the shaded tails show <i>how</i> rare. Slide the threshold and read off the odds. Then read why markets break this maths.</p></div>'+
+      toolShell('The normal distribution â how rare is a big move?', c,'sgPlot',
+        '<div class="stat"><span class="k">Chance on a given day</span><span class="v" id="sg_p"></span></div>'+
+        '<div class="stat"><span class="k">Normal curve says: about once every</span><span class="v" id="sg_freq" style="font-size:16px"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Reading the curve</h4>'+
+        '<p>About <b>68%</b> of days land within Â±1Ï, <b>95%</b> within Â±2Ï, <b>99.7%</b> within Â±3Ï. So a 3Ï down-day should, in theory, happen roughly once every 1.5 years; a 4Ï move about once a century.</p>'+
+        '<h4>Why markets have fat tails</h4>'+
+        '<p>Reality delivers those extremes far more often than the bell curve allows â volatility clusters (calm, then chaos), and panics feed on themselves. Black Monday 1987 was a ~20Ï move under the normal model â which should be impossible in the life of the universe, yet it happened. The lesson: <b>never size your book as if the tails are Gaussian.</b> The bell curve is a decent guide to the middle and a dangerous liar about the edges.</p>'+
+        '<div class="callout">Good or bad? A large <i>adverse</i> Ï move is what blows up a book sized for normal tails. A large <i>favourable</i> one is why cheap convexity (long options, defined-risk bets) pays off â you keep the upside tail, cap the downside.</div>'+
+      '</div>';
+    function draw(){
+      var k=num(id('k')); setv(id('k'),k.toFixed(1)+'Ï');
+      var p=2*(1-normcdf(k)); // two-sided probability of a move beyond Â±k sigma
+      var days=p>0?1/p:Infinity;
+      document.getElementById('sgPlot').innerHTML=plot({
+        xmin:-4,xmax:4, ymin:0, ymax:0.44,
+        xticks:[-3,-2,-1,0,1,2,3], xfmt:function(v){return v+'Ï';},
+        yticks:[0,0.1,0.2,0.3,0.4], yfmt:function(v){return v.toFixed(1);},
+        series:[
+          {fn:function(x){return Math.abs(x)>=k?normpdf(x):0;}, fill:'--loss-fill', hideLine:true},
+          {fn:normpdf, color:'--accent', width:2.6}
+        ],
+        guides:[{p:k},{p:-k}],
+        xlabel:'move size (standard deviations)', ylabel:'likelihood', aria:'normal distribution tails'
+      });
+      document.getElementById('sg_p').textContent=(p*100<0.1?(p*100).toPrecision(2):(p*100).toFixed(1))+'%';
+      var f=document.getElementById('sg_freq');
+      f.textContent = days>2600 ? Math.round(days/252)+' trading years' : (days>25? Math.round(days/21)+' months' : Math.round(days)+' trading days');
+    }
+    bind(id('k'),draw); draw();
+  }
+
+  function curvePosTool(host){
+    var rates='down', curve='steepen';
+    host.innerHTML=
+      '<div class="prose"><p>Bonds let you bet on three separate things. <b>Level</b>: are yields going up or down (that\'s duration). <b>Slope</b>: is the curve steepening or flattening (a steepener/flattener). <b>Curvature</b>: is the middle rich or cheap versus the wings (a butterfly). Pick your view and get the trade.</p></div>'+
+      '<div class="tool"><p class="tool-head">Build the trade from your view</p>'+
+        '<div class="optrow"><span class="lab">Where are yields going?</span><div class="opts" id="cp_rates">'+
+          ['down','unchanged','up'].map(function(o){return '<button class="opt'+(o==='down'?' on':'')+'" data-v="'+o+'">'+o+'</button>';}).join('')+'</div></div>'+
+        '<div class="optrow"><span class="lab">What\'s the curve doing?</span><div class="opts" id="cp_curve">'+
+          ['steepen','unchanged','flatten'].map(function(o){return '<button class="opt'+(o==='steepen'?' on':'')+'" data-v="'+o+'">'+o+'</button>';}).join('')+'</div></div>'+
+        '<div class="trade-out"><p class="tk">The expression</p><p class="tv" id="cp_trade"></p><p class="td" id="cp_desc"></p></div>'+
+      '</div>'+
+      '<div class="prose">'+
+        '<h4>Three independent bets</h4>'+
+        '<p><b>Directional (duration):</b> long bonds if you think yields fall, short if they rise. This is a bet on the <i>level</i> of rates. <b>Curve (relative value):</b> a steepener profits if the long end rises relative to the front (or the front falls relative to the long); a flattener is the reverse. <b>Butterfly:</b> trades the belly (e.g. 5y) against the wings (2y &amp; 10y) â a bet purely on curvature.</p>'+
+        '<h4>Why DV01-neutral matters</h4>'+
+        '<p>A pure curve trade should profit from the <i>shape</i> changing, not from rates going up or down overall. So desks size the two legs to have equal-and-opposite DV01 â the parallel move cancels, isolating the slope bet. That sizing is exactly what my Market Analysis Tools project computes.</p>'+
+        '<div class="callout">Bull = yields falling (prices up); bear = yields rising. So "bull steepener" = front-led rally; "bear steepener" = long-end-led sell-off â today\'s tape.</div>'+
+      '</div>';
+    function draw(){
+      var t, d;
+      if(rates==='unchanged' && curve==='steepen'){ t='DV01-neutral 2s10s steepener'; d='Pure slope bet: receive the front leg, pay the long leg, sized to cancel any parallel move.'; }
+      else if(rates==='unchanged' && curve==='flatten'){ t='DV01-neutral 2s10s flattener'; d='Pure slope bet the other way: pay the front, receive the long, DV01-matched.'; }
+      else if(rates==='unchanged' && curve==='unchanged'){ t='No rates trade â look at carry/roll or a butterfly'; d='No level or slope view. If the belly looks rich/cheap, express curvature with a 2s5s10s fly.'; }
+      else if(rates==='down' && curve==='steepen'){ t='Bull steepener â long the front end'; d='Yields falling, front falling faster (Fed easing). Be long short-dated duration / receive the 2y.'; }
+      else if(rates==='down' && curve==='flatten'){ t='Bull flattener â long the long end'; d='Yields falling, long end falling faster (flight to quality / growth fears). Be long 10sâ30s duration.'; }
+      else if(rates==='down' && curve==='unchanged'){ t='Outright long duration'; d='Pure level view: buy bonds across the curve, no slope bet.'; }
+      else if(rates==='up' && curve==='steepen'){ t='Bear steepener â short the long end'; d='Yields rising, long end rising faster (fiscal / inflation / term premium â today). Short 30y duration.'; }
+      else if(rates==='up' && curve==='flatten'){ t='Bear flattener â short the front end'; d='Yields rising, front rising faster (hawkish Fed repricing). Pay the 2y / short front duration.'; }
+      else { t='Outright short duration'; d='Pure level view: sell bonds across the curve, no slope bet.'; }
+      document.getElementById('cp_trade').textContent=t;
+      document.getElementById('cp_desc').textContent=d;
+    }
+    function wire(boxId, set){ var box=document.getElementById(boxId);
+      box.querySelectorAll('.opt').forEach(function(b){ b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); set(b.getAttribute('data-v')); draw();
+      });}); }
+    wire('cp_rates',function(v){rates=v;}); wire('cp_curve',function(v){curve=v;}); draw();
+  }
+
+  function riskOnOffTool(host){
+    seed=0.88; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=slider({seed:s,key:'sent',label:'Market sentiment',min:-100,max:100,step:5,value:60,fmt:function(v){return v<0?'risk-off '+v:(v>0?'risk-on +'+v:'neutral');}});
+    // beta of each asset's PRICE to risk sentiment (+ = rises in risk-on)
+    var assets=[
+      {n:'Equities (S&P)', b:1.0},{n:'High-yield credit', b:0.8},{n:'EM & cyclical FX', b:0.85},
+      {n:'Oil & copper', b:0.7},{n:'Bitcoin', b:0.95},
+      {n:'US Treasuries', b:-0.7},{n:'Gold', b:-0.4},{n:'US dollar (DXY)', b:-0.55},
+      {n:'Japanese yen', b:-0.85},{n:'Swiss franc', b:-0.75},{n:'VIX (fear index)', b:-1.0}
+    ];
+    host.innerHTML=
+      '<div class="prose"><p>On the days that matter, markets stop trading their own stories and move as one: <b>toward risk</b> (chase return) or <b>away from it</b> (flight to safety). Slide sentiment and watch each asset rotate â green rises, red falls.</p></div>'+
+      '<div class="tool"><p class="tool-head">Cross-asset response to sentiment</p><div class="sliders">'+c+'</div>'+
+        '<div class="rr-list" id="rr"></div></div>'+
+      '<div class="prose">'+
+        '<h4>Risk-on vs risk-off</h4>'+
+        '<p><b>Risk-on:</b> equities, high-yield credit (spreads tighten), EM and commodity-linked FX, oil/copper, crypto all rally; safe havens are sold. <b>Risk-off:</b> money sprints to safety â Treasuries and gold rally, the dollar and havens bid, credit spreads blow out, VIX spikes, equities and EM sell hard.</p>'+
+        '<h4>The safe-haven currencies</h4>'+
+        '<p><b>USD</b> â the world\'s reserve and funding currency; in a crunch everyone needs dollars (liquidity). <b>JPY</b> â Japan\'s huge overseas assets get repatriated and carry trades funded in cheap yen unwind, so yen surges exactly when risk sells off. <b>CHF</b> â deep current-account surplus, political stability, credible central bank. Gold sits alongside as the non-fiat haven.</p>'+
+        '<div class="callout">What desks actually do in risk-off: cut gross and net exposure, buy downside protection (puts), rotate into defensives/quality, raise cash, and add duration and gold. Preserve capital first; hunt bargains once the dust settles.</div>'+
+      '</div>';
+    function draw(){
+      var se=num(id('sent'));
+      setv(id('sent'), se<0?'risk-off '+se:(se>0?'risk-on +'+se:'neutral'));
+      var html='';
+      assets.forEach(function(a){
+        var move=a.b*se/100;                 // -1..1
+        var pct=Math.min(50,Math.abs(move)*50);
+        var up=move>=0;
+        var col= Math.abs(move)<0.02 ? 'var(--faint)' : (up?'var(--profit)':'var(--loss)');
+        var side = up ? 'left:50%; width:'+pct+'%;' : 'right:50%; width:'+pct+'%;';
+        html+='<div class="rr-row"><span class="nm">'+a.n+'</span>'+
+          '<div class="rr-track"><div class="rr-mid"></div><div class="rr-fill" style="'+side+'background:'+col+'"></div></div></div>';
+      });
+      document.getElementById('rr').innerHTML=html;
+    }
+    bind(id('sent'),draw); draw();
+  }
+
+  function regimeTool(host){
+    seed=0.89; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'g',label:'Growth',min:-100,max:100,step:5,value:40,fmt:function(v){return v<0?'slowing '+v:(v>0?'accelerating +'+v:'flat');}})+
+      slider({seed:s,key:'i',label:'Inflation',min:-100,max:100,step:5,value:-30,fmt:function(v){return v<0?'falling '+v:(v>0?'rising +'+v:'flat');}});
+    var cells=[
+      {key:'reflation', n:'Reflation', d:'growth â Â· inflation â', pos:'tr'},
+      {key:'goldilocks', n:'Goldilocks', d:'growth â Â· inflation â', pos:'tl'},
+      {key:'stagflation', n:'Stagflation', d:'growth â Â· inflation â', pos:'br'},
+      {key:'slowdown', n:'Deflationary slowdown', d:'growth â Â· inflation â', pos:'bl'}
+    ];
+    host.innerHTML=
+      '<div class="prose"><p>Nearly all macro reduces to two questions: is <b>growth</b> rising or falling, and is <b>inflation</b> rising or falling? That gives four regimes, each with assets it favours. Move the dot and read the playbook.</p></div>'+
+      '<div class="tool"><p class="tool-head">The growth Ã inflation map</p><div class="sliders">'+c+'</div>'+
+        '<div class="quad-wrap"><span class="qaxis-y">â inflation high Â· low â</span><div class="quad" id="quad">'+
+          '<div class="qcell" data-k="stagflation"><span class="qn">Stagflation</span><span class="qd">growth â Â· inflation â</span></div>'+
+          '<div class="qcell" data-k="reflation"><span class="qn">Reflation</span><span class="qd">growth â Â· inflation â</span></div>'+
+          '<div class="qcell" data-k="slowdown"><span class="qn">Slowdown</span><span class="qd">growth â Â· inflation â</span></div>'+
+          '<div class="qcell" data-k="goldilocks"><span class="qn">Goldilocks</span><span class="qd">growth â Â· inflation â</span></div>'+
+          '<div class="qdot" id="qdot"></div>'+
+        '</div><div class="qaxis">â growth low Â· high â</div></div>'+
+        '<div class="trade-out"><p class="tk">Regime &amp; playbook</p><p class="tv" id="rg_name"></p><p class="td" id="rg_play"></p></div>'+
+      '</div>'+
+      '<div class="prose">'+
+        '<h4>The four regimes</h4>'+
+        '<p><b>Goldilocks</b> (growth up, inflation cool): the best backdrop for risk â equities and credit rally, vol low. <b>Reflation</b> (both rising): cyclicals, value, financials, commodities and real assets lead; rates rise and the curve steepens. <b>Stagflation</b> (growth down, inflation up): the nightmare â commodities and gold hold up while both bonds and equities struggle (2022). <b>Deflationary slowdown</b> (both falling): long-dated government bonds win, quality and defensives hold, cyclicals and credit suffer.</p>'+
+        '<h4>Spotting the transition â where the money is</h4>'+
+        '<p>Markets shift regime <i>before</i> the official data confirms it, so watch the leading tells: <b>PMIs/ISM</b> and jobless claims for growth; <b>breakevens and inflation swaps</b> for inflation; the <b>yield curve</b>, <b>credit spreads</b>, <b>commodity prices</b> and <b>earnings revisions</b> for the turn. Transitions are when correlations flip and old playbooks stop working â the biggest P&amp;L (and the biggest blow-ups) live there. The classic error is fighting the last regime.</p>'+
+        '<div class="callout">This is the lens behind the macro dashboards I built at Schonfeld and my daily brief â locate the regime, then position for the <i>next</i> one.</div>'+
+      '</div>';
+    var play={
+      goldilocks:'Risk-on. Overweight equities (esp. growth/quality), tighten into credit, low vol favours carry. Duration fine. "Buy the dip."',
+      reflation:'Own cyclicals, value, financials, energy & materials, commodities, TIPS/real assets, EM. Short duration; position for a steeper curve.',
+      stagflation:'Defend. Commodities & gold, cash, quality and defensives, value over growth. Both bonds and equities vulnerable; short duration.',
+      slowdown:'Risk-off. Long duration (government bonds win), quality & defensives, USD and gold. Avoid cyclicals, small caps and credit.'
+    };
+    function draw(){
+      var g=num(id('g')), i=num(id('i'));
+      setv(id('g'), g<0?'slowing '+g:(g>0?'accelerating +'+g:'flat'));
+      setv(id('i'), i<0?'falling '+i:(i>0?'rising +'+i:'flat'));
+      var key = g>=0 ? (i>=0?'reflation':'goldilocks') : (i>=0?'stagflation':'slowdown');
+      // dot position: x by growth, y by inflation (top = high inflation)
+      var dot=document.getElementById('qdot');
+      dot.style.left = (50 + g/100*46)+'%';
+      dot.style.top = (50 - i/100*46)+'%';
+      document.querySelectorAll('#quad .qcell').forEach(function(cl){ cl.classList.toggle('active', cl.getAttribute('data-k')===key); });
+      var names={goldilocks:'Goldilocks',reflation:'Reflation',stagflation:'Stagflation',slowdown:'Deflationary slowdown'};
+      document.getElementById('rg_name').textContent=names[key];
+      document.getElementById('rg_play').textContent=play[key];
+    }
+    ['g','i'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function carryTool(host){
+    seed=0.91; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'diff',label:'Interest-rate differential (carry)',min:0,max:8,step:0.25,value:4,fmt:function(v){return v.toFixed(2)+'%';}})+
+      slider({seed:s,key:'shock',label:'Size of the risk-off unwind',min:0,max:100,step:5,value:45,fmt:function(v){return v+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>Borrow where rates are low (say the yen), invest where they\'re high, and you earn the gap â the <b>carry</b> â every single day. The line climbs steadily. Then a risk-off shock hits, everyone unwinds at once, and the high-yield currency drops. Slide the differential and the shock and watch the trade-off.</p></div>'+
+      toolShell('Cumulative return of a carry trade over ~18 months', c, 'carPlot',
+        '<div class="stat"><span class="k">Annual carry</span><span class="v" id="ca_c" style="color:var(--profit)"></span></div>'+
+        '<div class="stat"><span class="k">Unwind drawdown</span><span class="v" id="ca_dd" style="color:var(--loss)"></span></div>'+
+        '<div class="stat"><span class="k">Carry wiped out</span><span class="v" id="ca_w" style="font-size:16px"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Why it\'s seductive â and dangerous</h4>'+
+        '<p>Day to day, carry is the smoothest return in macro: a steady drip with a beautiful Sharpe. The catch is a <b>fat left tail</b>. High-carry currencies behave like risk assets, so when markets panic the carry trade unwinds violently â months of gains gone in days. The desk phrase is "picking up pennies in front of a steamroller."</p>'+
+        '<h4>Where the yen comes in</h4>'+
+        '<p>The yen is the classic <b>funding currency</b> â rates were near zero for decades, so traders borrow yen to buy higher-yielders. That\'s why, in a risk-off event, the yen <i>surges</i>: everyone buys back yen to close the trade at once. It ties straight to my USD/JPY view â the carry and the BOJ are two sides of the same pair.</p>'+
+        '<div class="callout">Carry works in calm and dies in chaos. Sizing it as if the good days are the whole story is exactly the mistake the sigma-moves and crowding concepts warn about.</div>'+
+      '</div>';
+    function draw(){
+      var diff=num(id('diff')), shock=num(id('shock'))/100;
+      setv(id('diff'),diff.toFixed(2)+'%'); setv(id('shock'),Math.round(shock*100)+'%');
+      var crashFull=shock*16, pts=[], peak=0, end=0;
+      for(var m=0;m<=18;m++){
+        var carry=diff*(m/12);
+        var crash= m>=13 ? crashFull*Math.min(1,(m-13)/4) : 0;
+        var cum=carry-crash; pts.push([m,cum]); if(carry>peak)peak=carry; end=cum;
+      }
+      var ymin=Math.min(-1,end-1), ymax=Math.max(peak+1,2);
+      document.getElementById('carPlot').innerHTML=plot({
+        xmin:0,xmax:18, ymin:ymin, ymax:ymax,
+        xticks:[0,6,12,18], xfmt:function(v){return v+'m';},
+        yticks:[Math.round(ymin), 0, Math.round(peak)], yfmt:function(v){return (v>0?'+':'')+v+'%';},
+        series:[{fn:null, pts:pts, color:(end<0?'--loss':'--profit'), fill:'x', fillSigned:true, width:2.6}],
+        xlabel:'months held', ylabel:'cumulative return', aria:'carry trade path'
+      });
+      document.getElementById('ca_c').textContent='+'+diff.toFixed(2)+'%';
+      document.getElementById('ca_dd').textContent='â'+crashFull.toFixed(1)+'%';
+      document.getElementById('ca_w').textContent = diff>0 ? (crashFull/diff*12).toFixed(0)+' months' : 'â';
+    }
+    ['diff','shock'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function rateDiffTool(host){
+    seed=0.92; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'us',label:'US 2-year yield',min:0,max:6,step:0.1,value:4.3,fmt:function(v){return v.toFixed(1)+'%';}})+
+      slider({seed:s,key:'jp',label:'Japan 2-year yield',min:0,max:3,step:0.1,value:0.6,fmt:function(v){return v.toFixed(1)+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>Money flows toward higher yields, so a currency\'s value tracks the <b>gap</b> between its interest rates and another\'s. The USâJapan 2-year gap is the textbook driver of USD/JPY. Move the two rates and watch the pair â and the carry you\'d earn being long it.</p></div>'+
+      toolShell('USD/JPY vs the USâJapan 2y yield gap (illustrative)', c, 'rdPlot',
+        '<div class="stat"><span class="k">2y differential</span><span class="v" id="rd_diff"></span></div>'+
+        '<div class="stat"><span class="k">Carry (long USD/JPY)</span><span class="v" id="rd_carry" style="color:var(--profit)"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Interest-rate parity â the no-arbitrage rule</h4>'+
+        '<p><b>Covered IRP</b> says the forward exchange rate must offset the rate gap exactly, or you\'d have free money: the higher-yield currency trades at a <b>forward discount</b>. So in theory the extra interest is cancelled by expected depreciation.</p>'+
+        '<h4>...and why carry works anyway</h4>'+
+        '<p><b>Uncovered IRP</b> says spot should drift to wipe out the carry â but empirically it often <i>doesn\'t</i> (the "forward premium puzzle"). Spot tends to follow the differential instead, which is why higher-rate currencies frequently strengthen and the carry trade pays. This gap between theory and reality is where a lot of FX P&amp;L lives.</p>'+
+        '<div class="callout">Practical read for USD/JPY: watch the US 2y vs the JGB 2y. When the Fed is high and the BOJ pinned near zero, the gap is wide and USD/JPY is heavy to the topside; the risk is the BOJ finally tightening and the gap snapping shut.</div>'+
+      '</div>';
+    function draw(){
+      var us=num(id('us')), jp=num(id('jp'));
+      setv(id('us'),us.toFixed(1)+'%'); setv(id('jp'),jp.toFixed(1)+'%');
+      var diff=us-jp;
+      function fx(d){ return 108 + d*9; } // illustrative USD/JPY level vs differential
+      var pts=[]; for(var d=-1;d<=6.01;d+=0.1) pts.push([d,fx(d)]);
+      document.getElementById('rdPlot').innerHTML=plot({
+        xmin:-1,xmax:6, ymin:fx(-1)-4, ymax:fx(6)+4,
+        xticks:[0,2,4,6], xfmt:function(v){return v+'%';},
+        yticks:[100,120,140,160].filter(function(v){return v>=fx(-1)-4&&v<=fx(6)+4;}), yfmt:function(v){return v;},
+        series:[{pts:pts, color:'--accent', width:2.8}],
+        markers:[{p:diff,v:fx(diff),color:'--profit',t:'Â¥'+fx(diff).toFixed(0),dx:8,dy:-8}],
+        guides:[{p:diff}],
+        xlabel:'US â Japan 2y differential', ylabel:'USD/JPY', aria:'usdjpy vs rate differential'
+      });
+      var e=document.getElementById('rd_diff'); e.textContent=(diff>=0?'+':'â')+Math.abs(diff*100).toFixed(0)+' bp';
+      e.style.color = diff>=0?'var(--profit)':'var(--loss)';
+      document.getElementById('rd_carry').textContent=(diff>=0?'+':'')+diff.toFixed(2)+'% / yr';
+    }
+    ['us','jp'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function dollarSmileTool(host){
+    seed=0.93; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=slider({seed:s,key:'x',label:'World state',min:-100,max:100,step:5,value:-60,fmt:function(v){return v<-33?'global risk-off':(v>33?'US outperforming':'sluggish middle');}});
+    host.innerHTML=
+      '<div class="prose"><p>You\'d think the dollar just tracks US growth in a straight line. It doesn\'t â it\'s <b>strong at both ends</b>. In a global panic everyone runs to dollars (safety); when the US economy races ahead, money chases US yields and growth. It\'s only weak in the dull middle. Slide across the states and watch the smile.</p></div>'+
+      toolShell('Dollar strength across world states', c, 'dsPlot',
+        '<div class="stat"><span class="k">Regime</span><span class="v" id="ds_reg" style="font-size:16px"></span></div>'+
+        '<div class="stat"><span class="k">Dollar</span><span class="v" id="ds_dir"></span></div>')+
+      '<div class="prose">'+
+        '<h4>The left side â the haven bid</h4>'+
+        '<p>When markets crash, the dollar rallies regardless of what the US economy is doing: it\'s the world\'s reserve and funding currency, and in a crunch everyone scrambles for dollar liquidity. This is the same flight-to-quality behind the risk-off concept.</p>'+
+        '<h4>The right side â the growth/yield bid</h4>'+
+        '<p>When the US grows faster and pays higher rates than everyone else ("US exceptionalism"), capital flows in to capture that return, lifting the dollar. <b>The dip in the middle</b> is the benign, boring world â decent global growth, no US standout, no panic â where the dollar softens and higher-beta currencies do best.</p>'+
+        '<div class="callout">Trading use: to be bearish the dollar you usually need the <i>middle</i> â synchronised global growth with the US no longer exceptional. Both a US boom and a US-led scare tend to bid it.</div>'+
+      '</div>';
+    function draw(){
+      var x=num(id('x'));
+      setv(id('x'), x<-33?'global risk-off':(x>33?'US outperforming':'sluggish middle'));
+      function str(v){ return 40 + 0.006*v*v; }
+      var pts=[]; for(var v=-100;v<=100;v+=4) pts.push([v,str(v)]);
+      document.getElementById('dsPlot').innerHTML=plot({
+        xmin:-100,xmax:100, ymin:30, ymax:108,
+        xticks:[-100,-50,0,50,100], xfmt:function(v){return v<0?'risk-off':(v>0?'US strong':'middle');},
+        yticks:[40,60,80,100], yfmt:function(v){return v;},
+        series:[{pts:pts, color:'--accent', width:2.8}],
+        markers:[{p:x,v:str(x),color:'--profit',t:'USD',dx:8,dy:-8}],
+        guides:[{p:x}],
+        xlabel:'world state', ylabel:'dollar strength', aria:'dollar smile'
+      });
+      document.getElementById('ds_reg').textContent = x<-33?'Risk-off haven':(x>33?'US exceptionalism':'Benign middle');
+      var d=document.getElementById('ds_dir'); var strong=str(x)>55;
+      d.textContent = strong?'Strong':'Soft'; d.style.color=strong?'var(--profit)':'var(--loss)';
+    }
+    bind(id('x'),draw); draw();
+  }
+
+  function pppTool(host){
+    seed=0.94; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=slider({seed:s,key:'d',label:'Inflation gap (home â foreign)',min:-4,max:8,step:0.5,value:3,fmt:function(v){return (v>0?'+':'')+v.toFixed(1)+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>If prices rise faster at home than abroad, your money buys less over time â so your currency should slowly <b>lose value</b> to keep a basket of goods costing the same everywhere. That\'s purchasing power parity. Slide the inflation gap and watch the 10-year drift.</p></div>'+
+      toolShell('Home-currency value over 10 years (PPP drift)', c, 'ppPlot',
+        '<div class="stat"><span class="k">Implied drift</span><span class="v" id="pp_a"></span></div>'+
+        '<div class="stat"><span class="k">Over 10 years</span><span class="v" id="pp_c"></span></div>')+
+      '<div class="prose">'+
+        '<h4>The long-run anchor</h4>'+
+        '<p>PPP is the idea behind the Economist\'s <b>Big Mac index</b>: the same burger should cost roughly the same everywhere once you convert currencies, and if it doesn\'t, the "expensive" currency is overvalued. A higher-inflation currency has to depreciate over time to restore that balance.</p>'+
+        '<h4>Why it\'s useless for timing</h4>'+
+        '<p>PPP holds over <b>decades</b>, not months. Rate differentials, capital flows and risk sentiment push currencies far from PPP fair value for years at a stretch â the <b>real exchange rate</b> can stay stretched for a whole cycle. So treat PPP as a gravity that eventually pulls, not a signal you can trade on this quarter.</p>'+
+        '<div class="callout">Rule of thumb: use rate differentials and positioning for the next few months, and PPP only to sense-check whether a currency is cheap or dear in the very long run.</div>'+
+      '</div>';
+    function draw(){
+      var d=num(id('d')); setv(id('d'),(d>0?'+':'')+d.toFixed(1)+'%');
+      var pts=[]; for(var t=0;t<=10;t+=0.25) pts.push([t,100*Math.pow(1-d/100,t)]);
+      var end=100*Math.pow(1-d/100,10);
+      document.getElementById('ppPlot').innerHTML=plot({
+        xmin:0,xmax:10, ymin:Math.min(70,end-5), ymax:Math.max(115,100*Math.pow(1-d/100,0)+5),
+        xticks:[0,2,4,6,8,10], xfmt:function(v){return v+'y';},
+        yticks:[70,80,90,100,110].filter(function(v){return v>=Math.min(70,end-5)&&v<=Math.max(115,105);}), yfmt:function(v){return v;},
+        series:[{pts:pts, color:(d>0?'--loss':'--profit'), width:2.8}],
+        guides:[],
+        xlabel:'years', ylabel:'home-currency value (index)', aria:'ppp drift'
+      });
+      document.getElementById('pp_a').textContent=(d>0?'â':'+')+Math.abs(d).toFixed(1)+'% / yr';
+      document.getElementById('pp_c').textContent=(end<100?'â':'+')+Math.abs(100-end).toFixed(0)+'%';
+    }
+    bind(id('d'),draw); draw();
+  }
+
+  function greeksTool(host){
+    seed=0.311; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var K=100, r=0.04;
+    var c=
+      slider({seed:s,key:'spot',label:'Spot price (strike = 100)',min:60,max:140,step:1,value:100,fmt:function(v){return '$'+v;}})+
+      slider({seed:s,key:'vol',label:'Implied volatility',min:10,max:60,step:1,value:25,fmt:function(v){return v+'%';}})+
+      slider({seed:s,key:'t',label:'Time to expiry',min:0.05,max:1,step:0.05,value:0.5,fmt:function(v){return Math.round(v*12)+'m';}});
+    host.innerHTML=
+      '<div class="prose"><p>Here\'s a call option struck at 100. Its price (the curve) bends as spot moves â and that bend is where the greeks live. <b>Delta</b> is the slope, <b>gamma</b> is how fast the slope changes, <b>vega</b> is sensitivity to vol, <b>theta</b> is the daily bleed from time passing. Move the sliders and watch all four.</p></div>'+
+      toolShell('Call option value vs spot (Black-Scholes)', c, 'grPlot',
+        '<div class="stat"><span class="k">Option price</span><span class="v" id="gr_px"></span></div>'+
+        '<div class="stat"><span class="k">Delta</span><span class="v" id="gr_d"></span></div>'+
+        '<div class="stat"><span class="k">Gamma</span><span class="v" id="gr_g"></span></div>'+
+        '<div class="stat"><span class="k">Vega /1%</span><span class="v" id="gr_v"></span></div>'+
+        '<div class="stat"><span class="k">Theta /day</span><span class="v" id="gr_t" style="color:var(--loss)"></span></div>')+
+      '<div class="prose">'+
+        '<h4>The four dials</h4>'+
+        '<p><b>Delta</b> (0â1 for a call) is both your directional exposure and your hedge ratio â a 0.5 delta means the option moves like half a share, so you\'d short half a share to be neutral. <b>Gamma</b> is the rate delta changes: high near the strike, and it\'s what makes a hedged option position still make money in a big move. <b>Vega</b> is your exposure to implied vol rising or falling. <b>Theta</b> is time decay â every day that passes, an option loses a little value, which is the price you pay for optionality.</p>'+
+        '<div class="callout">The desk shorthand: <b>long options = long gamma, long vega, short theta.</b> You want movement (gamma) and rising vol (vega), and you\'re paying rent (theta) to own that. Selling options flips all three.</div>'+
+      '</div>';
+    function bs(S,vol,T){ vol=vol/100; var sq=vol*Math.sqrt(T);
+      var d1=(Math.log(S/K)+(r+vol*vol/2)*T)/sq, d2=d1-sq;
+      var price=S*normcdf(d1)-K*Math.exp(-r*T)*normcdf(d2);
+      var delta=normcdf(d1), gamma=normpdf(d1)/(S*sq);
+      var vega=S*normpdf(d1)*Math.sqrt(T)/100;
+      var theta=(-S*normpdf(d1)*vol/(2*Math.sqrt(T)) - r*K*Math.exp(-r*T)*normcdf(d2))/365;
+      return {price:price,delta:delta,gamma:gamma,vega:vega,theta:theta}; }
+    function draw(){
+      var S=num(id('spot')), vol=num(id('vol')), T=num(id('t'));
+      setv(id('spot'),'$'+S); setv(id('vol'),vol+'%'); setv(id('t'),Math.round(T*12)+'m');
+      var g=bs(S,vol,T);
+      var pts=[]; for(var x=60;x<=140;x+=1) pts.push([x,bs(x,vol,T).price]);
+      document.getElementById('grPlot').innerHTML=plot({
+        xmin:60,xmax:140, ymin:0, ymax:Math.max(42,bs(140,vol,T).price+3),
+        xticks:[60,80,100,120,140], xfmt:function(v){return v;},
+        yticks:[0,10,20,30,40], yfmt:function(v){return '$'+v;},
+        series:[{pts:pts,color:'--accent',width:2.8}],
+        markers:[{p:S,v:g.price,color:'--profit',t:'$'+g.price.toFixed(1),dx:8,dy:-8}],
+        guides:[{p:K,t:'strike',side:'l'}],
+        xlabel:'spot price', ylabel:'option value', aria:'option price vs spot'
+      });
+      document.getElementById('gr_px').textContent='$'+g.price.toFixed(2);
+      document.getElementById('gr_d').textContent=g.delta.toFixed(2);
+      document.getElementById('gr_g').textContent=g.gamma.toFixed(3);
+      document.getElementById('gr_v').textContent='$'+g.vega.toFixed(2);
+      document.getElementById('gr_t').textContent='â$'+Math.abs(g.theta).toFixed(3);
+    }
+    ['spot','vol','t'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function ivRvTool(host){
+    seed=0.314; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'iv',label:'Implied vol (what you pay)',min:8,max:45,step:1,value:20,fmt:function(v){return v+'%';}})+
+      slider({seed:s,key:'rv',label:'Realised vol (what happens)',min:8,max:45,step:1,value:15,fmt:function(v){return v+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>When you buy an option you pay for <b>implied</b> vol â the market\'s forecast of how much things will move. What actually shows up is <b>realised</b> vol. On average implied sits <i>above</i> realised: that persistent gap is the <b>vol risk premium</b>. Slide both and see who wins.</p></div>'+
+      '<div class="tool"><p class="tool-head">Implied vs realised â and the premium</p><div class="sliders">'+c+'</div>'+
+        '<div id="ivrvBars" style="padding:8px 2px"></div>'+
+        '<div class="readout"><div class="stat"><span class="k">Vol risk premium</span><span class="v" id="iv_prem"></span></div>'+
+        '<div class="stat"><span class="k">Edge belongs to</span><span class="v" id="iv_who" style="font-size:15px"></span></div></div></div>'+
+      '<div class="prose">'+
+        '<h4>Why implied usually beats realised</h4>'+
+        '<p>Investors pay up for protection â there\'s structural demand to <i>buy</i> insurance (puts), so options are priced a touch rich. Sellers of that insurance collect the premium, which is why systematically <b>selling vol</b> makes money most of the time.</p>'+
+        '<h4>...and why it can ruin you</h4>'+
+        '<p>"Most of the time" is the trap. When a shock hits, realised vol explodes past implied and the short-vol seller takes a huge loss â the same fat-tailed, picking-up-pennies profile as the carry trade. The edge is real but the tail is brutal; size it like it can go against you 5Ã, because occasionally it does.</p>'+
+        '<div class="callout">Rule of thumb: implied &gt; realised â options look expensive, lean toward selling premium (carefully). Realised &gt; implied â options are cheap, own optionality.</div>'+
+      '</div>';
+    function draw(){
+      var iv=num(id('iv')), rv=num(id('rv'));
+      setv(id('iv'),iv+'%'); setv(id('rv'),rv+'%');
+      function bar(label,val,col){ var pct=val/45*100;
+        return '<div class="sbar"><span class="sl">'+label+'</span><div class="sbar-track"><div class="sbar-fill" style="width:'+pct+'%;background:'+col+'"></div></div><span class="sv">'+val+'%</span></div>'; }
+      document.getElementById('ivrvBars').innerHTML=bar('Implied',iv,'var(--accent)')+bar('Realised',rv,'var(--muted)');
+      var prem=iv-rv;
+      var pe=document.getElementById('iv_prem'); pe.textContent=(prem>=0?'+':'')+prem+' pts'; pe.style.color=prem>=0?'var(--profit)':'var(--loss)';
+      document.getElementById('iv_who').textContent = prem>0?'Option sellers':(prem<0?'Option buyers':'Fair');
+    }
+    ['iv','rv'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function skewTool(host){
+    seed=0.312; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'skew',label:'Skew steepness',min:0,max:100,step:5,value:55,fmt:function(v){return v+'%';}})+
+      slider({seed:s,key:'lvl',label:'Overall vol level',min:10,max:45,step:1,value:20,fmt:function(v){return v+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>If markets were truly normal, every strike would trade at the same implied vol â a flat line. Instead, downside strikes (puts) trade at <b>higher</b> implied vol than upside ones. That downward tilt is the <b>skew</b>. Steepen it and watch the crash premium build.</p></div>'+
+      toolShell('Implied vol by strike (equity skew)', c, 'skPlot',
+        '<div class="stat"><span class="k">90% put IV</span><span class="v" id="sk_put"></span></div>'+
+        '<div class="stat"><span class="k">110% call IV</span><span class="v" id="sk_call"></span></div>'+
+        '<div class="stat"><span class="k">Skew (put â call)</span><span class="v" id="sk_diff" style="color:var(--loss)"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Why the skew exists</h4>'+
+        '<p>Two reasons. First, <b>crash fear</b>: equity markets fall faster than they rise, so downside protection is genuinely worth more â the normal model underprices it. Second, <b>demand</b>: everyone wants to buy puts to hedge and sell calls for income, and that flow pushes put vols up and call vols down. The result is a persistent tilt, steepest exactly when fear is high.</p>'+
+        '<h4>How desks use it</h4>'+
+        '<p>The skew is tradeable in its own right â a <b>risk reversal</b> (sell a call, buy a put, or vice versa) is a pure bet on it. And it warns you: a suddenly steepening skew means the market is paying up for crash protection, often before the crash.</p>'+
+      '</div>';
+    function draw(){
+      var sk=num(id('skew'))/100, lvl=num(id('lvl'));
+      setv(id('skew'),Math.round(sk*100)+'%'); setv(id('lvl'),lvl+'%');
+      function iv(strike){ return lvl + sk*12*(100-strike)/20; } // higher IV for lower strikes
+      var pts=[]; for(var x=80;x<=120;x+=1) pts.push([x,iv(x)]);
+      document.getElementById('skPlot').innerHTML=plot({
+        xmin:80,xmax:120, ymin:Math.max(5,lvl-sk*10), ymax:lvl+sk*14,
+        xticks:[80,90,100,110,120], xfmt:function(v){return v+'%';},
+        yticks:[Math.round(lvl-sk*8),Math.round(lvl),Math.round(lvl+sk*8)], yfmt:function(v){return v+'%';},
+        series:[{pts:pts,color:'--accent',width:2.8}],
+        guides:[{p:100,t:'at-the-money',side:'r'}],
+        xlabel:'strike (% of spot)', ylabel:'implied vol', aria:'volatility skew'
+      });
+      document.getElementById('sk_put').textContent=iv(90).toFixed(1)+'%';
+      document.getElementById('sk_call').textContent=iv(110).toFixed(1)+'%';
+      document.getElementById('sk_diff').textContent='+'+(iv(90)-iv(110)).toFixed(1)+' pts';
+    }
+    ['skew','lvl'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function structuredTool(host){
+    seed=0.313; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'prot',label:'Capital protected',min:80,max:100,step:5,value:100,fmt:function(v){return v+'%';}})+
+      slider({seed:s,key:'part',label:'Upside participation',min:20,max:150,step:10,value:70,fmt:function(v){return v+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>A capital-protected note is the classic structured product, and it\'s just two things in a wrapper: a <b>zero-coupon bond</b> that grows back to your money at maturity, plus a <b>call option</b> for the upside. The bond gives the floor; the interest you give up buys the option. Here\'s the client payoff â slide the protection and participation.</p></div>'+
+      toolShell('Note payoff vs the underlying at maturity', c, 'stPlot',
+        '<div class="stat"><span class="k">Downside floor</span><span class="v" id="st_floor" style="color:var(--profit)"></span></div>'+
+        '<div class="stat"><span class="k">You capture</span><span class="v" id="st_part"></span></div>')+
+      '<div class="prose">'+
+        '<h4>How the desk builds it</h4>'+
+        '<p>Say a client invests 100 for 5 years. The structurer buys a zero-coupon bond that costs ~85 today and matures at 100 â that guarantees the capital back. The remaining ~15 buys call options on the underlying. More option budget (lower protection, or lower rates making the bond cheaper) buys more <b>participation</b> in the upside. That\'s the entire trade-off you\'re sliding.</p>'+
+        '<h4>Autocallables â the other big one</h4>'+
+        '<p>An <b>autocallable</b> pays a chunky coupon and automatically redeems early if the underlying is above a level on an observation date â but has a <b>downside barrier</b>: breach it and the client eats the losses. It\'s income in exchange for selling tail risk. Great yield in calm markets, painful when the barrier breaks.</p>'+
+        '<div class="callout">The structurer\'s job: turn a client\'s view and risk appetite into a payoff, price the option legs, and manage what the desk is left holding. This is the seat you\'re aiming for.</div>'+
+      '</div>';
+    function draw(){
+      var prot=num(id('prot')), part=num(id('part'))/100;
+      setv(id('prot'),prot+'%'); setv(id('part'),Math.round(part*100)+'%');
+      // payoff (% of capital) vs underlying return r%
+      function pay(rr){ return Math.max(prot, 100 + part*Math.max(rr,0)); }
+      var pts=[]; for(var rr=-40;rr<=60;rr+=1) pts.push([rr,pay(rr)]);
+      document.getElementById('stPlot').innerHTML=plot({
+        xmin:-40,xmax:60, ymin:prot-8, ymax:pay(60)+6,
+        xticks:[-40,-20,0,20,40,60], xfmt:function(v){return (v>0?'+':'')+v+'%';},
+        yticks:[Math.round(prot-5),100,Math.round((100+pay(60))/2),Math.round(pay(60))], yfmt:function(v){return v;},
+        series:[{pts:pts,color:'--profit',width:2.8}],
+        guides:[{p:0,t:'flat',side:'r'}],
+        markers:[{p:-25,v:prot,color:'--profit',t:'floor '+prot,dx:6,dy:-8}],
+        xlabel:'underlying return at maturity', ylabel:'note payoff (% of capital)', aria:'structured note payoff'
+      });
+      document.getElementById('st_floor').textContent=prot+'% of capital';
+      document.getElementById('st_part').textContent=Math.round(part*100)+'% of the upside';
+    }
+    ['prot','part'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function creditSpreadsTool(host){
+    seed=0.321; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'pd',label:'Annual default probability',min:0.1,max:12,step:0.1,value:2,fmt:function(v){return v.toFixed(1)+'%';}})+
+      slider({seed:s,key:'rec',label:'Recovery if it defaults',min:0,max:80,step:5,value:40,fmt:function(v){return v+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>A credit spread is the extra yield over a government bond you demand for lending to something that might not pay you back. At its core it compensates you for <b>expected loss</b> = default odds Ã the bit you don\'t recover. Slide the two and watch the fair spread.</p></div>'+
+      toolShell('Fair credit spread vs default probability', c, 'csPlot',
+        '<div class="stat"><span class="k">Expected-loss spread</span><span class="v" id="cs_spr"></span></div>'+
+        '<div class="stat"><span class="k">Rating bucket</span><span class="v" id="cs_band" style="font-size:15px"></span></div>')+
+      '<div class="prose">'+
+        '<h4>What a spread pays you for</h4>'+
+        '<p>The floor is <b>expected loss</b>: default probability Ã loss-given-default (1 â recovery). But real spreads sit <i>above</i> that â investors also demand a <b>risk premium</b> (defaults cluster in bad times, exactly when you can least afford them) and a <b>liquidity premium</b> (corporate bonds are harder to sell). So the traded spread is expected loss plus fear plus illiquidity.</p>'+
+        '<h4>IG vs HY</h4>'+
+        '<p><b>Investment grade</b> (BBBâ and up) trades tight â tens to low hundreds of basis points â because default is unlikely. <b>High yield</b> ("junk") pays hundreds to thousands of bp for real default risk. Spreads are the market\'s live gauge of corporate stress: they blow out in a downturn long before defaults actually spike.</p>'+
+      '</div>';
+    function draw(){
+      var pd=num(id('pd')), rec=num(id('rec'))/100;
+      setv(id('pd'),pd.toFixed(1)+'%'); setv(id('rec'),Math.round(rec*100)+'%');
+      function spread(p){ return p/100*(1-rec)*10000; } // bp, expected-loss
+      var cur=spread(pd);
+      var pts=[]; for(var p=0.1;p<=12.01;p+=0.2) pts.push([p,spread(p)]);
+      document.getElementById('csPlot').innerHTML=plot({
+        xmin:0,xmax:12, ymin:0, ymax:spread(12)+40,
+        xticks:[0,3,6,9,12], xfmt:function(v){return v+'%';},
+        yticks:[0,Math.round(spread(12)/2/50)*50,Math.round(spread(12)/50)*50], yfmt:function(v){return v+'bp';},
+        series:[{pts:pts,color:'--accent',width:2.8}],
+        markers:[{p:pd,v:cur,color:'--loss',t:Math.round(cur)+'bp',dx:8,dy:-8}],
+        guides:[{p:pd}],
+        xlabel:'annual default probability', ylabel:'fair spread', aria:'credit spread vs default'
+      });
+      document.getElementById('cs_spr').textContent=Math.round(cur)+' bp';
+      document.getElementById('cs_band').textContent = cur<150?'Investment grade':(cur<400?'Crossover / BB':'High yield');
+    }
+    ['pd','rec'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function creditCycleTool(host){
+    seed=0.322; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=slider({seed:s,key:'p',label:'Position in the cycle',min:0,max:100,step:2,value:30,fmt:function(v){return v+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>Credit moves in a cycle of lenders getting braver, then scared. Spreads (the line) are tight when times are good and blow out in the downturn. Slide through the phases and read what to do in each.</p></div>'+
+      toolShell('Credit spreads through the cycle', c, 'ccPlot',
+        '<div class="stat"><span class="k">Phase</span><span class="v" id="cc_ph" style="font-size:16px"></span></div>'+
+        '<div class="stat"><span class="k">Spreads</span><span class="v" id="cc_sp"></span></div>')+
+      '<div class="prose">'+
+        '<h4>The four phases</h4>'+
+        '<p><b>Repair</b> (after a crisis): spreads very wide, defaults peaking, but this is the best <i>forward</i> return â you\'re paid richly to take risk others are fleeing. <b>Recovery</b>: spreads tighten fast, balance sheets heal, own credit. <b>Expansion</b>: spreads tight, leverage building, complacency â carry is fine but the risk/reward is getting poor. <b>Downturn</b>: spreads gap wider, defaults rise â get defensive, up in quality, into cash.</p>'+
+        '<div class="callout">The tell: credit usually <b>leads</b> equities. When spreads start widening while stocks are still making highs, the credit market is warning you the cycle is turning.</div>'+
+      '</div>';
+    function draw(){
+      var p=num(id('p')); setv(id('p'),p+'%');
+      // spread curve: low in expansion, spikes in downturn, wide in repair
+      function spr(x){ var rad=x/100*2*Math.PI; return 200 + 260*(0.5-0.5*Math.cos(rad)) + (x>62&&x<88? 180*Math.sin((x-62)/26*Math.PI):0); }
+      var pts=[]; for(var x=0;x<=100;x+=2) pts.push([x,spr(x)]);
+      document.getElementById('ccPlot').innerHTML=plot({
+        xmin:0,xmax:100, ymin:100, ymax:720,
+        xticks:[0,25,50,75,100], xfmt:function(v){return v===0?'repair':(v===50?'expansion':(v===100?'repair':''));},
+        yticks:[150,350,550], yfmt:function(v){return v+'bp';},
+        series:[{pts:pts,color:'--accent',width:2.6}],
+        markers:[{p:p,v:spr(p),color:'--loss',t:Math.round(spr(p))+'bp',dx:8,dy:-8}],
+        guides:[{p:p}],
+        xlabel:'cycle progression', ylabel:'IG+HY blended spread', aria:'credit cycle'
+      });
+      var phase = p<20?'Repair':(p<55?'Recovery / expansion':(p<85?'Late cycle â downturn':'Repair'));
+      document.getElementById('cc_ph').textContent=phase;
+      var sp=spr(p); document.getElementById('cc_sp').textContent=Math.round(sp)+' bp';
+    }
+    bind(id('p'),draw); draw();
+  }
+
+  function equityMultTool(host){
+    seed=0.331; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'g',label:'Long-run earnings growth',min:0,max:10,step:0.5,value:4,fmt:function(v){return v.toFixed(1)+'%';}})+
+      slider({seed:s,key:'r',label:'Discount rate (required return)',min:6,max:14,step:0.5,value:9,fmt:function(v){return v.toFixed(1)+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>A stock\'s price is its earnings times a <b>multiple</b> (the P/E). What justifies the multiple? Really two things: how fast earnings grow, and the return investors demand (which tracks interest rates). The fair P/E is roughly 1 Ã· (discount rate â growth). Move them and watch it swing.</p></div>'+
+      toolShell('Justified P/E vs earnings growth', c, 'emPlot',
+        '<div class="stat"><span class="k">Justified P/E</span><span class="v" id="em_pe"></span></div>'+
+        '<div class="stat"><span class="k">Implied earnings yield</span><span class="v" id="em_ey"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Two sources of return</h4>'+
+        '<p>Equity returns come from earnings <i>growing</i> and from the multiple <i>re-rating</i>. In a good year both work; the danger is paying a high multiple that then compresses. Notice how sensitive the P/E is as growth approaches the discount rate â small changes in either move valuations a lot. That\'s why long-duration growth stocks are so rate-sensitive.</p>'+
+        '<h4>What moves the multiple</h4>'+
+        '<p>Multiples <b>expand</b> when rates fall (lower discount rate), growth expectations rise, or risk appetite is high; they <b>compress</b> when rates rise or fear returns. 2022 was a pure multiple-compression bear market â earnings held up, but higher rates crushed P/Es. Related gauges: forward vs trailing P/E, PEG (P/E Ã· growth), and EV/EBITDA for cross-company comparisons.</p>'+
+      '</div>';
+    function draw(){
+      var g=num(id('g')), r=num(id('r'));
+      setv(id('g'),g.toFixed(1)+'%'); setv(id('r'),r.toFixed(1)+'%');
+      function pe(gg){ var d=(r-gg)/100; return d>0.005? 1/d : 200; }
+      var cur=Math.min(pe(g),200);
+      var pts=[]; for(var gg=0;gg<=Math.min(10,r-1);gg+=0.25) pts.push([gg,Math.min(pe(gg),200)]);
+      document.getElementById('emPlot').innerHTML=plot({
+        xmin:0,xmax:10, ymin:0, ymax:60,
+        xticks:[0,2,4,6,8,10], xfmt:function(v){return v+'%';},
+        yticks:[0,15,30,45,60], yfmt:function(v){return v+'x';},
+        series:[{pts:pts,color:'--accent',width:2.8}],
+        markers:[{p:g,v:Math.min(cur,60),color:'--profit',t:cur.toFixed(0)+'x',dx:8,dy:-8}],
+        guides:[{p:g}],
+        xlabel:'earnings growth', ylabel:'justified P/E', aria:'justified pe vs growth'
+      });
+      document.getElementById('em_pe').textContent=cur.toFixed(1)+'x';
+      document.getElementById('em_ey').textContent=(100/cur).toFixed(1)+'%';
+    }
+    ['g','r'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function factorTool(host){
+    host.innerHTML=
+      '<div class="prose"><p>Beyond the market itself (beta), decades of data show a handful of <b>factors</b> â shared characteristics â that explain why some stocks systematically beat others. A portfolio\'s returns can be decomposed into its exposure to these. Here are the big five and when each tends to work.</p>'+
+        '<table><thead><tr><th>Factor</th><th>What it buys</th><th>Works best whenâ¦</th></tr></thead><tbody>'+
+        '<tr><td>Value</td><td>Cheap stocks (low P/E, P/B) over expensive ones</td><td>Recovery / reflation; rising rates</td></tr>'+
+        '<tr><td>Momentum</td><td>Recent winners over recent losers</td><td>Trending markets; mid-cycle</td></tr>'+
+        '<tr><td>Quality</td><td>High profitability, low debt, stable earnings</td><td>Late cycle / slowdowns; flight to safety</td></tr>'+
+        '<tr><td>Size</td><td>Smaller companies over mega-caps</td><td>Early recovery; risk-on</td></tr>'+
+        '<tr><td>Low volatility</td><td>Boring, stable stocks</td><td>Downturns; defensive regimes</td></tr>'+
+        '</tbody></table>'+
+        '<h4>Why factors matter</h4>'+
+        '<p>They\'re the equity equivalent of style in trading: a manager who "beats the market" may just be tilted to value or momentum â that\'s <b>factor exposure</b>, not necessarily skill (alpha). Factors are cyclical: value can underperform for years then roar back, so they diversify each other. This is the lens behind my Portfolio Analysis Suite\'s attribution.</p>'+
+        '<div class="callout">Interview-ready framing: "Is this return alpha, or just a factor tilt I could have bought cheaply?" â the same alpha-vs-beta question, one level deeper.</div>'+
+      '</div>';
+  }
+
+  function sectorTool(host){
+    host.innerHTML=
+      '<div class="prose"><p>In a slowdown money rarely leaves equities entirely â it <b>rotates</b> from economically-sensitive sectors into defensive ones. Which sectors lead maps onto the business cycle. The classic rotation:</p>'+
+        '<table><thead><tr><th>Cycle phase</th><th>Leaders</th><th>Character</th></tr></thead><tbody>'+
+        '<tr><td>Early recovery</td><td>Financials, consumer discretionary, industrials</td><td>Cyclical, rate-sensitive, high beta</td></tr>'+
+        '<tr><td>Mid cycle</td><td>Technology, industrials</td><td>Growth &amp; capex</td></tr>'+
+        '<tr><td>Late cycle</td><td>Energy, materials</td><td>Inflation-sensitive, real assets</td></tr>'+
+        '<tr><td>Recession</td><td>Utilities, staples, healthcare</td><td>Defensive â steady demand</td></tr>'+
+        '</tbody></table>'+
+        '<h4>Cyclicals vs defensives</h4>'+
+        '<p><b>Cyclicals</b> (banks, autos, industrials, discretionary) live and die with growth â they lead out of a trough and get hit first into a downturn. <b>Defensives</b> (utilities, consumer staples, healthcare) sell things people buy in any weather, so they hold up when growth rolls over. The ratio of cyclicals-to-defensives is itself a real-time read on where the market thinks the cycle is.</p>'+
+        '<div class="callout">This connects the equity market straight to the regime and business-cycle tools â sector leadership is the cycle expressing itself inside the stock market.</div>'+
+      '</div>';
+  }
+
+  function breakevenTool(host){
+    seed=0.341; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'real',label:'Real yield (TIPS)',min:-2,max:4,step:0.1,value:2,fmt:function(v){return v.toFixed(1)+'%';}})+
+      slider({seed:s,key:'be',label:'Breakeven (expected inflation)',min:0,max:5,step:0.1,value:2.3,fmt:function(v){return v.toFixed(1)+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>A nominal bond yield is two things stacked on top of each other: the <b>real yield</b> (your return after inflation, which you can read straight off TIPS) plus the <b>breakeven</b> (the inflation the market expects). Nominal = real + breakeven. Move the two pieces and watch the 10-year build.</p></div>'+
+      '<div class="tool"><p class="tool-head">Decomposing the 10-year nominal yield</p><div class="sliders">'+c+'</div>'+
+        '<div class="stackbar" id="beBar"></div>'+
+        '<div class="stacklegend"><span><i style="background:var(--profit)"></i>real yield</span><span><i style="background:var(--accent)"></i>breakeven (inflation)</span></div>'+
+        '<div class="readout"><div class="stat"><span class="k">Nominal 10y</span><span class="v" id="be_nom"></span></div></div></div>'+
+      '<div class="prose">'+
+        '<h4>Why the split matters</h4>'+
+        '<p>When a bond sells off (nominal yield rises), the two pieces tell different stories. If it\'s the <b>real yield</b> rising, that\'s about growth, Fed policy or term premium â tighter financial conditions, bad for equities (especially growth). If it\'s the <b>breakeven</b> rising, the market is repricing <i>inflation</i> higher. Same headline yield, opposite drivers.</p>'+
+        '<div class="callout">This is exactly the test from our first conversation: is the long-end sell-off real yields (fiscal / term premium) or breakevens (inflation fear)? Watch which leg is doing the moving â that\'s the tell.</div>'+
+      '</div>';
+    function draw(){
+      var real=num(id('real')), be=num(id('be'));
+      setv(id('real'),real.toFixed(1)+'%'); setv(id('be'),be.toFixed(1)+'%');
+      var nom=real+be;
+      // stacked bar widths (handle negative real gracefully by clamping display)
+      var rShow=Math.max(0,real), total=Math.max(0.5,rShow+be);
+      document.getElementById('beBar').innerHTML=
+        '<div class="stackseg" style="flex-basis:'+(rShow/total*100)+'%;background:var(--profit)">'+(real>=0?real.toFixed(1)+'%':'')+'</div>'+
+        '<div class="stackseg" style="flex-basis:'+(be/total*100)+'%;background:var(--accent)">'+be.toFixed(1)+'%</div>';
+      document.getElementById('be_nom').textContent=nom.toFixed(1)+'%'+(real<0?'  (real yield negative)':'');
+    }
+    ['real','be'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function varTool(host){
+    seed=0.351; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'vol',label:'Portfolio daily volatility',min:0.3,max:4,step:0.1,value:1.2,fmt:function(v){return v.toFixed(1)+'%';}})+
+      slider({seed:s,key:'conf',label:'Confidence level',min:90,max:99,step:1,value:95,fmt:function(v){return v+'%';}});
+    // inverse normal (Acklam approx, simplified via bisection on normcdf)
+    function invnorm(pp){ var lo=-6,hi=6,mid; for(var i=0;i<60;i++){ mid=(lo+hi)/2; if(normcdf(mid)<pp) lo=mid; else hi=mid; } return mid; }
+    host.innerHTML=
+      '<div class="prose"><p><b>Value-at-Risk</b> answers one question: on a normal bad day, how much could I lose? Pick a confidence level and it draws the line the loss should stay inside that often. The shaded tail is what VaR is measuring â and, crucially, what it ignores beyond that line. Slide vol and confidence.</p></div>'+
+      toolShell('Distribution of daily P&L (Â£1m portfolio)', c, 'vrPlot',
+        '<div class="stat"><span class="k">1-day VaR</span><span class="v" id="vr_var" style="color:var(--loss)"></span></div>'+
+        '<div class="stat"><span class="k">As % of book</span><span class="v" id="vr_pct"></span></div>'+
+        '<div class="stat"><span class="k">Meaning</span><span class="v" id="vr_txt" style="font-size:13px"></span></div>')+
+      '<div class="prose">'+
+        '<h4>What VaR is â and isn\'t</h4>'+
+        '<p>95% VaR of Â£20k means: on 95 days out of 100 you lose less than Â£20k. It says <b>nothing</b> about the other 5 days â the loss could be Â£25k or Â£250k. VaR measures the edge of the tail, not what\'s inside it. <b>Expected Shortfall</b> (the average loss <i>given</i> you\'re in the tail) fixes part of that, which is why regulators now prefer it.</p>'+
+        '<h4>Why stress testing exists</h4>'+
+        '<p>VaR assumes a roughly normal distribution â and markets have fat tails (see the sigma-moves concept). So VaR systematically understates disaster risk; it looked fine right up to 2008. <b>Stress testing</b> throws away the bell curve and asks "what happens in a repeat of 2008, or a 2022 rates shock, or a 1987?" â scenario-based, not probability-based. That combination, VaR for the everyday and stress tests for the tail, is the market-risk framework I worked on at Deutsche.</p>'+
+      '</div>';
+    function draw(){
+      var vol=num(id('vol')), conf=num(id('conf'))/100;
+      setv(id('vol'),vol.toFixed(1)+'%'); setv(id('conf'),Math.round(conf*100)+'%');
+      var z=invnorm(conf); var varPct=z*vol; var varGbp=varPct/100*1e6;
+      // plot P&L distribution in % (normal, sd=vol)
+      function pdfp(x){ return normpdf(x/vol)/vol; }
+      var lim=vol*4;
+      document.getElementById('vrPlot').innerHTML=plot({
+        xmin:-lim,xmax:lim, ymin:0, ymax:pdfp(0)*1.15,
+        xticks:[-Math.round(lim*10)/10,-Math.round(vol*10)/10,0,Math.round(vol*10)/10,Math.round(lim*10)/10], xfmt:function(v){return v+'%';},
+        yticks:[], yfmt:function(v){return v;},
+        series:[
+          {fn:function(x){return x<=-varPct?pdfp(x):0;}, fill:'--loss-fill', hideLine:true},
+          {fn:pdfp, color:'--accent', width:2.6}
+        ],
+        guides:[{p:-varPct,t:'VaR',side:'l'}],
+        xlabel:'daily P&L', ylabel:'likelihood', aria:'VaR distribution'
+      });
+      document.getElementById('vr_var').textContent='âÂ£'+Math.round(varGbp).toLocaleString();
+      document.getElementById('vr_pct').textContent=varPct.toFixed(2)+'%';
+      document.getElementById('vr_txt').textContent=Math.round(conf*100)+'% of days lose less than this';
+    }
+    ['vol','conf'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function businessCycleTool(host){
+    seed=0.361; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=slider({seed:s,key:'p',label:'Where are we in the cycle?',min:0,max:100,step:2,value:25,fmt:function(v){return v+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>Economies expand and contract in a repeating wave. Reading which phase you\'re in â and spotting the turn before the data confirms it â sits underneath almost every macro decision. Slide along the cycle and read the phase and the tilt.</p></div>'+
+      toolShell('The business cycle', c, 'bcPlot',
+        '<div class="stat"><span class="k">Phase</span><span class="v" id="bc_ph" style="font-size:16px"></span></div>'+
+        '<div class="stat"><span class="k">Typical tilt</span><span class="v" id="bc_tilt" style="font-size:13px"></span></div>')+
+      '<div class="prose">'+
+        '<h4>The four phases</h4>'+
+        '<p><b>Expansion:</b> growth accelerating, unemployment falling, risk assets and cyclicals lead. <b>Peak:</b> growth hot, inflation and rates rising, late-cycle plays (energy, materials) shine, curve often flattens. <b>Contraction/recession:</b> growth falling, defensives and bonds win, credit spreads widen. <b>Trough:</b> the darkest data, but where forward returns are best â the market bottoms <i>before</i> the economy does.</p>'+
+        '<h4>Leading vs lagging</h4>'+
+        '<p>Time your read with <b>leading</b> indicators â PMIs/ISM, jobless claims, building permits, the yield curve, credit spixes â not <b>lagging</b> ones like unemployment and CPI, which confirm what already happened. The whole edge is that markets discount the <i>next</i> phase, so you position ahead of the crowd, not with it.</p>'+
+        '<div class="callout">Pair this with the regime tool: the business cycle is the growth axis over time; the regime grid adds the inflation axis at a point in time.</div>'+
+      '</div>';
+    function draw(){
+      var p=num(id('p')); setv(id('p'),p+'%');
+      function wave(x){ return 50 + 38*Math.sin((x/100)*2*Math.PI - Math.PI/2); }
+      var pts=[]; for(var x=0;x<=100;x+=2) pts.push([x,wave(x)]);
+      document.getElementById('bcPlot').innerHTML=plot({
+        xmin:0,xmax:100, ymin:0, ymax:100,
+        xticks:[0,25,50,75,100], xfmt:function(v){return v===0?'trough':(v===25?'expansion':(v===50?'peak':(v===75?'contraction':'trough')));},
+        yticks:[], yfmt:function(v){return v;},
+        series:[{pts:pts,color:'--accent',width:2.8}],
+        markers:[{p:p,v:wave(p),color:'--profit',t:'',dx:0,dy:0}],
+        guides:[{p:p}],
+        xlabel:'time', ylabel:'activity', aria:'business cycle wave'
+      });
+      var phase, tilt;
+      if(p<20||p>=95){ phase='Trough'; tilt='Buy the bottom: cyclicals, small caps, credit'; }
+      else if(p<45){ phase='Expansion'; tilt='Risk-on: equities, cyclicals, tighten credit'; }
+      else if(p<62){ phase='Peak'; tilt='Late cycle: energy, materials, short duration'; }
+      else { phase='Contraction'; tilt='Defensive: bonds, quality, staples, cash'; }
+      document.getElementById('bc_ph').textContent=phase;
+      document.getElementById('bc_tilt').textContent=tilt;
+    }
+    bind(id('p'),draw); draw();
+  }
+
+  function bojTool(host){
+    host.innerHTML=
+      '<div class="prose"><p>When a currency moves too far, too fast, the government can step directly into the market to move it â <b>FX intervention</b>. Japan is the textbook case, and it ties straight to my USD/JPY view.</p>'+
+        '<h4>How it works</h4>'+
+        '<p>In Japan the <b>Ministry of Finance</b> decides and the <b>BOJ</b> executes. To strengthen a weak yen, they <b>sell dollar reserves and buy yen</b> â a huge market order that spikes the yen. (To weaken the yen they\'d do the reverse, printing yen to buy foreign assets.) It\'s blunt, expensive, and finite: you can only sell the reserves you have.</p>'+
+        '<h4>When and why</h4>'+
+        '<p>Authorities intervene against <b>speed and disorder</b>, not a level per se â the official line is always "we\'re watching excessive, one-sided moves." For USD/JPY, the market watches the pace of the move and prior intervention zones (the 150s+ have drawn action). Verbal warnings ("jawboning") come first; actual intervention second.</p>'+
+        '<h4>Does it work?</h4>'+
+        '<p>Rarely reverses a trend driven by fundamentals â if the USâJapan rate gap is wide (see the rate-differentials concept), intervention only buys time. But it can force a violent short-term reversal that punishes crowded yen shorts, which is why positioning matters so much around it. Intervention plus a BOJ policy shift together is what actually turns the pair.</p>'+
+        '<div class="callout">Trading read: near intervention zones, a crowded short-yen (long USD/JPY) trade carries fat two-way tail risk â exactly the positioning-and-crowding lesson applied to FX.</div>'+
+      '</div>';
+  }
+
+  function crackTool(host){
+    seed=0.371; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'crude',label:'Crude',min:50,max:120,step:1,value:86,fmt:function(v){return '$'+v;}})+
+      slider({seed:s,key:'gaso',label:'Gasoline (petrol)',min:60,max:150,step:1,value:104,fmt:function(v){return '$'+v;}})+
+      slider({seed:s,key:'diesel',label:'Diesel / distillate',min:60,max:160,step:1,value:116,fmt:function(v){return '$'+v;}});
+    host.innerHTML=
+      '<div class="prose"><p>A refinery buys crude, splits it, and sells the products â mostly petrol and diesel. Its margin is the <b>crack spread</b>. The industry benchmark is the <b>3-2-1</b>: take 3 barrels of crude, assume they make 2 of petrol and 1 of diesel, and see what\'s left. Move the three prices and watch the margin.</p></div>'+
+      toolShell('3-2-1 crack spread ($/bbl) vs crude price', c, 'crPlot',
+        '<div class="stat"><span class="k">3-2-1 crack</span><span class="v" id="cr_val"></span></div>'+
+        '<div class="stat"><span class="k">Refiner is</span><span class="v" id="cr_state" style="font-size:15px"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Long products, short crude</h4>'+
+        '<p>A refiner\'s P&amp;L rises when products outrun crude and gets crushed when crude outruns products. So refiners <b>hedge</b> by locking the crack: buy crude futures, sell product futures. A wide crack means fat margins â refineries run flat-out â more crude demand and more product supply, which eventually narrows it again.</p>'+
+        '<h4>What moves it</h4>'+
+        '<p>Refinery outages, driving-season demand, cold snaps (diesel/heating), and export bottlenecks all swing cracks. It\'s a core physical-desk signal â exactly the kind of relationship in my BP commodities toolkit: the flat price is one thing, but the <i>spread</i> is where the refining economics live.</p>'+
+      '</div>';
+    function crack(cr,g,d){ return (2*g + d - 3*cr)/3; }
+    function draw(){
+      var cr=num(id('crude')), g=num(id('gaso')), d=num(id('diesel'));
+      setv(id('crude'),'$'+cr); setv(id('gaso'),'$'+g); setv(id('diesel'),'$'+d);
+      var val=crack(cr,g,d);
+      var pts=[]; for(var x=50;x<=120;x+=1) pts.push([x,crack(x,g,d)]);
+      document.getElementById('crPlot').innerHTML=plot({
+        xmin:50,xmax:120, ymin:Math.min(-10,crack(120,g,d)-3), ymax:Math.max(40,crack(50,g,d)+3),
+        xticks:[50,70,90,110], xfmt:function(v){return '$'+v;},
+        yticks:[0,15,30], yfmt:function(v){return '$'+v;},
+        series:[{fn:function(x){return crack(x,g,d);}, color:(val>=0?'--profit':'--loss'), fill:'x', fillSigned:true, width:2.6}],
+        markers:[{p:cr,v:val,color:'--accent',t:'$'+val.toFixed(1),dx:8,dy:-8}],
+        guides:[{p:cr}],
+        xlabel:'crude price', ylabel:'crack spread', aria:'crack spread vs crude'
+      });
+      document.getElementById('cr_val').textContent='$'+val.toFixed(2)+'/bbl';
+      var st=document.getElementById('cr_state'); st.textContent=val>8?'Minting money':(val>0?'Thin margin':'Losing money');
+      st.style.color = val>8?'var(--profit)':(val>0?'var(--accent-ink)':'var(--loss)');
+    }
+    ['crude','gaso','diesel'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function storageTool(host){
+    seed=0.372; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var SPOT=85;
+    var c=
+      slider({seed:s,key:'sto',label:'Storage cost',min:0,max:2,step:0.1,value:0.5,fmt:function(v){return '$'+v.toFixed(1)+'/bbl/mo';}})+
+      slider({seed:s,key:'fin',label:'Financing rate',min:0,max:8,step:0.25,value:4.5,fmt:function(v){return v.toFixed(2)+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>Why is a barrel for delivery in 6 months priced differently from one today? Because to hold the physical barrel you pay to <b>store</b> it and to <b>finance</b> it. Add those up and you get the fair slope of the futures curve â the cost of carry. Slide the two costs.</p></div>'+
+      toolShell('Fair futures curve built from carry (spot = $85)', c, 'stoPlot',
+        '<div class="stat"><span class="k">Fair 6m carry</span><span class="v" id="sto_carry"></span></div>'+
+        '<div class="stat"><span class="k">Curve shape</span><span class="v" id="sto_shape" style="font-size:15px"></span></div>')+
+      '<div class="prose">'+
+        '<h4>The cash-and-carry arbitrage</h4>'+
+        '<p>If the market\'s contango is <i>wider</i> than the true cost of carry, it\'s free money: buy the physical barrel now, pay to store and finance it, and sell it forward at the fatter price â lock in the difference risk-free. Traders piling into that trade push the curve back toward fair value. So <b>storage + financing caps how steep contango can get.</b></p>'+
+        '<h4>The extremes</h4>'+
+        '<p>In 2020 the world ran out of storage â the front collapsed (briefly negative) and contango blew out so far that traders hired <b>tankers as floating storage</b>. The opposite, <b>backwardation</b>, means the market pays you to hold the physical (a high "convenience yield") because supply is tight now â the Iran-sanctions setup. This is the storage-vs-5yr-range logic in my commodities toolkit.</p>'+
+      '</div>';
+    function draw(){
+      var sto=num(id('sto')), fin=num(id('fin'));
+      setv(id('sto'),'$'+sto.toFixed(1)+'/bbl/mo'); setv(id('fin'),fin.toFixed(2)+'%');
+      function F(m){ return SPOT + m*sto + SPOT*(fin/100)*(m/12); }
+      var pts=[]; for(var m=0;m<=12;m++) pts.push([m,F(m)]);
+      var carry6=F(6)-SPOT;
+      document.getElementById('stoPlot').innerHTML=plot({
+        xmin:0,xmax:12, ymin:SPOT-2, ymax:F(12)+2,
+        xticks:[0,3,6,9,12], xfmt:function(v){return v===0?'spot':'M'+v;},
+        yticks:[Math.round(SPOT), Math.round(F(6)), Math.round(F(12))], yfmt:function(v){return '$'+v;},
+        series:[{pts:pts,color:'--accent',width:2.8,dots:true}],
+        xlabel:'delivery month', ylabel:'fair futures price', aria:'cost of carry curve'
+      });
+      document.getElementById('sto_carry').textContent='$'+carry6.toFixed(2)+'/bbl';
+      document.getElementById('sto_shape').textContent='Contango (upward)';
+    }
+    ['sto','fin'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function gradeTool(host){
+    seed=0.373; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var c=
+      slider({seed:s,key:'diff',label:'Price at hub B â hub A',min:-6,max:10,step:0.5,value:4,fmt:function(v){return (v>0?'+':'')+'$'+v;}})+
+      slider({seed:s,key:'freight',label:'Freight cost AâB',min:0,max:10,step:0.5,value:3,fmt:function(v){return '$'+v;}});
+    host.innerHTML=
+      '<div class="prose"><p>The same barrel is worth different amounts in different places â and moving it costs money. A physical trader buys where crude is cheap and ships it where it\'s dear, <b>if</b> the price gap beats the freight. Slide the location spread and the freight and see whether the arb is open.</p></div>'+
+      toolShell('Arbitrage margin vs freight cost', c, 'grPlotC',
+        '<div class="stat"><span class="k">Arb margin</span><span class="v" id="gd_arb"></span></div>'+
+        '<div class="stat"><span class="k">Trade</span><span class="v" id="gd_state" style="font-size:15px"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Grade spreads â quality</h4>'+
+        '<p>Crude varies by <b>density</b> (light vs heavy) and <b>sulphur</b> (sweet vs sour). Light-sweet (like Brent/WTI) is easier to refine into high-value products, so it trades at a premium; heavy-sour trades at a discount. The <b>Brent-WTI spread</b> is the most-watched grade/location spread of all.</p>'+
+        '<h4>Location spreads â geography &amp; chokepoints</h4>'+
+        '<p>Location spreads are set by transport cost and bottlenecks. When a <b>chokepoint</b> â Hormuz, the Suez Canal, the Malacca or Bosphorus straits â is threatened, freight rates spike and regional spreads blow out, because the cost (or risk) of moving barrels there jumps. That\'s exactly what my BP chokepoint map tracks: a geopolitical flare-up at a strait reprices every barrel downstream of it.</p>'+
+      '</div>';
+    function draw(){
+      var diff=num(id('diff')), fr=num(id('freight'));
+      setv(id('diff'),(diff>0?'+':'')+'$'+diff); setv(id('freight'),'$'+fr);
+      var arb=diff-fr;
+      document.getElementById('grPlotC').innerHTML=plot({
+        xmin:0,xmax:10, ymin:Math.min(-8,diff-10), ymax:Math.max(8,diff),
+        xticks:[0,2,4,6,8,10], xfmt:function(v){return '$'+v;},
+        yticks:[Math.round(Math.min(-6,diff-8)),0,Math.round(Math.max(6,diff))], yfmt:function(v){return (v>0?'+':'')+'$'+v;},
+        series:[{fn:function(f){return diff-f;}, color:(arb>=0?'--profit':'--loss'), fill:'x', fillSigned:true, width:2.6}],
+        markers:[{p:fr,v:arb,color:'--accent',t:(arb>=0?'+':'â')+'$'+Math.abs(arb).toFixed(1),dx:8,dy:arb>=0?-8:16}],
+        guides:[{p:fr}],
+        xlabel:'freight cost AâB', ylabel:'arb margin ($/bbl)', aria:'location arb'
+      });
+      var a=document.getElementById('gd_arb'); a.textContent=(arb>=0?'+':'â')+'$'+Math.abs(arb).toFixed(2); a.style.color=arb>=0?'var(--profit)':'var(--loss)';
+      document.getElementById('gd_state').textContent = arb>0?'Ship it â arb open':'Leave it â freight too high';
+    }
+    ['diff','freight'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  function opecTool(host){
+    seed=0.374; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
+    var ELAS=0.15;
+    var c=
+      slider({seed:s,key:'sup',label:'Supply change (% of market)',min:-4,max:4,step:0.25,value:0,fmt:function(v){return (v>0?'+':'')+v.toFixed(2)+'%';}})+
+      slider({seed:s,key:'dem',label:'Demand change (% of market)',min:-4,max:4,step:0.25,value:0,fmt:function(v){return (v>0?'+':'')+v.toFixed(2)+'%';}});
+    host.innerHTML=
+      '<div class="prose"><p>In the short run almost nobody drives less because petrol went up 10% â oil demand is <b>inelastic</b>. So when supply and demand don\'t match, price has to do all the adjusting, and it moves a lot. Shift supply (think an OPEC+ decision) or demand and watch the price whip.</p></div>'+
+      toolShell('Price impact vs the supply-demand balance', c, 'opPlot',
+        '<div class="stat"><span class="k">Market balance</span><span class="v" id="op_bal" style="font-size:15px"></span></div>'+
+        '<div class="stat"><span class="k">Est. price impact</span><span class="v" id="op_px"></span></div>')+
+      '<div class="prose">'+
+        '<h4>Why small gaps â big moves</h4>'+
+        '<p>With demand barely responding to price, a ~1% shortfall can\'t be closed by people using less â so price spikes until some marginal demand finally gives way. That inelasticity is the whole reason oil is so volatile, and why removing even a few hundred thousand barrels (sanctions, an outage) moves the flat price hard.</p>'+
+        '<h4>OPEC+ and spare capacity</h4>'+
+        '<p>OPEC+ manages this by <b>adjusting output</b> â cutting to support price, adding to cap it. Its real power is <b>spare capacity</b>: the barrels (mostly Saudi) it can bring on quickly. That spare cushion is the market\'s shock absorber â when it\'s thin, the risk premium in price balloons because there\'s no buffer for the next disruption. This is the supply-demand balance I modelled at BP; the Iran-sanctions story is a deficit shock playing out in real time.</p>'+
+      '</div>';
+    function draw(){
+      var sup=num(id('sup')), dem=num(id('dem'));
+      setv(id('sup'),(sup>0?'+':'')+sup.toFixed(2)+'%'); setv(id('dem'),(dem>0?'+':'')+dem.toFixed(2)+'%');
+      var net=sup-dem; // positive = surplus
+      function px(n){ return Math.max(-60,Math.min(60,-n/ELAS)); }
+      var pts=[]; for(var n=-4;n<=4;n+=0.1) pts.push([n,px(n)]);
+      document.getElementById('opPlot').innerHTML=plot({
+        xmin:-4,xmax:4, ymin:-60, ymax:60,
+        xticks:[-4,-2,0,2,4], xfmt:function(v){return (v>0?'+':'')+v+'%';},
+        yticks:[-40,-20,0,20,40], yfmt:function(v){return (v>0?'+':'')+v+'%';},
+        series:[{fn:px, color:'--accent', width:2.8}],
+        markers:[{p:net,v:px(net),color:(px(net)>=0?'--profit':'--loss'),t:(px(net)>=0?'+':'')+px(net).toFixed(0)+'%',dx:8,dy:-8}],
+        guides:[{p:net}],
+        xlabel:'balance (surplus â )', ylabel:'price impact', aria:'oil balance price impact'
+      });
+      var b=document.getElementById('op_bal');
+      b.textContent = Math.abs(net)<0.1?'Balanced':(net>0?'Surplus '+net.toFixed(2)+'%':'Deficit '+Math.abs(net).toFixed(2)+'%');
+      b.style.color = Math.abs(net)<0.1?'var(--muted)':(net>0?'var(--loss)':'var(--profit)');
+      var pe=document.getElementById('op_px'); var v=px(net); pe.textContent=(v>=0?'+':'')+v.toFixed(0)+'%'; pe.style.color=v>=0?'var(--profit)':'var(--loss)';
+    }
+    ['sup','dem'].forEach(function(k){bind(id(k),draw);}); draw();
+  }
+
+  /* ================= app shell: search / filter / routing ================= */
+  var hub=document.getElementById('hub'), detail=document.getElementById('detail');
+  var grid=document.getElementById('grid'), chipsEl=document.getElementById('chips');
+  var searchEl=document.getElementById('search'), countEl=document.getElementById('count'), emptyEl=document.getElementById('empty');
+  var activeCat="All", query="";
+
+  function renderChips(){
+    chipsEl.innerHTML="";
+    ["All"].concat(CATS).forEach(function(cat){
+      var b=el('button',{'class':'chip'+(cat===activeCat?' on':'')},cat);
+      b.addEventListener('click',function(){ activeCat=cat; renderChips(); renderGrid(); });
+      chipsEl.appendChild(b);
+    });
+  }
+  function matches(c){
+    if(activeCat!=="All" && c.cat!==activeCat) return false;
+    if(!query) return true;
+    var q=query.toLowerCase();
+    return (c.title+' '+c.summary+' '+c.cat+' '+c.tags.join(' ')).toLowerCase().indexOf(q)>=0;
+  }
+  function renderGrid(){
+    grid.innerHTML="";
+    var shown=CONCEPTS.filter(matches);
+    shown.forEach(function(c){
+      var card=el('button',{'class':'concept-card','data-id':c.id});
+      card.innerHTML=
+        '<div class="card-top"><span class="cat-tag">'+c.cat+'</span>'+(c.interactive?'<span class="badge">Interactive</span>':'')+'</div>'+
+        '<h3>'+c.title+'</h3>'+
+        '<p>'+c.summary+'</p>'+
+        '<div class="tagrow">'+c.tags.slice(0,4).map(function(t){return '<span class="tag">'+t+'</span>';}).join('')+'</div>';
+      card.addEventListener('click',function(){ location.hash='#/'+c.id; });
+      grid.appendChild(card);
+    });
+    emptyEl.style.display = shown.length?'none':'block';
+    countEl.textContent = shown.length+' concept'+(shown.length===1?'':'s')+(activeCat!=='All'?' in '+activeCat:'')+(query?' matching "'+query+'"':'');
+  }
+  searchEl.addEventListener('input',function(){ query=searchEl.value.trim(); renderGrid(); });
+
+  function openConcept(c){
+    hub.style.display='none'; detail.style.display='block';
+    document.getElementById('d-cat').textContent=c.cat;
+    document.getElementById('d-title').textContent=c.title;
+    document.getElementById('d-stand').textContent=c.stand;
+    var body=document.getElementById('d-body'); body.innerHTML="";
+    c.build(body);
+    // project link
+    var pl=el('a',{'class':'project-link',href:c.projectUrl},'â See it applied â '+c.project);
+    body.appendChild(pl);
+    window.scrollTo(0,0);
+  }
+  function showHub(){ detail.style.display='none'; hub.style.display='block'; }
+
+  function route(){
+    var h=location.hash;
+    if(h.indexOf('#/')===0){
+      var id=h.slice(2);
+      var c=CONCEPTS.filter(function(x){return x.id===id;})[0];
+      if(c){ openConcept(c); return; }
+    }
+    showHub();
+  }
+  document.getElementById('back').addEventListener('click',function(){ location.hash=''; });
+  window.addEventListener('hashchange',route);
+
+  renderChips(); renderGrid(); route();
+})();
+</script>
