@@ -731,7 +731,7 @@
       document.getElementById('cl_floor').textContent = fmtUsd(floor);
       document.getElementById('cl_cap').textContent = '+'+fmtUsd(cap).replace('$','$');
       document.getElementById('cl_be').textContent = '$'+be.toFixed(0);
-      document.getElementById('cl_rr').textContent = floor<0 ? (cap/Math.abs(floor)).toFixed(1)+' : 1' : '—';
+      document.getElementById('cl_rr').textContent = floor<0 ? (cap/Math.abs(floor)).toFixed(1)+' : 1' : '-';
     }
     function id(k){ return 'sl_'+Math.round(s*1e6)+'_'+k; }
     function fmtUsd(v){ return (v<0?'−$':'$')+Math.abs(v).toFixed(0); }
