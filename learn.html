@@ -742,8 +742,8 @@
   function yieldCurveTool(host){
     seed=0.22; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
     var c=
-      slider({seed:s,key:'front',label:'Front end Â· 2y (Fed policy)',min:1,max:6,step:0.1,value:3.6,fmt:function(v){return v.toFixed(1)+'%';}})+
-      slider({seed:s,key:'long',label:'Long end Â· 30y (term premium)',min:1,max:7,step:0.1,value:5.2,fmt:function(v){return v.toFixed(1)+'%';}});
+      slider({seed:s,key:'front',label:'Front end · 2y (Fed policy)',min:1,max:6,step:0.1,value:3.6,fmt:function(v){return v.toFixed(1)+'%';}})+
+      slider({seed:s,key:'long',label:'Long end · 30y (term premium)',min:1,max:7,step:0.1,value:5.2,fmt:function(v){return v.toFixed(1)+'%';}});
     host.innerHTML=
       '<div class="prose"><p>Each dot is the yield on a bond of that maturity. The line joining them is <b>the curve</b>. The single most-watched number is <b>2s10s</b>, the 10-year minus the 2-year. Move the two ends and watch the shape (and the story) change.</p></div>'+
       toolShell('US Treasury curve, yield by maturity', c, 'ycPlot',
@@ -884,7 +884,7 @@
         series:[{pts:pts, color:'--accent', width:2.8}],
         markers:[{p:rho,v:v,color:'--profit',t:v.toFixed(1)+'%',dx:8,dy:-8}],
         guides:[{p:rho}],
-        xlabel:'correlation (Ï)', ylabel:'portfolio vol', aria:'portfolio vol vs correlation'
+        xlabel:'correlation (ρ)', ylabel:'portfolio vol', aria:'portfolio vol vs correlation'
       });
       document.getElementById('co_vol').textContent=v.toFixed(1)+'%';
       document.getElementById('co_ben').textContent='−'+(20-v).toFixed(1)+' pts';
@@ -895,13 +895,13 @@
   function sizingTool(host){
     seed=0.66; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
     var c=
-      slider({seed:s,key:'acct',label:'Account size',min:10000,max:1000000,step:10000,value:100000,fmt:function(v){return 'Â£'+(v/1000)+'k';}})+
+      slider({seed:s,key:'acct',label:'Account size',min:10000,max:1000000,step:10000,value:100000,fmt:function(v){return '£'+(v/1000)+'k';}})+
       slider({seed:s,key:'risk',label:'Risk per trade',min:0.25,max:5,step:0.25,value:1,fmt:function(v){return v+'%';}})+
       slider({seed:s,key:'vol',label:'Asset volatility (annual)',min:10,max:120,step:5,value:40,fmt:function(v){return v+'%';}});
     host.innerHTML=
       '<div class="prose"><p>The pro question isn\'t "how much do I want to buy", it\'s "how much can I lose if I\'m wrong, and how big can the position be so that loss stays inside my budget." Set your rules; the tool sizes it. Watch the position <b>shrink as volatility rises</b>.</p></div>'+
       toolShell('Risk-based position sizing', c, null,
-        '<div class="stat"><span class="k">Risk budget (Â£)</span><span class="v" id="sz_budget"></span></div>'+
+        '<div class="stat"><span class="k">Risk budget (£)</span><span class="v" id="sz_budget"></span></div>'+
         '<div class="stat"><span class="k">Stop distance</span><span class="v" id="sz_stop"></span></div>'+
         '<div class="stat"><span class="k">Position size</span><span class="v" id="sz_pos" style="color:var(--profit)"></span></div>'+
         '<div class="stat"><span class="k">% of account</span><span class="v" id="sz_pct"></span></div>');
@@ -914,14 +914,14 @@
       '</div>');
     function draw(){
       var acct=num(id('acct')), risk=num(id('risk')), vol=num(id('vol'));
-      setv(id('acct'),'Â£'+(acct/1000)+'k'); setv(id('risk'),risk+'%'); setv(id('vol'),vol+'%');
+      setv(id('acct'),'£'+(acct/1000)+'k'); setv(id('risk'),risk+'%'); setv(id('vol'),vol+'%');
       var budget=acct*risk/100;
       var stopPct=vol/Math.sqrt(52); // ~1-week move as a sensible stop distance
       var pos=budget/(stopPct/100);
-      document.getElementById('sz_budget').textContent='Â£'+Math.round(budget).toLocaleString();
+      document.getElementById('sz_budget').textContent='£'+Math.round(budget).toLocaleString();
       document.getElementById('sz_stop').textContent=stopPct.toFixed(1)+'%';
       var pe=document.getElementById('sz_pos');
-      pe.textContent='Â£'+Math.round(pos).toLocaleString();
+      pe.textContent='£'+Math.round(pos).toLocaleString();
       var pct=pos/acct*100;
       document.getElementById('sz_pct').textContent=pct.toFixed(0)+'%';
     }
@@ -972,18 +972,18 @@
 
   function momentumTool(host){
     seed=0.81; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
-    var c=slider({seed:s,key:'phi',label:'Return autocorrelation (Ï)',min:-0.9,max:0.9,step:0.05,value:0.45,fmt:function(v){return v.toFixed(2);}});
+    var c=slider({seed:s,key:'phi',label:'Return autocorrelation (ρ)',min:-0.9,max:0.9,step:0.05,value:0.45,fmt:function(v){return v.toFixed(2);}});
     host.innerHTML=
-      '<div class="prose"><p>One number decides a market\'s personality: how much this period\'s move predicts the next. Positive Ï means moves <b>persist</b>, a trend. Negative Ï means they <b>reverse</b>, mean reversion. Zero is a coin-flip random walk. Slide it and watch the same random shocks build very different paths.</p></div>'+
-      toolShell('Synthetic price path (same shocks, different Ï)', c, 'momPlot',
+      '<div class="prose"><p>One number decides a market\'s personality: how much this period\'s move predicts the next. Positive ρ means moves <b>persist</b>, a trend. Negative ρ means they <b>reverse</b>, mean reversion. Zero is a coin-flip random walk. Slide it and watch the same random shocks build very different paths.</p></div>'+
+      toolShell('Synthetic price path (same shocks, different ρ)', c, 'momPlot',
         '<div class="stat"><span class="k">Character</span><span class="v" id="mo_char" style="font-size:17px"></span></div>'+
         '<div class="stat"><span class="k">Which style wins</span><span class="v" id="mo_style" style="font-size:15px"></span></div>')+
       '<div class="prose">'+
         '<h4>Momentum vs mean reversion</h4>'+
-        '<p><b>Momentum / trend-following</b> buys what\'s rising and sells what\'s falling, it prints money when Ï &gt; 0 and the trend runs. <b>Mean reversion</b> does the opposite: it fades extremes, betting price snaps back to an average, it wins when Ï &lt; 0. A <b>trend</b> is just sustained momentum on a longer horizon.</p>'+
+        '<p><b>Momentum / trend-following</b> buys what\'s rising and sells what\'s falling, it prints money when ρ &gt; 0 and the trend runs. <b>Mean reversion</b> does the opposite: it fades extremes, betting price snaps back to an average, it wins when ρ &lt; 0. A <b>trend</b> is just sustained momentum on a longer horizon.</p>'+
         '<h4>Horizon is everything</h4>'+
         '<p>The same market can be both, depending on the clock. Very short-term prices often mean-revert (noise, market-making); the classic <b>3–12 month</b> window trends (the momentum factor); over many years prices mean-revert to fundamentals/valuation. Match your signal to your horizon or the edge inverts on you.</p>'+
-        '<div class="callout">The risk in momentum is the <b>crash</b>: trends persist, persist, then reverse violently (Ï flips). That\'s the bridge to the next concept, crowding.</div>'+
+        '<div class="callout">The risk in momentum is the <b>crash</b>: trends persist, persist, then reverse violently (ρ flips). That\'s the bridge to the next concept, crowding.</div>'+
       '</div>';
     var r=rng(7), noise=[]; for(var i=0;i<160;i++) noise.push(randn(r));
     function draw(){
@@ -1058,15 +1058,15 @@
       toolShell('Stock return vs market return (monthly)', c, 'abPlot',
         '<div class="stat"><span class="k">Beta</span><span class="v" id="ab_b"></span></div>'+
         '<div class="stat"><span class="k">Alpha (annualised)</span><span class="v" id="ab_a"></span></div>'+
-        '<div class="stat"><span class="k">RÂ² (market-explained)</span><span class="v" id="ab_r"></span></div>')+
+        '<div class="stat"><span class="k">R² (market-explained)</span><span class="v" id="ab_r"></span></div>')+
       '<div class="prose">'+
         '<h4>Beta, the risk you didn\'t create</h4>'+
         '<p>Beta 1 moves with the index; beta 1.5 amplifies it; beta 0.5 dampens it. A big return on high beta in a rising market is just leverage to the market, not skill. Beta is <b>systematic</b> risk you can get cheaply from an index.</p>'+
         '<h4>Alpha, the bit you can take credit for</h4>'+
-        '<p>Alpha is return <i>above</i> what beta explains, the payoff to genuine edge. It\'s what active managers charge for and what a trading book is ultimately judged on. <b>RÂ²</b> tells you how much of the moves the market explains; low RÂ² (lots of noise) means the beta/alpha estimate is shakier.</p>'+
+        '<p>Alpha is return <i>above</i> what beta explains, the payoff to genuine edge. It\'s what active managers charge for and what a trading book is ultimately judged on. <b>R²</b> tells you how much of the moves the market explains; low R² (lots of noise) means the beta/alpha estimate is shakier.</p>'+
         '<div class="callout">CAPM in one line: return ≈ risk-free + β × (market − risk-free) + α. Everything to the left of α is the market renting you its risk; α is yours.</div>'+
       '</div>';
-    var r=rng(11), mkt=[]; for(var i=0;i<44;i++) mkt.push((r()-0.5)*16); // market returns spread ~ Â±8%
+    var r=rng(11), mkt=[]; for(var i=0;i<44;i++) mkt.push((r()-0.5)*16); // market returns spread ~ ±8%
     function draw(){
       var b=num(id('beta')), a=num(id('alpha')), nz=num(id('noise'));
       setv(id('beta'),b.toFixed(1)); setv(id('alpha'),(a>0?'+':'')+a.toFixed(1)+'%'); setv(id('noise'),nz.toFixed(1)+'%');
@@ -1173,26 +1173,26 @@
 
   function sigmaTool(host){
     seed=0.86; var s=seed; function id(k){return 'sl_'+Math.round(s*1e6)+'_'+k;}
-    var c=slider({seed:s,key:'k',label:'Size of move (standard deviations)',min:0.5,max:5,step:0.1,value:3,fmt:function(v){return v.toFixed(1)+'Ï';}});
+    var c=slider({seed:s,key:'k',label:'Size of move (standard deviations)',min:0.5,max:5,step:0.1,value:3,fmt:function(v){return v.toFixed(1)+'σ';}});
     host.innerHTML=
-      '<div class="prose"><p>Volatility is one standard deviation (1Ï) of returns. A "3-sigma move" is one three times that size. The bell curve says such moves are rare, the shaded tails show <i>how</i> rare. Slide the threshold and read off the odds. Then read why markets break this maths.</p></div>'+
+      '<div class="prose"><p>Volatility is one standard deviation (1σ) of returns. A "3-sigma move" is one three times that size. The bell curve says such moves are rare, the shaded tails show <i>how</i> rare. Slide the threshold and read off the odds. Then read why markets break this maths.</p></div>'+
       toolShell('The normal distribution, how rare is a big move?', c,'sgPlot',
         '<div class="stat"><span class="k">Chance on a given day</span><span class="v" id="sg_p"></span></div>'+
         '<div class="stat"><span class="k">Normal curve says: about once every</span><span class="v" id="sg_freq" style="font-size:16px"></span></div>')+
       '<div class="prose">'+
         '<h4>Reading the curve</h4>'+
-        '<p>About <b>68%</b> of days land within Â±1Ï, <b>95%</b> within Â±2Ï, <b>99.7%</b> within Â±3Ï. So a 3Ï down-day should, in theory, happen roughly once every 1.5 years; a 4Ï move about once a century.</p>'+
+        '<p>About <b>68%</b> of days land within ±1σ, <b>95%</b> within ±2σ, <b>99.7%</b> within ±3σ. So a 3σ down-day should, in theory, happen roughly once every 1.5 years; a 4σ move about once a century.</p>'+
         '<h4>Why markets have fat tails</h4>'+
-        '<p>Reality delivers those extremes far more often than the bell curve allows, volatility clusters (calm, then chaos), and panics feed on themselves. Black Monday 1987 was a ~20Ï move under the normal model, which should be impossible in the life of the universe, yet it happened. The lesson: <b>never size your book as if the tails are Gaussian.</b> The bell curve is a decent guide to the middle and a dangerous liar about the edges.</p>'+
-        '<div class="callout">Good or bad? A large <i>adverse</i> Ï move is what blows up a book sized for normal tails. A large <i>favourable</i> one is why cheap convexity (long options, defined-risk bets) pays off, you keep the upside tail, cap the downside.</div>'+
+        '<p>Reality delivers those extremes far more often than the bell curve allows, volatility clusters (calm, then chaos), and panics feed on themselves. Black Monday 1987 was a ~20σ move under the normal model, which should be impossible in the life of the universe, yet it happened. The lesson: <b>never size your book as if the tails are Gaussian.</b> The bell curve is a decent guide to the middle and a dangerous liar about the edges.</p>'+
+        '<div class="callout">Good or bad? A large <i>adverse</i> σ move is what blows up a book sized for normal tails. A large <i>favourable</i> one is why cheap convexity (long options, defined-risk bets) pays off, you keep the upside tail, cap the downside.</div>'+
       '</div>';
     function draw(){
-      var k=num(id('k')); setv(id('k'),k.toFixed(1)+'Ï');
-      var p=2*(1-normcdf(k)); // two-sided probability of a move beyond Â±k sigma
+      var k=num(id('k')); setv(id('k'),k.toFixed(1)+'σ');
+      var p=2*(1-normcdf(k)); // two-sided probability of a move beyond ±k sigma
       var days=p>0?1/p:Infinity;
       document.getElementById('sgPlot').innerHTML=plot({
         xmin:-4,xmax:4, ymin:0, ymax:0.44,
-        xticks:[-3,-2,-1,0,1,2,3], xfmt:function(v){return v+'Ï';},
+        xticks:[-3,-2,-1,0,1,2,3], xfmt:function(v){return v+'σ';},
         yticks:[0,0.1,0.2,0.3,0.4], yfmt:function(v){return v.toFixed(1);},
         series:[
           {fn:function(x){return Math.abs(x)>=k?normpdf(x):0;}, fill:'--loss-fill', hideLine:true},
@@ -1292,21 +1292,21 @@
       slider({seed:s,key:'g',label:'Growth',min:-100,max:100,step:5,value:40,fmt:function(v){return v<0?'slowing '+v:(v>0?'accelerating +'+v:'flat');}})+
       slider({seed:s,key:'i',label:'Inflation',min:-100,max:100,step:5,value:-30,fmt:function(v){return v<0?'falling '+v:(v>0?'rising +'+v:'flat');}});
     var cells=[
-      {key:'reflation', n:'Reflation', d:'growth ↑ Â· inflation ↑', pos:'tr'},
-      {key:'goldilocks', n:'Goldilocks', d:'growth ↑ Â· inflation ↓', pos:'tl'},
-      {key:'stagflation', n:'Stagflation', d:'growth ↓ Â· inflation ↑', pos:'br'},
-      {key:'slowdown', n:'Deflationary slowdown', d:'growth ↓ Â· inflation ↓', pos:'bl'}
+      {key:'reflation', n:'Reflation', d:'growth ↑ · inflation ↑', pos:'tr'},
+      {key:'goldilocks', n:'Goldilocks', d:'growth ↑ · inflation ↓', pos:'tl'},
+      {key:'stagflation', n:'Stagflation', d:'growth ↓ · inflation ↑', pos:'br'},
+      {key:'slowdown', n:'Deflationary slowdown', d:'growth ↓ · inflation ↓', pos:'bl'}
     ];
     host.innerHTML=
       '<div class="prose"><p>Nearly all macro reduces to two questions: is <b>growth</b> rising or falling, and is <b>inflation</b> rising or falling? That gives four regimes, each with assets it favours. Move the dot and read the playbook.</p></div>'+
       '<div class="tool"><p class="tool-head">The growth × inflation map</p><div class="sliders">'+c+'</div>'+
-        '<div class="quad-wrap"><span class="qaxis-y">← inflation high Â· low →</span><div class="quad" id="quad">'+
-          '<div class="qcell" data-k="stagflation"><span class="qn">Stagflation</span><span class="qd">growth ↓ Â· inflation ↑</span></div>'+
-          '<div class="qcell" data-k="reflation"><span class="qn">Reflation</span><span class="qd">growth ↑ Â· inflation ↑</span></div>'+
-          '<div class="qcell" data-k="slowdown"><span class="qn">Slowdown</span><span class="qd">growth ↓ Â· inflation ↓</span></div>'+
-          '<div class="qcell" data-k="goldilocks"><span class="qn">Goldilocks</span><span class="qd">growth ↑ Â· inflation ↓</span></div>'+
+        '<div class="quad-wrap"><span class="qaxis-y">← inflation high · low →</span><div class="quad" id="quad">'+
+          '<div class="qcell" data-k="stagflation"><span class="qn">Stagflation</span><span class="qd">growth ↓ · inflation ↑</span></div>'+
+          '<div class="qcell" data-k="reflation"><span class="qn">Reflation</span><span class="qd">growth ↑ · inflation ↑</span></div>'+
+          '<div class="qcell" data-k="slowdown"><span class="qn">Slowdown</span><span class="qd">growth ↓ · inflation ↓</span></div>'+
+          '<div class="qcell" data-k="goldilocks"><span class="qn">Goldilocks</span><span class="qd">growth ↑ · inflation ↓</span></div>'+
           '<div class="qdot" id="qdot"></div>'+
-        '</div><div class="qaxis">← growth low Â· high →</div></div>'+
+        '</div><div class="qaxis">← growth low · high →</div></div>'+
         '<div class="trade-out"><p class="tk">Regime &amp; playbook</p><p class="tv" id="rg_name"></p><p class="td" id="rg_play"></p></div>'+
       '</div>'+
       '<div class="prose">'+
@@ -1409,7 +1409,7 @@
         xticks:[0,2,4,6], xfmt:function(v){return v+'%';},
         yticks:[100,120,140,160].filter(function(v){return v>=fx(-1)-4&&v<=fx(6)+4;}), yfmt:function(v){return v;},
         series:[{pts:pts, color:'--accent', width:2.8}],
-        markers:[{p:diff,v:fx(diff),color:'--profit',t:'Â¥'+fx(diff).toFixed(0),dx:8,dy:-8}],
+        markers:[{p:diff,v:fx(diff),color:'--profit',t:'¥'+fx(diff).toFixed(0),dx:8,dy:-8}],
         guides:[{p:diff}],
         xlabel:'US − Japan 2y differential', ylabel:'USD/JPY', aria:'usdjpy vs rate differential'
       });
@@ -1823,13 +1823,13 @@
     function invnorm(pp){ var lo=-6,hi=6,mid; for(var i=0;i<60;i++){ mid=(lo+hi)/2; if(normcdf(mid)<pp) lo=mid; else hi=mid; } return mid; }
     host.innerHTML=
       '<div class="prose"><p><b>Value-at-Risk</b> answers one question: on a normal bad day, how much could I lose? Pick a confidence level and it draws the line the loss should stay inside that often. The shaded tail is what VaR is measuring, and, crucially, what it ignores beyond that line. Slide vol and confidence.</p></div>'+
-      toolShell('Distribution of daily P&L (Â£1m portfolio)', c, 'vrPlot',
+      toolShell('Distribution of daily P&L (£1m portfolio)', c, 'vrPlot',
         '<div class="stat"><span class="k">1-day VaR</span><span class="v" id="vr_var" style="color:var(--loss)"></span></div>'+
         '<div class="stat"><span class="k">As % of book</span><span class="v" id="vr_pct"></span></div>'+
         '<div class="stat"><span class="k">Meaning</span><span class="v" id="vr_txt" style="font-size:13px"></span></div>')+
       '<div class="prose">'+
         '<h4>What VaR is, and isn\'t</h4>'+
-        '<p>95% VaR of Â£20k means: on 95 days out of 100 you lose less than Â£20k. It says <b>nothing</b> about the other 5 days, the loss could be Â£25k or Â£250k. VaR measures the edge of the tail, not what\'s inside it. <b>Expected Shortfall</b> (the average loss <i>given</i> you\'re in the tail) fixes part of that, which is why regulators now prefer it.</p>'+
+        '<p>95% VaR of £20k means: on 95 days out of 100 you lose less than £20k. It says <b>nothing</b> about the other 5 days, the loss could be £25k or £250k. VaR measures the edge of the tail, not what\'s inside it. <b>Expected Shortfall</b> (the average loss <i>given</i> you\'re in the tail) fixes part of that, which is why regulators now prefer it.</p>'+
         '<h4>Why stress testing exists</h4>'+
         '<p>VaR assumes a roughly normal distribution, and markets have fat tails (see the sigma-moves concept). So VaR systematically understates disaster risk; it looked fine right up to 2008. <b>Stress testing</b> throws away the bell curve and asks "what happens in a repeat of 2008, or a 2022 rates shock, or a 1987?", scenario-based, not probability-based. That combination, VaR for the everyday and stress tests for the tail, is the market-risk framework I worked on at Deutsche.</p>'+
       '</div>';
@@ -1851,7 +1851,7 @@
         guides:[{p:-varPct,t:'VaR',side:'l'}],
         xlabel:'daily P&L', ylabel:'likelihood', aria:'VaR distribution'
       });
-      document.getElementById('vr_var').textContent='−Â£'+Math.round(varGbp).toLocaleString();
+      document.getElementById('vr_var').textContent='−£'+Math.round(varGbp).toLocaleString();
       document.getElementById('vr_pct').textContent=varPct.toFixed(2)+'%';
       document.getElementById('vr_txt').textContent=Math.round(conf*100)+'% of days lose less than this';
     }
