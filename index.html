@@ -15,6 +15,50 @@
   <link rel="stylesheet" href="css/style.css" />
 
   <style>
+    /* ── Also Building section ──────────────────────────────── */
+    .building {
+      padding: var(--sp-16) 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .building__card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      box-shadow: 0 3px 0 var(--color-border);
+      padding: var(--sp-8);
+      max-width: 640px;
+    }
+    .building__desc {
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      line-height: 1.7;
+      max-width: 58ch;
+      margin-bottom: var(--sp-6);
+    }
+    .billsplit-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-3);
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 700;
+      color: var(--color-text);
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      padding: var(--sp-3) var(--sp-6);
+      box-shadow: 0 3px 0 var(--color-border);
+      transition: transform 0.14s ease, box-shadow 0.14s ease, border-color var(--dur-fast);
+    }
+    .billsplit-cta:hover {
+      transform: translateY(3px);
+      box-shadow: none;
+      border-color: rgba(17,17,17,0.3);
+    }
+    .billsplit-cta svg { flex-shrink: 0; transition: transform var(--dur-fast) var(--ease-expo); }
+    .billsplit-cta:hover svg { transform: translate(3px, -3px); }
+
     /* ── Current Views section ──────────────────────────────── */
     .views {
       padding: var(--sp-24) 0;
@@ -554,7 +598,7 @@
             </div>
           </article>
 
-          <article class="project-card" data-index="06">
+          <article class="project-card" data-index="06" style="grid-column: 1 / -1;">
             <div class="project-card__inner">
               <div class="project-card__top">
                 <span class="project-card__number">06</span>
@@ -583,43 +627,27 @@
             </div>
           </article>
 
-          <article class="project-card" data-index="07" style="grid-column: 1 / -1;">
-            <div class="project-card__inner">
-              <div class="project-card__top">
-                <span class="project-card__number">07</span>
-                <div class="project-card__links">
-                  <a href="https://github.com/niyamrathod/leamington-housing-alert" class="project-card__link"
-                     target="_blank" rel="noopener"
-                     aria-label="Leamington Housing Alert — GitHub">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                    </svg>
-                    <span>Repo</span>
-                  </a>
-                  <a href="leamington-housing-alert.html" class="project-card__link"
-                     aria-label="Leamington Housing Alert — open project page">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                    </svg>
-                    <span>Open</span>
-                  </a>
-                </div>
-              </div>
-              <h3 class="project-card__title">Leamington Housing Alert</h3>
-              <p class="project-card__insight">
-                A scraper that watches independent Leamington Spa letting agents for new student houses and emails a digest the moment something matches my criteria - built because refreshing agent sites by hand during house-hunting season got old fast. Runs on a GitHub Actions schedule with no server and no database, and includes a room-size-weighted bill split calculator for once the house is found.
-              </p>
-              <ul class="project-card__tags" role="list">
-                <li class="tag">Web Scraping</li>
-                <li class="tag">GitHub Actions</li>
-                <li class="tag">Automation</li>
-                <li class="tag">Python</li>
-              </ul>
-            </div>
-          </article>
+        </div>
+      </div>
+    </section>
 
+    <!-- ── Also Building ────────────────────────────────────── -->
+    <section class="building" id="building" aria-labelledby="building-heading">
+      <div class="container">
+        <div class="building__card">
+          <span class="section-label">Outside of Finance</span>
+          <h2 class="section-heading" id="building-heading" style="margin-bottom:var(--sp-4);">Also Building</h2>
+          <p class="building__desc">
+            A startup idea I'm working on alongside the finance tools above: an alert system for
+            student housing in Leamington Spa that watches independent letting agents and emails you
+            the moment something matches, plus a bill-split calculator for once you've found a place.
+          </p>
+          <a href="leamington-housing-alert.html" class="billsplit-cta">
+            Leamington Housing Alert
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </a>
         </div>
       </div>
     </section>
