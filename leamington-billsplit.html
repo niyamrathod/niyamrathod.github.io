@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bill Split Calculator — splits rent or bills between housemates in proportion to room size. Runs entirely in the browser. By Niyam Rathod." />
+  <title>Bill Split Calculator — Niyam Rathod</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ── Project-hero shell (matches the other project pages) ── */
+    .project-hero {
+      padding: calc(var(--sp-32) * 0.35) 0 var(--sp-12);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .project-hero__back {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.8125rem; font-family: var(--font-body);
+      color: var(--color-muted); text-decoration: none;
+      margin-bottom: var(--sp-16); transition: color var(--dur-fast);
+    }
+    .project-hero__back:hover { color: var(--color-text); }
+    .project-hero__back svg { transition: transform var(--dur-fast); }
+    .project-hero__back:hover svg { transform: translateX(-3px); }
+    .project-hero__label {
+      font-size: 0.75rem; font-family: var(--font-body); font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--color-muted); margin-bottom: var(--sp-8);
+    }
+    .project-hero__title {
+      font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800; line-height: 1.05; letter-spacing: -0.02em;
+      color: var(--color-text); margin-bottom: var(--sp-12);
+    }
+    .project-hero__desc {
+      font-size: 1rem; color: var(--color-muted); max-width: 60ch;
+      line-height: 1.7; margin-bottom: var(--sp-12);
+    }
+    .project-hero__tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      list-style: none; padding: 0; margin: 0;
+    }
+
+    /* ── Calculator ───────────────────────────────────────── */
+    .calc-section { padding: var(--sp-16) 0 var(--sp-24); }
+    .calc-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      box-shadow: 0 3px 0 var(--color-border);
+      padding: var(--sp-8);
+      max-width: 640px;
+    }
+    .calc-field { margin-bottom: var(--sp-6); }
+    .calc-field label {
+      display: block;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: var(--sp-2);
+    }
+    .calc-field input {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: var(--sp-3) var(--sp-4);
+    }
+    .calc-field input:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(198, 255, 0, 0.35);
+    }
+
+    .housemate-row {
+      display: flex;
+      gap: var(--sp-3);
+      align-items: center;
+      margin-bottom: var(--sp-3);
+    }
+    .housemate-row input[name="name"] { flex: 1 1 55%; }
+    .housemate-row input[name="size"] { flex: 1 1 35%; }
+    .housemate-row__remove {
+      flex: 0 0 auto;
+      width: 32px; height: 32px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--color-faint);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      color: var(--color-muted);
+      cursor: pointer;
+      transition: color var(--dur-fast), border-color var(--dur-fast);
+    }
+    .housemate-row__remove:hover { color: var(--color-text); border-color: var(--color-text); }
+
+    .calc-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-3);
+      margin-top: var(--sp-6);
+    }
+    .btn-secondary {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--color-text);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      padding: var(--sp-3) var(--sp-6);
+      cursor: pointer;
+      box-shadow: 0 3px 0 var(--color-border);
+      transition: transform 0.14s ease, box-shadow 0.14s ease, border-color var(--dur-fast);
+    }
+    .btn-secondary:hover { transform: translateY(3px); box-shadow: none; border-color: rgba(17,17,17,0.3); }
+    .btn-primary {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--color-text);
+      background: #C2B5A3;
+      border: 2px solid #C2B5A3;
+      border-radius: 100px;
+      padding: var(--sp-3) var(--sp-6);
+      cursor: pointer;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+      transition: transform 0.14s ease, box-shadow 0.14s ease, background var(--dur-fast), border-color var(--dur-fast);
+    }
+    .btn-primary:hover { transform: translateY(3px); box-shadow: none; background: #B5A898; border-color: #B5A898; }
+
+    .calc-error {
+      font-size: var(--text-sm);
+      color: #B3261E;
+      margin-top: var(--sp-4);
+    }
+
+    .results {
+      margin-top: var(--sp-12);
+      padding-top: var(--sp-8);
+      border-top: 1px solid var(--color-border);
+    }
+    .results__row {
+      display: flex;
+      justify-content: space-between;
+      font-size: var(--text-base);
+      padding: var(--sp-2) 0;
+    }
+    .results__row--total {
+      margin-top: var(--sp-3);
+      padding-top: var(--sp-3);
+      border-top: 1px solid var(--color-border);
+      font-family: var(--font-display);
+      font-weight: 700;
+    }
+    .results__name { color: var(--color-text); }
+    .results__amount { color: var(--color-text); font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__logo">NR</a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html#work"    class="nav__link">Work</a></li>
+        <li><a href="index.html#views"   class="nav__link">Markets</a></li>
+        <li><a href="index.html#about"   class="nav__link">About</a></li>
+        <li><a href="index.html#contact" class="nav__link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── Page hero ──────────────────────────────────────── -->
+    <section class="project-hero">
+      <div class="container">
+        <a href="leamington-housing-alert.html" class="project-hero__back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
+          </svg>
+          Back to Leamington Housing Alert
+        </a>
+        <p class="project-hero__label">Project 07 — Tool</p>
+        <h1 class="project-hero__title">Bill Split<br>Calculator</h1>
+        <p class="project-hero__desc">
+          Splits a total rent or bills figure between housemates in proportion to room size, once
+          you've actually found a house. Runs entirely in your browser - nothing you enter here is
+          sent anywhere or saved.
+        </p>
+        <ul class="project-hero__tags" role="list">
+          <li class="tag">JavaScript</li>
+          <li class="tag">No Backend</li>
+          <li class="tag">Room-Size Weighted</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── Calculator ─────────────────────────────────────── -->
+    <section class="calc-section">
+      <div class="container">
+        <div class="calc-card">
+
+          <div class="calc-field">
+            <label for="total-amount">Total amount to split (£)</label>
+            <input type="number" id="total-amount" min="0.01" step="0.01" placeholder="e.g. 1200" />
+          </div>
+
+          <div class="calc-field">
+            <label>Housemates</label>
+            <div id="housemate-rows"></div>
+            <button type="button" class="btn-secondary" id="add-row">+ Add housemate</button>
+          </div>
+
+          <div class="calc-actions">
+            <button type="button" class="btn-primary" id="calculate">Calculate split</button>
+          </div>
+
+          <p class="calc-error" id="calc-error" hidden></p>
+
+          <div class="results" id="results" hidden></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <span class="footer__logo">NR</span>
+        <nav aria-label="Footer navigation">
+          <ul class="footer__links" role="list">
+            <li><a href="index.html#work">Work</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="footer__copy">&copy; 2026 Niyam Rathod</p>
+    </div>
+  </footer>
+
+  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3ab50156fbf24407a68e6e4bcb0653e7"}'></script><!-- End Cloudflare Web Analytics -->
+
+  <script src="js/main.js"></script>
+  <script>
+    // Bill-split calculator logic. Deliberately mirrors billsplit.py's
+    // maths so the browser tool and the terminal script always agree:
+    // every share is rounded to the nearest penny except the last
+    // person's, who absorbs whatever rounding remainder is left over
+    // so the shares always add back up to exactly the total entered.
+
+    const rowsContainer = document.getElementById('housemate-rows');
+    const removeIconSvg = `
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>`;
+
+    function addHousemateRow(name = '', size = '') {
+      const row = document.createElement('div');
+      row.className = 'housemate-row';
+      row.innerHTML = `
+        <input type="text" name="name" placeholder="Name" value="${name}" />
+        <input type="number" name="size" placeholder="Room size (sq ft or ranking)" min="0.01" step="0.01" value="${size}" />
+        <button type="button" class="housemate-row__remove" aria-label="Remove housemate">${removeIconSvg}</button>
+      `;
+      row.querySelector('.housemate-row__remove').addEventListener('click', () => {
+        row.remove();
+      });
+      rowsContainer.appendChild(row);
+    }
+
+    // Start with two empty rows - the minimum needed for a split.
+    addHousemateRow();
+    addHousemateRow();
+
+    document.getElementById('add-row').addEventListener('click', () => addHousemateRow());
+
+    function showError(message) {
+      const errorEl = document.getElementById('calc-error');
+      errorEl.textContent = message;
+      errorEl.hidden = false;
+      document.getElementById('results').hidden = true;
+    }
+
+    function splitByRoomSize(total, housemates) {
+      const totalRoomSize = housemates.reduce((sum, h) => sum + h.size, 0);
+      const shares = [];
+      let runningTotal = 0;
+
+      for (let i = 0; i < housemates.length - 1; i++) {
+        const share = Math.round((total * housemates[i].size / totalRoomSize) * 100) / 100;
+        shares.push({ name: housemates[i].name, share });
+        runningTotal += share;
+      }
+
+      const last = housemates[housemates.length - 1];
+      shares.push({ name: last.name, share: Math.round((total - runningTotal) * 100) / 100 });
+
+      return shares;
+    }
+
+    document.getElementById('calculate').addEventListener('click', () => {
+      const errorEl = document.getElementById('calc-error');
+      errorEl.hidden = true;
+
+      const total = parseFloat(document.getElementById('total-amount').value);
+      if (!total || total <= 0) {
+        showError('Enter a total amount greater than 0.');
+        return;
+      }
+
+      const housemates = [];
+      for (const row of rowsContainer.querySelectorAll('.housemate-row')) {
+        const name = row.querySelector('[name="name"]').value.trim();
+        const size = parseFloat(row.querySelector('[name="size"]').value);
+        if (!name || !size || size <= 0) continue; // skip incomplete rows
+        housemates.push({ name, size });
+      }
+
+      if (housemates.length < 2) {
+        showError('Enter at least 2 housemates with a name and room size.');
+        return;
+      }
+
+      const shares = splitByRoomSize(total, housemates);
+      const resultsEl = document.getElementById('results');
+      const sum = shares.reduce((s, entry) => s + entry.share, 0);
+
+      resultsEl.innerHTML =
+        shares.map(entry => `
+          <div class="results__row">
+            <span class="results__name">${entry.name}</span>
+            <span class="results__amount">£${entry.share.toFixed(2)}</span>
+          </div>
+        `).join('') +
+        `<div class="results__row results__row--total">
+          <span>Total</span>
+          <span>£${sum.toFixed(2)}</span>
+        </div>`;
+      resultsEl.hidden = false;
+    });
+  </script>
+</body>
+</html>
